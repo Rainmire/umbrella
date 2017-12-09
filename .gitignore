@@ -17,3 +17,6 @@
 /rails-api-server/yarn-error.log
 
 /rails-api-server.byebug_history
+
+# dependencies
+/umbrellaRN_frontend/node_modules
