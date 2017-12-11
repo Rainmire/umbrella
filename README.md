@@ -5,6 +5,7 @@
 Hello and Welcome! Umbrella is a mobile application that facilitates communication between teachers and parents. This was inspired by an app that Lily uses for her son's preschool, but found it to have limitations, and overall the design left much to be desired. Through Umbrella, each child will have a profile page, which will have the child's picture, and list their name, class, teacher, contact information, and milestones. Teachers can also post messages specific to certain children, or to the whole class, and parents can see those in a feed. As bonuses, our plan is to implement direct chat functionality, and integrate Google's calendar API so the parents can see the school's schedule.
 
 ## Wireframes
+![app-wireframe](https://github.com/Rainmire/umbrella/blob/master/docs/UmbrellaApp.png)
 
 ## MVPs & Functionality
 
