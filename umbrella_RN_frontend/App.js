@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import SessionReducer from './reducers/session_reducer';
 import LoginForm from './components/login_form';
 
+
 class App extends Component {
   render() {
     return (
