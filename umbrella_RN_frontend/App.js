@@ -9,6 +9,10 @@ import LoginForm from './components/login_form';
 
 
 class App extends Component {
+  static navigationOptions = { 
+    title: 'Home',
+  };
+
   render() {
     return (
       <Provider store={createStore(SessionReducer, applyMiddleware(logger))}>
