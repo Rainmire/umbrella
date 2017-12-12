@@ -5,4 +5,9 @@ class Child < ApplicationRecord
   class_name: "User",
   primary_key: :id,
   foreign_key: :parent_id
+
+  belongs_to :teacher,
+  class_name: "User",
+  primary_key: :id,
+  foreign_key: :teacher_id
 end

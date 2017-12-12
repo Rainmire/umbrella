@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  validates :provider, :name, :type, :oauth_token, :oauth_expires_at
+  validates :name, :type
   validates :email, uniqueness: true
 
   has_many :children,
