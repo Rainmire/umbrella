@@ -29,7 +29,7 @@
 			<string>io.umbrella</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.171373634993-21ouq0q4298r3nv20f2i6uhn4panlilm</string>
+				<string>umbrella</string>
 			</array>
 		</dict>
 	</array>

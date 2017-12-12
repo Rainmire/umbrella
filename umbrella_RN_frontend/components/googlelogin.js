@@ -20,10 +20,12 @@ export default class GoogleLogin extends Component {
 
   // Set up Linking
   componentDidMount() {
+    console.log("did mount");
     // Add event listener to handle OAuthLogin:// URLs
     Linking.addEventListener('url', this.handleOpenURL);
     // Launched from an external URL
     Linking.getInitialURL().then((url) => {
+      console.log(url);
       if (url) {
         this.handleOpenURL({ url });
       }
@@ -36,13 +38,15 @@ export default class GoogleLogin extends Component {
   }
 
   handleOpenURL({ url }){
+    console.log("hello");
     // Extract stringified user string out of the URL
-    const [, user_string] = url.match(/user=([^#]+)/);
-    this.setState({
-      // Decode the user string and parse it into JSON
-      user: JSON.parse(decodeURI(user_string))
-    });
+    // const [, user_string] = url.match(/user=([^#]+)/);
+    // this.setState({
+    //   // Decode the user string and parse it into JSON
+    //   user: JSON.parse(decodeURI(user_string))
+    // });
     if (Platform.OS === 'ios') {
+      console.log("hi");
       SafariView.dismiss();
     }
   }
