@@ -63,8 +63,6 @@ class LoginForm extends Component {
   }
 
   render() {
-    console.log('Did I show?')
-    debugger
     return (
       <View style={styles.viewStyle}>
         {this.renderError()}

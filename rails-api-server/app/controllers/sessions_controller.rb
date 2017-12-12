@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
     if @user
       login(@user)
     end
+
     redirect_to 'umbrella://' + user.oauth_token.to_json
   end
 

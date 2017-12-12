@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { logger } from 'redux-logger';
 import { Provider } from 'react-redux';
 import SessionReducer from './reducers/session_reducer';
-// import LoginForm from './components/login_form';
+import LoginForm from './components/login_form';
 import ProfileScreen from './components/profile_screen';
 import FeedScreen from './components/feed_screen';
 import CalendarScreen from './components/calendar_screen';
@@ -17,7 +17,10 @@ class App extends Component {
   render() {
     return (
       <Provider store={createStore(SessionReducer, applyMiddleware(logger))}>
-        <RootNavigator />
+        <View >
+          <LoginForm />
+          <RootNavigator />
+        </ View>
       </Provider>
     );
   }
@@ -25,5 +28,3 @@ class App extends Component {
 
 
 export default App;
-
-
