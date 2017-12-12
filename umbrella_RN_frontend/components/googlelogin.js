@@ -37,11 +37,11 @@ export default class GoogleLogin extends Component {
 
   handleOpenURL({ url }){
     // Extract stringified user string out of the URL
-    const [, user_string] = url.match(/user=([^#]+)/);
-    this.setState({
-      // Decode the user string and parse it into JSON
-      user: JSON.parse(decodeURI(user_string))
-    });
+    // const [, user_string] = url.match(/user=([^#]+)/);
+    // this.setState({
+    //   // Decode the user string and parse it into JSON
+    //   user: JSON.parse(decodeURI(user_string))
+    // });
     if (Platform.OS === 'ios') {
       SafariView.dismiss();
     }
