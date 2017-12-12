@@ -1,4 +1,12 @@
 class User < ApplicationRecord
+  validates :provider, :name, :type, :oauth_token, :oauth_expires_at
+  validates :email, uniqueness: true
+
+  has_many :children,
+  class_name: "Child",
+  primary_key: :id,
+  foreign_key: :parent_id
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
       user.provider = auth.provider
