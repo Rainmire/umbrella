@@ -3,6 +3,10 @@ import { StyleSheet, View, Text, Button } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 
 class CalendarScreen extends React.Component {
+  static navigationOptions = {
+    tabBarLabel: 'Feed',
+  };
+
   render() {
     return(
       <View>
