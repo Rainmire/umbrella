@@ -7,9 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 users = User.create([
-  { name: 'Lily', email: 'lily@gmail.com', type: 'parent' },
-  { name: 'Guy', email: 'guy@gmail.com', type: 'teacher', teacher_class: 'Class A' },
-  { name: 'Mitch', email: 'mitch@gmail.com', type: 'parent' },
+  { name: 'Lily', email: 'zq.yang.lily@gmail.com', type: 'parent' },
+  { name: 'Guy', email: 'ggwass@gmail.com', type: 'teacher', teacher_class: 'Class A' },
+  { name: 'Mitch', email: 'melancholycomedy@gmail.com', type: 'parent' },
   ])
 
 children = Child.create([
