@@ -9,6 +9,9 @@ import MessageScreen from '../components/message_screen';
 
 
 const RootNavigator = TabNavigator({
+  ProfileScreen: {
+    screen: ProfileScreen,
+  },
   CalendarScreen: {
     screen: CalendarScreen,
   },
@@ -18,9 +21,7 @@ const RootNavigator = TabNavigator({
   MessageScreen: {
     screen: MessageScreen,
   },
-  ProfileScreen: {
-    screen: ProfileScreen,
-  },
+
 }, {
   tabBarPosition: 'bottom',
   animationEnabled: true,
@@ -30,5 +31,3 @@ const RootNavigator = TabNavigator({
 });
 
 export default RootNavigator;
-
-

@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button, FlatList, Image } from 'react-native';
+import { StyleSheet, View, Text, Button, FlatList, Image, TouchableOpacity } from 'react-native';
 import { TabNavigator } from 'react-navigation';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { onSignOut } from '../app/auth';
 
 // this button will route to the Google oAuth link, which will display the
@@ -43,74 +44,65 @@ class ProfileScreen extends React.Component {
 
   componentWillMount() {
     this.setState({ currentChild: [this.state.children[0]] });
-    this.fetchData();
+
   }
 
   fetchData = async () => {
-    const response = await fetch('/api/user');
+    const response = await fetch('/api/user')
+      .then(e => console.error(e));
     const json = response.json();
     this.setState({ children: json.results });
   }
 
   _renderSwitchChildren = () => {
-    return (
-      <View style={styles.switchChildren}>
-        <Image style={styles.buttonImage}/>
-        <Text> Switch Profiles </Text>
-      </View>
-    )
+    if (this.state.children.length > 1) {
+      return (
+        <TouchableOpacity
+          onPress={this._switchChild}
+          style={styles.switchChildButton}
+        >
+          <Text style={styles.buttonText}> Switch Child </Text>
+        </ TouchableOpacity>
+      )
+    }
   }
 
-  _renderItem = ({ item }) => {
-    console.log(item)
-    return (
+  _renderItem = ({ item }) => (
+    <View style={styles.profileScreen}>
       <View>
-        <View style={styles.profileScreen}>
-          <View>
-            <Image
-              source={{ uri: `${item.image_url}` }}
-              style={styles.photo}
-              />
-          </View>
-          <View >
-            <View style={styles.childInfo1}>
-              <Text style={styles.text}>Name:   {`${item.name}`}</Text>
-              <Text style={styles.text}>Class:   {`${item.class}`}</Text>
-            </View>
-            <View style={styles.childInfo2}>
-              <Text style={styles.text}>Main Teacher:   {`${item.teacher}`}</Text>
-              <Text style={styles.text}>Contact:   {`${item.contact}`}</Text>
-            </View>
-          </View>
+        <Image
+          source={{ uri: `${item.image_url}` }}
+          style={styles.photo}
+          />
+      </View>
+      <View style={styles.childInfoContainer}>
+        <View style={styles.childInfo1}>
+          <Text style={styles.text}>Name:   {`${item.name}`}</Text>
+          <Text style={styles.text}>Class:   {`${item.class}`}</Text>
         </View>
-        <View>
-          { this._renderSwitchChildren() }
+        <View style={styles.childInfo2}>
+          <Text style={styles.text}>Main Teacher:   {`${item.teacher}`}</Text>
+          <Text style={styles.text}>Contact:   {`${item.contact}`}</Text>
         </View>
       </View>
-    )
-  }
+    </View>
+  )
 
-  //
-  // _switchChild = () => (
-  //   if (this.props.children.length > 1) {
-  //     return(
-  //       <View>
-  //       <Button>
-  //
-  //       </Button>
-  //       </View>
-  //     )
-  //   }
-  // )
+
+
+  _switchChild = () => (
+    console.log('You have switched children')
+  )
 
   render() {
     return (
-      <View>
+      <View style={styles.profileScreen}>
         <FlatList
           data={ this.state.currentChild }
           keyExtractor={(x, i) => i }// change to the id
           renderItem={ this._renderItem }
         ></FlatList>
+        { this._renderSwitchChildren() }
       </View>
     );
   }
@@ -120,7 +112,14 @@ export const styles = StyleSheet.create({
   profileScreen: {
     flex: 1,
     alignItems: 'center',
-    paddingTop: 100,
+    justifyContent: 'center',
+    paddingTop: 50,
+  },
+  childInfoContainer: {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 3,
   },
   childInfo1: {
     height: 75,
@@ -139,23 +138,28 @@ export const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   photo: {
-    height: 100,
-    width: 100,
+    // flex: 1,
+    height: 150,
+    width: 150,
     borderWidth: 2,
-    marginTop: 25,
-    marginBottom: 25,
-
+    marginBottom: 50,
+    borderRadius: 75,
+    // alignItems: 'center',
   },
-  switchChilren: {
-    flex: 0,
-    flexDirection: 'row',
+  switchChildButton: {
     height: 50,
     width: 300,
-    borderWidth: .5,
+    flex: 1,
+    color: 'blue',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#bddfeb',
+    borderRadius: 30,
+    marginBottom: 100,
   },
-  buttonImage: {
-    height: 50,
-    width: 50,
+  buttonText: {
+    fontSize: 24,
+    color: 'blue',
   }
 });
 
