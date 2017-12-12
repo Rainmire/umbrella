@@ -42,10 +42,8 @@ class ProfileScreen extends React.Component {
   }
 
   componentWillMount() {
-    console.log(this.state.children[0])
-
-    this.setState({ currentChild: [this.state.children[0]] })
-    console.log(this.state.currentChild)
+    this.setState({ currentChild: [this.state.children[0]] });
+    this.fetchData();
   }
 
   fetchData = async () => {
