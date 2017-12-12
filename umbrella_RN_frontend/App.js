@@ -6,85 +6,24 @@ import { logger } from 'redux-logger';
 import { Provider } from 'react-redux';
 import SessionReducer from './reducers/session_reducer';
 // import LoginForm from './components/login_form';
-import ProfileScreen from './components/profile_page';
+import ProfileScreen from './components/profile_screen';
+import FeedScreen from './components/feed_screen';
+import CalendarScreen from './components/calendar_screen';
+import MessageScreen from './components/message_screen';
+import RootNavigator from './navigation/root_navigator';
 // import { SignedOut, SignedIn } from './app/router';
 
-
-class FeedScreen extends React.Component {
-  static navigationOptions = {
-    tabBarLabel: 'Feed',
-    // Note: By default the icon is only shown on iOS. Search the showIcon option below.
-    
-  };
-
+class App extends Component {
   render() {
-    console.log(this)
-    console.log(this.props)
-    
     return (
-      <View> 
-        <Text style={{margin: 50}}>
-          This is the Feed screen.
-          This will display an index of messages to the user, posted by the teachers/ admin.
-        </Text>
-        
-      </View>
+      <Provider store={createStore(SessionReducer, applyMiddleware(logger))}>
+        <RootNavigator />
+      </Provider>
     );
   }
 }
 
-// class MyNotificationsScreen extends React.Component {
-//   static navigationOptions = {
-//     tabBarLabel: 'Notifications',
-// 
-//   };
-// 
-//   render() {
-//     return (
-//       <Button
-//         onPress={() => this.props.navigation.goBack()}
-//         title="Go back home"
-//       />
-//     );
-//   }
-// }
 
-const styles = StyleSheet.create({
-  icon: {
-    width: 26,
-    height: 26,
-  },
-});
-
-const MyApp = TabNavigator({
-  FeedScreen: {
-    screen: FeedScreen,
-  },
-  ProfileScreen: {
-    screen: ProfileScreen,
-  },
-}, {
-  tabBarPosition: 'bottom',
-  animationEnabled: true,
-  tabBarOptions: {
-    activeTintColor: '#e91e63',
-  },
-});
-
-export default MyApp;
+export default App;
 
 
-// class App extends Component {
-//   render() {
-//     return (
-//       <Provider store={createStore(SessionReducer, applyMiddleware(logger))}>
-//         <View>
-// 
-//           <ProfileScreen />
-//         </View>
-//       </Provider>
-//     );
-//   }
-// }
-// 
-// export default App;

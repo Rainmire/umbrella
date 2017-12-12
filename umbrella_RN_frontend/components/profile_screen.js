@@ -1,14 +1,6 @@
-
-
-
-
-
-
-
 import React from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import { TabNavigator } from 'react-navigation';
-// import RootNavigator from '../navigation/root_navigator';
 import { onSignOut } from '../app/auth';
 
 // this button will route to the Google oAuth link, which will display the 
@@ -60,13 +52,11 @@ export const styles = StyleSheet.create({
     flex: 1, 
     alignItems: 'center', 
     paddingTop: 50,
-    // justifyContent: 'center',
   },
   box: {
     height: 75,
     width: 300,
     borderWidth: .5,
-
   },
   text: {
     flex: 1,
@@ -75,7 +65,6 @@ export const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   photo: {
-    // flex: 1,
     height: 100,
     width: 100,
     borderWidth: 2,
@@ -86,7 +75,6 @@ export const styles = StyleSheet.create({
   milestones: {
     height: 1,
     width: 280,
-    // paddingBottom: 10,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
@@ -96,9 +84,7 @@ export const styles = StyleSheet.create({
     borderColor: 'red',
   },
   button: {
-    padding: 100,
-
-    
+  
   }
 });  
 
