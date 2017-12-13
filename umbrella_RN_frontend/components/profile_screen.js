@@ -57,6 +57,15 @@ class ProfileScreen extends React.Component {
     this.setState({ children: json.results });
   }
 
+  handleSignout(){
+    return ()=>{
+      AsyncStorage.getItem('token').then((returntoken)=> {
+        this.props.logoutUser(returntoken);
+        AsyncStorage.removeItem('token');
+      });
+    }
+  }
+
   _renderSwitchChildren = () => {
     if (this.state.children.length > 1) {
       return (
@@ -76,7 +85,7 @@ class ProfileScreen extends React.Component {
       onPress={console.log('sign out')}
       style={styles.logOutButton}
     >
-      <Text style={styles.signOutButtonText}> SIGN OUT </Text>
+      <Text style={styles.signOutButtonText} onClick={this.handleSignout()}> SIGN OUT </Text>
     </ TouchableOpacity>
   )
 

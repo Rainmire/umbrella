@@ -1,16 +1,12 @@
-export const emailChanged = (email) => {
-  return {
+export const emailChanged = (email) => ({
     type: 'EMAIL_CHANGED',
     email
-  };
-};
+  });
 
-export const passwordChanged = (password) => {
-  return {
+export const passwordChanged = (password) => ({
     type: 'PASSWORD_CHANGED',
     password
-  };
-};
+  });
 
 export const loginUser = ({ email, password }) => {
   return (dispatch) => {
@@ -49,3 +45,10 @@ export const loginUser = ({ email, password }) => {
       });
   };
 };
+//
+export const logoutUser = (token) => (
+  fetch('http://localhost:3000/api/session', {
+    method: 'DELETE',
+    headers: { 'Authorization': token }
+  })
+);
