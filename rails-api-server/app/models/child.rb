@@ -1,5 +1,5 @@
 class Child < ApplicationRecord
-  validates :name, :teacher_id, :parent_id
+  validates :name, :teacher_id, :parent_id, presence: true
 
   belongs_to :parent,
   class_name: "User",
