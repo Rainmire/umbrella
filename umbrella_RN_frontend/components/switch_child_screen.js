@@ -42,6 +42,7 @@ class SwitchChildScreen extends React.Component {
     // this.setState({ currentChild: [this.state.children[0]] });
   }
 
+
   fetchData = async () => {
     const response = await fetch('/api/user')
       .then(e => console.error(e));
@@ -50,14 +51,17 @@ class SwitchChildScreen extends React.Component {
   }
 
   _switchChild = () => (
-    console.log('You have switched children')
+
+    this.props.navigation.navigate('ProfileScreen')
   )
 
 // wrap this item in  TouchableOpacity tag so the whole index item is
 // is clickable, and will navigate to the child's profile page, and will
 // fetc all the data associated with that child from the store
   _renderItem = ({ item }) => (
-    <View style={styles.switchChildContainer}>
+    <TouchableOpacity
+      onPress={this._switchChild}
+      style={styles.switchChildContainer}>
       <View>
         <Image
           source={{ uri: `${item.image_url}` }}
@@ -67,7 +71,7 @@ class SwitchChildScreen extends React.Component {
       <View>
         <Text>{`${item.name}`}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 
   render() {

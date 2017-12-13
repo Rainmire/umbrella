@@ -1,16 +1,16 @@
 import { StackNavigator, TabNavigator } from "react-navigation";
 import LoginForm from "../components/login_form";
 import ProfileScreen from "../components/profile_screen";
-import RootNavigator from "./root_navigator";
+import SimpleNav from "./root_navigator";
 
-// export const SignedOut = StackNavigator({
-//   LoginForm: {
-//     screen: LoginForm,
-//     navigationOptions: {
-//       title: "Sign In"
-//     }
-//   },
-// });
+export const SignedOut = StackNavigator({
+  LoginForm: {
+    screen: LoginForm,
+    navigationOptions: {
+      title: "Sign In"
+    }
+  },
+});
 //
 // export const SignedIn = StackNavigator({
 //   SignedIn: {
@@ -20,7 +20,7 @@ import RootNavigator from "./root_navigator";
 
 // const Router = StackNavigator({
 //   SignedIn: {
-//     screen: SignedIn,
+//     screen: SimpleNav,
 //   },
 //   SignedOut: {
 //     screen: SignedOut,
@@ -40,6 +40,7 @@ import RootNavigator from "./root_navigator";
 //
 // // this.props.navigation.dispatch(navigateAction)
 //
+// export default navigateAction;
 //
 //
 // export default navigateAction;

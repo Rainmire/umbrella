@@ -57,7 +57,7 @@ class ProfileScreen extends React.Component {
     )
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.setState({ currentChild: [this.state.children[0]] });
 
   }
@@ -70,14 +70,14 @@ class ProfileScreen extends React.Component {
   }
 
   _switchChild = () => (
-    this.props.navigation.navigate('SwitchChildScreen') //{children: this.state.children}
+    this.props.navigation.navigate('SwitchChild') //{children: this.state.children}
   )
 
   _renderSwitchChildren = () => {
     if (this.state.children.length > 1) {
       return (
         <TouchableOpacity
-          onPress={ () => this.props.navigation.navigate('SwitchChild')}
+          onPress={this._switchChild}
           style={styles.profileButton}
         >
           <Text style={styles.switchChildButtonText}> Switch Child </Text>
@@ -89,7 +89,7 @@ class ProfileScreen extends React.Component {
 
   _renderLogOutButton = () => (
     <TouchableOpacity
-      onPress={console.log('sign out')}
+      onPress={this.onSignOut}
       style={styles.logOutButton}
     >
       <Text style={styles.signOutButtonText}> SIGN OUT </Text>
@@ -139,7 +139,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 50,
+    // paddingTop: 50,
   },
   childInfoContainer: {
     shadowColor: '#000',
