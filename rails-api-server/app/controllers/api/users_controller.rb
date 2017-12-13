@@ -2,6 +2,7 @@ class Api::UsersController < ApplicationController
 
   def show
     @user = current_user
+    # @user = User.first
     if @user
       @children = @user.children
       render 'api/users/show'
