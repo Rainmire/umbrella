@@ -10,14 +10,16 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
-import { fetchCurrentUser } from '../actions/user_actions';
+
 
 export default class GoogleLogin extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       user: undefined, // user has not logged in yet
     };
+    console.log(this.props);
+    this.handleOpenURL= this.handleOpenURL.bind(this);
   }
 
   // Set up Linking
@@ -41,12 +43,7 @@ export default class GoogleLogin extends Component {
     const token = url.slice(11);
     AsyncStorage.setItem('token', token);
     AsyncStorage.getItem('token').then((returntoken)=> {
-      // fetch('http://localhost:3000/api/user', {
-      //   method: 'GET',
-      //   headers: { 'Authorization': returntoken }
-      // })
-      fetchCurrentUser(returntoken);
-
+      this.props.fetchCurrentUser(returntoken);
     });
     // Extract stringified user string out of the URL
     // const [, user_string] = url.match(/user=([^#]+)/);
@@ -67,7 +64,7 @@ export default class GoogleLogin extends Component {
   loginWithGoogle (){
     this.openURL('http://localhost:3000/auth/google_oauth2');
   }
-  
+
 
   // Open URL in a browser
   openURL(url){
