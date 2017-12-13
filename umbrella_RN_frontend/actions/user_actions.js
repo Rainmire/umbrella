@@ -20,7 +20,7 @@ export const fetchCurrentUser = (token) => (dispatch) => {
   }).then(({children}) => dispatch(receiveChildrenIds(children)));
 };
 
-export const fetchInfo = (child_id,token) => (dispatch) => {
+export const fetchChildInfo = (child_id,token) => (dispatch) => {
   fetch('http://localhost:3000/api/children/child_id', {
     method: 'GET',
     headers: { 'Authorization': token }
