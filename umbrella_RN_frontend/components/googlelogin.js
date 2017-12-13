@@ -54,6 +54,7 @@ export default class GoogleLogin extends Component {
   loginWithGoogle (){
     this.openURL('http://localhost:3000/auth/google_oauth2');
   }
+  
 
   // Open URL in a browser
   openURL(url){
@@ -72,6 +73,7 @@ export default class GoogleLogin extends Component {
 
   render() {
     const { user } = this.state;
+
     return (
       <View>
         <Icon.Button
