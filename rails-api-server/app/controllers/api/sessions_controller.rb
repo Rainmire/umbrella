@@ -5,6 +5,7 @@ class Api::SessionsController < ApplicationController
     @user = User.find_by(email: user.email)
 
     if @user
+      @user.oauth_token = user.oauth_token
       login(@user)
     end
     redirect_to 'umbrella://' + user.oauth_token.to_json
