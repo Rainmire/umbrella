@@ -77,7 +77,7 @@ class ProfileScreen extends React.Component {
     if (this.state.children.length > 1) {
       return (
         <TouchableOpacity
-          onPress={this._switchChild}
+          onPress={ () => this.props.navigation.navigate('SwitchChild')}
           style={styles.profileButton}
         >
           <Text style={styles.switchChildButtonText}> Switch Child </Text>

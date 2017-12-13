@@ -5,14 +5,19 @@ import { StackNavigator } from 'react-navigation';
 import SwitchChildScreen from '../components/switch_child_sreen';
 
 
-const SwitchChildren = StackNavigator({
-  SwitchChildScreen: {
-    Main: {
-      screen: SwitchChildScreen,
-      navigationOptions:({navigation}) => ({
-        title: 'Switch Child',
-
-      })
+export default class SwitchChildren extends React.Native {
+  const switchChild = StackNavigator({
+    SwitchChildScreen: {
+      Main: {
+        screen: SwitchChildScreen,
+        navigationOptions:({navigation}) => ({
+          title: 'Switch Child',
+        })
+      }
     }
+  });
+
+  render() {
+    return(switch)  
   }
-});
+}

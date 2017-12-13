@@ -12,12 +12,12 @@ import SwitchChildScreen from '../components/switch_child_screen';
 //   Home: { screen: ProfileScreen },
 //   SwitchChild: { screen: SwitchChildScreen }
 // });
-const SwitchProfileScreen = StackNavigator({
-  SwitchChildScreen: {
-    screen: SwitchChildScreen,
-    showLabel: false
-  }
-});
+// const SwitchProfileScreen = StackNavigator({
+//   SwitchChildScreen: {
+//     screen: SwitchChildScreen,
+//     showLabel: false
+//   }
+// });
 
 
 const RootNavigator = TabNavigator({
@@ -33,10 +33,6 @@ const RootNavigator = TabNavigator({
   ProfileScreen: {
     screen: ProfileScreen,
   },
-  SwitchChildScreen: {
-    screen: SwitchProfileScreen,
-    showLabel: false
-  }
 
 }, {
   tabBarPosition: 'bottom',
@@ -46,4 +42,9 @@ const RootNavigator = TabNavigator({
   },
 });
 
-export default RootNavigator;
+const SimpleNav = StackNavigator({
+  Home: { screen: RootNavigator },
+  SwitchChild: { screen: SwitchChildScreen }
+});
+
+export default SimpleNav;
