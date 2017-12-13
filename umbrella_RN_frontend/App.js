@@ -4,7 +4,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { logger } from 'redux-logger';
 import { Provider } from 'react-redux';
 import RootReducer from './reducers/root_reducer';
-import LoginForm from './components/login_form';
+import GoogleLogin from './components/googlelogin';
 import thunk from 'redux-thunk';
 
 

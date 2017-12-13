@@ -41,7 +41,6 @@ export default class GoogleLogin extends Component {
     const token = url.slice(11);
     AsyncStorage.setItem('token', token);
     AsyncStorage.getItem('token').then((returntoken)=> {
-      console.log(returntoken);
       // fetch('http://localhost:3000/api/user', {
       //   method: 'GET',
       //   headers: { 'Authorization': returntoken }
