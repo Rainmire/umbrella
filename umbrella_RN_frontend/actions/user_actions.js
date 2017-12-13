@@ -1,4 +1,4 @@
-export const RECEIVE_INFO = "RECEIVE_INFO";
+export const RECEIVE_CHILD_INFO = "RECEIVE_CHILD_INFO";
 export const RECEIVE_CHILDRENIDS = "RECEIVE_CHILDRENIDS";
 export const RECEIVE_MOMENTS = "RECEIVE_MOMENTS";
 
@@ -7,8 +7,8 @@ const receiveChildrenIds = (children) => ({
   children
 });
 
-const receiveInfo = (payload) => ({
-  type: RECEIVE_INFO,
+const receiveChildInfo = (payload) => ({
+  type: RECEIVE_CHILD_INFO,
   payload
 });
 
@@ -30,7 +30,7 @@ export const fetchChildInfo = (child_id,token) => (dispatch) => {
   return fetch('http://localhost:3000/api/children/child_id', {
     method: 'GET',
     headers: { 'Authorization': token }
-  }).then((payload) => dispatch(receiveChildrenIds(payload)));
+  }).then((payload) => dispatch(receiveChildInfo(payload)));
 };
 
 export const fetchMoments = (child_id,token) => {
