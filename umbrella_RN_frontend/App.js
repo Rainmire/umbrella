@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet, Button, Text } from 'react-native';
+import { TabNavigator } from 'react-navigation';
 import { createStore, applyMiddleware } from 'redux';
 import { logger } from 'redux-logger';
 import { Provider } from 'react-redux';
@@ -21,4 +22,10 @@ class App extends Component {
   }
 }
 
+
 export default App;
+
+// <View >
+//   <LoginForm />
+//   <RootNavigator />
+// </ View>
