@@ -12,7 +12,8 @@ class Api::SessionsController < ApplicationController
   end
 
   def destroy
-    @user = current_user
-    @user.oauth_token = nil
+    current_user.oauth_token = nil
+    session[:oauth_token] = nil
+    @current_user = nil
   end
 end
