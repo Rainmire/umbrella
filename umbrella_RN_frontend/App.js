@@ -18,19 +18,12 @@ class App extends Component {
   render() {
     return (
       <Provider store={createStore(SessionReducer, applyMiddleware(logger))}>
-        <View>
-          <SignedOut />
-          <SignedIn />
-        </View>
+
+        <RootNavigator />
+
       </Provider>
     );
   }
 }
 
-
 export default App;
-
-// <View >
-//   <LoginForm />
-//   <RootNavigator />
-// </ View>
