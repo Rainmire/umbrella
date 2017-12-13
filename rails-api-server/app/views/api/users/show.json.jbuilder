@@ -1,4 +1,4 @@
-json.extract! @user, :name, :email
+# json.extract! @user, :name, :email
 
 @children.each do |child|
   json.set! child.id do
