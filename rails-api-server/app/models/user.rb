@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  validates :name, :type
+  validates :name, :type, presence: true
   validates :email, uniqueness: true
 
   has_many :children,
