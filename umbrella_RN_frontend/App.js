@@ -9,15 +9,12 @@ import thunk from 'redux-thunk';
 
 
 class App extends Component {
-  static navigationOptions = {
-    title: 'Home',
-  };
 
   render() {
     return (
       <Provider store={createStore(RootReducer, applyMiddleware(logger,thunk))}>
         <View>
-          <LoginForm />
+          <GoogleLogin />
         </View>
       </Provider>
     );

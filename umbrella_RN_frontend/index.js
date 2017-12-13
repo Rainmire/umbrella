@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
-import Router from './router';
+import App from './App';
 
-AppRegistry.registerComponent('umbrella_RN_frontend', () => Router);
+AppRegistry.registerComponent('umbrella_RN_frontend', () => App);

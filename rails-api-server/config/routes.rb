@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  get 'auth/:provider/callback', to: 'sessions#create'
+  namespace :api, defaults: {format: :json} do
+    get '/user', to: 'users#show', as: 'user'
+  end
+
+  get 'auth/:provider/callback', to: 'api/sessions#create'
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
 
