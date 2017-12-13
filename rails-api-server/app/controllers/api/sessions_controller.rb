@@ -12,6 +12,6 @@ class Api::SessionsController < ApplicationController
 
   def destroy
     session[:oauth_token] = nil
-    
+
   end
 end
