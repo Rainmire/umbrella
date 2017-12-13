@@ -31,16 +31,15 @@ class SwitchChildScreen extends React.Component {
 
   }
 
-  static navigationOptions = {
-    tabBarLabel: 'Profile',
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name="user" size={30} color="#00F" />
-    )
-  }
+  // static navigationOptions = {
+  //   tabBarLabel: 'Profile',
+  //   tabBarIcon: ({ tintColor }) => (
+  //     <Icon name="user" size={30} color="#00F" />
+  //   )
+  // }
 
   componentWillMount() {
-    this.setState({ currentChild: [this.state.children[0]] });
-
+    // this.setState({ currentChild: [this.state.children[0]] });
   }
 
   fetchData = async () => {
@@ -54,26 +53,46 @@ class SwitchChildScreen extends React.Component {
     console.log('You have switched children')
   )
 
+// wrap this item in  TouchableOpacity tag so the whole index item is
+// is clickable, and will navigate to the child's profile page, and will
+// fetc all the data associated with that child from the store
+  _renderItem = ({ item }) => (
+    <View style={styles.switchChildContainer}>
+      <View>
+        <Image
+          source={{ uri: `${item.image_url}` }}
+          style={{height: 50, width: 50}}
+          />
+      </View>
+      <View>
+        <Text>{`${item.name}`}</Text>
+      </View>
+    </View>
+  )
+
   render() {
+    console.log(this)
     return (
-      <View style={styles.profileScreen}>
+      <View>
         <FlatList
-          data={ this.state.currentChild }
+          data={ this.state.children }
           keyExtractor={(x, i) => i }// change to the id
           renderItem={ this._renderItem }
         ></FlatList>
-        { this._renderSwitchChildren() }
-        { this._renderLogOutButton() }
       </View>
     );
   }
 }
 
 export const styles = StyleSheet.create({
-
+  switchChildContainer: {
+    marginTop: 50,
+    flex: 1,
+    flexDirection: 'row',
+  }
 });
 
-export default ProfileScreen;
+export default SwitchChildScreen;
 
 // <Button
 // style={styles.button}

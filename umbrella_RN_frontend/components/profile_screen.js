@@ -11,6 +11,8 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { TabNavigator } from 'react-navigation';
 import { onSignOut } from '../app/auth';
+import SwitchChildScreen from './switch_child_screen';
+import navigateAction from '../navigation/router';
 
 // this button will route to the Google oAuth link, which will display the
 // google login form
@@ -67,6 +69,10 @@ class ProfileScreen extends React.Component {
     this.setState({ children: json.results });
   }
 
+  _switchChild = () => (
+    this.props.navigation.navigate('SwitchChildScreen') //{children: this.state.children}
+  )
+
   _renderSwitchChildren = () => {
     if (this.state.children.length > 1) {
       return (
@@ -112,13 +118,8 @@ class ProfileScreen extends React.Component {
     </View>
   )
 
-
-
-  _switchChild = () => (
-    console.log('You have switched children')
-  )
-
   render() {
+    console.log(this);
     return (
       <View style={styles.profileScreen}>
         <FlatList
@@ -180,7 +181,6 @@ export const styles = StyleSheet.create({
     width: 300,
     flex: 1,
     flexDirection: 'row',
-    color: 'blue',
     alignItems: 'center',
     justifyContent: 'flex-end',
     backgroundColor: '#bddfeb',
@@ -192,7 +192,6 @@ export const styles = StyleSheet.create({
     height: 50,
     width: 300,
     flex: 1,
-    color: 'blue',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#bddfeb',

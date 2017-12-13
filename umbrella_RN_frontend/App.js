@@ -8,6 +8,7 @@ import SessionReducer from './reducers/session_reducer';
 // import LoginForm from './components/login_form';
 import RootNavigator from './navigation/root_navigator';
 import GoogleLogin from './components/googlelogin';
+import SwitchChildScreen from './components/switch_child_screen';
 
 class App extends Component {
   render() {
