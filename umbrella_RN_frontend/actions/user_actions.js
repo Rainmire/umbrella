@@ -12,19 +12,13 @@ const receiveInfo = (payload) => ({
   payload
 });
 
-// export const fetchCurrentUser = (token) => {
-//   fetch('http://localhost:3000/api/user', {
-//       method: 'GET',
-//       headers: { 'Authorization': token }
-//     }).then((res) => console.log(res));
-// };
 export const fetchCurrentUser = (token) => (dispatch) => {
   console.log("hi");
   fetch('http://localhost:3000/api/user', {
     method: 'GET',
     headers: { 'Authorization': token }
-  }).then((res) => {
-    console.log(res);
+  }).then(({_bodyInit}) => {
+    console.log(_bodyInit);
     // fetchChildInfo(Object.keys(children)[0],token);
     // dispatch(receiveChildrenIds(children));
   });
