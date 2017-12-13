@@ -13,7 +13,7 @@ users = User.create([
   ])
 
 children = Child.create([
-  { name: 'Child1', teacher_id: 2, parent_id: 1 },
-  { name: 'Child2', teacher_id: 2, parent_id: 1 },
-  { name: 'Child3', teacher_id: 2, parent_id: 3 },
+  { name: 'Child1', teacher_id: 2, parent_id: 1, profile_pic: 'http://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513188522/cat1_cok5bz.jpg' },
+  { name: 'Child2', teacher_id: 2, parent_id: 1, profile_pic: 'http://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513188939/cats2_u6iwaq.jpg' },
+  { name: 'Child3', teacher_id: 2, parent_id: 3, profile_pic: 'http://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513189131/cat3_wx4tns.jpg' },
   ])

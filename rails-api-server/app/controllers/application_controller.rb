@@ -5,7 +5,9 @@ class ApplicationController < ActionController::Base
 
   def current_user
     # @current_user ||= User.find(session[:oauth_token]) if session[:oauth_token]
-    @current_user ||= User.find_by(oauth_token: request.headers["Authorization"])
+    token = request.headers["Authorization"]
+    return nil if token.nil?
+    @current_user ||= User.find_by(oauth_token: token)
   end
 
   def login(user)
