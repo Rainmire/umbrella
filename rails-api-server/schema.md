@@ -35,6 +35,7 @@ body        | text      | not null
 created_at  | datetime  | not null
 updated_at  | datetime  | not null
 author_id   | integer   | not null, foreign key
+child_id    | integer   | not null, foreign_key
 
 ## messages
 
