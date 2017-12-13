@@ -4,17 +4,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { TabNavigator } from 'react-navigation';
 import { onSignOut } from '../app/auth';
 
-// this button will route to the Google oAuth link, which will display the
-// google login form
-// const LoginScreen = ({ navigation }) => (
-//   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//     <Text>Login Screen</Text>
-//     <Button
-//     onPress={ () => navigation.navigate('Profile')}
-//     title='Log In'
-//     />
-//   </View>
-// );
 class ProfileScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -73,7 +62,7 @@ class ProfileScreen extends React.Component {
 
   _renderLogOutButton = () => (
     <TouchableOpacity
-      onPress={console.log('sign out')}
+      onPress={onSignOut}
       style={styles.logOutButton}
     >
       <Text style={styles.signOutButtonText}> SIGN OUT </Text>
@@ -102,10 +91,9 @@ class ProfileScreen extends React.Component {
     </View>
   )
 
-
-
   _switchChild = () => (
     console.log('You have switched children')
+
   )
 
   render() {
@@ -160,17 +148,16 @@ export const styles = StyleSheet.create({
     borderRadius: 75,
   },
   buttonContainer: {
-    height: 150,
+    height: 130,
     width: 300,
     flex: 1,
     flexDirection: 'column',
   },
   profileButton: {
-    height: 50,
+    height: 60,
     width: 300,
     flex: 1,
     flexDirection: 'row',
-    color: 'blue',
     alignItems: 'center',
     justifyContent: 'flex-end',
     backgroundColor: '#bddfeb',
@@ -179,24 +166,23 @@ export const styles = StyleSheet.create({
     paddingRight: 20
   },
   logOutButton: {
-    height: 50,
+    height: 60,
     width: 300,
     flex: 1,
-    color: 'blue',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#bddfeb',
     borderRadius: 30,
     marginBottom: 20,
-    paddingRight: 20
+    // paddingRight: 20
   },
   switchChildButtonText: {
-    fontSize: 24,
+    fontSize: 18,
     color: 'blue',
-    paddingRight: 40
+    paddingRight: 50
   },
   signOutButtonText: {
-    fontSize: 24,
+    fontSize: 18,
     color: 'blue',
   }
 });

@@ -11,13 +11,17 @@ import FeedScreen from './components/feed_screen';
 import CalendarScreen from './components/calendar_screen';
 import MessageScreen from './components/message_screen';
 import RootNavigator from './navigation/root_navigator';
-// import { SignedOut, SignedIn } from './app/router';
+import Router from './navigation/router';
+import { SignedOut, SignedIn } from './navigation/router';
 
 class App extends Component {
   render() {
     return (
       <Provider store={createStore(SessionReducer, applyMiddleware(logger))}>
-        <RootNavigator />
+        <View>
+          <SignedOut />
+          <SignedIn />
+        </View>
       </Provider>
     );
   }
