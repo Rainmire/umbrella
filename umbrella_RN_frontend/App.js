@@ -6,15 +6,18 @@ import { logger } from 'redux-logger';
 import { Provider } from 'react-redux';
 import SessionReducer from './reducers/session_reducer';
 // import LoginForm from './components/login_form';
+import RootNavigator from './navigation/root_navigator';
 import GoogleLogin from './components/googlelogin';
+import SwitchChildScreen from './components/switch_child_screen';
+import SimpleNav from './navigation/root_navigator';
 
 class App extends Component {
   render() {
     return (
       <Provider store={createStore(SessionReducer, applyMiddleware(logger))}>
-        <View>
-          <GoogleLogin />
-        </View>
+
+          <SimpleNav />
+
       </Provider>
     );
   }

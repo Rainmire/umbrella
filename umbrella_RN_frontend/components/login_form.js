@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions/session_actions';
 import GoogleLogin from './googlelogin';
 
-class LoginForm extends Component {
+class LoginForm extends React.Component {
   onButtonSubmit() {
     // console.log('Submitted: ', `${this.props.email} ${this.props.password}`);
     // const { email, password } = this.props;
