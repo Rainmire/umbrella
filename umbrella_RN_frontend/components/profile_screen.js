@@ -1,5 +1,13 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button, FlatList, Image, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Button,
+  FlatList,
+  Image,
+  TouchableOpacity
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { TabNavigator } from 'react-navigation';
 import { onSignOut } from '../app/auth';
@@ -21,12 +29,14 @@ class ProfileScreen extends React.Component {
 
     this.state= {
       children: [{
+        // id: ,
         name: 'May',
         class: 'Room 24',
         teacher: 'Ms. Lee',
         contact: '415-213-9024',
         image_url: 'https://www.security-camera-warehouse.com/images/profile.png'
       }, {
+        // id: ,
         name: 'April',
         class: 'Room 9',
         teacher: 'Mr. Z',
