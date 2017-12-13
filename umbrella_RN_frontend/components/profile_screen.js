@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, Button, FlatList, Image, TouchableOpacity } from 'react-native';
-import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { TabNavigator } from 'react-navigation';
 import { onSignOut } from '../app/auth';
 
 // this button will route to the Google oAuth link, which will display the
@@ -39,7 +39,10 @@ class ProfileScreen extends React.Component {
   }
 
   static navigationOptions = {
-    tabBarLabel: 'Profile'
+    tabBarLabel: 'Profile',
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="user" size={30} color="#00F" />
+    )
   }
 
   componentWillMount() {
@@ -59,13 +62,24 @@ class ProfileScreen extends React.Component {
       return (
         <TouchableOpacity
           onPress={this._switchChild}
-          style={styles.switchChildButton}
+          style={styles.profileButton}
         >
-          <Text style={styles.buttonText}> Switch Child </Text>
+          <Text style={styles.switchChildButtonText}> Switch Child </Text>
+          <Icon name="arrow-right" size={20} color="#900" />
         </ TouchableOpacity>
       )
     }
   }
+
+  _renderLogOutButton = () => (
+    <TouchableOpacity
+      onPress={console.log('sign out')}
+      style={styles.logOutButton}
+    >
+      <Text style={styles.signOutButtonText}> SIGN OUT </Text>
+    </ TouchableOpacity>
+  )
+
 
   _renderItem = ({ item }) => (
     <View style={styles.profileScreen}>
@@ -103,6 +117,7 @@ class ProfileScreen extends React.Component {
           renderItem={ this._renderItem }
         ></FlatList>
         { this._renderSwitchChildren() }
+        { this._renderLogOutButton() }
       </View>
     );
   }
@@ -138,15 +153,32 @@ export const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   photo: {
-    // flex: 1,
     height: 150,
     width: 150,
     borderWidth: 2,
     marginBottom: 50,
     borderRadius: 75,
-    // alignItems: 'center',
   },
-  switchChildButton: {
+  buttonContainer: {
+    height: 150,
+    width: 300,
+    flex: 1,
+    flexDirection: 'column',
+  },
+  profileButton: {
+    height: 50,
+    width: 300,
+    flex: 1,
+    flexDirection: 'row',
+    color: 'blue',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    backgroundColor: '#bddfeb',
+    borderRadius: 30,
+    marginBottom: 20,
+    paddingRight: 20
+  },
+  logOutButton: {
     height: 50,
     width: 300,
     flex: 1,
@@ -155,36 +187,21 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#bddfeb',
     borderRadius: 30,
-    marginBottom: 100,
+    marginBottom: 20,
+    paddingRight: 20
   },
-  buttonText: {
+  switchChildButtonText: {
+    fontSize: 24,
+    color: 'blue',
+    paddingRight: 40
+  },
+  signOutButtonText: {
     fontSize: 24,
     color: 'blue',
   }
 });
 
 export default ProfileScreen;
-
-// this is what I had before using flatList
-// <View>
-//
-//   <View style={styles.profileScreen}>
-//     <View style={styles.photo}>
-//       <Text>Photo</Text>
-//     </View>
-//     <View >
-//       <View style={styles.box}>
-//         <Text style={styles.text}>Name: </Text>
-//         <Text style={styles.text}>Class: </Text>
-//       </View>
-//       <View style={styles.box}>
-//         <Text style={styles.text}>Main Teacher: </Text>
-//         <Text style={styles.text}>Contact: </Text>
-//       </View>
-//     </View>
-//   </View>
-//
-// </View>
 
 // <Button
 // style={styles.button}

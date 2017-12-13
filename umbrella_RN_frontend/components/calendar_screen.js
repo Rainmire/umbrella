@@ -1,10 +1,14 @@
 import React from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import { TabNavigator } from 'react-navigation';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class CalendarScreen extends React.Component {
   static navigationOptions = {
-    tabBarLabel: 'Feed',
+    tabBarLabel: 'Calendar',
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="calendar" size={30} color="#00F" />
+    )
   };
 
   render() {
