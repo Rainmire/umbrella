@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171212010033) do
+ActiveRecord::Schema.define(version: 20171213021135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "children", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "teacher_id", null: false
+    t.integer "parent_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_children_on_name"
+    t.index ["parent_id"], name: "index_children_on_parent_id"
+    t.index ["teacher_id"], name: "index_children_on_teacher_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "provider"
@@ -25,7 +36,6 @@ ActiveRecord::Schema.define(version: 20171212010033) do
     t.datetime "updated_at", null: false
     t.string "email", null: false
     t.string "teacher_class"
-    t.string "type"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
