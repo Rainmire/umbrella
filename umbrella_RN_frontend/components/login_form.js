@@ -45,6 +45,7 @@ class LoginForm extends React.Component {
     //     />
     //   );
     // }
+    console.log(this.props);
       return (
         <Button
           style={{

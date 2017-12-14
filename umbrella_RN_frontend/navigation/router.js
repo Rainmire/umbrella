@@ -27,7 +27,6 @@ class Router extends Component {
     isSignedIn()
       .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
       .catch(err => alert('There was a problem signing you in.'));
-      console.log(this.state);
   }
 
   // if (!checkedSignIn) {
