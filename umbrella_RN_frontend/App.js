@@ -5,21 +5,19 @@ import { createStore, applyMiddleware } from 'redux';
 import { logger } from 'redux-logger';
 import { Provider } from 'react-redux';
 import SessionReducer from './reducers/session_reducer';
-import LoginForm from './components/login_form';
-import ProfileScreen from './components/profile_screen';
-import FeedScreen from './components/feed_screen';
-import CalendarScreen from './components/calendar_screen';
-import MessageScreen from './components/message_screen';
+// import LoginForm from './components/login_form';
 import RootNavigator from './navigation/root_navigator';
-import Router from './navigation/router';
-import { SignedOut, SignedIn } from './navigation/router';
+import GoogleLogin from './components/googlelogin';
+import SwitchChildScreen from './components/switch_child_screen';
+import SimpleNav from './navigation/root_navigator';
+// import Router from './navigation/router';
 
 class App extends Component {
   render() {
     return (
       <Provider store={createStore(SessionReducer, applyMiddleware(logger))}>
 
-        <RootNavigator />
+          <SimpleNav />
 
       </Provider>
     );

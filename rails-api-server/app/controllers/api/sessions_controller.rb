@@ -8,12 +8,12 @@ class Api::SessionsController < ApplicationController
       @user.oauth_token = user.oauth_token
       login(@user)
     end
-
-    redirect_to 'umbrella://' + user.oauth_token.to_json
+    redirect_to 'umbrella://' + user.oauth_token
   end
 
   def destroy
+    current_user.oauth_token = nil
     session[:oauth_token] = nil
-
+    @current_user = nil
   end
 end

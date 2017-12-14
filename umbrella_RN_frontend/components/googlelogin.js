@@ -5,10 +5,12 @@ import {
   StyleSheet,
   Platform,
   Text,
-  View
+  View,
+  AsyncStorage
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
+import { fetchCurrentUser } from '../actions/user_actions';
 
 export default class GoogleLogin extends Component {
   constructor(){
@@ -36,12 +38,24 @@ export default class GoogleLogin extends Component {
   }
 
   handleOpenURL({ url }){
+    const token = url.slice(11);
+    AsyncStorage.setItem('token', token);
+    AsyncStorage.getItem('token').then((returntoken)=> {
+      console.log(returntoken);
+      // fetch('http://localhost:3000/api/user', {
+      //   method: 'GET',
+      //   headers: { 'Authorization': returntoken }
+      // })
+      fetchCurrentUser(returntoken);
+
+    });
     // Extract stringified user string out of the URL
     // const [, user_string] = url.match(/user=([^#]+)/);
     // this.setState({
     //   // Decode the user string and parse it into JSON
     //   user: JSON.parse(decodeURI(user_string))
     // });
+
     if (Platform.OS === 'ios') {
       SafariView.dismiss();
     }

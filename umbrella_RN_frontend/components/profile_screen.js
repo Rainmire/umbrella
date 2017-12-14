@@ -1,8 +1,18 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button, FlatList, Image, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Button,
+  FlatList,
+  Image,
+  TouchableOpacity
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { TabNavigator } from 'react-navigation';
 import { onSignOut } from '../app/auth';
+import SwitchChildScreen from './switch_child_screen';
+import navigateAction from '../navigation/router';
 
 class ProfileScreen extends React.Component {
   constructor(props) {
@@ -10,12 +20,14 @@ class ProfileScreen extends React.Component {
 
     this.state= {
       children: [{
+        // id: ,
         name: 'May',
         class: 'Room 24',
         teacher: 'Ms. Lee',
         contact: '415-213-9024',
         image_url: 'https://www.security-camera-warehouse.com/images/profile.png'
       }, {
+        // id: ,
         name: 'April',
         class: 'Room 9',
         teacher: 'Mr. Z',
@@ -34,7 +46,7 @@ class ProfileScreen extends React.Component {
     )
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.setState({ currentChild: [this.state.children[0]] });
 
   }
@@ -45,6 +57,10 @@ class ProfileScreen extends React.Component {
     const json = response.json();
     this.setState({ children: json.results });
   }
+
+  _switchChild = () => (
+    this.props.navigation.navigate('SwitchChild') //{children: this.state.children}
+  )
 
   _renderSwitchChildren = () => {
     if (this.state.children.length > 1) {
@@ -62,7 +78,7 @@ class ProfileScreen extends React.Component {
 
   _renderLogOutButton = () => (
     <TouchableOpacity
-      onPress={onSignOut}
+      onPress={this.onSignOut}
       style={styles.logOutButton}
     >
       <Text style={styles.signOutButtonText}> SIGN OUT </Text>
@@ -91,12 +107,8 @@ class ProfileScreen extends React.Component {
     </View>
   )
 
-  _switchChild = () => (
-    console.log('You have switched children')
-
-  )
-
   render() {
+    console.log(this);
     return (
       <View style={styles.profileScreen}>
         <FlatList
@@ -116,7 +128,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 50,
+    // paddingTop: 50,
   },
   childInfoContainer: {
     shadowColor: '#000',
