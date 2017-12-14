@@ -12,7 +12,7 @@ import {
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { onSignOut } from '../app/auth';
-import styles from '../stylesheets/profile_screen';
+// import styles from '../stylesheets/profile_screen';
 import SwitchChildScreen from './switch_child_screen';
 import navigateAction from '../navigation/router';
 
@@ -197,7 +197,6 @@ export const styles = StyleSheet.create({
   }
 });
 
-export default ProfileScreen;
 
 // <Button
 // style={styles.button}
