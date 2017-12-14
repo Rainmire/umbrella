@@ -3,7 +3,8 @@ class Api::ChildrenController < ApplicationController
     @child = current_user.children.find(params[:id])
     # @child = User.first.children.find(params[:id])
     if @child
-      @teacher = @child.teacher
+      # @teacher = @child.teacher
+      # @moment
       # debugger
       render 'api/children/show'
     else
