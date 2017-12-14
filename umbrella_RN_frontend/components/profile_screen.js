@@ -6,7 +6,8 @@ import {
   Button,
   FlatList,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { TabNavigator } from 'react-navigation';
@@ -28,26 +29,6 @@ import navigateAction from '../navigation/router';
 class ProfileScreen extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state= {
-      children: [{
-        // id: ,
-        name: 'May',
-        class: 'Room 24',
-        teacher: 'Ms. Lee',
-        contact: '415-213-9024',
-        image_url: 'https://www.security-camera-warehouse.com/images/profile.png'
-      }, {
-        // id: ,
-        name: 'April',
-        class: 'Room 9',
-        teacher: 'Mr. Z',
-        contact: '415-213-9009',
-        image_url: 'https://www.security-camera-warehouse.com/images/profile.png'
-      }],
-      currentChild: null
-    }
-
   }
 
   static navigationOptions = {
@@ -57,21 +38,32 @@ class ProfileScreen extends React.Component {
     )
   }
 
-  componentDidMount() {
-    this.setState({ currentChild: [this.state.children[0]] });
+  // componentDidMount() {
+  //   this.setState({ currentChild: [this.state.children[0]] });
+  //
+  // }
 
-  }
+  // fetchData = async () => {
+  //   const response = await fetch('/api/user')
+  //     .then(e => console.error(e));
+  //   const json = response.json();
+  //   this.setState({ children: json.results });
+  // }
 
-  fetchData = async () => {
-    const response = await fetch('/api/user')
-      .then(e => console.error(e));
-    const json = response.json();
-    this.setState({ children: json.results });
+
+  handleSignout(){
+    return ()=>{
+      AsyncStorage.getItem('token').then((returntoken)=> {
+        this.props.logoutUser(returntoken);
+        AsyncStorage.removeItem('token');
+      });
+    }
   }
 
   _switchChild = () => (
     this.props.navigation.navigate('SwitchChild') //{children: this.state.children}
   )
+
 
   _renderSwitchChildren = () => {
     if (this.state.children.length > 1) {
@@ -89,7 +81,7 @@ class ProfileScreen extends React.Component {
 
   _renderLogOutButton = () => (
     <TouchableOpacity
-      onPress={this.onSignOut}
+      onPress={this.handleSignout()}
       style={styles.logOutButton}
     >
       <Text style={styles.signOutButtonText}> SIGN OUT </Text>
@@ -123,16 +115,16 @@ class ProfileScreen extends React.Component {
     return (
       <View style={styles.profileScreen}>
         <FlatList
-          data={ this.state.currentChild }
-          keyExtractor={(x, i) => i }// change to the id
-          renderItem={ this._renderItem }
-        ></FlatList>
-        { this._renderSwitchChildren() }
+        >Test</FlatList>
         { this._renderLogOutButton() }
       </View>
     );
   }
 }
+// { this._renderSwitchChildren() }
+// data={ this.props.currentChild }
+// keyExtractor={(x, i) => i }
+// renderItem={ this._renderItem }
 
 export const styles = StyleSheet.create({
   profileScreen: {
@@ -222,3 +214,23 @@ export default ProfileScreen;
 // onPress={() => console.log('put function here to switch current child')}
 //   title='Switch Child Profile'
 // ></Button>
+
+
+// this.state= {
+//   children: [{
+//     // id: ,
+//     name: 'May',
+//     class: 'Room 24',
+//     teacher: 'Ms. Lee',
+//     contact: '415-213-9024',
+//     image_url: 'https://www.security-camera-warehouse.com/images/profile.png'
+//   }, {
+//     // id: ,
+//     name: 'April',
+//     class: 'Room 9',
+//     teacher: 'Mr. Z',
+//     contact: '415-213-9009',
+//     image_url: 'https://www.security-camera-warehouse.com/images/profile.png'
+//   }],
+//   currentChild: null
+// }
