@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { StackNavigator } from 'react-navigation';
+// import styles from '../stylesheets/switch_child_screen';
 
 
 class SwitchChildScreen extends React.Component {
