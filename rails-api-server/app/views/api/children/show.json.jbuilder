@@ -5,7 +5,7 @@ end
 json.moments do
   @child.moments.each do |moment|
     json.set! moment.id do
-      json.extract! moment, :body, :author_id, :created_at
+      json.extract! moment, :body, :author_id, :created_at, :is_public
     end
   end
 end

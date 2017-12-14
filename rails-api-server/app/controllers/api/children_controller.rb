@@ -1,7 +1,7 @@
 class Api::ChildrenController < ApplicationController
   def show
-    @child = current_user.children.find(params[:id])
-    # @child = User.first.children.find(params[:id])
+    # @child = current_user.children.find(params[:id])
+    @child = User.first.children.find(params[:id])
     if @child
       # @teacher = @child.teacher
       # @moment
