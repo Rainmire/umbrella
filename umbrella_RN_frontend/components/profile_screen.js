@@ -107,7 +107,7 @@ class ProfileScreen extends React.Component {
   )
 
   render() {
-    console.log('profile screen props: ', this.props);
+    console.log('profile screen props: ', );
     return (
       <View style={styles.profileScreen}>
         <FlatList
