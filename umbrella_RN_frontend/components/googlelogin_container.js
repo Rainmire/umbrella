@@ -10,4 +10,4 @@ const mapDTPs = dispatch => ({
   fetchCurrentUser: (token) => dispatch(fetchCurrentUser(token))
 });
 
-export default connect(null, mapDTPs)(GoogleLogin);
+export default connect(mapSTPs, mapDTPs)(GoogleLogin);

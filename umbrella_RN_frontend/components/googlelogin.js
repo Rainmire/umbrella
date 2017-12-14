@@ -13,13 +13,12 @@ import SafariView from 'react-native-safari-view';
 // import { TabNavigator } from 'react-navigation';
 
 
-
 export default class GoogleLogin extends Component {
   constructor(props){
     super(props);
     this.handleOpenURL= this.handleOpenURL.bind(this);
-    console.log(this.props);
   }
+
 
   // Set up Linking
   componentDidMount() {
@@ -44,14 +43,14 @@ export default class GoogleLogin extends Component {
     });
     AsyncStorage.getItem('token').then((returntoken)=> {
       this.props.fetchCurrentUser(returntoken);
-    });
+    }).then( () => this.props.navigation.navigate('SignedIn'));
+
     // Extract stringified user string out of the URL
     // const [, user_string] = url.match(/user=([^#]+)/);
     // this.setState({
     //   // Decode the user string and parse it into JSON
     //   user: JSON.parse(decodeURI(user_string))
     // });
-
     if (Platform.OS === 'ios') {
       SafariView.dismiss();
     }
@@ -82,7 +81,9 @@ export default class GoogleLogin extends Component {
   }
 
   render() {
+    console.log('google login: ', this);
     return (
+
         <Icon.Button
           name="google"
           backgroundColor="#DD4B39"
@@ -173,3 +174,33 @@ const styles = StyleSheet.create({
 //   >
 //     Login with Facebook
 //   </Icon.Button>
+
+
+
+
+
+// <View style={styles.container}>
+//   { user
+//     ? // Show user info if already logged in
+//       <View style={styles.content}>
+//         <Text style={styles.header}>
+//           Welcome {user.name}!
+//         </Text>
+//         <View style={styles.avatar}>
+//           <Image source={{ uri: user.avatar }} style={styles.avatarImage} />
+//         </View>
+//       </View>
+//     : // Show Please log in message if not
+//       <View style={styles.content}>
+//         <Text style={styles.header}>
+//           Welcome Stranger!
+//         </Text>
+//         <View style={styles.avatar}>
+//           <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" />
+//         </View>
+//         <Text style={styles.text}>
+//           Please log in to continue {'\n'}
+//           to the awesomness
+//         </Text>
+//       </View>
+//   }

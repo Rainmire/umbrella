@@ -13,11 +13,14 @@ import RootNavigator from './navigation/root_navigator';
 // import SwitchChildScreen from './components/switch_child_screen';
 import SimpleNav from './navigation/root_navigator';
 import AuthNav from './navigation/root_navigator';
+import CreateRootNavigator from './navigation/root_navigator';
 import { isSignedIn } from './app/auth';
 import Router from './navigation/router';
 
+// if we make this for android too, need to make an action to dispatch
+// a navigation function 'rest' to reset the navigation state
+// https://reactnavigation.org/docs/navigators/navigation-actions#Reset
 class App extends Component {
-
   render() {
 
     return (
@@ -28,11 +31,4 @@ class App extends Component {
   }
 }
 
-// <GoogleLoginContainer />
-
 export default App;
-
-// <View >
-//   <LoginForm />
-//   <RootNavigator />
-// </ View>
