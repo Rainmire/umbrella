@@ -1,7 +1,7 @@
 import { StackNavigator, TabNavigator } from "react-navigation";
 import LoginForm from "../components/login_form";
 import ProfileScreen from "../components/profile_screen";
-import RootNavigator from "./root_navigator";
+import SimpleNav from "./root_navigator";
 
 export const SignedOut = StackNavigator({
   LoginForm: {
@@ -11,20 +11,36 @@ export const SignedOut = StackNavigator({
     }
   },
 });
+//
+// export const SignedIn = StackNavigator({
+//   SignedIn: {
+//     screen: SignedIn,
+//   },
+// });
 
-export const SignedIn = StackNavigator({
-  SignedIn: {
-    screen: RootNavigator,
-  },
-});
+// const Router = StackNavigator({
+//   SignedIn: {
+//     screen: SimpleNav,
+//   },
+//   SignedOut: {
+//     screen: SignedOut,
+//   },
+// });
 
-const Router = StackNavigator({
-  SignedIn: {
-    screen: SignedIn,
-  },
-  SignedOut: {
-    screen: SignedOut,
-  },
-});
-
-export default Router;
+// import { NavigationActions } from 'react-navigation'
+//
+// const navigateAction = NavigationActions.navigate({
+//
+//   routeName: 'SwitchChildPage',
+//
+//   params: {},
+//
+//   action: NavigationActions.navigate({ routeName: 'SwitchChildPage'})
+// })
+//
+// // this.props.navigation.dispatch(navigateAction)
+//
+// export default navigateAction;
+//
+//
+// export default navigateAction;
