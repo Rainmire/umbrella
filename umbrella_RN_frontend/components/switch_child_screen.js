@@ -15,20 +15,6 @@ import { StackNavigator } from 'react-navigation';
 class SwitchChildScreen extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state= {
-      children: [{
-        id: 3,
-        name: 'May',
-        image_url: 'https://www.security-camera-warehouse.com/images/profile.png'
-      }, {
-        id: 7,
-        name: 'April',
-        image_url: 'https://www.security-camera-warehouse.com/images/profile.png'
-      }],
-      currentChild: null
-    }
-
   }
 
   // static navigationOptions = {
@@ -38,44 +24,37 @@ class SwitchChildScreen extends React.Component {
   //   )
   // }
 
-  componentWillMount() {
-    // this.setState({ currentChild: [this.state.children[0]] });
+  // componentWillMount() {
+  //   // this.setState({ currentChild: [this.state.children[0]] });
+  // }
+
+
+  _switchChild (){
+    this.props.navigation.navigate('ProfileScreen');
   }
-
-
-  fetchData = async () => {
-    const response = await fetch('/api/user')
-      .then(e => console.error(e));
-    const json = response.json();
-    this.setState({ children: json.results });
-  }
-
-  _switchChild = () => (
-
-    this.props.navigation.navigate('ProfileScreen')
-  )
 
 // wrap this item in  TouchableOpacity tag so the whole index item is
 // is clickable, and will navigate to the child's profile page, and will
 // fetc all the data associated with that child from the store
-  _renderItem = ({ item }) => (
-    <TouchableOpacity
-      onPress={this._switchChild}
-      style={styles.switchChildContainer}>
-      <View>
-        <Image
-          source={{ uri: `${item.image_url}` }}
-          style={{height: 50, width: 50}}
-          />
-      </View>
-      <View>
-        <Text>{`${item.name}`}</Text>
-      </View>
-    </TouchableOpacity>
-  )
+  _renderItem ({ item }){
+    return(
+      <TouchableOpacity
+        onPress={this._switchChild}
+        style={styles.switchChildContainer}>
+        <View>
+          <Image
+            source={{ uri: `${item.image_url}` }}
+            style={{height: 50, width: 50}}
+            />
+        </View>
+        <View>
+          <Text>{`${item.name}`}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  }
 
   render() {
-    console.log(this)
     return (
       <View>
         <FlatList
@@ -108,3 +87,18 @@ export default SwitchChildScreen;
 // onPress={() => console.log('put function here to switch current child')}
 //   title='Switch Child Profile'
 // ></Button>
+
+
+
+// this.state= {
+//   children: [{
+//     id: 3,
+//     name: 'May',
+//     image_url: 'https://www.security-camera-warehouse.com/images/profile.png'
+//   }, {
+//     id: 7,
+//     name: 'April',
+//     image_url: 'https://www.security-camera-warehouse.com/images/profile.png'
+//   }],
+//   currentChild: null
+// }

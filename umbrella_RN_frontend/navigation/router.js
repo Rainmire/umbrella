@@ -1,46 +1,52 @@
-import { StackNavigator, TabNavigator } from "react-navigation";
-import LoginForm from "../components/login_form";
-import ProfileScreen from "../components/profile_screen";
-import SimpleNav from "./root_navigator";
+import React, { Component } from 'react';
+import { View, StyleSheet, Button, Text } from 'react-native';
+// import { TabNavigator } from 'react-navigation';
+// import { createStore, applyMiddleware } from 'redux';
+// import { logger } from 'redux-logger';
+// import { Provider } from 'react-redux';
+// import SessionReducer from './reducers/session_reducer';
+import LoginForm from '../components/login_form';
+// import RootNavigator from './navigation/root_navigator';
+// import GoogleLogin from './components/googlelogin';
+// import SwitchChildScreen from './components/switch_child_screen';
+import SimpleNav from '../navigation/root_navigator';
+// import AuthNav from './navigation/root_navigator';
+import { isSignedIn } from '../app/auth';
 
-export const SignedOut = StackNavigator({
-  LoginForm: {
-    screen: LoginForm,
-    navigationOptions: {
-      title: "Sign In"
+class Router extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      signedIn: false,
+      checkedSignIn: false
+    };
+  }
+
+  componentWillMount() {
+    isSignedIn()
+      .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
+      .catch(err => alert('There was a problem signing you in.'));
+      console.log(this.state);
+  }
+
+  // if (!checkedSignIn) {
+  //   return null;
+  // }
+
+  render() {
+    const { checkedSignIn, signedIn } = this.state;
+
+    if (signedIn) {
+      return (
+        <SimpleNav />
+      );
+    } else {
+      return (
+        <LoginForm />
+      );
     }
-  },
-});
-//
-// export const SignedIn = StackNavigator({
-//   SignedIn: {
-//     screen: SignedIn,
-//   },
-// });
+  }
+}
 
-// const Router = StackNavigator({
-//   SignedIn: {
-//     screen: SimpleNav,
-//   },
-//   SignedOut: {
-//     screen: SignedOut,
-//   },
-// });
-
-// import { NavigationActions } from 'react-navigation'
-//
-// const navigateAction = NavigationActions.navigate({
-//
-//   routeName: 'SwitchChildPage',
-//
-//   params: {},
-//
-//   action: NavigationActions.navigate({ routeName: 'SwitchChildPage'})
-// })
-//
-// // this.props.navigation.dispatch(navigateAction)
-//
-// export default navigateAction;
-//
-//
-// export default navigateAction;
+export default Router;

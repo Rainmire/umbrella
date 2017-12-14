@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resource :user, only: [:show]
     resource :session, only: [:destroy]
     # delete 'session', to: 'sessions#destroy'
+    resources :children, only: [:show]
   end
 
   get 'auth/:provider/callback', to: 'api/sessions#create'
