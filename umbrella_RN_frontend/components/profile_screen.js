@@ -64,7 +64,7 @@ class ProfileScreen extends React.Component {
   }
 
   fetchData = async () => {
-    const response = await fetch('/api/user')
+    const response = await fetch('https/api/user')
       .then(e => console.error(e));
     const json = response.json();
     this.setState({ children: json.results });

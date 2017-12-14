@@ -5,22 +5,52 @@ import { createStore, applyMiddleware } from 'redux';
 import { logger } from 'redux-logger';
 import { Provider } from 'react-redux';
 import SessionReducer from './reducers/session_reducer';
-// import LoginForm from './components/login_form';
+import LoginForm from './components/login_form';
 import RootNavigator from './navigation/root_navigator';
 import GoogleLogin from './components/googlelogin';
 import SwitchChildScreen from './components/switch_child_screen';
 import SimpleNav from './navigation/root_navigator';
-// import Router from './navigation/router';
+import AuthNav from './navigation/root_navigator';
+import { isSignedIn } from './app/auth';
+import Router from './navigation/router';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      signedIn: false,
+      checkedSignIn: false
+    };
+  }
+
+  componentWillMount() {
+    isSignedIn()
+      .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
+      .catch(err => alert('There was a problem signing you in.'));
+  }
+
+  // if (!checkedSignIn) {
+  //   return null;
+  // }
+
   render() {
-    return (
-      <Provider store={createStore(SessionReducer, applyMiddleware(logger))}>
+    const { checkedSignIn, signedIn } = this.state;
 
+    if (signedIn) {
+      return (
+        <Provider store={createStore(SessionReducer, applyMiddleware(logger))}>
           <SimpleNav />
+        </Provider>
+      );
+    } else {
+      return (
+        <Provider store={createStore(SessionReducer, applyMiddleware(logger))}>
+          <LoginForm />
+        </Provider>
+      );
+    }
 
-      </Provider>
-    );
   }
 }
 
