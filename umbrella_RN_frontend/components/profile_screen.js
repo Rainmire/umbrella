@@ -69,7 +69,7 @@ class ProfileScreen extends React.Component {
     this.setState({ children: json.results });
   }
 
-<<<<<<< HEAD
+
   handleSignout(){
     return ()=>{
       AsyncStorage.getItem('token').then((returntoken)=> {
@@ -78,11 +78,11 @@ class ProfileScreen extends React.Component {
       });
     }
   }
-=======
+
   _switchChild = () => (
     this.props.navigation.navigate('SwitchChild') //{children: this.state.children}
   )
->>>>>>> f5730a16e6750d033b259959ab7b7adcbeb5d8db
+
 
   _renderSwitchChildren = () => {
     if (this.state.children.length > 1) {
