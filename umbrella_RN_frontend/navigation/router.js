@@ -10,6 +10,7 @@ import RootNavigator from './root_navigator';
 // import GoogleLogin from './components/googlelogin';
 // import SwitchChildScreen from './components/switch_child_screen';
 import SimpleNav from './root_navigator';
+import { SignedIn, SignedOut } from './root_navigator';
 // import AuthNav from './navigation/root_navigator';
 import { isSignedIn } from '../app/auth';
 
@@ -35,13 +36,15 @@ class Router extends Component {
       SignedIn: {
         screen: SignedIn,
         navigationOptions: {
-          gesturesEnabled: false
+          gesturesEnabled: false,
+          left: null
         }
       },
       SignedOut: {
         screen: SignedOut,
         navigationOptions: {
-          gesturesEnabled: false
+          gesturesEnabled: false,
+          left: null
         }
       }
     },
@@ -61,9 +64,9 @@ class Router extends Component {
     }
 
     if (signedIn) {
-      return <SimpleNav />;
+      return <SignedIn />;
     } else {
-      return <LoginForm />;
+      return <SignedOut />;
     }
   }
 }

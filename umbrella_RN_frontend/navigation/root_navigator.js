@@ -9,17 +9,6 @@ import CalendarScreen from '../components/calendar_screen';
 import MessageScreen from '../components/message_screen';
 import SwitchChildScreen from '../components/switch_child_screen';
 
-// const RootNavigator = StackNavigator({
-//   Home: { screen: ProfileScreen },
-//   SwitchChild: { screen: SwitchChildScreen }
-// });
-// const SwitchProfileScreen = StackNavigator({
-//   SwitchChildScreen: {
-//     screen: SwitchChildScreen,
-//     showLabel: false
-//   }
-// });
-
 // SignedIn
 const RootNavigator = TabNavigator({
   CalendarScreen: {
@@ -44,13 +33,29 @@ const RootNavigator = TabNavigator({
 });
 
 // look into screenProps to pass props
-// const SimpleNav = StackNavigator({
-//   Home: { screen: RootNavigator }, // SignedIn
-//   SwitchChild: { screen: SwitchChildScreen },
-//   Login: { screen: LoginForm }
-// });
+export const SignedIn = StackNavigator({
+  Home: {
+    screen: RootNavigator,
+    navigationOptions: {
+      header: null
+    }
+  },
+  SwitchChild: {
+    screen: SwitchChildScreen,
+  },
+  Login: {
+    screen: LoginForm,
+    navigationOptions: {
+      header: null
+    }
+  }
+});
 
-
-
-
-export default RootNavigator;
+export const SignedOut = StackNavigator({
+  Login: {
+    screen: LoginForm,
+    navigationOptions: {
+      header: null
+    }
+  }
+});
