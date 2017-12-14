@@ -5,7 +5,8 @@ import {
   StyleSheet,
   Platform,
   Text,
-  View
+  View,
+  AsyncStorage
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
@@ -16,7 +17,6 @@ export default class GoogleLogin extends Component {
   constructor(props){
     super(props);
     this.handleOpenURL= this.handleOpenURL.bind(this);
-    console.log(this.props);
   }
 
   // Set up Linking
@@ -36,8 +36,6 @@ export default class GoogleLogin extends Component {
   }
 
   handleOpenURL({ url }){
-<<<<<<< HEAD
-=======
     const token = url.slice(11);
     AsyncStorage.setItem('token', token).then(()=>{
       this.props.navigation.navigate("ProfileScreen");
@@ -45,7 +43,7 @@ export default class GoogleLogin extends Component {
     AsyncStorage.getItem('token').then((returntoken)=> {
       this.props.fetchCurrentUser(returntoken);
     });
->>>>>>> 1d779431e1b79ef4ec15ec4841ebc5ca896f2a2c
+
     // Extract stringified user string out of the URL
     // const [, user_string] = url.match(/user=([^#]+)/);
     // this.setState({
@@ -82,11 +80,9 @@ export default class GoogleLogin extends Component {
   }
 
   render() {
+    console.log('google login: ', this);
     return (
-<<<<<<< HEAD
-      <View>
-=======
->>>>>>> 1d779431e1b79ef4ec15ec4841ebc5ca896f2a2c
+
         <Icon.Button
           name="google"
           backgroundColor="#DD4B39"

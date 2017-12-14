@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
+import LoginFormContainer from '../components/login_form_container';
 import LoginForm from '../components/login_form';
 import ProfileContainer from '../components/profile_container';
 import MomentsScreen from '../components/moments_screen';
@@ -43,15 +44,13 @@ const RootNavigator = TabNavigator({
 });
 
 // look into screenProps to pass props
-const SimpleNav = StackNavigator({
-  Home: { screen: RootNavigator }, // SignedIn
-  SwitchChild: { screen: SwitchChildScreen },
-<<<<<<< HEAD
-  Login: { screen: LoginForm }
-=======
-  Login: {screen: LoginForm}
->>>>>>> 1d779431e1b79ef4ec15ec4841ebc5ca896f2a2c
-});
+// const SimpleNav = StackNavigator({
+//   Home: { screen: RootNavigator }, // SignedIn
+//   SwitchChild: { screen: SwitchChildScreen },
+//   Login: { screen: LoginForm }
+// });
 
 
-export default SimpleNav;
+
+
+export default RootNavigator;

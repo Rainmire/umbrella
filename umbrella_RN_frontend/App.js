@@ -13,11 +13,11 @@ import RootNavigator from './navigation/root_navigator';
 // import SwitchChildScreen from './components/switch_child_screen';
 import SimpleNav from './navigation/root_navigator';
 import AuthNav from './navigation/root_navigator';
+import CreateRootNavigator from './navigation/root_navigator';
 import { isSignedIn } from './app/auth';
 import Router from './navigation/router';
 
 class App extends Component {
-
   render() {
 
     return (

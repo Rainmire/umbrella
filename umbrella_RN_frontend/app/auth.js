@@ -1,3 +1,4 @@
+import React from "react";
 import { AsyncStorage } from "react-native";
 
 // where are we goign to get the user_key from? What will it be?

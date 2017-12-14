@@ -8,10 +8,17 @@ import { emailChanged, passwordChanged, loginUser } from '../actions/session_act
 import GoogleLoginContainer from './googlelogin_container';
 
 class LoginForm extends React.Component {
+  constructor(props) {
+    super(props);    
+  }
   onButtonSubmit() {
     // console.log('Submitted: ', `${this.props.email} ${this.props.password}`);
     // const { email, password } = this.props;
     // this.props.loginUser({ email, password });
+  }
+
+  componenetDidMount() {
+
   }
   emailChanged(value) {
     const email = _.lowerCase(value.trim());
@@ -64,7 +71,7 @@ class LoginForm extends React.Component {
   }
 
   render() {
-
+console.log('login form: ', this);
       return (
         <View style={styles.viewStyle}>
         {this.renderError()}
@@ -92,7 +99,7 @@ class LoginForm extends React.Component {
         />
 
         {this.renderButton()}
-        <GoogleLoginContainer />
+        <GoogleLoginContainer navigation={this.props.navigation}/>
         </View>
       );
   }
