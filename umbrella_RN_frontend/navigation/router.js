@@ -46,7 +46,7 @@ class Router extends Component {
           gesturesEnabled: false,
           left: null
         }
-      }
+      },
     },
     {
       headerMode: "none",

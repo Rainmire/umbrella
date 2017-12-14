@@ -1,18 +1,12 @@
-import { RECEIVE_CURRENT_CHILD } from '../actions/children_actions';
+import { RECEIVE_CURRENT_CHILD_ID } from '../actions/children_actions';
 import merge from 'lodash/merge';
 
 
 const childrenReducer = (state = {}, action) => {
   Object.freeze(state);
   switch (action.type) {
-    case RECEIVE_CURRENT_CHILD:
-      return action.child;
-    // case RECEIVE_PIC:
-    //   return merge({},state,{[action.picture.id]:action.picture});
-    // case REMOVE_PIC:
-    //   const newState = merge({},state);
-    //   delete newState[action.picId];
-    //   return newState;
+    case RECEIVE_CURRENT_CHILD_ID:
+      return action.childId;
     default:
       return state;
   }

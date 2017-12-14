@@ -1,16 +1,16 @@
 import { receiveUsers } from './user_actions';
 
 export const RECEIVE_CHILDREN = "RECEIVE_CHILDRENIDS";
-export const RECEIVE_CURRENT_CHILD = "RECEIVE_CURRENT_CHILD";
+export const RECEIVE_CURRENT_CHILD_ID = "RECEIVE_CURRENT_CHILD_ID";
 
 export const receiveChildren = (children) => ({
   type: RECEIVE_CHILDREN,
   children
 });
 
-export const receiveCurrentChild = ( child ) => ({
-  type: RECEIVE_CURRENT_CHILD,
-  child
+export const receiveCurrentChildId = ( childId ) => ({
+  type: RECEIVE_CURRENT_CHILD_ID,
+  childId
 });
 
 

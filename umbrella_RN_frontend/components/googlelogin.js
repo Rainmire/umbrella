@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
-// import { TabNavigator } from 'react-navigation';
+import { TabNavigator } from 'react-navigation';
 
 
 export default class GoogleLogin extends Component {
@@ -18,7 +18,6 @@ export default class GoogleLogin extends Component {
     super(props);
     this.handleOpenURL= this.handleOpenURL.bind(this);
   }
-
 
   // Set up Linking
   componentDidMount() {
@@ -37,13 +36,28 @@ export default class GoogleLogin extends Component {
   }
 
   handleOpenURL({ url }){
+    const { navigate } = this.props.navigation;
+    const { dispatch } = this.props.navigation;
+
     const token = url.slice(11);
-    AsyncStorage.setItem('token', token).then(()=>{
-      this.props.navigation.navigate("ProfileScreen");
-    });
+    AsyncStorage.setItem('token', token);
+
     AsyncStorage.getItem('token').then((returntoken)=> {
       this.props.fetchCurrentUser(returntoken);
+    }).then( () => {
+      dispatch({
+        type:'Navigation/RESET',
+        actions: [{
+          type: 'Navigate',
+          routeName: 'Home'
+        }],
+        index: 0
+      });
     });
+
+    // .then( () => {
+    //     this.props.navigation.navigate("Home");
+    // });
 
     // Extract stringified user string out of the URL
     // const [, user_string] = url.match(/user=([^#]+)/);

@@ -34,6 +34,12 @@ const RootNavigator = TabNavigator({
 
 // look into screenProps to pass props
 export const SignedIn = StackNavigator({
+  Login: {
+    screen: LoginForm,
+    navigationOptions: {
+      header: null
+    }
+  },
   Home: {
     screen: RootNavigator,
     navigationOptions: {
@@ -43,12 +49,6 @@ export const SignedIn = StackNavigator({
   SwitchChild: {
     screen: SwitchChildScreen,
   },
-  Login: {
-    screen: LoginForm,
-    navigationOptions: {
-      header: null
-    }
-  }
 });
 
 export const SignedOut = StackNavigator({
@@ -57,5 +57,11 @@ export const SignedOut = StackNavigator({
     navigationOptions: {
       header: null
     }
-  }
+  },
+  Home: {
+    screen: RootNavigator,
+    navigationOptions: {
+      header: null
+    }
+  },
 });
