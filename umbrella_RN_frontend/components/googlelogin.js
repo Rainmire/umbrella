@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
-import { TabNavigator } from 'react-navigation';
+// import { TabNavigator } from 'react-navigation';
 
 
 export default class GoogleLogin extends Component {

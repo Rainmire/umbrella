@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { fetchCurrentUser } from '../actions/user_actions';
 import GoogleLogin from './googlelogin';
 
-const mapSTPs = (state, { navigation }) => ({
+const mapSTPs = (state,{navigation}) => ({
   navigation: navigation
 });
 
