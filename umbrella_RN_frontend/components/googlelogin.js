@@ -41,11 +41,12 @@ export default class GoogleLogin extends Component {
 
     const token = url.slice(11);
     AsyncStorage.setItem('token', token);
+
     AsyncStorage.getItem('token').then((returntoken)=> {
       this.props.fetchCurrentUser(returntoken);
     }).then( () => {
       dispatch({
-        type:'Reset',
+        type:'Navigation/RESET',
         actions: [{
           type: 'Navigate',
           routeName: 'Home'
