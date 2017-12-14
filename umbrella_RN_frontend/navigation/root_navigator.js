@@ -19,7 +19,7 @@ import SwitchChildScreen from '../components/switch_child_screen';
 //   }
 // });
 
-
+// SignedIn
 const RootNavigator = TabNavigator({
   CalendarScreen: {
     screen: CalendarScreen,
@@ -42,9 +42,11 @@ const RootNavigator = TabNavigator({
   },
 });
 
+// look into screenProps to pass props
 const SimpleNav = StackNavigator({
-  Home: { screen: RootNavigator },
+  Home: { screen: RootNavigator }, // SignedIn
   SwitchChild: { screen: SwitchChildScreen }
 });
+
 
 export default SimpleNav;

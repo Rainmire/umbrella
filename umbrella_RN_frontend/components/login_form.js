@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator, AsyncStorage } from 'react-native';
 import { Hoshi } from 'react-native-textinput-effects';
 import Button from 'react-native-button';
 import _ from 'lodash';
@@ -63,36 +63,37 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    return (
-      <View style={styles.viewStyle}>
+
+      return (
+        <View style={styles.viewStyle}>
         {this.renderError()}
         <Hoshi
-          label={'Username'}
-          // this is used as active border color
-          borderColor={'#b76c94'}
-          // this is used to set backgroundColor of label mask.
-          // please pass the backgroundColor of your TextInput container.
-          backgroundColor={'#FFF'}
-          // onChangeText={this.emailChanged.bind(this)}
-          // value={this.props.email}
+        label={'Username'}
+        // this is used as active border color
+        borderColor={'#b76c94'}
+        // this is used to set backgroundColor of label mask.
+        // please pass the backgroundColor of your TextInput container.
+        backgroundColor={'#FFF'}
+        // onChangeText={this.emailChanged.bind(this)}
+        // value={this.props.email}
         />
 
         <Hoshi
-          label={'Password'}
-          // this is used as active border color
-          borderColor={'#b76c94'}
-          // this is used to set backgroundColor of label mask.
-          // please pass the backgroundColor of your TextInput container.
-          backgroundColor={'#FFF'}
-          // onChangeText={this.passwordChanged.bind(this)}
-          // value={this.props.password}
-          secureTextEntry
+        label={'Password'}
+        // this is used as active border color
+        borderColor={'#b76c94'}
+        // this is used to set backgroundColor of label mask.
+        // please pass the backgroundColor of your TextInput container.
+        backgroundColor={'#FFF'}
+        // onChangeText={this.passwordChanged.bind(this)}
+        // value={this.props.password}
+        secureTextEntry
         />
 
         {this.renderButton()}
         <GoogleLogin />
-      </View>
-    );
+        </View>
+      );
   }
 }
 

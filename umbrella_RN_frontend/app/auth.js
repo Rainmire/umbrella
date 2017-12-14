@@ -1,7 +1,7 @@
 import { AsyncStorage } from "react-native";
 
 // where are we goign to get the user_key from? What will it be?
-export const USER_KEY = "auth-demo-key";
+export const USER_KEY = "token";
 
 export const onSignIn = () => AsyncStorage.setItem(USER_KEY, "true");
 
