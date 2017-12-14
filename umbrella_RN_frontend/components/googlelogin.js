@@ -43,7 +43,7 @@ export default class GoogleLogin extends Component {
     });
     AsyncStorage.getItem('token').then((returntoken)=> {
       this.props.fetchCurrentUser(returntoken);
-    }).then( () => this.props.navigation.navigate('SignedIn'));
+    });
 
     // Extract stringified user string out of the URL
     // const [, user_string] = url.match(/user=([^#]+)/);

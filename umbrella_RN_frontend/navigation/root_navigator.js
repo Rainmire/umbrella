@@ -11,11 +11,11 @@ import SwitchChildScreen from '../components/switch_child_screen';
 
 // SignedIn
 const RootNavigator = TabNavigator({
-  CalendarScreen: {
-    screen: CalendarScreen,
-  },
   MomentsScreen: {
     screen: MomentsScreen,
+  },
+  CalendarScreen: {
+    screen: CalendarScreen,
   },
   MessageScreen: {
     screen: MessageScreen,

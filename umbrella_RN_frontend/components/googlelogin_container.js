@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import { fetchCurrentUser } from '../actions/user_actions';
 import GoogleLogin from './googlelogin';
 
-const mapSTPs = (state,{navigation}) => ({
-  navigation: navigation
+const mapSTPs = (state) => ({
+  currentChild: state.currentChild
 });
 
 const mapDTPs = dispatch => ({
