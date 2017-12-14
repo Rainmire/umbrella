@@ -29,6 +29,7 @@ import navigateAction from '../navigation/router';
 class ProfileScreen extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props);
   }
 
   static navigationOptions = {
@@ -55,7 +56,9 @@ class ProfileScreen extends React.Component {
     return ()=>{
       AsyncStorage.getItem('token').then((returntoken)=> {
         this.props.logoutUser(returntoken);
-        AsyncStorage.removeItem('token');
+        AsyncStorage.removeItem('token').then(()=>{
+          this.props.navigation.navigate("Login");
+        });
       });
     }
   }
