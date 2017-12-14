@@ -42,6 +42,7 @@ const RootNavigator = TabNavigator({
   },
 });
 
+// look into screenProps to pass props
 const SimpleNav = StackNavigator({
   Home: { screen: RootNavigator },
   SwitchChild: { screen: SwitchChildScreen }
