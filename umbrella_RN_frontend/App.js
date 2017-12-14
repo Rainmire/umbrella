@@ -15,42 +15,14 @@ import { isSignedIn } from './app/auth';
 import Router from './navigation/router';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      signedIn: false,
-      checkedSignIn: false
-    };
-  }
-
-  componentWillMount() {
-    isSignedIn()
-      .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
-      .catch(err => alert('There was a problem signing you in.'));
-  }
-
-  // if (!checkedSignIn) {
-  //   return null;
-  // }
 
   render() {
-    const { checkedSignIn, signedIn } = this.state;
 
-    if (signedIn) {
-      return (
-        <Provider store={createStore(SessionReducer, applyMiddleware(logger))}>
-          <SimpleNav />
-        </Provider>
-      );
-    } else {
-      return (
-        <Provider store={createStore(SessionReducer, applyMiddleware(logger))}>
-          <LoginForm />
-        </Provider>
-      );
-    }
-
+    return (
+      <Provider store={createStore(SessionReducer, applyMiddleware(logger))}>
+        <Router />
+      </Provider>
+    );
   }
 }
 
