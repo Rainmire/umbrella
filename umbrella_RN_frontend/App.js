@@ -20,13 +20,13 @@ class App extends Component {
   render() {
     return (
       <Provider store={createStore(RootReducer, applyMiddleware(logger,thunk))}>
-        <GoogleLoginContainer />
+        <SimpleNav />
       </Provider>
     );
   }
 }
 
-// <SimpleNav />
+// <GoogleLoginContainer />
 
 export default App;
 

@@ -6,7 +6,8 @@ import {
   Button,
   FlatList,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { TabNavigator } from 'react-navigation';
@@ -26,9 +27,9 @@ import navigateAction from '../navigation/router';
 //   </View>
 // );
 class ProfileScreen extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+  }
 
   static navigationOptions = {
     tabBarLabel: 'Profile',
@@ -80,10 +81,10 @@ class ProfileScreen extends React.Component {
 
   _renderLogOutButton = () => (
     <TouchableOpacity
-      onPress={this.onSignOut}
+      onPress={this.handleSignout()}
       style={styles.logOutButton}
     >
-      <Text style={styles.signOutButtonText} onClick={this.handleSignout()}> SIGN OUT </Text>
+      <Text style={styles.signOutButtonText}> SIGN OUT </Text>
     </ TouchableOpacity>
   )
 
@@ -114,16 +115,16 @@ class ProfileScreen extends React.Component {
     return (
       <View style={styles.profileScreen}>
         <FlatList
-          data={ this.state.currentChild }
-          keyExtractor={(x, i) => i }// change to the id
-          renderItem={ this._renderItem }
-        ></FlatList>
-        { this._renderSwitchChildren() }
+        >Test</FlatList>
         { this._renderLogOutButton() }
       </View>
     );
   }
 }
+// { this._renderSwitchChildren() }
+// data={ this.props.currentChild }
+// keyExtractor={(x, i) => i }
+// renderItem={ this._renderItem }
 
 export const styles = StyleSheet.create({
   profileScreen: {

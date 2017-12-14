@@ -46,9 +46,17 @@ export const loginUser = ({ email, password }) => {
   };
 };
 //
-export const logoutUser = (token) => (
+export const logoutUser = (token) => (dispatch) => (
   fetch('http://localhost:3000/api/session', {
     method: 'DELETE',
     headers: { 'Authorization': token }
+  }).then(()=>{
+    dispatch(logout());
   })
 );
+
+const logout = () => ({
+  type: LOGOUT
+});
+
+export const LOGOUT = "LOGOUT";

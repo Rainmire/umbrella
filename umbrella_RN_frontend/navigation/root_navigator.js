@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import LoginForm from '../components/login_form';
-import ProfileScreen from '../components/profile_screen';
+import ProfileContainer from '../components/profile_container';
 import MomentsScreen from '../components/moments_screen';
 import CalendarScreen from '../components/calendar_screen';
 import MessageScreen from '../components/message_screen';
@@ -31,7 +31,7 @@ const RootNavigator = TabNavigator({
     screen: MessageScreen,
   },
   ProfileScreen: {
-    screen: ProfileScreen,
+    screen: ProfileContainer,
   },
 
 }, {
