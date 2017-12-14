@@ -9,13 +9,14 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
+import { TabNavigator } from 'react-navigation';
+
 
 export default class GoogleLogin extends Component {
-  constructor(){
-    super();
-    this.state = {
-      user: undefined, // user has not logged in yet
-    };
+  constructor(props){
+    super(props);
+    this.handleOpenURL= this.handleOpenURL.bind(this);
+    console.log(this.props);
   }
 
   // Set up Linking
@@ -31,11 +32,20 @@ export default class GoogleLogin extends Component {
   }
 
   componentWillUnmount() {
-    // Remove event listener
     Linking.removeEventListener('url', this.handleOpenURL);
   }
 
   handleOpenURL({ url }){
+<<<<<<< HEAD
+=======
+    const token = url.slice(11);
+    AsyncStorage.setItem('token', token).then(()=>{
+      this.props.navigation.navigate("ProfileScreen");
+    });
+    AsyncStorage.getItem('token').then((returntoken)=> {
+      this.props.fetchCurrentUser(returntoken);
+    });
+>>>>>>> 1d779431e1b79ef4ec15ec4841ebc5ca896f2a2c
     // Extract stringified user string out of the URL
     // const [, user_string] = url.match(/user=([^#]+)/);
     // this.setState({
@@ -72,10 +82,11 @@ export default class GoogleLogin extends Component {
   }
 
   render() {
-    const { user } = this.state;
-
     return (
+<<<<<<< HEAD
       <View>
+=======
+>>>>>>> 1d779431e1b79ef4ec15ec4841ebc5ca896f2a2c
         <Icon.Button
           name="google"
           backgroundColor="#DD4B39"
@@ -84,11 +95,39 @@ export default class GoogleLogin extends Component {
         >
           Log in with Google
         </Icon.Button>
-      </View>
     );
   }
 }
+// const { user } = this.state;
 
+// <View>
+//   <View style={styles.container}>
+//     { user
+//       ? // Show user info if already logged in
+//       <View style={styles.content}>
+//       <Text style={styles.header}>
+//       Welcome {user.name}!
+//       </Text>
+//       <View style={styles.avatar}>
+//       <Image source={{ uri: user.avatar }} style={styles.avatarImage} />
+//       </View>
+//       </View>
+//       : // Show Please log in message if not
+//       <View style={styles.content}>
+//       <Text style={styles.header}>
+//       Welcome Stranger!
+//       </Text>
+//       <View style={styles.avatar}>
+//       <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" />
+//       </View>
+//       <Text style={styles.text}>
+//       Please log in to continue {'\n'}
+//       to the awesomness
+//       </Text>
+//       </View>
+//     }
+//   </View>
+// </View>
 const iconStyles = {
   borderRadius: 10,
   iconStyle: { paddingVertical: 5 },

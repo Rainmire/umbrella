@@ -1,11 +1,13 @@
 export const RECEIVE_CHILD_INFO = "RECEIVE_CHILD_INFO";
 export const RECEIVE_MOMENTS = "RECEIVE_MOMENTS";
+export const RECEIVE_USER = "RECEIVE_USER";
 
 import { receiveChildren } from './children_actions';
 
-const receiveChildInfo = (payload) => ({
-  type: RECEIVE_CHILD_INFO,
-  payload
+
+const receiveUser = (user) => ({
+  type: RECEIVE_USER,
+  user
 });
 
 export const fetchCurrentUser = (token) => (dispatch) => {
@@ -13,9 +15,10 @@ export const fetchCurrentUser = (token) => (dispatch) => {
     method: 'GET',
     headers: { 'Authorization': token }
   }).then(({_bodyInit}) => {
-    console.log(_bodyInit);
+    const a = JSON.parse(decodeURI(_bodyInit));
     // fetchChildInfo(Object.keys(children)[0],token);
-    dispatch(receiveChildren(_bodyInit.children));
+    dispatch(receiveChildren(a.children));
+    dispatch(receiveUser(a.users));
   });
 
 };

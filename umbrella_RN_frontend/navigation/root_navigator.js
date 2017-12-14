@@ -46,7 +46,11 @@ const RootNavigator = TabNavigator({
 const SimpleNav = StackNavigator({
   Home: { screen: RootNavigator }, // SignedIn
   SwitchChild: { screen: SwitchChildScreen },
+<<<<<<< HEAD
   Login: { screen: LoginForm }
+=======
+  Login: {screen: LoginForm}
+>>>>>>> 1d779431e1b79ef4ec15ec4841ebc5ca896f2a2c
 });
 
 
