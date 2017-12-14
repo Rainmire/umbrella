@@ -28,18 +28,6 @@ class ProfileScreen extends React.Component {
     )
   }
 
-<<<<<<< HEAD
-  componentDidMount() {
-    this.fetchData();
-    this.setState({ currentChild: [this.state.children[0]] });
-  }
-
-  fetchData = async () => {
-    const response = await fetch('/api/user')
-      .then(e => console.error(e));
-    const json = response.json();
-    this.setState({ children: json.results });
-=======
   // componentDidMount() {
   //   this.setState({ currentChild: [this.state.children[0]] });
   //
@@ -60,7 +48,7 @@ class ProfileScreen extends React.Component {
         AsyncStorage.removeItem('token');
       });
     }
->>>>>>> master
+
   }
 
   _switchChild = () => (
@@ -130,9 +118,9 @@ class ProfileScreen extends React.Component {
 // keyExtractor={(x, i) => i }
 // renderItem={ this._renderItem }
 
-<<<<<<< HEAD
+
 export default ProfileScreen;
-=======
+
 export const styles = StyleSheet.create({
   profileScreen: {
     flex: 1,
@@ -241,4 +229,3 @@ export default ProfileScreen;
 //   }],
 //   currentChild: null
 // }
->>>>>>> master
