@@ -5,7 +5,7 @@ import Button from 'react-native-button';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions/session_actions';
-import GoogleLogin from './googlelogin';
+import GoogleLoginContainer from './googlelogin_container';
 
 class LoginForm extends React.Component {
   onButtonSubmit() {
@@ -91,7 +91,7 @@ class LoginForm extends React.Component {
         />
 
         {this.renderButton()}
-        <GoogleLogin />
+        <GoogleLoginContainer />
         </View>
       );
   }

@@ -4,11 +4,13 @@ import { TabNavigator } from 'react-navigation';
 import { createStore, applyMiddleware } from 'redux';
 import { logger } from 'redux-logger';
 import { Provider } from 'react-redux';
-import SessionReducer from './reducers/session_reducer';
-import LoginForm from './components/login_form';
+
+import RootReducer from './reducers/root_reducer';
+import GoogleLoginContainer from './components/googlelogin_container';
+import thunk from 'redux-thunk';
 import RootNavigator from './navigation/root_navigator';
-import GoogleLogin from './components/googlelogin';
-import SwitchChildScreen from './components/switch_child_screen';
+// import GoogleLogin from './components/googlelogin';
+// import SwitchChildScreen from './components/switch_child_screen';
 import SimpleNav from './navigation/root_navigator';
 import AuthNav from './navigation/root_navigator';
 import { isSignedIn } from './app/auth';
@@ -19,17 +21,11 @@ class App extends Component {
   render() {
 
     return (
-      <Provider store={createStore(SessionReducer, applyMiddleware(logger))}>
+      <Provider store={createStore(RootReducer, applyMiddleware(logger,thunk))}>
         <Router />
       </Provider>
     );
   }
 }
 
-
 export default App;
-
-// <View >
-//   <LoginForm />
-//   <RootNavigator />
-// </ View>

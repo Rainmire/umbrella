@@ -6,7 +6,8 @@ import {
   Button,
   FlatList,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -18,26 +19,6 @@ import navigateAction from '../navigation/router';
 class ProfileScreen extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state= {
-      children: [{
-        // id: ,
-        name: 'May',
-        class: 'Room 24',
-        teacher: 'Ms. Lee',
-        contact: '415-213-9024',
-        image_url: 'https://www.security-camera-warehouse.com/images/profile.png'
-      }, {
-        // id: ,
-        name: 'April',
-        class: 'Room 9',
-        teacher: 'Mr. Z',
-        contact: '415-213-9009',
-        image_url: 'https://www.security-camera-warehouse.com/images/profile.png'
-      }],
-      currentChild: null
-    }
-
   }
 
   static navigationOptions = {
@@ -47,6 +28,7 @@ class ProfileScreen extends React.Component {
     )
   }
 
+<<<<<<< HEAD
   componentDidMount() {
     this.fetchData();
     this.setState({ currentChild: [this.state.children[0]] });
@@ -57,11 +39,34 @@ class ProfileScreen extends React.Component {
       .then(e => console.error(e));
     const json = response.json();
     this.setState({ children: json.results });
+=======
+  // componentDidMount() {
+  //   this.setState({ currentChild: [this.state.children[0]] });
+  //
+  // }
+
+  // fetchData = async () => {
+  //   const response = await fetch('/api/user')
+  //     .then(e => console.error(e));
+  //   const json = response.json();
+  //   this.setState({ children: json.results });
+  // }
+
+
+  handleSignout(){
+    return ()=>{
+      AsyncStorage.getItem('token').then((returntoken)=> {
+        this.props.logoutUser(returntoken);
+        AsyncStorage.removeItem('token');
+      });
+    }
+>>>>>>> master
   }
 
   _switchChild = () => (
     this.props.navigation.navigate('SwitchChild') //{children: this.state.children}
   )
+
 
   _renderSwitchChildren = () => {
     if (this.state.children.length > 1) {
@@ -81,7 +86,7 @@ class ProfileScreen extends React.Component {
 
   _renderLogOutButton = () => (
     <TouchableOpacity
-      onPress={this.onSignOut}
+      onPress={this.handleSignout()}
       style={styles.logOutButton}
     >
       <Text style={styles.signOutButtonText}> SIGN OUT </Text>
@@ -114,15 +119,126 @@ class ProfileScreen extends React.Component {
     return (
       <View style={styles.profileScreen}>
         <FlatList
-          data={ this.state.currentChild }
-          keyExtractor={(x, i) => i }// change to the id
-          renderItem={ this._renderItem }
-        ></FlatList>
-        { this._renderSwitchChildren() }
+        >Test</FlatList>
         { this._renderLogOutButton() }
       </View>
     );
   }
 }
+// { this._renderSwitchChildren() }
+// data={ this.props.currentChild }
+// keyExtractor={(x, i) => i }
+// renderItem={ this._renderItem }
+
+<<<<<<< HEAD
+export default ProfileScreen;
+=======
+export const styles = StyleSheet.create({
+  profileScreen: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    // paddingTop: 50,
+  },
+  childInfoContainer: {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 3,
+  },
+  childInfo1: {
+    height: 75,
+    width: 300,
+    borderWidth: .5,
+  },
+  childInfo2: {
+    height: 75,
+    width: 300,
+    borderWidth: .5,
+  },
+  text: {
+    flex: 1,
+    justifyContent: 'space-around',
+    paddingTop: 5,
+    paddingLeft: 10,
+  },
+  photo: {
+    height: 150,
+    width: 150,
+    borderWidth: 2,
+    marginBottom: 50,
+    borderRadius: 75,
+  },
+  buttonContainer: {
+    height: 130,
+    width: 300,
+    flex: 1,
+    flexDirection: 'column',
+  },
+  profileButton: {
+    height: 60,
+    width: 300,
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    backgroundColor: '#bddfeb',
+    borderRadius: 30,
+    marginBottom: 20,
+    paddingRight: 20
+  },
+  logOutButton: {
+    height: 60,
+    width: 300,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#bddfeb',
+    borderRadius: 30,
+    marginBottom: 20,
+    // paddingRight: 20
+  },
+  switchChildButtonText: {
+    fontSize: 18,
+    color: 'blue',
+    paddingRight: 50
+  },
+  signOutButtonText: {
+    fontSize: 18,
+    color: 'blue',
+  }
+});
 
 export default ProfileScreen;
+
+// <Button
+// style={styles.button}
+//   onPress={ () => onSignOut().then(() => this.props.navigation.navigate('SignedOut'))}
+//   title='Sign Out'
+// > </Button>
+// <Button
+// style={styles.button}
+// onPress={() => console.log('put function here to switch current child')}
+//   title='Switch Child Profile'
+// ></Button>
+
+
+// this.state= {
+//   children: [{
+//     // id: ,
+//     name: 'May',
+//     class: 'Room 24',
+//     teacher: 'Ms. Lee',
+//     contact: '415-213-9024',
+//     image_url: 'https://www.security-camera-warehouse.com/images/profile.png'
+//   }, {
+//     // id: ,
+//     name: 'April',
+//     class: 'Room 9',
+//     teacher: 'Mr. Z',
+//     contact: '415-213-9009',
+//     image_url: 'https://www.security-camera-warehouse.com/images/profile.png'
+//   }],
+//   currentChild: null
+// }
+>>>>>>> master
