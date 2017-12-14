@@ -30,12 +30,12 @@ class Router extends Component {
       console.log(this.state);
   }
 
-  // if (!checkedSignIn) {
-  //   return null;
-  // }
 
   render() {
     const { checkedSignIn, signedIn } = this.state;
+    if (!checkedSignIn) {
+      return null;
+    }
 
     if (signedIn) {
       return (
