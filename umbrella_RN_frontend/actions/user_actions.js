@@ -1,11 +1,7 @@
 export const RECEIVE_CHILD_INFO = "RECEIVE_CHILD_INFO";
-export const RECEIVE_CHILDRENIDS = "RECEIVE_CHILDRENIDS";
 export const RECEIVE_MOMENTS = "RECEIVE_MOMENTS";
 
-const receiveChildrenIds = (children) => ({
-  type: RECEIVE_CHILDRENIDS,
-  children
-});
+import { receiveChildren } from './children_actions'; 
 
 const receiveChildInfo = (payload) => ({
   type: RECEIVE_CHILD_INFO,
