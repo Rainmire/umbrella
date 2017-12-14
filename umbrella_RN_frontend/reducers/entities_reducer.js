@@ -1,11 +1,10 @@
 import { combineReducers } from 'redux';
-import ChildrenReducer from './session_reducer';
-import UserReducer from './entities_reducer';
+import ChildrenReducer from './children_reducer';
+import UsersReducer from './users_reducer';
 // import errorReducer from './error_reducer';
 
 
 export default combineReducers({
   children: ChildrenReducer,
-  users: UserReducer,
-  
+  users: UsersReducer,
 });

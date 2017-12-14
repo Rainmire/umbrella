@@ -26,29 +26,9 @@ import navigateAction from '../navigation/router';
 //   </View>
 // );
 class ProfileScreen extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state= {
-      children: [{
-        // id: ,
-        name: 'May',
-        class: 'Room 24',
-        teacher: 'Ms. Lee',
-        contact: '415-213-9024',
-        image_url: 'https://www.security-camera-warehouse.com/images/profile.png'
-      }, {
-        // id: ,
-        name: 'April',
-        class: 'Room 9',
-        teacher: 'Mr. Z',
-        contact: '415-213-9009',
-        image_url: 'https://www.security-camera-warehouse.com/images/profile.png'
-      }],
-      currentChild: null
-    }
-
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   static navigationOptions = {
     tabBarLabel: 'Profile',
@@ -57,17 +37,17 @@ class ProfileScreen extends React.Component {
     )
   }
 
-  componentDidMount() {
-    this.setState({ currentChild: [this.state.children[0]] });
+  // componentDidMount() {
+  //   this.setState({ currentChild: [this.state.children[0]] });
+  //
+  // }
 
-  }
-
-  fetchData = async () => {
-    const response = await fetch('/api/user')
-      .then(e => console.error(e));
-    const json = response.json();
-    this.setState({ children: json.results });
-  }
+  // fetchData = async () => {
+  //   const response = await fetch('/api/user')
+  //     .then(e => console.error(e));
+  //   const json = response.json();
+  //   this.setState({ children: json.results });
+  // }
 
 
   handleSignout(){
@@ -233,3 +213,23 @@ export default ProfileScreen;
 // onPress={() => console.log('put function here to switch current child')}
 //   title='Switch Child Profile'
 // ></Button>
+
+
+// this.state= {
+//   children: [{
+//     // id: ,
+//     name: 'May',
+//     class: 'Room 24',
+//     teacher: 'Ms. Lee',
+//     contact: '415-213-9024',
+//     image_url: 'https://www.security-camera-warehouse.com/images/profile.png'
+//   }, {
+//     // id: ,
+//     name: 'April',
+//     class: 'Room 9',
+//     teacher: 'Mr. Z',
+//     contact: '415-213-9009',
+//     image_url: 'https://www.security-camera-warehouse.com/images/profile.png'
+//   }],
+//   currentChild: null
+// }
