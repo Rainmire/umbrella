@@ -11,9 +11,10 @@ class MomentsScreen extends React.Component {
     )
   };
 
-  componentWillMount(){
+  componentDidMount(){
     AsyncStorage.getItem("token").then((returntoken)=>{
-      this.props.fetchChildInfo(Object.keys(this.props.children)[0],returntoken);
+      console.log("this.props.currentChildId");
+      this.props.fetchChildInfo(this.props.currentChildId,returntoken);
     })
   }
 

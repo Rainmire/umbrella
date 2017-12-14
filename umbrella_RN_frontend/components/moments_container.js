@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { fetchChildInfo } from '../actions/children_actions';
-import Moments from './googlelogin';
+import Moments from './moments_screen';
 
 const mapSTPs = (state) => ({
-  children: state.children,
+  currentChildId: state.currentChildId,
   moments: state.moments
 });
 

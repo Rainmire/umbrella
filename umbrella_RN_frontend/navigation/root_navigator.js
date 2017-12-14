@@ -4,7 +4,7 @@ import { TabNavigator, StackNavigator } from 'react-navigation';
 import LoginFormContainer from '../components/login_form_container';
 import LoginForm from '../components/login_form';
 import ProfileContainer from '../components/profile_container';
-import MomentsScreen from '../components/moments_screen';
+import MomentsContainer from '../components/moments_container';
 import CalendarScreen from '../components/calendar_screen';
 import MessageScreen from '../components/message_screen';
 import SwitchChildScreen from '../components/switch_child_screen';
@@ -12,7 +12,7 @@ import SwitchChildScreen from '../components/switch_child_screen';
 // SignedIn
 const RootNavigator = TabNavigator({
   MomentsScreen: {
-    screen: MomentsScreen,
+    screen: MomentsContainer,
   },
   CalendarScreen: {
     screen: CalendarScreen,

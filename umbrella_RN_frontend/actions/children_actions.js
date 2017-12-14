@@ -15,7 +15,6 @@ export const receiveCurrentChildId = ( childId ) => ({
 
 
 export const fetchChildInfo = (childId,token) => (dispatch) => {
-  console.log("hi");
   fetch(`http://localhost:3000/api/children/${childId}`, {
     method: 'GET',
     headers: { 'Authorization': token }
