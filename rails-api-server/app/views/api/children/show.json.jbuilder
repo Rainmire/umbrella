@@ -1,3 +1,3 @@
-json.extract! @child, :class
-json.extract! @teacher, :id, :name, :profile_pic, :contact
-# json.extract! @parent, :id, :name, :profile_pic, :contact
+json.teacher do
+  json.extract! @teacher, :id, :name, :teacher_class, :profile_pic, :contact
+end

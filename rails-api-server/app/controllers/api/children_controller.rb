@@ -4,6 +4,7 @@ class Api::ChildrenController < ApplicationController
     @child = User.first.children.find(params[:id])
     if @child
       @teacher = @child.teacher
+      # debugger
       render 'api/children/show'
     else
       render json: ["No child found"], status: 404
