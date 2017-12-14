@@ -1,14 +1,16 @@
 Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
-    get '/user', to: 'users#show', as: 'user'
+    # get '/user', to: 'users#show', as: 'user'
+    resource :user, only: [:show]
+    resource :session, only: [:destroy]
+    # delete 'session', to: 'sessions#destroy'
   end
 
   get 'auth/:provider/callback', to: 'api/sessions#create'
   get 'auth/failure', to: redirect('/')
-  get 'signout', to: 'sessions#destroy', as: 'signout'
+  # get 'signout', to: 'api/sessions#destroy', as: 'signout'
 
-  resources :sessions, only: [:create, :destroy]
   resource :home, only: [:show]
 
   root to: "home#show"
