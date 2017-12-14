@@ -1,11 +1,13 @@
 export const RECEIVE_CHILD_INFO = "RECEIVE_CHILD_INFO";
 export const RECEIVE_MOMENTS = "RECEIVE_MOMENTS";
+export const RECEIVE_USERS = "RECEIVE_USERS";
 
 import { receiveChildren } from './children_actions';
 
-const receiveChildInfo = (payload) => ({
-  type: RECEIVE_CHILD_INFO,
-  payload
+
+const receiveUsers = (users) => ({
+  type: RECEIVE_USERS,
+  users
 });
 
 export const fetchCurrentUser = (token) => (dispatch) => {
@@ -13,21 +15,22 @@ export const fetchCurrentUser = (token) => (dispatch) => {
     method: 'GET',
     headers: { 'Authorization': token }
   }).then(({_bodyInit}) => {
-    console.log(_bodyInit);
-    // fetchChildInfo(Object.keys(children)[0],token);
-    dispatch(receiveChildren(_bodyInit.children));
+    const a = JSON.parse(_bodyInit);
+    // fetchChildInfo(Object.keys(a.children)[0],token);
+    dispatch(receiveChildren(a.children));
+    dispatch(receiveUsers(a.user));
   });
 
 };
 
 
-export const fetchChildInfo = (child_id,token) => (dispatch) => {
-  fetch('http://localhost:3000/api/children/child_id', {
-    method: 'GET',
-    headers: { 'Authorization': token }
-  }).then((payload) => dispatch(receiveChildInfo(payload)));
-};
-
+// export const fetchChildInfo = (child_id,token) => (dispatch) => {
+//   fetch('http://localhost:3000/api/children/child_id', {
+//     method: 'GET',
+//     headers: { 'Authorization': token }
+//   }).then((payload) => dispatch(receiveChildInfo(payload)));
+// };
+//
 export const fetchMoments = (child_id,token) => {
 
 };
