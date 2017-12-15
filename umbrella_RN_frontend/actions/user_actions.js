@@ -2,7 +2,7 @@ export const RECEIVE_CHILD_INFO = "RECEIVE_CHILD_INFO";
 
 export const RECEIVE_USER = "RECEIVE_USER";
 
-import { fetchChildInfo, receiveChildren, receiveCurrentChildId } from './children_actions';
+import { fetchChildInfo, receiveChildren, receiveCurrentChild } from './children_actions';
 
 
 export const receiveUser = (user) => ({
@@ -16,8 +16,11 @@ export const fetchCurrentUser = (token) => (dispatch) => {
     headers: { 'Authorization': token }
   }).then(({_bodyInit}) => {
     const response = JSON.parse(_bodyInit);
-    dispatch(receiveCurrentChildId(Object.keys(response.children)[0]));
-    dispatch(fetchChildInfo(Object.keys(response.children)[0]),token);
+    console.log(response);
+    console.log(`Response:${response.children}`);
+    const currentChild = response.children[0];
+    dispatch(receiveCurrentChild(currentChild));
+    dispatch(fetchChildInfo(currentChild.id,token));
     dispatch(receiveChildren(response.children));
     dispatch(receiveUser(response.user));
   });

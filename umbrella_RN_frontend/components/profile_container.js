@@ -2,13 +2,14 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../actions/session_actions';
 import ProfileSreen from './profile_screen';
 
-// const mapSTPs = (state) => ({
-//   children: state.children,
-//
-// });
+const mapSTPs = ({entities}) => ({
+  // console.log(`this is profile:${state.currentChild}`);
+  currentChild: entities.currentChild,
+  teacher: entities.users[entities.currentChild.teacher_id]
+});
 
 const mapDTPs = dispatch => ({
   logoutUser: (token) => dispatch(logoutUser(token))
 });
 
-export default connect(null, mapDTPs)(ProfileSreen);
+export default connect(mapSTPs, mapDTPs)(ProfileSreen);

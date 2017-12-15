@@ -6,7 +6,7 @@ const childrenReducer = (state = {}, action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_MOMENTS:
-      return action.moments;
+      return merge({},state,action.moments);
     // case RECEIVE_PIC:
     //   return merge({},state,{[action.picture.id]:action.picture});
     // case REMOVE_PIC:

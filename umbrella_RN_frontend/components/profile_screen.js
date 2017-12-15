@@ -47,7 +47,7 @@ class ProfileScreen extends React.Component {
       AsyncStorage.getItem('token').then((returntoken)=> {
         this.props.logoutUser(returntoken);
         AsyncStorage.removeItem('token').then(()=>{
-          this.props.navigation.navigate("Login");
+          this.props.navigation.navigate("SignedOut");
         });
       });
     }

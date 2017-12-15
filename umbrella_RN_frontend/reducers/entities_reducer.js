@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux';
 import ChildrenReducer from './children_reducer';
 import UsersReducer from './users_reducer';
-import CurrentChildIdReducer from './current_child_id_reducer';
+import MomentsReducer from './moments_reducer';
+import CurrentChildReducer from './current_child_reducer';
 // import errorReducer from './error_reducer';
 
 
 export default combineReducers({
   children: ChildrenReducer,
   users: UsersReducer,
-  currentChildId: CurrentChildIdReducer
+  currentChild: CurrentChildReducer,
+  moments: MomentsReducer
 });
