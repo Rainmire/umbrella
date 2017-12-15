@@ -1,12 +1,12 @@
-import { RECEIVE_USER } from '../actions/user_actions';
+import { RECEIVE_MOMENTS } from '../actions/moment_actions';
 import merge from 'lodash/merge';
 
 
-const usersReducer = (state = {}, action) => {
+const childrenReducer = (state = {}, action) => {
   Object.freeze(state);
   switch (action.type) {
-    case RECEIVE_USER:
-      return merge({},state,{[action.user.id]:action.user});
+    case RECEIVE_MOMENTS:
+      return action.moments;
     // case RECEIVE_PIC:
     //   return merge({},state,{[action.picture.id]:action.picture});
     // case REMOVE_PIC:
@@ -18,4 +18,4 @@ const usersReducer = (state = {}, action) => {
   }
 };
 
-export default usersReducer;
+export default childrenReducer;

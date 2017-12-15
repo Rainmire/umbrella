@@ -9,23 +9,13 @@ import {
   TouchableOpacity,
   AsyncStorage
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { TabNavigator } from 'react-navigation';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { onSignOut } from '../app/auth';
+// import styles from '../stylesheets/profile_screen';
 import SwitchChildScreen from './switch_child_screen';
 import navigateAction from '../navigation/router';
 
-// this button will route to the Google oAuth link, which will display the
-// google login form
-// const LoginScreen = ({ navigation }) => (
-//   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//     <Text>Login Screen</Text>
-//     <Button
-//     onPress={ () => navigation.navigate('Profile')}
-//     title='Log In'
-//     />
-//   </View>
-// );
 class ProfileScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -61,6 +51,7 @@ class ProfileScreen extends React.Component {
         });
       });
     }
+
   }
 
   _switchChild = () => (
@@ -75,7 +66,9 @@ class ProfileScreen extends React.Component {
           onPress={this._switchChild}
           style={styles.profileButton}
         >
-          <Text style={styles.switchChildButtonText}> Switch Child </Text>
+          <Text style={styles.switchChildButtonText}>
+            Switch Child
+          </Text>
           <Icon name="arrow-right" size={20} color="#900" />
         </ TouchableOpacity>
       )
@@ -114,7 +107,7 @@ class ProfileScreen extends React.Component {
   )
 
   render() {
-    console.log(this);
+    console.log('profile screen props: ', );
     return (
       <View style={styles.profileScreen}>
         <FlatList
@@ -128,6 +121,9 @@ class ProfileScreen extends React.Component {
 // data={ this.props.currentChild }
 // keyExtractor={(x, i) => i }
 // renderItem={ this._renderItem }
+
+
+export default ProfileScreen;
 
 export const styles = StyleSheet.create({
   profileScreen: {
@@ -166,13 +162,13 @@ export const styles = StyleSheet.create({
     borderRadius: 75,
   },
   buttonContainer: {
-    height: 150,
+    height: 130,
     width: 300,
     flex: 1,
     flexDirection: 'column',
   },
   profileButton: {
-    height: 50,
+    height: 60,
     width: 300,
     flex: 1,
     flexDirection: 'row',
@@ -184,7 +180,7 @@ export const styles = StyleSheet.create({
     paddingRight: 20
   },
   logOutButton: {
-    height: 50,
+    height: 60,
     width: 300,
     flex: 1,
     alignItems: 'center',
@@ -192,20 +188,19 @@ export const styles = StyleSheet.create({
     backgroundColor: '#bddfeb',
     borderRadius: 30,
     marginBottom: 20,
-    paddingRight: 20
+    // paddingRight: 20
   },
   switchChildButtonText: {
-    fontSize: 24,
+    fontSize: 18,
     color: 'blue',
-    paddingRight: 40
+    paddingRight: 50
   },
   signOutButtonText: {
-    fontSize: 24,
+    fontSize: 18,
     color: 'blue',
   }
 });
 
-export default ProfileScreen;
 
 // <Button
 // style={styles.button}

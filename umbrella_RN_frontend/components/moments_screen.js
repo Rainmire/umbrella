@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import { StyleSheet, View, Text, Button, AsyncStorage } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -12,9 +12,7 @@ class MomentsScreen extends React.Component {
   };
 
   render() {
-    console.log(this)
     console.log(this.props)
-
     return (
       <View>
         <Text style={styles.moments}>
