@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator } from 'react-navigation';
+import LoginFormContainer from '../components/login_form_container';
 import LoginForm from '../components/login_form';
-import ProfileScreen from '../components/profile_screen';
-import FeedScreen from '../components/feed_screen';
+import ProfileContainer from '../components/profile_container';
+import MomentsContainer from '../components/moments_container';
 import CalendarScreen from '../components/calendar_screen';
 import MessageScreen from '../components/message_screen';
+import SwitchChildScreen from '../components/switch_child_screen';
 
-
+// SignedIn
 const RootNavigator = TabNavigator({
-  ProfileScreen: {
-    screen: ProfileScreen,
+  MomentsScreen: {
+    screen: MomentsContainer,
   },
   CalendarScreen: {
     screen: CalendarScreen,
   },
-  FeedScreen: {
-    screen: FeedScreen,
-  },
   MessageScreen: {
     screen: MessageScreen,
+  },
+  ProfileScreen: {
+    screen: ProfileContainer,
   },
 
 }, {
@@ -30,4 +32,36 @@ const RootNavigator = TabNavigator({
   },
 });
 
-export default RootNavigator;
+// look into screenProps to pass props
+export const SignedIn = StackNavigator({
+  Login: {
+    screen: LoginForm,
+    navigationOptions: {
+      header: null
+    }
+  },
+  Home: {
+    screen: RootNavigator,
+    navigationOptions: {
+      header: null
+    }
+  },
+  SwitchChild: {
+    screen: SwitchChildScreen,
+  },
+});
+
+export const SignedOut = StackNavigator({
+  Login: {
+    screen: LoginForm,
+    navigationOptions: {
+      header: null
+    }
+  },
+  Home: {
+    screen: RootNavigator,
+    navigationOptions: {
+      header: null
+    }
+  },
+});

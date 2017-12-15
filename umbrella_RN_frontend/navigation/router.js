@@ -1,30 +1,74 @@
-import { StackNavigator, TabNavigator } from "react-navigation";
-import LoginForm from "../components/login_form";
-import ProfileScreen from "../components/profile_screen";
-import RootNavigator from "./root_navigator";
+import React, { Component } from 'react';
+import { View, StyleSheet, Button, Text } from 'react-native';
+import { TabNavigator, StackNavigator } from 'react-navigation';
+// import { createStore, applyMiddleware } from 'redux';
+// import { logger } from 'redux-logger';
+// import { Provider } from 'react-redux';
+// import SessionReducer from './reducers/session_reducer';
+import LoginForm from '../components/login_form';
+import RootNavigator from './root_navigator';
+// import GoogleLogin from './components/googlelogin';
+// import SwitchChildScreen from './components/switch_child_screen';
+import SimpleNav from './root_navigator';
+import { SignedIn, SignedOut } from './root_navigator';
+// import AuthNav from './navigation/root_navigator';
+import { isSignedIn } from '../app/auth';
 
-export const SignedOut = StackNavigator({
-  LoginForm: {
-    screen: LoginForm,
-    navigationOptions: {
-      title: "Sign In"
+class Router extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      signedIn: false,
+      checkedSignIn: false
+    };
+  }
+
+  componentWillMount() {
+    isSignedIn()
+      .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
+      .catch(err => alert('There was a problem signing you in.'));
+  }
+
+  createRootNavigator(signedIn = false) {
+  return StackNavigator(
+    {
+      SignedIn: {
+        screen: SignedIn,
+        navigationOptions: {
+          gesturesEnabled: false,
+          left: null
+        }
+      },
+      SignedOut: {
+        screen: SignedOut,
+        navigationOptions: {
+          gesturesEnabled: false,
+          left: null
+        }
+      },
+    },
+    {
+      headerMode: "none",
+      mode: "modal",
+      initialRouteName: signedIn ? "SignedIn" : "SignedOut"
     }
-  },
-});
+  );
+}
 
-export const SignedIn = StackNavigator({
-  SignedIn: {
-    screen: RootNavigator,
-  },
-});
+  render() {
+    const { checkedSignIn, signedIn } = this.state;
 
-const Router = StackNavigator({
-  SignedIn: {
-    screen: SignedIn,
-  },
-  SignedOut: {
-    screen: SignedOut,
-  },
-});
+    if (!checkedSignIn) {
+      return null;
+    }
+
+    if (signedIn) {
+      return <SignedIn />;
+    } else {
+      return <SignedOut />;
+    }
+  }
+}
 
 export default Router;
