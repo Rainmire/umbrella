@@ -3,9 +3,16 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
 
   has_many :children,
-  class_name: "Child",
+  class_name: :Child,
   primary_key: :id,
   foreign_key: :parent_id
+
+  has_many :students,
+  class_name: :Child,
+  foreign_key: :teacher_id
+
+  has_many :moments,
+  foreign_key: :author_id
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|

@@ -2,7 +2,7 @@
 json.children do
   @children.each do |child|
     json.set! child.id do
-      json.extract! child, :name, :profile_pic
+      json.extract! child, :name, :profile_pic, :teacher_id
     end
   end
 end

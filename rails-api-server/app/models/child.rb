@@ -10,4 +10,7 @@ class Child < ApplicationRecord
   class_name: "User",
   primary_key: :id,
   foreign_key: :teacher_id
+
+  has_many :moments
+  
 end

@@ -9,6 +9,8 @@ class Api::SessionsController < ApplicationController
       login(@user)
     end
     redirect_to 'umbrella://' + user.oauth_token
+    # redirect_to 'umbrella://', session_token: user.oauth_token
+
   end
 
   def destroy
