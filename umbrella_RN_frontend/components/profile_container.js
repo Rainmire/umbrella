@@ -3,8 +3,9 @@ import { logoutUser } from '../actions/session_actions';
 import ProfileSreen from './profile_screen';
 
 const mapSTPs = (state) => ({
+  // console.log(`this is profile:${state.currentChild}`);
   currentChild: state.currentChild,
-  teacher: state.users[state.currentChild.teacher_id]
+  // teacher: state.users[state.currentChild.teacher_id]
 });
 
 const mapDTPs = dispatch => ({
