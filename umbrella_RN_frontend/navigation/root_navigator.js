@@ -9,8 +9,34 @@ import CalendarScreen from '../components/calendar_screen';
 import MessageScreen from '../components/message_screen';
 import SwitchChildScreen from '../components/switch_child_screen';
 
+export const createRootNavigator = (signedIn = false) => {
+  return StackNavigator(
+    {
+      SignedIn: {
+        screen: SignedInScreen,
+        navigationOptions: {
+          gesturesEnabled: false,
+          left: null
+        }
+      },
+      SignedOut: {
+        screen: LoginForm,
+        navigationOptions: {
+          gesturesEnabled: false,
+          left: null
+        }
+      },
+    },
+    {
+      headerMode: "none",
+      mode: "modal",
+      initialRouteName: signedIn ? "SignedIn" : "SignedOut"
+    }
+  );
+};
+
 // SignedIn
-const RootNavigator = TabNavigator({
+const HomeNavigator = TabNavigator({
   MomentsScreen: {
     screen: MomentsContainer,
   },
@@ -33,15 +59,9 @@ const RootNavigator = TabNavigator({
 });
 
 // look into screenProps to pass props
-export const SignedIn = StackNavigator({
-  Login: {
-    screen: LoginForm,
-    navigationOptions: {
-      header: null
-    }
-  },
+export const SignedInScreen = StackNavigator({
   Home: {
-    screen: RootNavigator,
+    screen: HomeNavigator,
     navigationOptions: {
       header: null
     }
@@ -51,17 +71,11 @@ export const SignedIn = StackNavigator({
   },
 });
 
-export const SignedOut = StackNavigator({
-  Login: {
-    screen: LoginForm,
-    navigationOptions: {
-      header: null
-    }
-  },
-  Home: {
-    screen: RootNavigator,
-    navigationOptions: {
-      header: null
-    }
-  },
-});
+// export const SignedOutScreen = StackNavigator({
+//   Login: {
+//     screen: LoginForm,
+//     navigationOptions: {
+//       header: null
+//     }
+//   }
+// });
