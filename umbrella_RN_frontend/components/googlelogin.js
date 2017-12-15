@@ -33,7 +33,7 @@ export default class GoogleLogin extends Component {
 
   componentWillUnmount() {
     Linking.removeEventListener('url', this.handleOpenURL);
-  
+
   }
 
   handleOpenURL({ url }){
@@ -46,20 +46,20 @@ export default class GoogleLogin extends Component {
     AsyncStorage.getItem('token').then((returntoken)=> {
       this.props.fetchCurrentUser(returntoken);
     })
-    // .then( () => {
-    //   dispatch({
-    //     type:'Navigation/RESET',
-    //     actions: [{
-    //       type: 'Navigate',
-    //       routeName: 'Home'
-    //     }],
-    //     index: 0
-    //   });
-    // });
-
     .then( () => {
-        this.props.navigation.navigate("Home");
+      dispatch({
+        type:'Navigation/RESET',
+        actions: [{
+          type: 'Navigate',
+          routeName: 'SignedIn'
+        }],
+        index: 0
+      });
     });
+
+    // .then( () => {
+    //     this.props.navigation.navigate("SignedIn");
+    // });
 
     // Extract stringified user string out of the URL
     // const [, user_string] = url.match(/user=([^#]+)/);

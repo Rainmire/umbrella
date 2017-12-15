@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Button, Text } from 'react-native';
+import { View, StyleSheet, Button, Text, AsyncStorage } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 // import { createStore, applyMiddleware } from 'redux';
 // import { logger } from 'redux-logger';
 // import { Provider } from 'react-redux';
 // import SessionReducer from './reducers/session_reducer';
-import LoginForm from '../components/login_form';
-import RootNavigator from './root_navigator';
+// import LoginForm from '../components/login_form';
+// import RootNavigator from './root_navigator';
 // import GoogleLogin from './components/googlelogin';
 // import SwitchChildScreen from './components/switch_child_screen';
-import SimpleNav from './root_navigator';
-import { SignedIn, SignedOut } from './root_navigator';
+// import SimpleNav from './root_navigator';
+import { SignedInScreen,
+         SignedOutScreen,
+         createRootNavigator } from './root_navigator';
 // import AuthNav from './navigation/root_navigator';
-import { isSignedIn } from '../app/auth';
+// import { isSignedIn } from '../app/auth';
 
 class Router extends Component {
   constructor(props) {
@@ -25,49 +27,32 @@ class Router extends Component {
   }
 
   componentWillMount() {
-    isSignedIn()
-      .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
-      .catch(err => alert('There was a problem signing you in.'));
+    this.isSignedIn();
   }
 
-  createRootNavigator(signedIn = false) {
-  return StackNavigator(
-    {
-      SignedIn: {
-        screen: SignedIn,
-        navigationOptions: {
-          gesturesEnabled: false,
-          left: null
-        }
-      },
-      SignedOut: {
-        screen: SignedOut,
-        navigationOptions: {
-          gesturesEnabled: false,
-          left: null
-        }
-      },
-    },
-    {
-      headerMode: "none",
-      mode: "modal",
-      initialRouteName: signedIn ? "SignedIn" : "SignedOut"
-    }
-  );
-}
+  isSignedIn(){
+    AsyncStorage.getItem("token").then((returntoken) =>{
+      if(returntoken){
+        this.setState({signedIn: true});
+      }
+      this.setState({checkedSignIn: true});
+    });
+  }
+
+
 
   render() {
-    const { checkedSignIn, signedIn } = this.state;
-
-    if (!checkedSignIn) {
+    if (!this.state.checkedSignIn) {
       return null;
     }
 
-    if (signedIn) {
-      return <SignedIn />;
-    } else {
-      return <SignedOut />;
-    }
+    // if (this.state.signedIn) {
+    //   return <SignedIn />;
+    // } else {
+    //   return <SignedOut />;
+    // }
+    const Layout = createRootNavigator(this.state.signedIn);
+    return <Layout />;
   }
 }
 
