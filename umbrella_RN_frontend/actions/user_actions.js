@@ -16,8 +16,9 @@ export const fetchCurrentUser = (token) => (dispatch) => {
     headers: { 'Authorization': token }
   }).then(({_bodyInit}) => {
     const response = JSON.parse(_bodyInit);
-    dispatch(receiveCurrentChildId(Object.keys(response.children)[0]));
-    dispatch(fetchChildInfo(Object.keys(response.children)[0]),token);
+    const currentChildId = Object.keys(response.children)[0];
+    dispatch(receiveCurrentChildId(currentChildId));
+    dispatch(fetchChildInfo(currentChildId,token));
     dispatch(receiveChildren(response.children));
     dispatch(receiveUser(response.user));
   });

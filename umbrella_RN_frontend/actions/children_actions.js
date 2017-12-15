@@ -1,4 +1,5 @@
 import { receiveUser } from './user_actions';
+import { receiveMoments } from './moment_actions';
 
 export const RECEIVE_CHILDREN = "RECEIVE_CHILDREN";
 export const RECEIVE_CURRENT_CHILD_ID = "RECEIVE_CURRENT_CHILD_ID";
@@ -20,8 +21,8 @@ export const fetchChildInfo = (childId,token) => (dispatch) => {
     headers: { 'Authorization': token }
   }).then(({_bodyInit}) => {
     const response = JSON.parse(_bodyInit);
-    console.log(response.teacher);
-    console.log(receiveUser);
+    console.log(response);
     dispatch(receiveUser(response.teacher));
+    dispatch(receiveMoments(response.moments));
   });
 };
