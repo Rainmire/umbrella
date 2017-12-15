@@ -7,12 +7,6 @@ const usersReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_USER:
       return merge({},state,{[action.user.id]:action.user});
-    // case RECEIVE_PIC:
-    //   return merge({},state,{[action.picture.id]:action.picture});
-    // case REMOVE_PIC:
-    //   const newState = merge({},state);
-    //   delete newState[action.picId];
-    //   return newState;
     default:
       return state;
   }

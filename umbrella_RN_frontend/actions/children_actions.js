@@ -23,7 +23,5 @@ export const fetchChildInfo = (childId,token) => (dispatch) => {
     console.log(response.teacher);
     console.log(receiveUser);
     dispatch(receiveUser(response.teacher));
-    // dispatch(receiveCurrentChild(payload));
   });
-
 };

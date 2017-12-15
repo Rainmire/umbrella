@@ -5,8 +5,6 @@ export const receiveMoments = (moments) => ({
   moments
 });
 
-
-
 export const fetchMoments = (childId,token) => {
 
 };
