@@ -1,6 +1,6 @@
-import { receiveUsers } from './user_actions';
+import { receiveUser } from './user_actions';
 
-export const RECEIVE_CHILDREN = "RECEIVE_CHILDRENIDS";
+export const RECEIVE_CHILDREN = "RECEIVE_CHILDREN";
 export const RECEIVE_CURRENT_CHILD_ID = "RECEIVE_CURRENT_CHILD_ID";
 
 export const receiveChildren = (children) => ({
@@ -18,9 +18,11 @@ export const fetchChildInfo = (childId,token) => (dispatch) => {
   fetch(`http://localhost:3000/api/children/${childId}`, {
     method: 'GET',
     headers: { 'Authorization': token }
-  }).then((payload) => {
-    console.log(payload);
-    dispatch(receiveUsers(payload.teacher));
+  }).then(({_bodyInit}) => {
+    const response = JSON.parse(_bodyInit);
+    console.log(response.teacher);
+    console.log(receiveUser);
+    dispatch(receiveUser(response.teacher));
     // dispatch(receiveCurrentChild(payload));
   });
 

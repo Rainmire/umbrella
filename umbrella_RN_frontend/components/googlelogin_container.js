@@ -3,7 +3,7 @@ import { fetchCurrentUser } from '../actions/user_actions';
 import GoogleLogin from './googlelogin';
 
 const mapSTPs = (state) => ({
-  currentChild: state.currentChild
+  currentChildId: state.currentChildId
 });
 
 const mapDTPs = dispatch => ({
