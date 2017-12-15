@@ -6,6 +6,7 @@ import { StyleSheet, View, Text, Button, AsyncStorage } from 'react-native';
 class MomentsForm extends React.Component {
 
   render() {
-
+    const {children} = this.props;
+    
   }
 }
