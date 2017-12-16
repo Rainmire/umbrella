@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../actions/session_actions';
 import ProfileSreen from './profile_screen';
 
-const mapSTPs = ({entities}) => ({
-  // console.log(`this is profile:${state.currentChild}`);
+const mapSTPs = ({entities, session}) => ({
+  currentUser: session.currentUser,
   currentChild: entities.currentChild,
   teacher: entities.users[entities.currentChild.teacher_id]
 });

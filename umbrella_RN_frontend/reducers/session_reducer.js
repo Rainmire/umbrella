@@ -11,6 +11,8 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case 'RECEIVE_CURRENT_USER':
+      return merge({},state,{currentUser: action.user});
     case 'EMAIL_CHANGED':
       return merge({},state,{email: action.email});
     case 'PASSWORD_CHANGED':
