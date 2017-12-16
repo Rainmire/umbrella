@@ -1,14 +1,5 @@
-# json.extract! @user, :name, :email
-# json.children do
-#   @children.each do |child|
-#     json.set! child.id do
-#       json.extract! child, :name, :profile_pic, :teacher_id
-#     end
-#   end
-# end
-json.current_user_id do
-  json.extract! @user, :id
-end
+
+json.extract! @user, :id
 
 json.users do
   @users.each do |user|
