@@ -6,6 +6,10 @@
 #     end
 #   end
 # end
+json.current_user_id do
+  json.extract! @user, :id
+end
+
 json.users do
   @users.each do |user|
     json.set! user.id do
