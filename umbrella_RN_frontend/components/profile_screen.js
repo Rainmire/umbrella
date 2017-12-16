@@ -30,7 +30,7 @@ class ProfileScreen extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    console.log(`new:${newProps}`);
+    console.log('new props',newProps});
 
   }
 
@@ -107,7 +107,7 @@ class ProfileScreen extends React.Component {
   )
 
   render() {
-    console.log(`profile screen props:${this.props} `);
+    console.log('profile screen props',this.props);
     return (
       <View style={styles.profileScreen}>
         <FlatList
