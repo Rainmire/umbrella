@@ -19,7 +19,6 @@ import navigateAction from '../navigation/router';
 class ProfileScreen extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
   }
 
   static navigationOptions = {
@@ -60,7 +59,7 @@ class ProfileScreen extends React.Component {
 
 
   _renderSwitchChildren = () => {
-    if (this.state.children.length > 1) {
+    if (this.props.children.length > 1) {
       return (
         <TouchableOpacity
           onPress={this._switchChild}
@@ -89,7 +88,7 @@ class ProfileScreen extends React.Component {
     <View style={styles.profileScreen}>
       <View>
         <Image
-          source={{ uri: `${item.image_url}` }}
+          source={{ uri: `${item.profile_pic}` }}
           style={styles.photo}
           />
       </View>
@@ -99,7 +98,7 @@ class ProfileScreen extends React.Component {
           <Text style={styles.text}>Class:   {`${item.class}`}</Text>
         </View>
         <View style={styles.childInfo2}>
-          <Text style={styles.text}>Main Teacher:   {`${item.teacher}`}</Text>
+          <Text style={styles.text}>Main Teacher:   {`${this.props.teacher}`}</Text>
           <Text style={styles.text}>Contact:   {`${item.contact}`}</Text>
         </View>
       </View>
@@ -107,17 +106,18 @@ class ProfileScreen extends React.Component {
   )
 
   render() {
-    console.log('profile screen props: ', );
+    console.log('PROFILE SCREEN : ', this);
     return (
       <View style={styles.profileScreen}>
         <FlatList
-        >Test</FlatList>
+        />
+        { this._renderSwitchChildren() }
         { this._renderLogOutButton() }
       </View>
+
     );
   }
 }
-// { this._renderSwitchChildren() }
 // data={ this.props.currentChild }
 // keyExtractor={(x, i) => i }
 // renderItem={ this._renderItem }
