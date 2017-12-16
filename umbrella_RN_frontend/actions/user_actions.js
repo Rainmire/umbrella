@@ -1,12 +1,12 @@
+import { receiveChildren, receiveCurrentChild } from './children_actions';
+import { receiveMoments } from './moment_actions';
+
 export const RECEIVE_CHILD_INFO = "RECEIVE_CHILD_INFO";
 
 export const RECEIVE_USERS = "RECEIVE_USERS";
 
-import { fetchChildInfo, receiveChildren, receiveCurrentChild } from './children_actions';
-
-
 export const receiveUsers = (users) => ({
-  type: RECEIVE_USER,
+  type: RECEIVE_USERS,
   users
 });
 
@@ -17,13 +17,10 @@ export const fetchCurrentUser = (token) => (dispatch) => {
   }).then(({_bodyInit}) => {
     const response = JSON.parse(_bodyInit);
     console.log(response);
-    console.log(`Response:${response.children}`);
     dispatch(receiveChildren(response.children));
     dispatch(receiveUsers(response.users));
-    const currentChild = response.children[0];
-    if
-    dispatch(receiveCurrentChild(currentChild));
-    dispatch(fetchChildInfo(currentChild.id,token));
+    dispatch(receiveMoments(response.moments));
+    dispatch(receiveCurrentChild(response.children[0]));
   });
 };
 
