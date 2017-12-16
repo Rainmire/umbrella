@@ -1,5 +1,4 @@
-
-json.extract! @user, :id
+json.current_user_id @user.id
 
 json.users do
   @users.each do |user|
