@@ -1,4 +1,4 @@
-import { RECEIVE_MOMENTS } from '../actions/moment_actions';
+import { RECEIVE_MOMENTS, RECEIVE_MORE_MOMENTS, RECEIVE_NEW_MOMENTS } from '../actions/moment_actions';
 import merge from 'lodash/merge';
 
 
@@ -7,6 +7,10 @@ const childrenReducer = (state = [], action) => {
   switch (action.type) {
     case RECEIVE_MOMENTS:
       return action.moments;
+    case RECEIVE_MORE_MOMENTS:
+      return state.concat(action.moments);
+    case RECEIVE_NEW_MOMENTS:
+      return action.moments.concat(state);
     default:
       return state;
   }
