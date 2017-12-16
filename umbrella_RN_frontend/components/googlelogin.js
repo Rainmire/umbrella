@@ -73,11 +73,11 @@ export default class GoogleLogin extends Component {
   }
 
   // Handle Login with Facebook button tap
-  // loginWithFacebook = () => this.openURL('http://localhost:3000/auth/facebook');
+  // loginWithFacebook = () => this.openURL('https://umbrella-server.herokuapp.com/auth/facebook');
 
   // Handle Login with Google button tap
   loginWithGoogle (){
-    this.openURL('http://localhost:3000/auth/google_oauth2');
+    this.openURL('https://umbrella-server.herokuapp.com/auth/google_oauth2');
   }
 
 
