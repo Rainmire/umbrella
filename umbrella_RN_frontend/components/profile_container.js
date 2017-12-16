@@ -5,7 +5,7 @@ import ProfileSreen from './profile_screen';
 const mapSTPs = ({entities, session}) => ({
   currentUser: session.currentUser,
   currentChild: entities.currentChild,
-  teacher: entities.users[entities.currentChild.teacher_id]
+  teacher: Object.keys(entities.currentChild).length === 0? {}:entities.users[entities.currentChild.teacher_id]
 });
 
 const mapDTPs = dispatch => ({
