@@ -4,8 +4,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def current_user
-    return User.first
-
+    # return User.first
     token = request.headers["Authorization"]
     return nil if token.nil?
     @current_user ||= User.find_by(oauth_token: token)
