@@ -11,8 +11,19 @@ class User < ApplicationRecord
   class_name: :Child,
   foreign_key: :teacher_id
 
-  has_many :moments,
+  has_many :authored_moments,
+  class_name: :Moment,
   foreign_key: :author_id
+
+  #user is teacher
+  has_many :parents,
+  through: :students,
+  source: :parent
+
+  #user is parent
+  has_many :teachers,
+  through: :children,
+  source: :teacher
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
