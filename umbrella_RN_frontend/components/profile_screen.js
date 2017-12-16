@@ -17,20 +17,35 @@ import SwitchChildScreen from './switch_child_screen';
 import navigateAction from '../navigation/router';
 
 class ProfileScreen extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   static navigationOptions = {
     tabBarLabel: 'Profile',
     tabBarIcon: ({ tintColor }) => (
       <Icon name="user" size={30} color="#00F" />
     )
   }
+  constructor(props) {
+    super(props);
 
-  componentWillReceiveProps(newProps) {
-    console.log('new props',newProps});
+    // this.state = {
+    //   currentChild: this.props.currentChild,
+    //   teacher: this.props.teacher,
+    //   children: this.props.children,
+    //   currentUser: this.props.currentUser
+    // }
+  }
 
+
+  componentWillMount() {
+    console.log('will mount props: ', this.props);
+
+  }
+
+  componentDidMount() {
+    console.log('mounted props: ', this.props);
+  }
+
+  componentWillReceiveProps() {
+    console.log('will receive props: ', this.props);
   }
 
   // fetchData = async () => {
@@ -54,7 +69,7 @@ class ProfileScreen extends React.Component {
   }
 
   _switchChild = () => (
-    this.props.navigation.navigate('SwitchChild') //{children: this.state.children}
+    this.props.navigation.navigate('SwitchChild', {children: this.props.children})
   )
 
 
@@ -84,33 +99,60 @@ class ProfileScreen extends React.Component {
   )
 
 
-  _renderItem = ({ item }) => (
-    <View style={styles.profileScreen}>
-      <View>
-        <Image
-          source={{ uri: `${item.profile_pic}` }}
-          style={styles.photo}
-          />
-      </View>
-      <View style={styles.childInfoContainer}>
-        <View style={styles.childInfo1}>
-          <Text style={styles.text}>Name:   {`${item.name}`}</Text>
-          <Text style={styles.text}>Class:   {`${item.class}`}</Text>
+  _renderItem = ({ props }) => {
+
+    // console.log('destructured props: ', props);
+    // console.log('here is the state: ', this.state)
+    const currentChild = this.props.currentChild
+    // console.log(currentChild);
+    //
+    // console.log(this.props.teacher);
+    // console.log(this.props.currentUser);
+    // console.log(this.props.children);
+    return(
+      <View style={styles.profileScreen}>
+        <View>
+          <Image
+            source={{ uri: `${currentChild.profile_pic}` }}
+            style={styles.photo}
+            />
         </View>
-        <View style={styles.childInfo2}>
-          <Text style={styles.text}>Main Teacher:   {`${this.props.teacher}`}</Text>
-          <Text style={styles.text}>Contact:   {`${item.contact}`}</Text>
+        <View style={styles.childInfoContainer}>
+          <View style={styles.childInfo1}>
+            <Text style={styles.text}>Name:   {`${this.props.currentChild.name}`}</Text>
+            <Text style={styles.text}>Class:   {`${this.props.teacher}`}</Text>
+          </View>
+          <View style={styles.childInfo2}>
+            <Text style={styles.text}>Main Teacher:   {`${this.props.teacher}`}</Text>
+            <Text style={styles.text}>Contact:   {`${this.props.teacher}`}</Text>
+          </View>
         </View>
       </View>
-    </View>
-  )
+    )
+  }
+
+  showprops = (obj, objName) => {
+    let result = '';
+    for (var i in obj) {
+      if (obj.hasOwnProperty(i)) {
+        result += objName + '.' + i + '=' + obj[i] + '\n';
+      }
+    }
+    return result
+  }
 
   render() {
-    console.log('profile screen props',this.props);
+    console.log(this.showprops(this.props.teacher, 'teacher'));
+    console.log('profile screen props: ', this.props);
+    console.log('profile screen state: ', this.state);
+    // debugger
     return (
       <View style={styles.profileScreen}>
-        <FlatList
-        />
+
+        <View>
+          { this._renderItem(this.props)}
+        </View>
+
         { this._renderSwitchChildren() }
         { this._renderLogOutButton() }
       </View>
@@ -121,6 +163,12 @@ class ProfileScreen extends React.Component {
 // data={ this.props.currentChild }
 // keyExtractor={(x, i) => i }
 // renderItem={ this._renderItem }
+// <FlatList
+// data={ [this.state] }
+// // extraData={this.state}
+// keyExtractor={ (item) => item.id }
+// renderItem={ this._renderItem }
+// />
 
 
 export default ProfileScreen;
