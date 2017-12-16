@@ -1,5 +1,14 @@
 import React from 'react';
-import { StyleSheet, View, Image, Text, Button, FlatList, AsyncStorage } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  Button,
+  FlatList,
+  AsyncStorage,
+  TouchableOpacity
+} from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -31,10 +40,31 @@ class MomentsScreen extends React.Component {
     </View>
   )
 
+  _addMoment = () => (
+    this.props.navigation.navigate('MomentForm')
+  )
+
+  _addMomentButton = () => {
+// change condition to check whether currentUser is teacher
+    if (true) {
+      return (
+        <View style={styles.addMomentContainer}>
+          <TouchableOpacity
+            onPress={this._addMoment}
+            style={styles.addMoment}
+            >
+            <Icon name='plus' size={50} color='#000' />
+          </TouchableOpacity>
+        </View>
+      );
+    }
+  }
+
   render() {
     console.log('MOMENTS: ', this.props)
     return (
       <View>
+        {this._addMomentButton()}
         {this._renderItem()}
       </View>
     );
@@ -75,5 +105,17 @@ export const styles = StyleSheet.create({
   footer_info: {
     fontSize: 12,
     marginTop: 5,
+  },
+  addMoment: {
+    backgroundColor: 'pink',
+    height: 50,
+    width: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  addMomentContainer: {
+    backgroundColor: 'yellow',
+    marginTop: 20,
+
   }
 });

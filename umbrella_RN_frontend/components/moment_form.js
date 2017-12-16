@@ -13,7 +13,7 @@ import {
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-class MomentsScreen extends React.Component {
+class MomentForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -26,6 +26,7 @@ class MomentsScreen extends React.Component {
   //
   // };
 
+//look at state for props needed
   _renderForm = () => (
     <View>
       <TextInput
@@ -41,8 +42,8 @@ class MomentsScreen extends React.Component {
       </TouchableOpacity>
 
       <View>
-        <TouchableOpacity onPress={console.log('function for selecting which users can see')}>//look at state for this
-          <Text>Select Recipient</Text>
+        <TouchableOpacity onPress={console.log('function for selecting which users can see')}>
+          <Text>Select Recipient </Text>
           <Icon name='angle-right' size={15} color='#000'/>
         </TouchableOpacity>
       </View>
@@ -62,7 +63,7 @@ class MomentsScreen extends React.Component {
   }
 }
 
-export default MomentsScreen;
+export default MomentForm;
 
 export const styles = StyleSheet.create({
 
