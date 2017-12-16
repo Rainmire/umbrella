@@ -2,7 +2,8 @@ import { connect } from 'react-redux';
 import { fetchChildInfo } from '../actions/user_actions';
 import SwitchChildScreen from './switch_child_screen';
 
-const mapSTPs = ({entities}) => ({
+const mapSTPs = ({entities, session}) => ({
+  currentUser: session.currentUser,
   children: entities.children
 });
 
