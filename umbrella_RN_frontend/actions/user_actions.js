@@ -1,12 +1,18 @@
+import { receiveChildren, receiveCurrentChild } from './children_actions';
+import { receiveMoments } from './moment_actions';
+
 export const RECEIVE_CHILD_INFO = "RECEIVE_CHILD_INFO";
 
-export const RECEIVE_USER = "RECEIVE_USER";
+export const RECEIVE_USERS = "RECEIVE_USERS";
+export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 
-import { fetchChildInfo, receiveChildren, receiveCurrentChild } from './children_actions';
+export const receiveUsers = (users) => ({
+  type: RECEIVE_USERS,
+  users
+});
 
-
-export const receiveUser = (user) => ({
-  type: RECEIVE_USER,
+export const receiveCurrentUser = (user) => ({
+  type: RECEIVE_CURRENT_USER,
   user
 });
 
@@ -16,14 +22,17 @@ export const fetchCurrentUser = (token) => (dispatch) => {
     headers: { 'Authorization': token }
   }).then(({_bodyInit}) => {
     const response = JSON.parse(_bodyInit);
-    console.log('IN THE USER ACTIONS NOW');
-    console.log('response', response);
-    console.log(`Response:${response.children}`);
-    const currentChild = response.children[0];
-    dispatch(receiveCurrentChild(currentChild));
-    dispatch(fetchChildInfo(currentChild.id,token));
+    console.log(response);
+    console.log("is teacher?", Boolean(response.users[response.current_user_id].class));
     dispatch(receiveChildren(response.children));
-    dispatch(receiveUser(response.user));
+    dispatch(receiveUsers(response.users));
+    dispatch(receiveMoments(response.moments));
+    const currentUser = response.users[response.current_user_id];
+    if(!currentUser.class){
+      console.log("is parent");
+      dispatch(receiveCurrentChild(response.children[0]));
+    }
+    dispatch(receiveCurrentUser(currentUser));
   });
 };
 

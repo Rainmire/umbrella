@@ -22,7 +22,6 @@ export const fetchChildInfo = (childId,token) => (dispatch) => {
   }).then(({_bodyInit}) => {
     const response = JSON.parse(_bodyInit);
     console.log(response);
-    dispatch(receiveUser(response.teacher));
     dispatch(receiveMoments(response.moments));
   });
 };

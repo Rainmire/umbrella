@@ -28,10 +28,10 @@ class ProfileScreen extends React.Component {
     )
   }
 
-  // componentDidMount() {
-  //   this.setState({ currentChild: [this.state.children[0]] });
-  //
-  // }
+  componentWillReceiveProps(newProps) {
+    console.log('new props',newProps});
+
+  }
 
   // fetchData = async () => {
   //   const response = await fetch('/api/user')
@@ -106,7 +106,7 @@ class ProfileScreen extends React.Component {
   )
 
   render() {
-    console.log('PROFILE SCREEN : ', this);
+    console.log('profile screen props',this.props);
     return (
       <View style={styles.profileScreen}>
         <FlatList
