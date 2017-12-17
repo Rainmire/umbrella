@@ -4,7 +4,7 @@ import { StyleSheet,
          Text,
          Button,
          AsyncStorage,
-         ScrollView,
+         ListView,
          RefreshControl
         } from 'react-native';
 import { TabNavigator } from 'react-navigation';
@@ -20,7 +20,9 @@ class MomentsScreen extends React.Component {
 
   constructor(props) {
     super(props);
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
+      dataSource: ds.cloneWithRows(['row 1', 'row 2']),
       refreshing: false,
     };
   }
@@ -55,7 +57,9 @@ class MomentsScreen extends React.Component {
   render() {
     console.log(this.props)
     return (
-      <ScrollView
+      <ListView
+        dataSource = {this.state.dataSource}
+        renderRow = {(rowData) => <Text>{rowData}</Text>}
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
@@ -67,7 +71,7 @@ class MomentsScreen extends React.Component {
           This will display an index of messages to the user, posted by the teachers/ admin.
         </Text>
 
-      </ScrollView>
+      </ListView>
     );
   }
 }
