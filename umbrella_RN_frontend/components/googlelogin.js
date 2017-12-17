@@ -78,6 +78,8 @@ export default class GoogleLogin extends Component {
   // Handle Login with Google button tap
   loginWithGoogle (){
     this.openURL('https://umbrella-server.herokuapp.com/auth/google_oauth2');
+    // this.openURL('http://localhost:3000/auth/google_oauth2');
+
   }
 
 

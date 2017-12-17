@@ -18,21 +18,26 @@ export const receiveCurrentUser = (user) => ({
 
 export const fetchCurrentUser = (token) => (dispatch) => {
   fetch('https://umbrella-server.herokuapp.com/api/user', {
+  // return fetch('http://localhost:3000/api/user', {
+
     method: 'GET',
     headers: { 'Authorization': token }
   }).then(({_bodyInit}) => {
     const response = JSON.parse(_bodyInit);
     console.log(response);
+    
+    const currentUser = response.users[response.current_user_id];
+
     console.log("is teacher?", Boolean(response.users[response.current_user_id].teacher_class));
     dispatch(receiveChildren(response.children));
     dispatch(receiveUsers(response.users));
     dispatch(receiveMoments(response.moments));
-    const currentUser = response.users[response.current_user_id];
+    dispatch(receiveCurrentUser(currentUser));
+
     if(!currentUser.teacher_class){
       console.log("is parent");
       dispatch(receiveCurrentChild(response.children[0]));
     }
-    dispatch(receiveCurrentUser(currentUser));
   });
 };
 
