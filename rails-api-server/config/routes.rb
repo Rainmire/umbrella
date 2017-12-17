@@ -7,7 +7,9 @@ Rails.application.routes.draw do
       get 'more_moments/:id', to: 'moments#more_moments'
     end
 
-    resource :session, only: [:destroy]
+    resource :session, only: [:destroy] do
+      post 'fetch_jwt', to: 'session#fetch_jwt'
+    end
     # delete 'session', to: 'sessions#destroy'
     resources :children, only: [:show] do
       get '/new_moments/:id', to: 'moments#new_moments'

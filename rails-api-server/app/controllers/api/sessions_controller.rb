@@ -1,13 +1,14 @@
 class Api::SessionsController < ApplicationController
   def create
     # user = User.from_omniauth(env["omniauth.auth"])
-    user = User.from_omniauth(request.env["omniauth.auth"])
-    @user = User.find_by(email: user.email)
+    auth_params = User.from_omniauth(request.env["omniauth.auth"])
+    user = User.find_by(email: auth_params.email.to_s.downcase)
 
-    if @user
-      token = user.oauth_token
-      @user.oauth_token = user.oauth_token
-      login(@user)
+    if user
+      token = auth_params.oauth_token
+      user.oauth_token = token
+      # login(@user)
+      user.save!
     else
       token = ''
     end
@@ -16,10 +17,26 @@ class Api::SessionsController < ApplicationController
 
   end
 
+  def fetch_jwt
+    user = User.find_by(oauth_token: params[:oauth_token])
+
+    if user
+      render json: ["You may only sign in from one device at a time."] if user.logged_in
+
+      auth_token = JsonWebToken.encode({oauth_token: params[:oauth_token]})
+      render json: {auth_token: auth_token}, status: :ok
+    else
+      render json: ["Session expired. Log in again."]
+    end
+  end
+
   def destroy
-    current_user.oauth_token = nil
-    current_user.provider = nil
-    session[:oauth_token] = nil
+    authenticate_request!
+
+    @current_user.oauth_token = nil
+    @current_user.provider = nil
+    # session[:oauth_token] = nil
+    @current_user.logged_in = false
     @current_user = nil
   end
 end
