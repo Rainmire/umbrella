@@ -46,6 +46,7 @@ class ProfileScreen extends React.Component {
 
   componentWillReceiveProps() {
     console.log('will receive props: ', this.props);
+    // console.log(this.props.teacher);
   }
 
   // fetchData = async () => {
@@ -99,16 +100,20 @@ class ProfileScreen extends React.Component {
   )
 
 
-  _renderItem = ({ props }) => {
+  _renderItem = ( teacher ) => {
 
     // console.log('destructured props: ', props);
     // console.log('here is the state: ', this.state)
     const currentChild = this.props.currentChild
+    // const currentTeacher = this.props.teacher
     // console.log(currentChild);
     //
     // console.log(this.props.teacher);
     // console.log(this.props.currentUser);
     // console.log(this.props.children);
+    console.log('teacher renderItem: ', teacher.name)
+    // console.log('typeof teacher renderItem: ', typeof currentTeacher)
+    // console.log(currentTeacher.name)
     return(
       <View style={styles.profileScreen}>
         <View>
@@ -142,22 +147,27 @@ class ProfileScreen extends React.Component {
   }
 
   render() {
-    console.log(this.showprops(this.props.teacher, 'teacher'));
-    console.log('profile screen props: ', this.props);
-    console.log('profile screen state: ', this.state);
+    // const destTeacherName = { teacherName }
+    const currentTeacher = this.props.teacher
+    // console.log(this.showprops(this.props.teacher, 'teacher'));
+    console.log('profile screen propssssss: ', this.props);
+    // console.log('teacher name: ', destTeacherName.name);
+    // console.log('profile screen props: ', this.props);
+    // console.log('teacher render: ', {currentTeacher})
+  // console.log('teacher render typeof: ', typeof {currentTeacher})
     // debugger
-    return (
-      <View style={styles.profileScreen}>
+      return (
+        <View style={styles.profileScreen}>
 
         <View>
-          { this._renderItem(this.props)}
+        { this._renderItem({ currentTeacher })}
         </View>
 
         { this._renderSwitchChildren() }
         { this._renderLogOutButton() }
-      </View>
+        </View>
 
-    );
+      );
   }
 }
 // data={ this.props.currentChild }
