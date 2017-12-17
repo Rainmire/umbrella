@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     end
 
     resource :session, only: [:destroy] do
-      post 'fetch_jwt', to: 'session#fetch_jwt'
+      get 'fetch_jwt', to: 'sessions#fetch_jwt'
     end
     # delete 'session', to: 'sessions#destroy'
     resources :children, only: [:show] do
