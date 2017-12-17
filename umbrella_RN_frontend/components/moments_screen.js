@@ -30,7 +30,9 @@ class MomentsScreen extends React.Component {
   componentWillMount(){
     this.setState({refreshing: true});
     AsyncStorage.getItem('token').then((returntoken)=> {
-      this.props.fetchCurrentUser(returntoken);
+      if(returntoken){
+        this.props.fetchCurrentUser(returntoken);
+      }
     }).then(()=>{
       this.setState({refreshing: false});
     });
@@ -40,6 +42,7 @@ class MomentsScreen extends React.Component {
     // this.setState({refreshing: true});
     AsyncStorage.getItem('token').then((returntoken) => {
       //is current user is teacher
+      console.log("current user is teacher?",this.props.currentUser);
       if(this.props.currentUser.teacher_class){
         this.props.fetchMoments(type,this.props.moments[0].id, 'user',returntoken)
         .then(() => {
@@ -53,14 +56,7 @@ class MomentsScreen extends React.Component {
       }
     })
   }
-
-  // _onEndReached(){
-  //   // this.setState({refreshing})
-  //   AsyncStorage.getItem('token').then((returntoken) => {
-  //
-  //   }
-  // }
-
+  
   render() {
     console.log(this.props)
     return (
@@ -72,7 +68,11 @@ class MomentsScreen extends React.Component {
             refreshing={this.state.refreshing}
             onRefresh={ () => this._fetch('new')}
           />}
-        onEndReached={ () => this._fetch('more') }
+        onEndReached={ () =>{
+          if(this.props.moments.length > 10){
+            this._fetch('more')
+          }
+        }}
       >
         <Text style={styles.moments}>
           This is the Moments screen.
