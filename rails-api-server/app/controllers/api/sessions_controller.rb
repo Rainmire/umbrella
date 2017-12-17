@@ -18,12 +18,12 @@ class Api::SessionsController < ApplicationController
   end
 
   def fetch_jwt
-    user = User.find_by(oauth_token: params[:oauth_token])
+    oauth_token = request.headers['oauth_token']
+    user = User.find_by(oauth_token: oauth_token)
 
     if user
       render json: ["You may only sign in from one device at a time."] if user.logged_in
-
-      auth_token = JsonWebToken.encode({oauth_token: params[:oauth_token]})
+      auth_token = JsonWebToken.encode({oauth_token: oauth_token})
       render json: {auth_token: auth_token}, status: :ok
     else
       render json: ["Session expired. Log in again."]
