@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  require 'json_web_token'
+  require 'jsonwebtoken.rb'
 
   protect_from_forgery with: :exception
 
