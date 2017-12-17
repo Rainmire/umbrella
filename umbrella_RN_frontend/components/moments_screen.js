@@ -1,5 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button, AsyncStorage } from 'react-native';
+import { StyleSheet,
+         View,
+         Text,
+         Button,
+         AsyncStorage,
+         ScrollView } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
