@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchNewMomentsForChild, fetchNewMomentsForTeacher } from '../actions/moments_actions';
+import { fetchNewMomentsForChild, fetchNewMomentsForTeacher } from '../actions/moment_actions';
 import Moments from './moments_screen';
 
 const mapSTPs = ({entities, session}) => ({
