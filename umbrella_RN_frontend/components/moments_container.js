@@ -10,8 +10,8 @@ const mapSTPs = ({entities, session}) => ({
 });
 
 const mapDTPs = dispatch => ({
-  fetchMoments: (type, firstmomentsId, who, token) =>{
-     dispatch(fetchMoments(type, firstmomentsId, who, token));},
+  fetchMoments: (type, firstmomentsId, who, token) =>(
+     dispatch(fetchMoments(type, firstmomentsId, who, token))),
   fetchCurrentUser: (token) => dispatch(fetchCurrentUser(token))
 });
 

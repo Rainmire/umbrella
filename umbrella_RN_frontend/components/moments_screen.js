@@ -39,10 +39,9 @@ class MomentsScreen extends React.Component {
   }
 
   _fetch(type) {
-    // this.setState({refreshing: true});
+    this.setState({refreshing: true});
     AsyncStorage.getItem('token').then((returntoken) => {
       //is current user is teacher
-      console.log("current user is teacher?",this.props.currentUser);
       if(this.props.currentUser.teacher_class){
         this.props.fetchMoments(type,this.props.moments[0].id, 'user',returntoken)
         .then(() => {
@@ -56,7 +55,7 @@ class MomentsScreen extends React.Component {
       }
     })
   }
-  
+
   render() {
     console.log(this.props)
     return (
