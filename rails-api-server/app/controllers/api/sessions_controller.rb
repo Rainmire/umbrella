@@ -5,10 +5,13 @@ class Api::SessionsController < ApplicationController
     @user = User.find_by(email: user.email)
 
     if @user
+      token = user.oauth_token
       @user.oauth_token = user.oauth_token
       login(@user)
+    else
+      token = ''
     end
-    redirect_to 'umbrella://' + user.oauth_token
+    redirect_to 'umbrella://' + token
     # redirect_to 'umbrella://', session_token: user.oauth_token
 
   end
