@@ -29,10 +29,10 @@ class ProfileScreen extends React.Component {
     )
   }
 
-  componentWillReceiveProps(newProps) {
-    console.log('new props',newProps});
-
-  }
+  // componentWillReceiveProps(newProps) {
+  //   console.log('new props',newProps});
+  //
+  // }
 
   // fetchData = async () => {
   //   const response = await fetch('/api/user')
@@ -108,6 +108,7 @@ class ProfileScreen extends React.Component {
 
   render() {
     console.log('profile screen props',this.props);
+    console.log('teacher',this.props.teacher.name);
     return (
       <View style={styles.profileScreen}>
         <FlatList

@@ -18,7 +18,7 @@ export const receiveNewMoments = (moments) => ({
 });
 
 export const fetchMoments = (childId,token) => {
-  // fetch('http://localhost:3000/api/user', {
+  // fetch('https://umbrella-server.herokuapp.com/api/user', {
   //   method: 'GET',
   //   headers: { 'Authorization': token }
   // }).then(({_bodyInit}) => {
