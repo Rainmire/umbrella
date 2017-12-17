@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { fetchNewMoments } from '../actions/moment_actions';
+import { fetchCurrentUser } from '../actions/user_actions';
 import Moments from './moments_screen';
 
 const mapSTPs = ({entities, session}) => ({
@@ -11,8 +12,7 @@ const mapSTPs = ({entities, session}) => ({
 const mapDTPs = dispatch => ({
   fetchNewMoments: (firstmomentsId,who,token) =>{
      dispatch(fetchNewMoments(firstmomentsId,who,token));},
-  // fetchNewMomentsForTeacher: (firstmomentsId,token) => {
-  //   dispatch(fetchNewMomentsForTeacher(firstmomentsId,token));}
+  fetchCurrentUser: (token) => dispatch(fetchCurrentUser(token))
 });
 
 export default connect(mapSTPs, mapDTPs)(Moments);

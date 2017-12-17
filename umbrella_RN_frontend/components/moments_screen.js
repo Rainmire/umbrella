@@ -25,6 +25,15 @@ class MomentsScreen extends React.Component {
     };
   }
 
+  componentWillMount(){
+    this.setState({refreshing: true});
+    AsyncStorage.getItem('token').then((returntoken)=> {
+      this.props.fetchCurrentUser(returntoken);
+    }).then(()=>{
+      this.setState({refreshing: false});
+    });
+  }
+
   _onRefresh() {
     this.setState({refreshing: true});
     AsyncStorage.getItem('token').then((returntoken) => {
