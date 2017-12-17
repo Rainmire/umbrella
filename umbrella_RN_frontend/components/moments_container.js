@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchChildInfo } from '../actions/children_actions';
+import { fetchNewMomentsForChild, fetchNewMomentsForTeacher } from '../actions/moments_actions';
 import Moments from './moments_screen';
 
 const mapSTPs = ({entities, session}) => ({
@@ -9,7 +9,10 @@ const mapSTPs = ({entities, session}) => ({
 });
 
 const mapDTPs = dispatch => ({
-  fetchChildInfo: (childId,token) => dispatch(fetchChildInfo(childId,token))
+  fetchNewMomentsForChild: (firstmomentsId,childId,token) =>{
+     dispatch(fetchNewMomentsForChild(firstmomentsId,childId,token));},
+  fetchNewMomentsForTeacher: (firstmomentsId,token) => {
+    dispatch(fetchNewMomentsForTeacher(firstmomentsId,token));}
 });
 
 export default connect(mapSTPs, mapDTPs)(Moments);
