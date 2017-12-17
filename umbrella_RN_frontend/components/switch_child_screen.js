@@ -17,11 +17,6 @@ import { StackNavigator } from 'react-navigation';
 class SwitchChildScreen extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      currentChild: this.props.currentChild
-    };
-
   }
 
   static navigationOptions = {
@@ -29,7 +24,7 @@ class SwitchChildScreen extends React.Component {
     tabBarIcon: ({ tintColor }) => (
       <Icon name="user" size={30} color="#00F" />
     )
-  }
+  };
 
   _renderItem = ({ item }) => {
     return(
