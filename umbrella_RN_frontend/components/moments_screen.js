@@ -5,6 +5,7 @@ import { StyleSheet,
          Button,
          AsyncStorage,
          ScrollView,
+         TouchableOpacity,
          RefreshControl
         } from 'react-native';
 import { TabNavigator } from 'react-navigation';
@@ -17,7 +18,7 @@ class MomentsScreen extends React.Component {
       <Icon name="newspaper-o" size={30} color="#00F" />
     )
   };
-// { item }
+
   _renderItem = () => (
     <View style={styles.moments_container}>
       <View style={styles.image_container}>
@@ -84,15 +85,16 @@ class MomentsScreen extends React.Component {
   }
 
   render() {
-    console.log('MOMENTS: ', this.props)
     return (
       <ScrollView
+        style={styles.moments_container}
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
             onRefresh={this._onRefresh.bind(this)}
           />}
       >
+      {this._addMomentButton()}
         <Text style={styles.moments}>
           This is the Moments screen.
           This will display an index of messages to the user, posted by the teachers/ admin.

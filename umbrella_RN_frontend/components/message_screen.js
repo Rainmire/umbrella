@@ -14,16 +14,12 @@ class MessageScreen extends React.Component {
   };
 
   render() {
-    console.log(this)
-    console.log(this.props)
-
     return (
       <View>
         <Text style={styles.messages}>
           This is the Message screen.
           This screen will be the direct chat capability made possible by using websockets.
         </Text>
-
       </View>
     );
   }
