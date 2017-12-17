@@ -12,6 +12,16 @@ import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class MomentsScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {
+      dataSource: ds.cloneWithRows(['row 1', 'row 2']),
+      refreshing: false,
+      isTeacher: false
+    };
+  }
+
   static navigationOptions = {
     tabBarLabel: 'Moments',
     tabBarIcon: ({ tintColor }) => (
@@ -45,7 +55,8 @@ class MomentsScreen extends React.Component {
 
   _addMomentButton = () => {
 // change condition to check whether currentUser is teacher
-    if (true) {
+
+    if (this.state.isTeacher) {
       return (
         <View style={styles.addMomentContainer}>
           <TouchableOpacity
@@ -59,15 +70,8 @@ class MomentsScreen extends React.Component {
     }
   }
 
-  constructor(props) {
-    super(props);
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    this.state = {
-      dataSource: ds.cloneWithRows(['row 1', 'row 2']),
-      refreshing: false,
-    };
-  }
-
+// not positive if this will work, but I think it should...for rendering the
+// add moment button
   componentWillMount(){
     this.setState({refreshing: true});
     AsyncStorage.getItem('token').then((returntoken)=> {
@@ -75,6 +79,9 @@ class MomentsScreen extends React.Component {
         this.props.fetchCurrentUser(returntoken);
       }
     }).then(()=>{
+      if (this.props.currentUser && this.props.currentUser.teacher_class) {
+        this.setState({ isTeacher: true});
+      }
       this.setState({refreshing: false});
     });
   }
@@ -83,7 +90,7 @@ class MomentsScreen extends React.Component {
     this.setState({refreshing: true});
     AsyncStorage.getItem('token').then((returntoken) => {
       //is current user is teacher
-      if(this.props.currentUser.teacher_class){
+      if(true){
         this.props.fetchMoments(type,this.props.moments[0].id, 'user',returntoken)
         .then(() => {
           this.setState({refreshing: false});
@@ -98,28 +105,26 @@ class MomentsScreen extends React.Component {
   }
 
   render() {
-    return (
-      <ListView
-        dataSource = {this.state.dataSource}
-        renderRow = {(rowData) => <Text>{rowData}</Text>}
-        refreshControl={
-          <RefreshControl
-            refreshing={this.state.refreshing}
-            onRefresh={ () => this._fetch('new')}
-          />}
-        onEndReached={ () =>{
-          if(this.props.moments.length > 10){
-            this._fetch('more')
-          }
-        }}
-      >
-      {this._addMomentButton()}
-        <Text style={styles.moments}>
-          This is the Moments screen.
-          This will display an index of messages to the user, posted by the teachers/ admin.
-        </Text>
 
-      </ListView>
+    return (
+      <View>
+      {this._addMomentButton()}
+        <ListView
+          dataSource = {this.state.dataSource}
+          renderRow = {(rowData) => <Text>{rowData}</Text>}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={ () => this._fetch('new')}
+            />}
+          onEndReached={ () =>{
+            if(this.props.moments.length > 10){
+              this._fetch('more')
+            }
+          }}
+        >
+        </ListView>
+      </View>
     );
   }
 }
