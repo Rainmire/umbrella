@@ -1,7 +1,9 @@
 class Api::UsersController < ApplicationController
 
+  before_action :authenticate_request!
+
   def show
-    @user = current_user
+    @user = @current_user
     if @user
       # @moments = @user.moments.order(:created_at)
       if @user.teacher_class
@@ -21,3 +23,15 @@ class Api::UsersController < ApplicationController
   end
 
 end
+
+
+# def login
+#   user = User.find_by(email: params[:email].to_s.downcase)
+#
+#   if user && user.authenticate(params[:password])
+#       auth_token = JsonWebToken.encode({oauth_token: user.oauth_token})
+#       render json: {auth_token: auth_token}, status: :ok
+#   else
+#     render json: {error: 'Invalid username / password'}, status: :unauthorized
+#   end
+# end
