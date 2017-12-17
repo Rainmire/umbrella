@@ -30,12 +30,12 @@ class MomentsScreen extends React.Component {
     AsyncStorage.getItem('token').then((returntoken) => {
       //is current user is teacher
       if(this.props.currentUser.teacher_class){
-        this.props.fetchNewMomentsForTeacher(this.props.moments[0].id,returntoken)
+        this.props.fetchNewMoments(this.props.moments[0].id, 'user',returntoken)
         .then(() => {
           this.setState({refreshing: false});
         });
       }else{//current user is parent
-        this.props.fetchNewMomentsForChild(this.props.moments[0].id, this.props.currentChild.id, returntoken)
+        this.props.fetchNewMoments(this.props.moments[0].id, `children/${this.props.currentChild.id}`, returntoken)
         .then(() => {
           this.setState({refreshing: false});
         });
