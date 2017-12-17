@@ -17,7 +17,8 @@ export const receiveCurrentUser = (user) => ({
 });
 
 export const fetchCurrentUser = (token) => (dispatch) => {
-  fetch('https://umbrella-server.herokuapp.com/api/user', {
+  // fetch('https://umbrella-server.herokuapp.com/api/user', {
+  fetch('http://localhost:3000/api/user', {
     method: 'GET',
     headers: { 'Authorization': token }
   }).then(({_bodyInit}) => {
