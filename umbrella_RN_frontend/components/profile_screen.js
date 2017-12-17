@@ -34,7 +34,7 @@ class ProfileScreen extends React.Component {
     // }
   }
 
-<<<<<<< HEAD
+
 
   componentWillMount() {
     console.log('will mount props: ', this.props);
@@ -49,12 +49,12 @@ class ProfileScreen extends React.Component {
     console.log('will receive props: ', this.props);
     // console.log(this.props.teacher);
   }
-=======
+
   // componentWillReceiveProps(newProps) {
   //   console.log('new props',newProps});
   //
   // }
->>>>>>> master
+
 
   // fetchData = async () => {
   //   const response = await fetch('/api/user')
@@ -107,20 +107,10 @@ class ProfileScreen extends React.Component {
   )
 
 
-  _renderItem = ( teacher ) => {
-
-    // console.log('destructured props: ', props);
-    // console.log('here is the state: ', this.state)
-    const currentChild = this.props.currentChild
-    // const currentTeacher = this.props.teacher
-    // console.log(currentChild);
-    //
-    // console.log(this.props.teacher);
-    // console.log(this.props.currentUser);
-    // console.log(this.props.children);
-    console.log('teacher renderItem: ', teacher.name)
-    // console.log('typeof teacher renderItem: ', typeof currentTeacher)
-    // console.log(currentTeacher.name)
+  _renderItem = ( { item } ) => {
+   console.log(item)
+   let currentChild = item.currentChild;
+   let teacher = item.teacher;
     return(
       <View style={styles.profileScreen}>
         <View>
@@ -131,12 +121,12 @@ class ProfileScreen extends React.Component {
         </View>
         <View style={styles.childInfoContainer}>
           <View style={styles.childInfo1}>
-            <Text style={styles.text}>Name:   {`${this.props.currentChild.name}`}</Text>
-            <Text style={styles.text}>Class:   {`${this.props.teacher}`}</Text>
+            <Text style={styles.text}>Name:   {`${currentChild.name}`}</Text>
+            <Text style={styles.text}>Class:   {`${teacher.teacher_class}`}</Text>
           </View>
           <View style={styles.childInfo2}>
-            <Text style={styles.text}>Main Teacher:   {`${this.props.teacher}`}</Text>
-            <Text style={styles.text}>Contact:   {`${this.props.teacher}`}</Text>
+            <Text style={styles.text}>Main Teacher:   {`${teacher.name}`}</Text>
+            <Text style={styles.text}>Contact:   {`${teacher.contact}`}</Text>
           </View>
         </View>
       </View>
@@ -156,12 +146,17 @@ class ProfileScreen extends React.Component {
   render() {
     console.log('profile screen props',this.props);
     console.log('teacher',this.props.teacher.name);
+    console.log('array props: ',[this.props]);
     return (
       <View style={styles.profileScreen}>
-        <FlatList
-        >Test</FlatList>
+      <FlatList
+      data={ [this.props] }
+      keyExtractor={ (item) => item.currentChild.id }
+      renderItem={ this._renderItem }
+      />
+        { this._renderSwitchChildren() }
         { this._renderLogOutButton() }
-        </View>
+      </View>
 
       );
   }
@@ -184,7 +179,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    // paddingTop: 50,
+    paddingTop: 50,
   },
   childInfoContainer: {
     shadowColor: '#000',
@@ -216,13 +211,13 @@ export const styles = StyleSheet.create({
     borderRadius: 75,
   },
   buttonContainer: {
-    height: 130,
+    height: 100,
     width: 300,
     flex: 1,
     flexDirection: 'column',
   },
   profileButton: {
-    height: 60,
+    height: 50,
     width: 300,
     flex: 1,
     flexDirection: 'row',
@@ -234,7 +229,7 @@ export const styles = StyleSheet.create({
     paddingRight: 20
   },
   logOutButton: {
-    height: 60,
+    height: 20,
     width: 300,
     flex: 1,
     alignItems: 'center',

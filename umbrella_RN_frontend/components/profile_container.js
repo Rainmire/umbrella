@@ -26,6 +26,7 @@ import ProfileSreen from './profile_screen';
 const mapSTPs = ({entities, session}) => ({
   currentUser: session.currentUser,
   currentChild: entities.currentChild,
+  children: entities.children,
   teacher: Object.keys(entities.currentChild).length === 0? {}:entities.users[entities.currentChild.teacher_id]
 });
 
