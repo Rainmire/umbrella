@@ -17,6 +17,7 @@ export const receiveCurrentChild = ( child ) => ({
 
 export const fetchChildInfo = (childId,token) => (dispatch) => {
   fetch(`https://umbrella-server.herokuapp.com/api/children/${childId}`, {
+  // fetch(`http://localhost:3000/api/children/${childId}`, {
     method: 'GET',
     headers: { 'Authorization': token }
   }).then(({_bodyInit}) => {
