@@ -16,7 +16,7 @@ class Api::UsersController < ApplicationController
       @users = other_users.to_a.push(@user)
       render 'api/users/show'
     else
-      render json: ["Not logged in"], status: 404
+      render json: ["Not logged in"], status: 401
     end
   end
 

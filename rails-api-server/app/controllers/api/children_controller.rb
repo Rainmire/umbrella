@@ -5,7 +5,7 @@ class Api::ChildrenController < ApplicationController
       @moments = @child.moments
       render 'api/children/show'
     else
-      render json: ["No child found"], status: 404
+      render json: ["No child found"], status: 403
     end
   end
 end
