@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchChildInfo } from '../actions/user_actions';
+import { fetchChildInfo, receiveCurrentChild } from '../actions/children_actions';
 import SwitchChildScreen from './switch_child_screen';
 
 const mapSTPs = ({entities, session}) => ({
@@ -8,7 +8,8 @@ const mapSTPs = ({entities, session}) => ({
 });
 
 const mapDTPs = dispatch => ({
-  fetchChildInfo: (childId,token) => dispatch(fetchChildInfo(childId,token))
+  fetchChildInfo: (childId,token) => dispatch(fetchChildInfo(childId,token)),
+  receiveCurrentChild: (child) => dispatch(receiveCurrentChild(child))
 });
 
 export default connect(mapSTPs, mapDTPs)(SwitchChildScreen);
