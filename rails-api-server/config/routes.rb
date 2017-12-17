@@ -2,12 +2,19 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     # get '/user', to: 'users#show', as: 'user'
-    resource :user, only: [:show]
+    resource :user, only: [:show] do
+      get 'new_moments/:id', to: 'moments#new_moments'
+      get 'more_moments/:id', to: 'moments#more_moments'
+    end
+
     resource :session, only: [:destroy]
     # delete 'session', to: 'sessions#destroy'
-    resources :children, only: [:show]
+    resources :children, only: [:show] do
+      get '/new_moments/:id', to: 'moments#new_moments'
+      get 'more_moments/:id', to: 'moments#more_moments'
+    end
 
-    resources :moments, only: [:index]
+    # resources :moments, only: [:index]
   end
 
   get 'auth/:provider/callback', to: 'api/sessions#create'
