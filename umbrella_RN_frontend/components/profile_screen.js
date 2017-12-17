@@ -17,52 +17,16 @@ import SwitchChildScreen from './switch_child_screen';
 import navigateAction from '../navigation/router';
 
 class ProfileScreen extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  
   static navigationOptions = {
     tabBarLabel: 'Profile',
     tabBarIcon: ({ tintColor }) => (
       <Icon name="user" size={30} color="#00F" />
     )
   }
-  constructor(props) {
-    super(props);
-
-    // this.state = {
-    //   currentChild: this.props.currentChild,
-    //   teacher: this.props.teacher,
-    //   children: this.props.children,
-    //   currentUser: this.props.currentUser
-    // }
-  }
-
-
-
-  componentWillMount() {
-    console.log('will mount props: ', this.props);
-
-  }
-
-  componentDidMount() {
-    console.log('mounted props: ', this.props);
-  }
-
-  componentWillReceiveProps() {
-    console.log('will receive props: ', this.props);
-    // console.log(this.props.teacher);
-  }
-
-  // componentWillReceiveProps(newProps) {
-  //   console.log('new props',newProps});
-  //
-  // }
-
-
-  // fetchData = async () => {
-  //   const response = await fetch('/api/user')
-  //     .then(e => console.error(e));
-  //   const json = response.json();
-  //   this.setState({ children: json.results });
-  // }
-
 
   handleSignout(){
     return ()=>{
@@ -73,13 +37,11 @@ class ProfileScreen extends React.Component {
         });
       });
     }
-
   }
 
   _switchChild = () => (
-    this.props.navigation.navigate('SwitchChild', {children: this.props.children})
+    this.props.navigation.navigate('SwitchChild')
   )
-
 
   _renderSwitchChildren = () => {
     if (this.props.children.length > 1) {
@@ -108,9 +70,9 @@ class ProfileScreen extends React.Component {
 
 
   _renderItem = ( { item } ) => {
-   console.log(item)
    let currentChild = item.currentChild;
    let teacher = item.teacher;
+
     return(
       <View style={styles.profileScreen}>
         <View>
@@ -133,44 +95,20 @@ class ProfileScreen extends React.Component {
     )
   }
 
-  showprops = (obj, objName) => {
-    let result = '';
-    for (var i in obj) {
-      if (obj.hasOwnProperty(i)) {
-        result += objName + '.' + i + '=' + obj[i] + '\n';
-      }
-    }
-    return result
-  }
-
   render() {
-    console.log('profile screen props',this.props);
-    console.log('teacher',this.props.teacher.name);
-    console.log('array props: ',[this.props]);
     return (
       <View style={styles.profileScreen}>
       <FlatList
-      data={ [this.props] }
-      keyExtractor={ (item) => item.currentChild.id }
-      renderItem={ this._renderItem }
+        data={ [this.props] }
+        keyExtractor={ (item) => item.currentChild.id }
+        renderItem={ this._renderItem }
       />
         { this._renderSwitchChildren() }
         { this._renderLogOutButton() }
       </View>
-
-      );
+    );
   }
 }
-// data={ this.props.currentChild }
-// keyExtractor={(x, i) => i }
-// renderItem={ this._renderItem }
-// <FlatList
-// data={ [this.state] }
-// // extraData={this.state}
-// keyExtractor={ (item) => item.id }
-// renderItem={ this._renderItem }
-// />
-
 
 export default ProfileScreen;
 
@@ -249,35 +187,3 @@ export const styles = StyleSheet.create({
     color: 'blue',
   }
 });
-
-
-// <Button
-// style={styles.button}
-//   onPress={ () => onSignOut().then(() => this.props.navigation.navigate('SignedOut'))}
-//   title='Sign Out'
-// > </Button>
-// <Button
-// style={styles.button}
-// onPress={() => console.log('put function here to switch current child')}
-//   title='Switch Child Profile'
-// ></Button>
-
-
-// this.state= {
-//   children: [{
-//     // id: ,
-//     name: 'May',
-//     class: 'Room 24',
-//     teacher: 'Ms. Lee',
-//     contact: '415-213-9024',
-//     image_url: 'https://www.security-camera-warehouse.com/images/profile.png'
-//   }, {
-//     // id: ,
-//     name: 'April',
-//     class: 'Room 9',
-//     teacher: 'Mr. Z',
-//     contact: '415-213-9009',
-//     image_url: 'https://www.security-camera-warehouse.com/images/profile.png'
-//   }],
-//   currentChild: null
-// }
