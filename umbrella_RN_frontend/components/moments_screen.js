@@ -36,23 +36,30 @@ class MomentsScreen extends React.Component {
     });
   }
 
-  _onRefresh() {
-    this.setState({refreshing: true});
+  _fetch(type) {
+    // this.setState({refreshing: true});
     AsyncStorage.getItem('token').then((returntoken) => {
       //is current user is teacher
       if(this.props.currentUser.teacher_class){
-        this.props.fetchNewMoments(this.props.moments[0].id, 'user',returntoken)
+        this.props.fetchMoments(type,this.props.moments[0].id, 'user',returntoken)
         .then(() => {
           this.setState({refreshing: false});
         });
       }else{//current user is parent
-        this.props.fetchNewMoments(this.props.moments[0].id, `children/${this.props.currentChild.id}`, returntoken)
+        this.props.fetchMoments(type,this.props.moments[0].id, `children/${this.props.currentChild.id}`, returntoken)
         .then(() => {
           this.setState({refreshing: false});
         });
       }
     })
   }
+
+  // _onEndReached(){
+  //   // this.setState({refreshing})
+  //   AsyncStorage.getItem('token').then((returntoken) => {
+  //
+  //   }
+  // }
 
   render() {
     console.log(this.props)
@@ -63,8 +70,9 @@ class MomentsScreen extends React.Component {
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
-            onRefresh={this._onRefresh.bind(this)}
+            onRefresh={ () => this._fetch('new')}
           />}
+        onEndReached={ () => this._fetch('more') }
       >
         <Text style={styles.moments}>
           This is the Moments screen.
