@@ -34,6 +34,7 @@ class ProfileScreen extends React.Component {
     // }
   }
 
+<<<<<<< HEAD
 
   componentWillMount() {
     console.log('will mount props: ', this.props);
@@ -48,6 +49,12 @@ class ProfileScreen extends React.Component {
     console.log('will receive props: ', this.props);
     // console.log(this.props.teacher);
   }
+=======
+  // componentWillReceiveProps(newProps) {
+  //   console.log('new props',newProps});
+  //
+  // }
+>>>>>>> master
 
   // fetchData = async () => {
   //   const response = await fetch('/api/user')
@@ -147,23 +154,12 @@ class ProfileScreen extends React.Component {
   }
 
   render() {
-    // const destTeacherName = { teacherName }
-    const currentTeacher = this.props.teacher
-    // console.log(this.showprops(this.props.teacher, 'teacher'));
-    console.log('profile screen propssssss: ', this.props);
-    // console.log('teacher name: ', destTeacherName.name);
-    // console.log('profile screen props: ', this.props);
-    // console.log('teacher render: ', {currentTeacher})
-  // console.log('teacher render typeof: ', typeof {currentTeacher})
-    // debugger
-      return (
-        <View style={styles.profileScreen}>
-
-        <View>
-        { this._renderItem({ currentTeacher })}
-        </View>
-
-        { this._renderSwitchChildren() }
+    console.log('profile screen props',this.props);
+    console.log('teacher',this.props.teacher.name);
+    return (
+      <View style={styles.profileScreen}>
+        <FlatList
+        >Test</FlatList>
         { this._renderLogOutButton() }
         </View>
 

@@ -13,7 +13,7 @@ export const loginUser = ({ email, password }) => {
     dispatch({
       type: 'LOAD_SPINNER'
     });
-    fetch('http://localhost:3000/token', {
+    fetch('https://umbrella-server.herokuapp.com/token', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -47,7 +47,7 @@ export const loginUser = ({ email, password }) => {
 };
 //
 export const logoutUser = (token) => (dispatch) => (
-  fetch('http://localhost:3000/api/session', {
+  fetch('https://umbrella-server.herokuapp.com/api/session', {
     method: 'DELETE',
     headers: { 'Authorization': token }
   }).then(()=>{
