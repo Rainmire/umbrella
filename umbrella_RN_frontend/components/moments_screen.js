@@ -4,7 +4,9 @@ import { StyleSheet,
          Text,
          Button,
          AsyncStorage,
-         ScrollView } from 'react-native';
+         ScrollView,
+         RefreshControl
+        } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -16,16 +18,47 @@ class MomentsScreen extends React.Component {
     )
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      refreshing: false,
+    };
+  }
+
+  _onRefresh() {
+    this.setState({refreshing: true});
+    AsyncStorage.getItem('token').then((returntoken) => {
+      //is current user is teacher
+      if(this.props.currentUser.teacher_class){
+        this.fetchNewMomentsForTeacher(this.moments[0].id,returntoken)
+        .then(() => {
+          this.setState({refreshing: false});
+        });
+      }else{//current user is parent
+        this.fetchNewMomentsForChild(this.moments[0].id, this.props.currentChild.id, returntoken)
+        .then(() => {
+          this.setState({refreshing: false});
+        });
+      }
+    })
+  }
+
   render() {
     console.log(this.props)
     return (
-      <View>
+      <ScrollView
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh.bind(this)}
+          />}
+      >
         <Text style={styles.moments}>
           This is the Moments screen.
           This will display an index of messages to the user, posted by the teachers/ admin.
         </Text>
 
-      </View>
+      </ScrollView>
     );
   }
 }
