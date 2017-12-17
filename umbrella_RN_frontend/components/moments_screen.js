@@ -4,7 +4,7 @@ import { StyleSheet,
          Text,
          Button,
          AsyncStorage,
-         ScrollView,
+         ListView,
          TouchableOpacity,
          RefreshControl
         } from 'react-native';
@@ -61,22 +61,35 @@ class MomentsScreen extends React.Component {
 
   constructor(props) {
     super(props);
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
+      dataSource: ds.cloneWithRows(['row 1', 'row 2']),
       refreshing: false,
     };
   }
 
-  _onRefresh() {
+  componentWillMount(){
+    this.setState({refreshing: true});
+    AsyncStorage.getItem('token').then((returntoken)=> {
+      if(returntoken){
+        this.props.fetchCurrentUser(returntoken);
+      }
+    }).then(()=>{
+      this.setState({refreshing: false});
+    });
+  }
+
+  _fetch(type) {
     this.setState({refreshing: true});
     AsyncStorage.getItem('token').then((returntoken) => {
       //is current user is teacher
       if(this.props.currentUser.teacher_class){
-        this.props.fetchNewMomentsForTeacher(this.props.moments[0].id,returntoken)
+        this.props.fetchMoments(type,this.props.moments[0].id, 'user',returntoken)
         .then(() => {
           this.setState({refreshing: false});
         });
       }else{//current user is parent
-        this.props.fetchNewMomentsForChild(this.props.moments[0].id, this.props.currentChild.id, returntoken)
+        this.props.fetchMoments(type,this.props.moments[0].id, `children/${this.props.currentChild.id}`, returntoken)
         .then(() => {
           this.setState({refreshing: false});
         });
@@ -86,13 +99,19 @@ class MomentsScreen extends React.Component {
 
   render() {
     return (
-      <ScrollView
-        style={styles.moments_container}
+      <ListView
+        dataSource = {this.state.dataSource}
+        renderRow = {(rowData) => <Text>{rowData}</Text>}
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
-            onRefresh={this._onRefresh.bind(this)}
+            onRefresh={ () => this._fetch('new')}
           />}
+        onEndReached={ () =>{
+          if(this.props.moments.length > 10){
+            this._fetch('more')
+          }
+        }}
       >
       {this._addMomentButton()}
         <Text style={styles.moments}>
@@ -100,7 +119,7 @@ class MomentsScreen extends React.Component {
           This will display an index of messages to the user, posted by the teachers/ admin.
         </Text>
 
-      </ScrollView>
+      </ListView>
     );
   }
 }

@@ -17,26 +17,13 @@ export const receiveNewMoments = (moments) => ({
   moments
 });
 
-export const fetchNewMomentsForTeacher = (firstMomentId,token) => dispatch => {
-  // fetch(`https://umbrella-server.herokuapp.com/api/user/new_moments/${firstMomentId}`, {
-  fetch(`http://localhost:3000/api/user/new_moments/${firstMomentId}`,{
-    method: 'GET',
-    headers: { 'Authorization': token }
-  }).then(({_bodyInit}) => {
-    const response = JSON.parse(_bodyInit);
-    console.log(response);
-    dispatch(receiveNewMoments(response.moments));
-  });
-};
-
-export const fetchNewMomentsForChild = (firstMomentId,childId,token) => dispatch => {
+export const fetchMoments = (type,MomentId,who,token) => dispatch => (
   // fetch(`https://umbrella-server.herokuapp.com/api/children/${childId}/new_moments/${firstMomentId}`, {
-  fetch(`http://localhost:3000/api/children/${childId}/new_moments/${firstMomentId}`,{
+  fetch(`http://localhost:3000/api/${who}/${type}_moments/${MomentId}`,{
     method: 'GET',
     headers: { 'Authorization': token }
   }).then(({_bodyInit}) => {
-    const response = JSON.parse(_bodyInit);
-    console.log(response);
-    dispatch(receiveNewMoments(response.moments));
-  });
-};
+    console.log("hi");
+    return dispatch(receiveNewMoments(JSON.parse(_bodyInit).moments));
+  })
+);
