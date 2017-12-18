@@ -78,12 +78,14 @@ class MomentsScreen extends React.Component {
       if(returntoken){
         this.props.fetchCurrentUser(returntoken);
       }
-    }).then(()=>{
-      if (this.props.currentUser && this.props.currentUser.teacher_class) {
-        this.setState({ isTeacher: true});
-      }
-      this.setState({refreshing: false});
-    });
+    }).then(()=> this.setState({refreshing: false}));
+  }
+
+  componentWillReceiveProps() {
+    if (this.props.currentUser && this.props.currentUser.teacher_class) {
+      this.setState({ isTeacher: true});
+      console.log('hit the will update')
+    }
   }
 
   _fetch(type) {

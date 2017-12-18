@@ -19,13 +19,23 @@ import navigateAction from '../navigation/router';
 class ProfileScreen extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      isTeacher: false
+    };
   }
-  
+
   static navigationOptions = {
     tabBarLabel: 'Profile',
     tabBarIcon: ({ tintColor }) => (
       <Icon name="user" size={30} color="#00F" />
     )
+  }
+
+  componentWillReceiveProps() {
+    if (this.props.currentUser && this.props.currentUser.teacher_class) {
+      this.setState({ isTeacher: true });
+    }
   }
 
   handleSignout(){
@@ -96,17 +106,30 @@ class ProfileScreen extends React.Component {
   }
 
   render() {
-    return (
-      <View style={styles.profileScreen}>
-      <FlatList
+
+    if (!this.state.isTeacher) {
+      return (
+        <View style={styles.profileScreen}>
+        <FlatList
         data={ [this.props] }
         keyExtractor={ (item) => item.currentChild.id }
         renderItem={ this._renderItem }
-      />
+        />
         { this._renderSwitchChildren() }
         { this._renderLogOutButton() }
-      </View>
-    );
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.profileScreen}>
+          <Image
+            source={{ uri: `${this.props.currentUser.profile_pic}` }}
+            style={styles.photo}
+            />
+          { this._renderLogOutButton() }
+        </View>
+      )
+    }
   }
 }
 
