@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171217054823) do
+ActiveRecord::Schema.define(version: 20171218013111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "child_moment_memberships", force: :cascade do |t|
+    t.integer "child_id", null: false
+    t.integer "moment_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["child_id"], name: "index_child_moment_memberships_on_child_id"
+    t.index ["moment_id"], name: "index_child_moment_memberships_on_moment_id"
+  end
 
   create_table "children", force: :cascade do |t|
     t.string "name", null: false

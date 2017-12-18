@@ -11,6 +11,9 @@ class Child < ApplicationRecord
   primary_key: :id,
   foreign_key: :teacher_id
 
-  has_many :moments
-  
+  has_many :child_moment_memberships
+
+  has_many :moments,
+  through: :child_moment_memberships
+
 end
