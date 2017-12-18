@@ -24,12 +24,12 @@ children = Child.create([
   ])
 
 moments = Moment.create([
-  { body: 'Moment1', author_id: 4, child_id: 1, is_public: false },
-  { body: 'Moment2', author_id: 4, child_id: 1, is_public: false },
-  { body: 'Moment3', author_id: 4, child_id: 2, is_public: false },
-  { body: 'Moment4', author_id: 4, child_id: 2, is_public: false },
-  { body: 'Moment5', author_id: 4, child_id: 3, is_public: false },
-  { body: 'Moment6', author_id: 4, child_id: 3, is_public: false },
+  { body: 'Moment1', author_id: 4, is_public: false },
+  { body: 'Moment2', author_id: 4, is_public: false },
+  { body: 'Moment3', author_id: 4, is_public: false },
+  { body: 'Moment4', author_id: 4, is_public: false },
+  { body: 'Moment5', author_id: 4, is_public: false },
+  { body: 'Moment6', author_id: 4, is_public: false },
   ])
 
 moments.each.with_index do |moment, idx|

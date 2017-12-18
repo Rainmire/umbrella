@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       get 'more_moments/:id', to: 'moments#more_moments'
     end
 
-    # resources :moments, only: [:index]
+    resources :moments, only: [:create]
   end
 
   get 'auth/:provider/callback', to: 'api/sessions#create'
