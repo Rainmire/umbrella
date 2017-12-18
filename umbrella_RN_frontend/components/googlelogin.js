@@ -40,20 +40,27 @@ export default class GoogleLogin extends Component {
     const { navigate } = this.props.navigation;
     const { dispatch } = this.props.navigation;
 
-    const token = url.slice(11);
-    AsyncStorage.setItem('token', token);
+    const oauthtoken = url.slice(11);
+    fetch('http://localhost:3000/api/session/fetch_jwt', {
 
-    AsyncStorage.getItem('token').then((returntoken)=> {
-      this.props.fetchCurrentUser(returntoken);
-    })
-    .then( () => {
-      dispatch({
-        type:'Navigation/RESET',
-        actions: [{
-          type: 'Navigate',
-          routeName: 'SignedIn'
-        }],
-        index: 0
+      method: 'GET',
+      headers: { 'oauth_token': oauthtoken }
+    }).then(({_bodyInit}) => {
+      const JWTtoken = JSON.parse(_bodyInit);
+      AsyncStorage.setItem('token', JWTtoken.auth_token);
+
+      AsyncStorage.getItem('token').then((returntoken)=> {
+        this.props.fetchCurrentUser(returntoken);
+      })
+      .then( () => {
+        dispatch({
+          type:'Navigation/RESET',
+          actions: [{
+            type: 'Navigate',
+            routeName: 'SignedIn'
+          }],
+          index: 0
+        });
       });
     });
 
