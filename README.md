@@ -4,7 +4,7 @@
 
 Umbrella is a mobile application that facilitates communication between parents and teachers.
 
-In the modern day and age, parents face the increasingly difficult challenge of balancing work with personal life. Our vision is to create a service which helps busy parents keep track of their children's everyday moments and milestones and converse with teachers. In doing so, we hope to employ cutting-edge technologies in mobile development in order to bring families closer together.
+In the modern day and age, parents face the increasingly difficult challenge of balancing work with personal life. Our vision is to create a service which helps busy parents keep track of their children's everyday activities as well as offer teachers a platform to express their creativity. In doing so, we hope to employ cutting-edge technologies in mobile development in order to make education an exciting and memorable adventure.
 
 Umbrella consists of 4 key components that work together to securely connect parents and teachers.
 
@@ -15,7 +15,21 @@ Umbrella consists of 4 key components that work together to securely connect par
 
 ## Moments
 
-The key feature of Umbrella is the Moments component. Using moments, teachers can post live updates about their class, which parents can see immediately. Teachers can assign moments to particular children in their class and selectively notify only the parents of those children. Parents with multiple are able to switch between their children and fetch the corresponding moments.
+The key feature of Umbrella is the Moments component. Moments allow parents to keep up to date with their children's activities
+
+**Teacher Functionality**
+
+Using moments, teachers can post live updates about their class, which parents can see immediately. Teachers can assign moments to particular children in their class and selectively notify only the parents of those children.
+
+INSERT GIF HERE
+
+**Dynamic Loading**
+
+Umbrella offers fast and responsive rendering by loading only the moments that it needs.
+
+INSERT GIF HERE
+
+
 
 ## Google Authentication
 
