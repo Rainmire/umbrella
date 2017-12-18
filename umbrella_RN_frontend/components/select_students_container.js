@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import MomentsForm from './moments_form';
+import SelectStudents from './select_students';
 
 const mapSTPs = ({entities}) => ({
   students: entities.children
@@ -9,4 +9,4 @@ const mapDTPs = (dispatch) => ({
 
 });
 
-export default connect(mapSTPs, mapDTPs)(MomentsForm);
+export default connect(mapSTPs, mapDTPs)(SelectStudents);
