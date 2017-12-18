@@ -7,7 +7,8 @@ import ProfileContainer from '../components/profile_container';
 import MomentsContainer from '../components/moments_container';
 import CalendarScreen from '../components/calendar_screen';
 import MessageScreen from '../components/message_screen';
-import SwitchChildScreen from '../components/switch_child_screen';
+import SwitchChildContainer from '../components/switch_child_container';
+import MomentForm from '../components/moment_form';
 
 export const createRootNavigator = (signedIn = false) => {
   return StackNavigator(
@@ -35,6 +36,7 @@ export const createRootNavigator = (signedIn = false) => {
   );
 };
 
+// switch all screens to containers once containers done
 // SignedIn
 const HomeNavigator = TabNavigator({
   MomentsScreen: {
@@ -58,7 +60,7 @@ const HomeNavigator = TabNavigator({
   },
 });
 
-// look into screenProps to pass props
+// switch all screens to containers once containers done
 export const SignedInScreen = StackNavigator({
   Home: {
     screen: HomeNavigator,
@@ -67,8 +69,11 @@ export const SignedInScreen = StackNavigator({
     }
   },
   SwitchChild: {
-    screen: SwitchChildScreen,
+    screen: SwitchChildContainer,
   },
+  MomentForm: {
+    screen: MomentForm,
+  }
 });
 
 // export const SignedOutScreen = StackNavigator({

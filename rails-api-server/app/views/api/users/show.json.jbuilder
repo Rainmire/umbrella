@@ -3,7 +3,7 @@ json.current_user_id @user.id
 json.users do
   @users.each do |user|
     json.set! user.id do
-      json.extract! user, :name, :profile_pic, :teacher_class
+      json.extract! user, :name, :profile_pic, :teacher_class, :contact
     end
   end
 end
