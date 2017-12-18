@@ -25,9 +25,12 @@ INSERT GIF HERE
 
 **Dynamic Loading**
 
-Umbrella offers fast and responsive rendering by loading only the moments that it needs.
+Umbrella offers fast and responsive rendering by loading only the moments that it needs. Users can pull down the top of the page to reload the latest moments. To load older moments, users simply scroll to the bottom of the page and Umbrella will fetch more data as needed.
 
 INSERT GIF HERE
+
+## User Profile
+
 
 
 

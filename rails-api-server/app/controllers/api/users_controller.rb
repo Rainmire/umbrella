@@ -8,11 +8,11 @@ class Api::UsersController < ApplicationController
     if user.teacher_class
       other_users = user.parents
       @children = user.students
-      @moments = user.authored_moments
+      @moments = user.authored_moments.order(created_at: :desc).limit(10)
     else
       other_users = user.teachers.distinct
       @children = user.children
-      @moments = user.children.first.moments
+      @moments = user.children.first.moments.order(created_at: :desc).limit(10)
     end
     @users = other_users.to_a.push(user)
     render 'api/users/show'
