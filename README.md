@@ -15,7 +15,7 @@ Umbrella consists of 4 key components that work together to securely connect par
 
 ## Moments
 
-The key feature of Umbrella is the Moments component. Using moments, teachers can post live updates on their class.
+The key feature of Umbrella is the Moments component. Using moments, teachers can post live updates about their class, which parents can see immediately. Teachers can assign moments to particular children in their class and selectively notify only the parents of those children. Parents with multiple are able to switch between their children and fetch the corresponding moments.
 
 ## Google Authentication
 
