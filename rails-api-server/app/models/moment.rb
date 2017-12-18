@@ -1,5 +1,5 @@
 class Moment < ApplicationRecord
-  validates :body, :author_id, :child_id, :is_public, presence: true
+  validates :body, :author_id, :is_public, presence: true
 
   after_initialize :set_private
 
@@ -7,7 +7,10 @@ class Moment < ApplicationRecord
   class_name: :User,
   foreign_key: :author_id
 
-  belongs_to :child
+  has_many :child_moment_memberships
+
+  has_many :children,
+  through: :child_moment_memberships
 
   def set_private
     self.is_public = false unless self.is_public

@@ -3,25 +3,20 @@ class Api::UsersController < ApplicationController
   before_action :authenticate_request!
 
   def show
-    @user = @current_user
-    if @user
-      # @moments = @user.moments.order(:created_at)
-      if @user.teacher_class
-        other_users = @user.parents
-        @children = @user.students
-        @moments = @user.authored_moments
-      else
-        other_users = @user.teachers.distinct
-        @children = @user.children
-        @moments = @user.children.first.moments
-      end
-      @users = other_users.to_a.push(@user)
-      render 'api/users/show'
-    else
-      render json: ["Not logged in"], status: 401
-    end
-  end
+    user = @current_user
 
+    if user.teacher_class
+      other_users = user.parents
+      @children = user.students
+      @moments = user.authored_moments.order(created_at: :desc).limit(10)
+    else
+      other_users = user.teachers.distinct
+      @children = user.children
+      @moments = user.children.first.moments.order(created_at: :desc).limit(10)
+    end
+    @users = other_users.to_a.push(user)
+    render 'api/users/show'
+  end
 end
 
 
