@@ -22,7 +22,6 @@ export const fetchChildInfo = (childId,token) => (dispatch) => {
     headers: { 'Authorization': token }
   }).then(({_bodyInit}) => {
     const response = JSON.parse(_bodyInit);
-    console.log(response);
     dispatch(receiveMoments(response.moments));
   });
 };
