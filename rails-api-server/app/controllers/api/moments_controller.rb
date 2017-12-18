@@ -1,4 +1,5 @@
 class Api::MomentsController < ApplicationController
+  before_action :authenticate_request!
 
   # def index
   #   # @user = current_user
@@ -27,7 +28,7 @@ class Api::MomentsController < ApplicationController
   # end
 
   def new_moments
-    user = current_user
+    user = @current_user
     if !user
       render json: ["Not logged in"], status: 401
     end
@@ -44,7 +45,7 @@ class Api::MomentsController < ApplicationController
   end
 
   def more_moments
-    user = current_user
+    user = @current_user
     if !user
       render json: ["Not logged in"], status: 401
     end
