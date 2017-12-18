@@ -15,44 +15,60 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 class MomentForm extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       body: 'This is the body of the moment',
-      moment_image: ''
+      momentImage: '',
+      studentsStatus: {}
     };
-  };
+    this.selectedStudents = this.selectedStudents.bind(this);
+  }
+
+  selectedStudents(){
+    return this.state.studentsStatus;
+  }
+
+  componentWillReceiveProps(newProps){
+    let stus = {};
+    newProps.students.forEach((student)=>{
+      stus[student.id] = false;
+    });
+    this.setState({studentsStatus:stus});
+  }
 
   // static navigationOptions = {
   //
   // };
 
 //look at state for props needed
-  _renderForm = () => (
-    <View>
+  _renderForm() {
+    return (
+      <View>
       <TextInput
-        multiline={ true }
-        numberOfLines = { 4 }
-        onChangeText={ (text) => this.setState({text})}
-        value={this.state.body}
-        />
+      multiline={ true }
+      numberOfLines = { 4 }
+      onChangeText={ (text) => this.setState({text})}
+      value={this.state.body}
+      />
 
       <TouchableOpacity
-        onPress={console.log('open the camera/ camera roll, set state')} >
-          <Icon name='camera' size={20} color='#000' />
+      onPress={console.log('open the camera/ camera roll, set state')} >
+      <Icon name='camera' size={20} color='#000' />
       </TouchableOpacity>
 
       <View>
-        <TouchableOpacity onPress={console.log('function for selecting which users can see')}>
-          <Text>Select Recipient </Text>
-          <Icon name='angle-right' size={15} color='#000'/>
-        </TouchableOpacity>
+      <TouchableOpacity onPress={this.selectedStudents}>
+      <Text>Select Recipient </Text>
+      <Icon name='angle-right' size={15} color='#000'/>
+      </TouchableOpacity>
       </View>
 
       <TouchableOpacity onPress={console.log('function for submitting form')}>
-        <Text>Submit</Text>
+      <Text>Submit</Text>
       </TouchableOpacity>
-    </View>
-  )
+      </View>
+    );
+  }
 
   render() {
     return (

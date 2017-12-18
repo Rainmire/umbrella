@@ -1,10 +1,12 @@
-#Umbrella
+# Umbrella
 
 ## Background & Overview
 
 Umbrella is a mobile application that facilitates communication between parents and teachers.
 
 In the modern day and age, parents face the increasingly difficult challenge of balancing work with personal life. Our vision is to create a service which helps busy parents keep track of their children's everyday activities as well as offer teachers a platform to express their creativity. In doing so, we hope to employ cutting-edge technologies in mobile development in order to make education an exciting and memorable adventure.
+
+<a href = "https://media.giphy.com/media/3ohs7WLBM4GUQkDt4c/giphy.gif"></a>
 
 Umbrella consists of 4 key components that work together to securely connect parents and teachers.
 
@@ -21,13 +23,11 @@ The key feature of Umbrella is the Moments component. Moments allow parents to k
 
 Using moments, teachers can post live updates about their class, which parents can see immediately. Teachers can assign moments to particular children in their class and selectively notify only the parents of those children.
 
-INSERT GIF HERE
 
 **Dynamic Loading**
 
 Umbrella offers fast and responsive rendering by loading only the moments that it needs. Users can pull down the top of the page to reload the latest moments. To load older moments, users simply scroll to the bottom of the page and Umbrella will fetch more data as needed.
 
-INSERT GIF HERE
 
 ## User Profile
 
@@ -40,7 +40,6 @@ The privacy and security of our users is of utmost importance to us. That's why 
 
 Users can sign in to Umbrella using their Google+ account by tapping the "Sign in with Google" button.
 
-IMAGE OF GOOGLE BUTTON
 
 It's easy, simple, and secure. Umbrella will never have access to the user's Google account. Instead, Google will verify the user's credentials and tell Umbrella to log you in.
 
