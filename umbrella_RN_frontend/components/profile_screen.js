@@ -19,7 +19,10 @@ import navigateAction from '../navigation/router';
 class ProfileScreen extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
+
+    this.state = {
+      isTeacher: false
+    };
   }
 
   static navigationOptions = {
@@ -29,18 +32,11 @@ class ProfileScreen extends React.Component {
     )
   }
 
-  // componentWillReceiveProps(newProps) {
-  //   console.log('new props',newProps});
-  //
-  // }
-
-  // fetchData = async () => {
-  //   const response = await fetch('/api/user')
-  //     .then(e => console.error(e));
-  //   const json = response.json();
-  //   this.setState({ children: json.results });
-  // }
-
+  componentWillReceiveProps() {
+    if (this.props.currentUser && this.props.currentUser.teacher_class) {
+      this.setState({ isTeacher: true });
+    }
+  }
 
   handleSignout(){
     return ()=>{
@@ -51,16 +47,14 @@ class ProfileScreen extends React.Component {
         });
       });
     }
-
   }
 
   _switchChild = () => (
-    this.props.navigation.navigate('SwitchChild') //{children: this.state.children}
+    this.props.navigation.navigate('SwitchChild')
   )
 
-
   _renderSwitchChildren = () => {
-    if (this.state.children.length > 1) {
+    if (this.props.children.length > 1) {
       return (
         <TouchableOpacity
           onPress={this._switchChild}
@@ -85,44 +79,59 @@ class ProfileScreen extends React.Component {
   )
 
 
-  _renderItem = ({ item }) => (
-    <View style={styles.profileScreen}>
-      <View>
-        <Image
-          source={{ uri: `${item.image_url}` }}
-          style={styles.photo}
-          />
-      </View>
-      <View style={styles.childInfoContainer}>
-        <View style={styles.childInfo1}>
-          <Text style={styles.text}>Name:   {`${item.name}`}</Text>
-          <Text style={styles.text}>Class:   {`${item.class}`}</Text>
+  _renderItem = ( { item } ) => {
+   let currentChild = item.currentChild;
+   let teacher = item.teacher;
+
+    return(
+      <View style={styles.profileScreen}>
+        <View>
+          <Image
+            source={{ uri: 'http://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513189131/cat3_wx4tns.jpg' }}
+            style={styles.photo}
+            />
         </View>
-        <View style={styles.childInfo2}>
-          <Text style={styles.text}>Main Teacher:   {`${item.teacher}`}</Text>
-          <Text style={styles.text}>Contact:   {`${item.contact}`}</Text>
+        <View style={styles.childInfoContainer}>
+          <View style={styles.childInfo1}>
+            <Text style={styles.text}>Name:   {`${currentChild.name}`}</Text>
+            <Text style={styles.text}>Class:   {`${teacher.teacher_class}`}</Text>
+          </View>
+          <View style={styles.childInfo2}>
+            <Text style={styles.text}>Main Teacher:   {`${teacher.name}`}</Text>
+            <Text style={styles.text}>Contact:   {`${teacher.contact}`}</Text>
+          </View>
         </View>
       </View>
-    </View>
-  )
+    )
+  }
 
   render() {
-    console.log('profile screen props',this.props);
-    console.log('teacher',this.props.teacher.name);
-    return (
-      <View style={styles.profileScreen}>
-        <FlatList
-        >Test</FlatList>
-        { this._renderLogOutButton() }
-      </View>
-    );
+
+    if (!this.state.isTeacher) {
+      return (
+        <View style={styles.profileScreen}>
+          <FlatList
+            data={ [this.props] }
+            keyExtractor={ (item) => item.currentChild.id }
+            renderItem={ this._renderItem }
+          />
+          { this._renderSwitchChildren() }
+          { this._renderLogOutButton() }
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.profileScreen}>
+          <Image
+            source={{ uri: `${this.props.currentUser.profile_pic}` }}
+            style={styles.photo}
+            />
+          { this._renderLogOutButton() }
+        </View>
+      )
+    }
   }
 }
-// { this._renderSwitchChildren() }
-// data={ this.props.currentChild }
-// keyExtractor={(x, i) => i }
-// renderItem={ this._renderItem }
-
 
 export default ProfileScreen;
 
@@ -131,7 +140,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    // paddingTop: 50,
+    paddingTop: 50,
   },
   childInfoContainer: {
     shadowColor: '#000',
@@ -163,13 +172,13 @@ export const styles = StyleSheet.create({
     borderRadius: 75,
   },
   buttonContainer: {
-    height: 130,
+    height: 100,
     width: 300,
     flex: 1,
     flexDirection: 'column',
   },
   profileButton: {
-    height: 60,
+    height: 50,
     width: 300,
     flex: 1,
     flexDirection: 'row',
@@ -181,7 +190,7 @@ export const styles = StyleSheet.create({
     paddingRight: 20
   },
   logOutButton: {
-    height: 60,
+    height: 20,
     width: 300,
     flex: 1,
     alignItems: 'center',
@@ -201,35 +210,3 @@ export const styles = StyleSheet.create({
     color: 'blue',
   }
 });
-
-
-// <Button
-// style={styles.button}
-//   onPress={ () => onSignOut().then(() => this.props.navigation.navigate('SignedOut'))}
-//   title='Sign Out'
-// > </Button>
-// <Button
-// style={styles.button}
-// onPress={() => console.log('put function here to switch current child')}
-//   title='Switch Child Profile'
-// ></Button>
-
-
-// this.state= {
-//   children: [{
-//     // id: ,
-//     name: 'May',
-//     class: 'Room 24',
-//     teacher: 'Ms. Lee',
-//     contact: '415-213-9024',
-//     image_url: 'https://www.security-camera-warehouse.com/images/profile.png'
-//   }, {
-//     // id: ,
-//     name: 'April',
-//     class: 'Room 9',
-//     teacher: 'Mr. Z',
-//     contact: '415-213-9009',
-//     image_url: 'https://www.security-camera-warehouse.com/images/profile.png'
-//   }],
-//   currentChild: null
-// }

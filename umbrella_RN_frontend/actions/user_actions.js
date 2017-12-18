@@ -17,15 +17,15 @@ export const receiveCurrentUser = (user) => ({
 });
 
 export const fetchCurrentUser = (token) => (dispatch) => {
-  fetch('https://umbrella-server.herokuapp.com/api/user', {
-  // return fetch('http://localhost:3000/api/user', {
+  // fetch('https://umbrella-server.herokuapp.com/api/user', {
+  return fetch('http://localhost:3000/api/user', {
 
     method: 'GET',
     headers: { 'Authorization': token }
   }).then(({_bodyInit}) => {
     const response = JSON.parse(_bodyInit);
     console.log(response);
-    
+
     const currentUser = response.users[response.current_user_id];
 
     console.log("is teacher?", Boolean(response.users[response.current_user_id].teacher_class));
