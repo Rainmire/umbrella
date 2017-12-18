@@ -15,12 +15,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 class MomentsScreen extends React.Component {
   constructor(props) {
     super(props);
-    // const ds = new FlatList.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    this.state = {
 
+    this.state = {
       refreshing: false,
       isTeacher: false,
-
     };
   }
 
@@ -64,7 +62,7 @@ class MomentsScreen extends React.Component {
   }
 
   _addMoment = () => (
-    this.props.navigation.navigate('MomentForm')
+    this.props.navigation.navigate('MomentForm', {navigation: this.props.navigation})
   )
 
   _addMomentButton = () => {
@@ -118,9 +116,8 @@ class MomentsScreen extends React.Component {
     })
   }
 
+// once backend fetch for moments is fixed, look at refresh again and fix
   render() {
-  // console.log('moments screen props: ', this.props)
-  // console.log('moments screen props.moments: ', this.props.moments)
 
     return (
       <View>
@@ -133,12 +130,12 @@ class MomentsScreen extends React.Component {
           renderItem={ this._renderItem }
           refreshing={this.state.refreshing}
           // initialNumToRender={ 4 }
-          onRefresh={ () => this._fetch('new')}
-          onEndReached={ () => {
-            if (this.props.moments.length > 10) {
-              this._fetch('more');
-            }
-          }}
+          // onRefresh={ () => this._fetch('new')}
+          // onEndReached={ () => {
+          //   if (this.props.moments.length > 10) {
+          //     this._fetch('more');
+          //   }
+          // }}
         />
       </View>
     );

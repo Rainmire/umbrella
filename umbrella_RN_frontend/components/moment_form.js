@@ -16,6 +16,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 class MomentForm extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       body: '',
       momentImage: '',
@@ -36,9 +37,12 @@ class MomentForm extends React.Component {
     this.setState({studentsStatus:stus});
   }
 
-  // static navigationOptions = {
-  //
-  // };
+//this.props.addMoment(this.state.body).then( () =>
+//this.props.navigation.navigate('MomentsScreen'))
+  _submitMoment = () => (
+    // console.log('submit moment props: ', this.props);
+    this.props.navigation.navigate('MomentsScreen')
+  )
 
 //look at state for props needed
   _renderForm() {
@@ -76,7 +80,7 @@ class MomentForm extends React.Component {
 
         <View style={styles.submitContainer}>
           <TouchableOpacity
-            onPress={console.log('function for submitting form')}
+            onPress={ this._submitMoment}
             style={styles.submit}
           >
             <Text style={styles.submitText}>Submit</Text>
@@ -87,6 +91,7 @@ class MomentForm extends React.Component {
   }
 
   render() {
+    console.log('new moment props: ', this.props);
     return (
       <View>
         {this._renderForm()}
@@ -99,7 +104,7 @@ export default MomentForm;
 
 export const styles = StyleSheet.create({
   newMomentContainer: {
-    // flex: 1,
+
   },
   textInputContainer: {
     height: 150,
