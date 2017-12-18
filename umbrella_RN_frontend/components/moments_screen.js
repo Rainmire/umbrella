@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet,
          View,
          Text,
+         Image,
          Button,
          AsyncStorage,
          FlatList,
@@ -14,11 +15,12 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 class MomentsScreen extends React.Component {
   constructor(props) {
     super(props);
-    // const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    // const ds = new FlatList.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      // dataSource: ds.cloneWithRows(['row 1', 'row 2']),
+
       refreshing: false,
-      isTeacher: false
+      isTeacher: false,
+
     };
   }
 
@@ -32,6 +34,10 @@ class MomentsScreen extends React.Component {
   _renderItem = ({ item }) => {
     const privacy = item.is_public ? 'Public' : 'Private';
     const author = this.props.users[item.author_id];
+    const timeStampSplit = item.created_at.split('T');
+    const dateStamp = timeStampSplit[0];
+    const timeStamp = timeStampSplit[1].split('.')[0];
+    // console.log('this it the item in the render item moments index: ', item);
     return(
       <View style={styles.moments_container}>
         <View style={styles.image_container}>
@@ -47,7 +53,11 @@ class MomentsScreen extends React.Component {
             source={{ uri: "https://www.security-camera-warehouse.com/images/profile.png" }}
             style={styles.moments_image}
           />
-          <Text style={styles.footer_info}>{`${item.created_at}` `${privacy}`}</Text>
+          <View style={styles.footer}>
+            <Text style={styles.footer_info}>{`${dateStamp}`}</Text>
+            <Text style={styles.footer_info}>--{`${timeStamp}`}--</Text>
+            <Text style={styles.footer_info}>{`${privacy}`}</Text>
+          </View>
         </View>
       </View>
     )
@@ -74,12 +84,10 @@ class MomentsScreen extends React.Component {
     }
   }
 
-// not positive if this will work, but I think it should...for rendering the
-// add moment button
-  componentWillMount(){
+  componentDidMount(){
     this.setState({refreshing: true});
     AsyncStorage.getItem('token').then((returntoken)=> {
-      if(this.props.currentUser === undefined && returntoken){
+      if (this.props.currentUser === undefined && returntoken) {
         this.props.fetchCurrentUser(returntoken);
       }
     }).then(()=> this.setState({refreshing: false}));
@@ -95,12 +103,12 @@ class MomentsScreen extends React.Component {
     this.setState({refreshing: true});
     AsyncStorage.getItem('token').then((returntoken) => {
       //is current user is teacher
-      if(true){
+      if (this.state.isTeacher) {
         this.props.fetchMoments(type,this.props.moments[0].id, 'user',returntoken)
-        .then(() => {
-          this.setState({refreshing: false});
-        }).then(() => console.log(this.props));
-      }else{//current user is parent
+          .then(() => {
+            this.setState({refreshing: false});
+        });
+      } else { //current user is parent
         this.props.fetchMoments(type,this.props.moments[0].id, `children/${this.props.currentChild.id}`, returntoken)
         .then(() => {
           this.setState({refreshing: false});
@@ -110,36 +118,27 @@ class MomentsScreen extends React.Component {
   }
 
   render() {
-  console.log('moments screen props: ', this.props)
-  console.log('moments screen props.moments: ', this.props.moments)
+  // console.log('moments screen props: ', this.props)
+  // console.log('moments screen props.moments: ', this.props.moments)
+
     return (
       <View>
         {this._addMomentButton()}
-        <FlatList>
+        <FlatList
+        // inverted
           data={this.props.moments}
           extraData={this.state}
           keyExtractor={ (item) => item.id }
           renderItem={ this._renderItem }
-        </FlatList>
-        <Text>
-        This is some test text
-        This is some test text
-        This is some test text
-        This is some test text
-        This is some test text
-        This is some test text
-        This is some test text
-        This is some test text
-        This is some test text
-        This is some test text
-        This is some test text
-        This is some test text
-        This is some test text
-        This is some test text
-        This is some test text
-        This is some test text
-        This is some test text
-        </Text>
+          refreshing={this.state.refreshing}
+          // initialNumToRender={ 4 }
+          onRefresh={ () => this._fetch('new')}
+          onEndReached={ () => {
+            if (this.props.moments.length > 10) {
+              this._fetch('more');
+            }
+          }}
+        />
       </View>
     );
   }
@@ -190,6 +189,11 @@ export const styles = StyleSheet.create({
   },
   image_container: {
     marginLeft: 15,
+  },
+  footer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   footer_info: {
     fontSize: 12,
