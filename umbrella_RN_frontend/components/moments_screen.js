@@ -69,10 +69,11 @@ class MomentsScreen extends React.Component {
 
   _addMomentButton = () => {
 // change condition to check whether currentUser is teacher
-
-    if (this.state.isTeacher) {
+// this.state.isTeacher
+    if (true) {
       return (
         <View style={styles.addMomentContainer}>
+          <Text style={styles.addMomentText}>Add Moment</Text>
           <TouchableOpacity
             onPress={this._addMoment}
             style={styles.addMoment}
@@ -87,11 +88,7 @@ class MomentsScreen extends React.Component {
   componentDidMount(){
     this.setState({refreshing: true});
     AsyncStorage.getItem('token').then((returntoken)=> {
-<<<<<<< HEAD
-      if(this.props.currentUser === undefined && returntoken){
-=======
       if (this.props.currentUser === undefined && returntoken) {
->>>>>>> 6f05f52a0c834001ae30ea0ae576a7449b626f14
         this.props.fetchCurrentUser(returntoken);
       }
     }).then(()=> this.setState({refreshing: false}));
@@ -204,15 +201,26 @@ export const styles = StyleSheet.create({
     marginTop: 5,
   },
   addMoment: {
-    backgroundColor: 'pink',
+    // backgroundColor: 'pink',
     height: 50,
     width: 50,
     alignItems: 'center',
     justifyContent: 'center',
+    marginRight: 25,
+    marginTop: 10,
+    marginLeft: 50
+
   },
   addMomentContainer: {
-    backgroundColor: 'yellow',
+    // backgroundColor: 'yellow',
     marginTop: 20,
-
+    // flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end'
+  },
+  addMomentText: {
+    justifyContent: 'center',
+    fontSize: 16,
   }
 });

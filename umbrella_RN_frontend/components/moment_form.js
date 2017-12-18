@@ -17,7 +17,7 @@ class MomentForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      body: 'This is the body of the moment',
+      body: '',
       momentImage: '',
       studentsStatus: {}
     };
@@ -43,29 +43,45 @@ class MomentForm extends React.Component {
 //look at state for props needed
   _renderForm() {
     return (
-      <View>
-      <TextInput
-      multiline={ true }
-      numberOfLines = { 4 }
-      onChangeText={ (text) => this.setState({text})}
-      value={this.state.body}
-      />
+      <View style={styles.newMomentContainer} >
+        <View style={styles.textInputContainer}>
+          <TextInput
+          style={styles.textInput}
+            multiline={ true }
+            numberOfLines={4}
+            onChangeText={ (text) => this.setState({body: text})}
+          />
+        </View>
 
-      <TouchableOpacity
-      onPress={console.log('open the camera/ camera roll, set state')} >
-      <Icon name='camera' size={20} color='#000' />
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.addPhoto}
+          onPress={console.log('open the camera/ camera roll, set state')} >
+          <Icon name='camera' size={50} color='#000' />
+        </TouchableOpacity>
 
-      <View>
-      <TouchableOpacity onPress={this.selectedStudents}>
-      <Text>Select Recipient </Text>
-      <Icon name='angle-right' size={15} color='#000'/>
-      </TouchableOpacity>
-      </View>
+        <View >
+          <TouchableOpacity
+            onPress={this.selectedStudents}
+            style={styles.selecteRecipient}
+          >
+            <Text style={styles.selecteRecipientText}>Select Recipient </Text>
+            <Icon
+              name='angle-right'
+              size={30}
+              color='#000'
+              style={styles.arrow}
+            />
+          </TouchableOpacity>
+        </View>
 
-      <TouchableOpacity onPress={console.log('function for submitting form')}>
-      <Text>Submit</Text>
-      </TouchableOpacity>
+        <View style={styles.submitContainer}>
+          <TouchableOpacity
+            onPress={console.log('function for submitting form')}
+            style={styles.submit}
+          >
+            <Text style={styles.submitText}>Submit</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -82,5 +98,48 @@ class MomentForm extends React.Component {
 export default MomentForm;
 
 export const styles = StyleSheet.create({
+  newMomentContainer: {
+    // flex: 1,
+  },
+  textInputContainer: {
+    height: 150,
+  },
+  textInput: {
+    backgroundColor: '#fff',
+    margin: 25,
+    borderWidth: 1,
+    flex: 1,
+  },
+  addPhoto: {
+    margin: 20,
+  },
+  selecteRecipient: {
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 25,
+  },
+  selecteRecipientText: {
+    fontSize: 22,
+  },
+  arrow: {
+    marginLeft: 20,
+  },
+  submitContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  submit: {
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 50,
+    width: 200,
+
+  },
+  submitText: {
+    fontSize: 22,
+  }
 
 });
