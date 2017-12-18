@@ -28,6 +28,17 @@ moments = Moment.create([
   { body: 'Moment4', author_id: 4, child_id: 2, is_public: false },
   { body: 'Moment5', author_id: 4, child_id: 3, is_public: false },
   { body: 'Moment6', author_id: 4, child_id: 3, is_public: false },
+  { body: 'Moment7', author_id: 4, child_id: 3, is_public: false },
+  { body: 'Moment8', author_id: 4, child_id: 3, is_public: false },
+  { body: 'Moment9', author_id: 4, child_id: 3, is_public: false },
+  { body: 'Moment10', author_id: 4, child_id: 3, is_public: false },
+  { body: 'Moment11', author_id: 4, child_id: 3, is_public: false },
+  { body: 'Moment12', author_id: 4, child_id: 3, is_public: false },
+  { body: 'Moment13', author_id: 4, child_id: 3, is_public: false },
+  { body: 'Moment14', author_id: 4, child_id: 3, is_public: false },
+  { body: 'Moment15', author_id: 4, child_id: 3, is_public: false },
+  { body: 'Moment16', author_id: 4, child_id: 3, is_public: false },
+  { body: 'Moment17', author_id: 4, child_id: 3, is_public: false },
   ])
 
 moments.each.with_index do |moment, idx|
