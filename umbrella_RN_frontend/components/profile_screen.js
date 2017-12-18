@@ -87,7 +87,7 @@ class ProfileScreen extends React.Component {
       <View style={styles.profileScreen}>
         <View>
           <Image
-            source={{ uri: `${currentChild.profile_pic}` }}
+            source={{ uri: 'http://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513189131/cat3_wx4tns.jpg' }}
             style={styles.photo}
             />
         </View>
@@ -110,13 +110,13 @@ class ProfileScreen extends React.Component {
     if (!this.state.isTeacher) {
       return (
         <View style={styles.profileScreen}>
-        <FlatList
-        data={ [this.props] }
-        keyExtractor={ (item) => item.currentChild.id }
-        renderItem={ this._renderItem }
-        />
-        { this._renderSwitchChildren() }
-        { this._renderLogOutButton() }
+          <FlatList
+            data={ [this.props] }
+            keyExtractor={ (item) => item.currentChild.id }
+            renderItem={ this._renderItem }
+          />
+          { this._renderSwitchChildren() }
+          { this._renderLogOutButton() }
         </View>
       );
     } else {

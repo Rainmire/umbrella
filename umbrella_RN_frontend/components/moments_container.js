@@ -6,7 +6,8 @@ import Moments from './moments_screen';
 const mapSTPs = ({entities, session}) => ({
   currentChild: entities.currentChild,
   currentUser: session.currentUser,
-  moments: entities.moments
+  moments: entities.moments,
+  users: entities.users
 });
 
 const mapDTPs = dispatch => ({

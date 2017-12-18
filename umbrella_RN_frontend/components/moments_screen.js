@@ -4,7 +4,7 @@ import { StyleSheet,
          Text,
          Button,
          AsyncStorage,
-         ListView,
+         FlatList,
          TouchableOpacity,
          RefreshControl
         } from 'react-native';
@@ -14,9 +14,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 class MomentsScreen extends React.Component {
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    // const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(['row 1', 'row 2']),
+      // dataSource: ds.cloneWithRows(['row 1', 'row 2']),
       refreshing: false,
       isTeacher: false
     };
@@ -29,25 +29,29 @@ class MomentsScreen extends React.Component {
     )
   };
 
-  _renderItem = () => (
-    <View style={styles.moments_container}>
-      <View style={styles.image_container}>
-        <Image
-          source={{ uri: "https://www.security-camera-warehouse.com/images/profile.png" }}
-          style={styles.profile_pic}
-        />
+  _renderItem = ({ item }) => {
+    const privacy = item.is_public ? 'Public' : 'Private';
+    const author = this.props.users[item.author_id];
+    return(
+      <View style={styles.moments_container}>
+        <View style={styles.image_container}>
+          <Image
+            source={{ uri: "https://www.security-camera-warehouse.com/images/profile.png" }}
+            style={styles.profile_pic}
+          />
+        </View>
+        <View style={styles.moment}>
+          <Text style={styles.name}>{`${author.name}`}</Text>
+          <Text style={styles.moment_body}>{`${item.body}`}</Text>
+          <Image
+            source={{ uri: "https://www.security-camera-warehouse.com/images/profile.png" }}
+            style={styles.moments_image}
+          />
+          <Text style={styles.footer_info}>{`${item.created_at}` `${privacy}`}</Text>
+        </View>
       </View>
-      <View style={styles.moment}>
-        <Text style={styles.name}>Ms. Teacher</Text>
-        <Text style={styles.moment_body}>This is the moment body.</Text>
-        <Image
-          source={{ uri: "https://www.security-camera-warehouse.com/images/profile.png" }}
-          style={styles.moments_image}
-        />
-        <Text style={styles.footer_info}>timestamp & privacy</Text>
-      </View>
-    </View>
-  )
+    )
+  }
 
   _addMoment = () => (
     this.props.navigation.navigate('MomentForm')
@@ -84,7 +88,6 @@ class MomentsScreen extends React.Component {
   componentWillReceiveProps() {
     if (this.props.currentUser && this.props.currentUser.teacher_class) {
       this.setState({ isTeacher: true});
-      console.log('hit the will update')
     }
   }
 
@@ -96,7 +99,7 @@ class MomentsScreen extends React.Component {
         this.props.fetchMoments(type,this.props.moments[0].id, 'user',returntoken)
         .then(() => {
           this.setState({refreshing: false});
-        });
+        }).then(() => console.log(this.props));
       }else{//current user is parent
         this.props.fetchMoments(type,this.props.moments[0].id, `children/${this.props.currentChild.id}`, returntoken)
         .then(() => {
@@ -107,31 +110,57 @@ class MomentsScreen extends React.Component {
   }
 
   render() {
-
+  console.log('moments screen props: ', this.props)
+  console.log('moments screen props.moments: ', this.props.moments)
     return (
       <View>
-      {this._addMomentButton()}
-        <ListView
-          dataSource = {this.state.dataSource}
-          renderRow = {(rowData) => <Text>{rowData}</Text>}
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={ () => this._fetch('new')}
-            />}
-          onEndReached={ () =>{
-            if(this.props.moments.length > 10){
-              this._fetch('more')
-            }
-          }}
-        >
-        </ListView>
+        {this._addMomentButton()}
+        <FlatList>
+          data={this.props.moments}
+          extraData={this.state}
+          keyExtractor={ (item) => item.id }
+          renderItem={ this._renderItem }
+        </FlatList>
+        <Text>
+        This is some test text
+        This is some test text
+        This is some test text
+        This is some test text
+        This is some test text
+        This is some test text
+        This is some test text
+        This is some test text
+        This is some test text
+        This is some test text
+        This is some test text
+        This is some test text
+        This is some test text
+        This is some test text
+        This is some test text
+        This is some test text
+        This is some test text
+        </Text>
       </View>
     );
   }
 }
 
 export default MomentsScreen;
+// <ListView
+// dataSource = {this.state.dataSource}
+// renderRow = {(rowData) => <Text>{rowData}</Text>}
+// refreshControl={
+//   <RefreshControl
+//   refreshing={this.state.refreshing}
+//   onRefresh={ () => this._fetch('new')}
+//   />}
+//   onEndReached={ () =>{
+//     if(this.props.moments.length > 10){
+//       this._fetch('more')
+//     }
+//   }}
+//   >
+//   </ListView>
 
 export const styles = StyleSheet.create({
   moments_container: {
