@@ -17,22 +17,23 @@ Umbrella consists of 4 key components that work together to securely connect par
 
 ## Moments
 
-The key feature of Umbrella is the Moments component. Moments allow parents to keep up to date with their children's activities
+The key feature of Umbrella is the Moments component. Moments allow parents to keep up to date with their children's activities.
+
+**Live Updates**
+
+Parents have instant access to live status updates from their children's classes from the comfort of their home or office.
 
 **Teacher Functionality**
 
 Using moments, teachers can post live updates about their class, which parents can see immediately. Teachers can assign moments to particular children in their class and selectively notify only the parents of those children.
 
-
 **Dynamic Loading**
 
 Umbrella offers fast and responsive rendering by loading only the moments that it needs. Users can pull down the top of the page to reload the latest moments. To load older moments, users simply scroll to the bottom of the page and Umbrella will fetch more data as needed.
 
-
 ## User Profile
 
-
-
+The profile page gives parents an overview of their children's classes and teachers. Selecting a child switches to that particular child's moments.
 
 ## Google Authentication
 
