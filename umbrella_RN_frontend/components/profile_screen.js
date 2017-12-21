@@ -87,7 +87,7 @@ class ProfileScreen extends React.Component {
       <View style={styles.profileScreen}>
         <View>
           <Image
-            source={{ uri: 'http://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513189131/cat3_wx4tns.jpg' }}
+            source={{ uri: `${currentChild.profile_pic}` }}
             style={styles.photo}
             />
         </View>
