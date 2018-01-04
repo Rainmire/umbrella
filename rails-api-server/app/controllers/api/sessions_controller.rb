@@ -18,7 +18,6 @@ class Api::SessionsController < ApplicationController
   end
 
   def fetch_jwt
-    debugger
     oauth_token = request.headers['HTTP_OAUTH_TOKEN']
 
     if oauth_token.nil?
