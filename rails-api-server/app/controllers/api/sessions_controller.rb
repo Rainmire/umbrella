@@ -22,7 +22,7 @@ class Api::SessionsController < ApplicationController
     oauth_token = request.headers['HTTP_OAUTH_TOKEN']
 
     if oauth_token.nil?
-      render json: ["No oauth_token found in header"]
+      render json: {error: "No oauth_token found in header"}
     else
       user = User.find_by(oauth_token: oauth_token)
 
