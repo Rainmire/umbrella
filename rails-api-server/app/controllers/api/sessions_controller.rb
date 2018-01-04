@@ -19,7 +19,7 @@ class Api::SessionsController < ApplicationController
 
   def fetch_jwt
     debugger
-    oauth_token = request.headers['oauth_token']
+    oauth_token = request.headers['HTTP_OAUTH_TOKEN']
 
     if oauth_token.nil?
       render json: ["No oauth_token found in header"]

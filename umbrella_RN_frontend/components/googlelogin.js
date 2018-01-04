@@ -41,7 +41,6 @@ export default class GoogleLogin extends Component {
     const { dispatch } = this.props.navigation;
 
     const oauthtoken = url.slice(11);
-    debugger;
     fetch('http://localhost:3000/api/session/fetch_jwt', {
 
       method: 'GET',
