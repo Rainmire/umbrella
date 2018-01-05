@@ -39,14 +39,14 @@
 //           }}
 //           style={styles.preview}
 //           aspect={Camera.constants.Aspect.fill}>
-//           <TouchableOpacity onPress={this._takePicture.bind(this)}>
+          // <TouchableOpacity onPress={this._takePicture.bind(this)}>
             // <Icon name='camera'
             //       style={styles.capture}
             //       size={50}
             //       color='#000'
             //       onPress={this._takePicture.bind(this)}
             // />
-//           </TouchableOpacity>
+          // </TouchableOpacity>
 //         </Camera>
 //       </View>
 //     );
@@ -73,7 +73,6 @@
 //   },
 // });
 
-'use strict';
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -96,13 +95,17 @@ class CaptureImage extends Component {
           }}
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}>
-<Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
+          <Text
+            style={styles.capture}
+            onPress={this.takePicture.bind(this)}
+          >[CAPTURE]</Text>
         </Camera>
       </View>
     );
   }
 
   takePicture() {
+    // comment out alert once we know it's working
     alert('image captured');
     const options = {};
     //options.location = ...
@@ -125,10 +128,10 @@ const styles = StyleSheet.create({
   capture: {
     flex: 0,
     backgroundColor: '#fff',
-    borderRadius: 5,
     color: '#000',
     padding: 10,
-    margin: 40
+    margin: 40,
+
   }
 });
 export default CaptureImage;

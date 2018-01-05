@@ -28,6 +28,7 @@ class MomentForm extends React.Component {
   }
 
   selectedStudents(){
+    this.props.navigation.navigate('SelectStudents')
     return this.state.studentsStatus;
   }
 
