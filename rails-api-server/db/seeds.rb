@@ -54,7 +54,7 @@ moments = Moment.create([
   { body: "Band-aid Report: Coco got tripped on the stairs", author_id: 5, is_public: false },
   { body: 'Nap Time: Restless', author_id: 5, is_public: false },
   #afternoon
-  #18,19,20,21,22,23
+  #19,20,21,22,23,24
   { body: 'Afternoon Play outside', author_id: 4, is_public: true },
   { body: 'Afternoon Story time', author_id: 4, is_public: true },
   { body: 'Afternoon Snack time', author_id: 4, is_public: true },
@@ -64,11 +64,11 @@ moments = Moment.create([
 
   { body: 'Moment balala', author_id: 5, is_public: false },
   { body: 'Moment long time ago', author_id: 5, is_public: false },
-  { body: 'Moment long time', author_id: 5, is_public: false },
-  { body: 'Moment not oldest', author_id: 5, is_public: false },
-  { body: 'Moment older', author_id: 5, is_public: false },
-  { body: 'Moment new', author_id: 5, is_public: false },
-  { body: 'Moment im the latest one', author_id: 5, is_public: false },
+  { body: 'Moment long time', author_id: 4, is_public: false },
+  { body: 'Moment not oldest', author_id: 4, is_public: false },
+  { body: 'Moment older', author_id: 4, is_public: false },
+  { body: 'Moment new', author_id: 4, is_public: false },
+  { body: 'Moment im the latest one', author_id: 4, is_public: false },
 
   ])
 
@@ -94,8 +94,6 @@ ChildMomentMembership.create([
   { child_id: 2, moment_id: 4 },
   { child_id: 3, moment_id: 4 },
   { child_id: 6, moment_id: 4 },
-
-  { child_id: 1, moment_id: 14 },
 
   { child_id: 3, moment_id: 5 },
   { child_id: 6, moment_id: 5 },
@@ -123,8 +121,6 @@ ChildMomentMembership.create([
   { child_id: 6, moment_id: 17 },
   { child_id: 6, moment_id: 18 },
 
-  { child_id: 4, moment_id: 18 },
-  { child_id: 5, moment_id: 18 },
   { child_id: 1, moment_id: 19 },
   { child_id: 4, moment_id: 19 },
   { child_id: 5, moment_id: 19 },
@@ -140,22 +136,17 @@ ChildMomentMembership.create([
   { child_id: 2, moment_id: 23 },
   { child_id: 3, moment_id: 23 },
   { child_id: 6, moment_id: 23 },
-
-  { child_id: 6, moment_id: 24 },
-  { child_id: 6, moment_id: 25 },
-  { child_id: 6, moment_id: 26 },
-  { child_id: 6, moment_id: 27 },
-  { child_id: 6, moment_id: 28 },
-  { child_id: 6, moment_id: 29 },
-  { child_id: 6, moment_id: 30 },
-
+  { child_id: 2, moment_id: 24 },
   { child_id: 3, moment_id: 24 },
+  { child_id: 6, moment_id: 24 },
+
   { child_id: 3, moment_id: 25 },
   { child_id: 3, moment_id: 26 },
-  { child_id: 3, moment_id: 27 },
-  { child_id: 3, moment_id: 28 },
-  { child_id: 3, moment_id: 29 },
-  { child_id: 3, moment_id: 30 },
+  { child_id: 1, moment_id: 27 },
+  { child_id: 1, moment_id: 28 },
+  { child_id: 1, moment_id: 29 },
+  { child_id: 1, moment_id: 30 },
+  { child_id: 1, moment_id: 31 },
 
 
 
