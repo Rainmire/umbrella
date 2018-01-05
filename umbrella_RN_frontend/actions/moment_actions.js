@@ -17,13 +17,16 @@ export const receiveNewMoments = (moments) => ({
   moments
 });
 
-export const fetchMoments = (type,MomentId,who,token) => dispatch => (
+export const fetchMoments = (type,who,token,MomentId) => dispatch => (
   // fetch(`https://umbrella-server.herokuapp.com/api/children/${who}/${type}_moments/${MomentId}`, {
-  fetch(`http://localhost:3000/api/${who}/${type}_moments/${MomentId}`,{
+  fetch(`http://localhost:3000/api/${who}/${type}_moments${MomentId}`,{
     method: 'GET',
     headers: { 'Authorization': token }
   }).then(({_bodyInit}) => {
-    console.log("hi");
-    return dispatch(receiveNewMoments(JSON.parse(_bodyInit).moments));
+    if(type === "new"){
+      return dispatch(receiveNewMoments(JSON.parse(_bodyInit).moments));
+    }else{
+      return dispatch(receiveMoreMoments(JSON.parse(_bodyInit).moments));
+    }
   })
 );
