@@ -19,6 +19,7 @@ class SelectStudents extends React.Component {
 // for each child, when we click them, we need to get their __?__ so we
 // can connect them to the moment when it is sent to the db;
   _renderItem = ({ item }) => {
+    console.log(`${item.name}`, 'has an id of: ', `${item.id}`);
     return(
       <TouchableOpacity
         onPress={ () =>  console.log('child', `${item.name}`, 'was pressed')}
@@ -39,9 +40,16 @@ class SelectStudents extends React.Component {
   render() {
     return (
       <View>
+        <TouchableOpacity
+          onPress={ () =>  console.log('selected all children')}
+          style={styles.selectAllButton}>
+          <View style={styles.name}>
+            <Text style={{fontSize: 24}}>Select All Students</Text>
+          </View>
+        </TouchableOpacity>
         <FlatList
           data={ this.props.students }
-          keyExtractor={(item) => item.id }
+          keyExtractor={ (item) => item.id }
           renderItem={ this._renderItem }
         ></FlatList>
       </View>
@@ -59,7 +67,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     backgroundColor: 'rgba(255, 182, 193, .5)',
-    marginTop: 10
+    marginTop: 20
   },
   photo: {
     height: 50,
@@ -74,7 +82,16 @@ export const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     paddingLeft: 25,
     alignItems: 'center'
-  }
+  },
+  selectAllButton: {
+    paddingTop: 5,
+    paddingBottom: 5,
+    backgroundColor: 'rgba(255, 182, 193, .5)',
+    marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 50,
+  },
 });
 
 // render(){

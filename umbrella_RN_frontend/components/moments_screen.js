@@ -86,9 +86,9 @@ class MomentsScreen extends React.Component {
 
   componentDidMount(){
     this.setState({refreshing: true});
+
     if (this.props.currentUser && this.props.currentUser.teacher_class) {
       this.setState({ isTeacher: true});
-      console.log('hit the teacher set: ', this.state.isTeacher)
     }
     AsyncStorage.getItem('token').then((returntoken)=> {
       if (this.props.currentUser === undefined && returntoken) {
@@ -150,29 +150,12 @@ class MomentsScreen extends React.Component {
 }
 
 export default MomentsScreen;
-// <ListView
-// dataSource = {this.state.dataSource}
-// renderRow = {(rowData) => <Text>{rowData}</Text>}
-// refreshControl={
-//   <RefreshControl
-//   refreshing={this.state.refreshing}
-//   onRefresh={ () => this._fetch('new')}
-//   />}
-//   onEndReached={ () =>{
-//     if(this.props.moments.length > 10){
-//       this._fetch('more')
-//     }
-//   }}
-//   >
-//   </ListView>
 
 export const styles = StyleSheet.create({
   moments_container: {
     flex: 1,
     flexDirection: 'row',
     paddingTop: 25,
-    // width: 150
-    // borderWidth: 1,
   },
   profile_pic: {
     height: 50,
@@ -208,7 +191,6 @@ export const styles = StyleSheet.create({
     marginTop: 5,
   },
   addMoment: {
-    // backgroundColor: 'pink',
     height: 50,
     width: 50,
     alignItems: 'center',
@@ -219,9 +201,7 @@ export const styles = StyleSheet.create({
 
   },
   addMomentContainer: {
-    // backgroundColor: 'yellow',
     marginTop: 20,
-    // flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end'
