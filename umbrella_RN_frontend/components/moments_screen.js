@@ -88,6 +88,7 @@ class MomentsScreen extends React.Component {
     this.setState({refreshing: true});
     if (this.props.currentUser && this.props.currentUser.teacher_class) {
       this.setState({ isTeacher: true});
+      console.log('hit the teacher set: ', this.state.isTeacher)
     }
     AsyncStorage.getItem('token').then((returntoken)=> {
       if (this.props.currentUser === undefined && returntoken) {

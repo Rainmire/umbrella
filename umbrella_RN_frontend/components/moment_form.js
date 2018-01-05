@@ -9,6 +9,7 @@ import {
   TextInput,
   TouchableOpacity,
   AsyncStorage,
+  Dimensions
 } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -47,19 +48,6 @@ class MomentForm extends React.Component {
 
 //look at state for props needed
 
-
-
-// <View>
-//   <Camera
-//     ref={(cam) => {
-//       this.camera = cam;
-//     }}
-//     style={styles.textInput}
-//     aspect={Camera.constants.Aspect.fill}>
-//     <Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
-//   </Camera>
-// </View>
-
   _renderForm() {
     return (
       <View style={styles.newMomentContainer} >
@@ -74,7 +62,11 @@ class MomentForm extends React.Component {
 
         <TouchableOpacity
           style={styles.addPhoto}
-          onPress={console.log('open the camera/ camera roll, set state')} >
+          onPress={ () => {
+            this.props.navigation.navigate('CaptureImage',
+              {navigation: this.props.navigation})
+          }}
+        >
           <Icon name='camera' size={50} color='#000' />
         </TouchableOpacity>
 
@@ -103,14 +95,6 @@ class MomentForm extends React.Component {
         </View>
       </View>
     );
-  }
-
-  takePicture() {
-    const options = {};
-    //options.location = ...
-    this.camera.capture({metadata: options})
-      .then((data) => console.log(data))
-      .catch(err => console.error(err));
   }
 
   render() {
@@ -164,7 +148,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 50,
     width: 200,
-
   },
   submitText: {
     fontSize: 22,

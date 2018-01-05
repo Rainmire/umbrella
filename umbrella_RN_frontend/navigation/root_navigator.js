@@ -9,6 +9,7 @@ import CalendarScreen from '../components/calendar_screen';
 import MessageScreen from '../components/message_screen';
 import SwitchChildContainer from '../components/switch_child_container';
 import MomentForm from '../components/moment_form';
+import CaptureImageContainer from '../components/camera/capture_image_container';
 
 export const createRootNavigator = (signedIn = false) => {
   return StackNavigator(
@@ -73,7 +74,10 @@ export const SignedInScreen = StackNavigator({
   },
   MomentForm: {
     screen: MomentForm,
-  }
+  },
+  CaptureImage:{
+    screen: CaptureImageContainer,
+  },
 });
 
 // export const SignedOutScreen = StackNavigator({
