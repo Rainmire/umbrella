@@ -6,7 +6,7 @@ Umbrella is a mobile application that facilitates communication between parents 
 
 In the modern day and age, parents face the increasingly difficult challenge of balancing work with personal life. Our vision is to create a service which helps busy parents keep track of their children's everyday activities as well as offer teachers a platform to express their creativity. In doing so, we hope to employ cutting-edge technologies in mobile development in order to make education an exciting and memorable adventure.
 
-<a href = "https://media.giphy.com/media/3ohs7WLBM4GUQkDt4c/giphy.gif"></a>
+![gif](https://media.giphy.com/media/3ohs7WLBM4GUQkDt4c/giphy.gif)
 
 Umbrella consists of 4 key components that work together to securely connect parents and teachers.
 
