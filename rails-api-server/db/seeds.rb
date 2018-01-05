@@ -73,6 +73,11 @@ moments = Moment.create([
   ])
 
 moments.each.with_index do |moment, idx|
+  moment.update_attribute :id, idx + 101
+end
+
+moments.each.with_index do |moment, idx|
+  moment.update_attribute :id, idx + 1
   moment.update_attribute :created_at, (moments.length - idx).minutes.ago
 end
 
@@ -155,3 +160,82 @@ ChildMomentMembership.create([
 
 
   ])
+
+  # ChildMomentMembership.create([
+  #   { child_id: 1, moment_id: 101 },
+  #   { child_id: 4, moment_id: 101 },
+  #   { child_id: 5, moment_id: 101 },
+  #   { child_id: 2, moment_id: 102 },
+  #   { child_id: 3, moment_id: 102 },
+  #   { child_id: 6, moment_id: 102 },
+  #   { child_id: 1, moment_id: 103 },
+  #   { child_id: 4, moment_id: 103 },
+  #   { child_id: 5, moment_id: 103 },
+  #   { child_id: 2, moment_id: 104 },
+  #   { child_id: 3, moment_id: 104 },
+  #   { child_id: 6, moment_id: 104 },
+  #
+  #   { child_id: 1, moment_id: 105 },
+  #
+  #   { child_id: 3, moment_id: 105 },
+  #   { child_id: 6, moment_id: 105 },
+  #
+  #   #child 3 extras
+  #   { child_id: 1, moment_id: 106 },
+  #   { child_id: 4, moment_id: 106 },
+  #   { child_id: 5, moment_id: 106 },
+  #   { child_id: 2, moment_id: 107 },
+  #   { child_id: 3, moment_id: 107 },
+  #   { child_id: 6, moment_id: 107 },
+  #   { child_id: 1, moment_id: 108 },
+  #   { child_id: 4, moment_id: 108 },
+  #   { child_id: 5, moment_id: 108 },
+  #
+  #   { child_id: 4, moment_id: 109 },
+  #   { child_id: 4, moment_id: 110 },
+  #   { child_id: 4, moment_id: 111 },
+  #
+  #   { child_id: 3, moment_id: 112 },
+  #   { child_id: 3, moment_id: 113 },
+  #   { child_id: 3, moment_id: 114 },
+  #
+  #   { child_id: 6, moment_id: 115 },
+  #   { child_id: 6, moment_id: 116 },
+  #   { child_id: 6, moment_id: 117 },
+  #
+  #   { child_id: 1, moment_id: 118 },
+  #   { child_id: 4, moment_id: 118 },
+  #   { child_id: 5, moment_id: 118 },
+  #   { child_id: 1, moment_id: 119 },
+  #   { child_id: 4, moment_id: 119 },
+  #   { child_id: 5, moment_id: 119 },
+  #   { child_id: 1, moment_id: 120 },
+  #   { child_id: 4, moment_id: 120 },
+  #   { child_id: 5, moment_id: 120 },
+  #   { child_id: 2, moment_id: 121 },
+  #   { child_id: 3, moment_id: 121 },
+  #   { child_id: 6, moment_id: 121 },
+  #   { child_id: 2, moment_id: 122 },
+  #   { child_id: 3, moment_id: 122 },
+  #   { child_id: 6, moment_id: 122 },
+  #   { child_id: 2, moment_id: 123 },
+  #   { child_id: 3, moment_id: 123 },
+  #   { child_id: 6, moment_id: 123 },
+  #
+  #   { child_id: 6, moment_id: 124 },
+  #   { child_id: 6, moment_id: 125 },
+  #   { child_id: 6, moment_id: 126 },
+  #   { child_id: 6, moment_id: 127 },
+  #   { child_id: 6, moment_id: 128 },
+  #   { child_id: 6, moment_id: 129 },
+  #   { child_id: 6, moment_id: 130 },
+  #
+  #   { child_id: 3, moment_id: 124 },
+  #   { child_id: 3, moment_id: 125 },
+  #   { child_id: 3, moment_id: 126 },
+  #   { child_id: 3, moment_id: 127 },
+  #   { child_id: 3, moment_id: 128 },
+  #   { child_id: 3, moment_id: 129 },
+  #   { child_id: 3, moment_id: 130 },
+  #
+  #   ])
