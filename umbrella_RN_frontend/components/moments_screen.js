@@ -61,6 +61,7 @@ class MomentsScreen extends React.Component {
     )
   }
 
+// create actions 
   _addMoment = () => (
     this.props.navigation.navigate('MomentForm', {navigation: this.props.navigation})
   )
