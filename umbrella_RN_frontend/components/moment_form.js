@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Camera from 'react-native-camera';
 
 class MomentForm extends React.Component {
   constructor(props) {
@@ -45,6 +46,12 @@ class MomentForm extends React.Component {
   )
 
 //look at state for props needed
+
+// <TouchableOpacity
+//   style={styles.addPhoto}
+//   onPress={console.log('open the camera/ camera roll, set state')} >
+//   <Icon name='camera' size={50} color='#000' />
+// </TouchableOpacity>
   _renderForm() {
     return (
       <View style={styles.newMomentContainer} >
@@ -57,11 +64,18 @@ class MomentForm extends React.Component {
           />
         </View>
 
-        <TouchableOpacity
-          style={styles.addPhoto}
-          onPress={console.log('open the camera/ camera roll, set state')} >
-          <Icon name='camera' size={50} color='#000' />
-        </TouchableOpacity>
+
+
+        <View style={styles.container}>
+          <Camera
+            ref={(cam) => {
+              this.camera = cam;
+            }}
+            style={styles.textInput}
+            aspect={Camera.constants.Aspect.fill}>
+            <Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
+          </Camera>
+        </View>
 
         <View >
           <TouchableOpacity
@@ -88,6 +102,14 @@ class MomentForm extends React.Component {
         </View>
       </View>
     );
+  }
+
+  takePicture() {
+    const options = {};
+    //options.location = ...
+    this.camera.capture({metadata: options})
+      .then((data) => console.log(data))
+      .catch(err => console.error(err));
   }
 
   render() {
