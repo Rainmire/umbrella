@@ -90,13 +90,11 @@ class MomentsScreen extends React.Component {
         this.props.fetchCurrentUser(returntoken);
       }
     }).then(()=> this.setState({refreshing: false}));
-  }
-
-  componentWillReceiveProps() {
     if (this.props.currentUser && this.props.currentUser.teacher_class) {
       this.setState({ isTeacher: true});
     }
   }
+
 
   _fetch(type) {
     this.setState({refreshing: true});
@@ -123,19 +121,18 @@ class MomentsScreen extends React.Component {
       <View>
         {this._addMomentButton()}
         <FlatList
-        // inverted
           data={this.props.moments}
           extraData={this.state}
           keyExtractor={ (item) => item.id }
           renderItem={ this._renderItem }
           refreshing={this.state.refreshing}
-          // initialNumToRender={ 4 }
-          // onRefresh={ () => this._fetch('new')}
-          // onEndReached={ () => {
-          //   if (this.props.moments.length > 10) {
-          //     this._fetch('more');
-          //   }
-          // }}
+          initialNumToRender={ 4 }
+          onRefresh={ () => this._fetch('new')}
+          onEndReached={ () => {
+            if (this.props.moments.length > 10) {
+              this._fetch('more');
+            }
+          }}
         />
       </View>
     );
