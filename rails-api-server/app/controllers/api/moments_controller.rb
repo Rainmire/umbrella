@@ -38,4 +38,9 @@ class Api::MomentsController < ApplicationController
     render 'api/moments/show'
   end
 
+  # private
+  # def moment_params
+  #   params.require(:moment).permit(:body)
+  # end
+
 end
