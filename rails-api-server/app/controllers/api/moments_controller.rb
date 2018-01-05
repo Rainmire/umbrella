@@ -29,11 +29,11 @@ class Api::MomentsController < ApplicationController
 
     if user.teacher_class #user is teacher
       target_moment = user.authored_moments.find(params[:id])
-      @moments = user.authored_moments.where("moments.created_at > ?", target_moment.created_at).order(created_at: :desc).limit(10)
+      @moments = user.authored_moments.where("moments.created_at < ?", target_moment.created_at).order(created_at: :desc).limit(10)
     else #user is parent
       child = user.children.find(params[:child_id])
       target_moment = child.moments.find(params[:id])
-      @moments = child.moments.where("moments.created_at > ?", target_moment.created_at).order(created_at: :desc).limit(10)
+      @moments = child.moments.where("moments.created_at < ?", target_moment.created_at).order(created_at: :desc).limit(10)
     end
     render 'api/moments/show'
   end
