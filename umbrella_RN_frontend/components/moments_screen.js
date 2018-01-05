@@ -132,6 +132,7 @@ class MomentsScreen extends React.Component {
           refreshing={this.state.refreshing}
           initialNumToRender={ 4 }
           onRefresh={ () => this._fetch('new')}
+          onEndReachedThreshold ={0}
           onEndReached={ () => {
             if (this.props.moments.length >= 10) {
               this._fetch('more');
