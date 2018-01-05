@@ -7,9 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.create([
-  { name: 'Lily', email: 'zq.yang.lily@gmail.com', contact: '111-111-1111', logged_in: false, profile_pic: 'http://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513199891/dog1_lymttu.jpg' },
-  { name: 'Guy', email: 'ggwass@gmail.com', contact: '222-222-2222', logged_in: false, profile_pic: 'http://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513199891/dog2_rz2qbr.jpg' },
-  { name: 'Mitch', email: 'melancholycomedy@gmail.com', contact: '333-333-3333', logged_in: false, profile_pic: 'http://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513199891/dog3_a25vcc.jpg' },
+  { name: 'Lily', email: 'zq.yang.lily@gmail.com', contact: '111-111-1111', logged_in: false, profile_pic: 'https://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513199891/dog1_lymttu.jpg' },
+  { name: 'Guy', email: 'ggwass@gmail.com', contact: '222-222-2222', logged_in: false, profile_pic: 'https://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513199891/dog2_rz2qbr.jpg' },
+  { name: 'Mitch', email: 'melancholycomedy@gmail.com', contact: '333-333-3333', logged_in: false, profile_pic: 'https://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513199891/dog3_a25vcc.jpg' },
   { name: 'Miss Melissa', email: 'teacher1@gmail.com', teacher_class: 'Class A', contact: '444-444-4444', logged_in: false, profile_pic: 'https://res.cloudinary.com/dreamhousesf/image/upload/v1511993218/dane-deaner-327695_xbkbyl.jpg' },
   { name: 'Miss Lisa', email: 'teacher2@gmail.com', teacher_class: 'Class B', contact: '555-555-5555', logged_in: false, profile_pic: 'https://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513199891/dog1_lymttu.jpg' },
   ])
@@ -44,12 +44,12 @@ moments = Moment.create([
   { body: 'Band-aid Report: James was tripped on the playground with minor scratch on the face ', author_id: 4, is_public: false },
   { body: 'Potty Time: Pee', author_id: 4, is_public: false },
   { body: 'Nap Time: 1:00-2:58pm', author_id: 4, is_public: false },
-  #12 13 14Moments for child 3, Ethan Lily
+  #12 13 14 15 Moments for child 3, Ethan Lily
   { body: 'Diaper : Wet', author_id: 5, is_public: false },
   { body: "Band-aid Report: Ethan got scratched when grabbing another kid's toy", author_id: 5, is_public: false },
   { body: 'Nap Time: 1:00- 3:00pm', author_id: 5, is_public: false },
   { body: 'Diaper : Wet', author_id: 5, is_public: false },
-  #15 16 17 Moments for child 6,coco Guy
+  #16 17 18 Moments for child 6,coco Guy
   { body: 'Diaper : Wet', author_id: 5, is_public: false },
   { body: "Band-aid Report: Coco got tripped on the stairs", author_id: 5, is_public: false },
   { body: 'Nap Time: Restless', author_id: 5, is_public: false },
@@ -90,12 +90,11 @@ ChildMomentMembership.create([
   { child_id: 3, moment_id: 4 },
   { child_id: 6, moment_id: 4 },
 
-  { child_id: 1, moment_id: 5 },
+  { child_id: 1, moment_id: 14 },
 
   { child_id: 3, moment_id: 5 },
   { child_id: 6, moment_id: 5 },
-
-  #child 3 extras
+  { child_id: 2, moment_id: 5 },
   { child_id: 1, moment_id: 6 },
   { child_id: 4, moment_id: 6 },
   { child_id: 5, moment_id: 6 },
@@ -113,12 +112,12 @@ ChildMomentMembership.create([
   { child_id: 3, moment_id: 12 },
   { child_id: 3, moment_id: 13 },
   { child_id: 3, moment_id: 14 },
+  { child_id: 3, moment_id: 15 },
 
-  { child_id: 6, moment_id: 15 },
   { child_id: 6, moment_id: 16 },
   { child_id: 6, moment_id: 17 },
+  { child_id: 6, moment_id: 18 },
 
-  { child_id: 1, moment_id: 18 },
   { child_id: 4, moment_id: 18 },
   { child_id: 5, moment_id: 18 },
   { child_id: 1, moment_id: 19 },
