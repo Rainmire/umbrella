@@ -61,7 +61,7 @@ class MomentsScreen extends React.Component {
     )
   }
 
-// create actions 
+// create actions
   _addMoment = () => (
     this.props.navigation.navigate('MomentForm', {navigation: this.props.navigation})
   )
@@ -86,6 +86,9 @@ class MomentsScreen extends React.Component {
 
   componentDidMount(){
     this.setState({refreshing: true});
+    if (this.props.currentUser && this.props.currentUser.teacher_class) {
+      this.setState({ isTeacher: true});
+    }
     AsyncStorage.getItem('token').then((returntoken)=> {
       if (this.props.currentUser === undefined && returntoken) {
         this.props.fetchCurrentUser(returntoken);
@@ -93,11 +96,11 @@ class MomentsScreen extends React.Component {
     }).then(()=> this.setState({refreshing: false}));
   }
 
-  componentWillReceiveProps() {
-    if (this.props.currentUser && this.props.currentUser.teacher_class) {
-      this.setState({ isTeacher: true});
-    }
-  }
+  // componentWillReceiveProps() {
+  //   if (this.props.currentUser && this.props.currentUser.teacher_class) {
+  //     this.setState({ isTeacher: true});
+  //   }
+  // }
 
   _fetch(type) {
     this.setState({refreshing: true});
@@ -165,6 +168,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     paddingTop: 25,
+    // width: 150
     // borderWidth: 1,
   },
   profile_pic: {
@@ -174,12 +178,14 @@ export const styles = StyleSheet.create({
   },
   moment: {
     marginLeft: 20,
+    flex: 1
   },
   name: {
     fontSize: 24,
     marginBottom: 10,
   },
   moment_body: {
+    flex: 1,
     marginBottom: 20,
   },
   moments_image: {
@@ -192,7 +198,7 @@ export const styles = StyleSheet.create({
   footer: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
   },
   footer_info: {
     fontSize: 12,
