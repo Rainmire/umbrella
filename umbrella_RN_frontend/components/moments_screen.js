@@ -95,25 +95,27 @@ class MomentsScreen extends React.Component {
         this.props.fetchCurrentUser(returntoken);
       }
     }).then(()=> this.setState({refreshing: false}));
+    if (this.props.currentUser && this.props.currentUser.teacher_class) {
+      this.setState({ isTeacher: true});
+    }
   }
 
-  // componentWillReceiveProps() {
-  //   if (this.props.currentUser && this.props.currentUser.teacher_class) {
-  //     this.setState({ isTeacher: true});
-  //   }
-  // }
 
   _fetch(type) {
     this.setState({refreshing: true});
     AsyncStorage.getItem('token').then((returntoken) => {
-      //is current user is teacher
+      let moment_id = `/${this.props.moments[this.props.moments.length - 1].id}`;
+      if(type === "new"){
+        moment_id = "";
+      }
+            //is current user is teacher
       if (this.state.isTeacher) {
-        this.props.fetchMoments(type,this.props.moments[0].id, 'user',returntoken)
+        this.props.fetchMoments(type, 'user',returntoken,moment_id)
           .then(() => {
             this.setState({refreshing: false});
         });
       } else { //current user is parent
-        this.props.fetchMoments(type,this.props.moments[0].id, `children/${this.props.currentChild.id}`, returntoken)
+        this.props.fetchMoments(type, `children/${this.props.currentChild.id}`, returntoken,moment_id)
         .then(() => {
           this.setState({refreshing: false});
         });
@@ -128,19 +130,19 @@ class MomentsScreen extends React.Component {
       <View>
         {this._addMomentButton()}
         <FlatList
-        // inverted
           data={this.props.moments}
           extraData={this.state}
           keyExtractor={ (item) => item.id }
           renderItem={ this._renderItem }
           refreshing={this.state.refreshing}
-          // initialNumToRender={ 4 }
-          // onRefresh={ () => this._fetch('new')}
-          // onEndReached={ () => {
-          //   if (this.props.moments.length > 10) {
-          //     this._fetch('more');
-          //   }
-          // }}
+          initialNumToRender={ 4 }
+          onRefresh={ () => this._fetch('new')}
+          onEndReachedThreshold ={0}
+          onEndReached={ () => {
+            if (this.props.moments.length >= 10) {
+              this._fetch('more');
+            }
+          }}
         />
       </View>
     );

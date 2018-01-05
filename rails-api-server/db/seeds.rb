@@ -6,12 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-users = User.create([
+User.create([
   { name: 'Lily', email: 'zq.yang.lily@gmail.com', contact: '111-111-1111', logged_in: false, profile_pic: 'https://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513199891/dog1_lymttu.jpg' },
   { name: 'Guy', email: 'ggwass@gmail.com', contact: '222-222-2222', logged_in: false, profile_pic: 'https://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513199891/dog2_rz2qbr.jpg' },
   { name: 'Mitch', email: 'melancholycomedy@gmail.com', contact: '333-333-3333', logged_in: false, profile_pic: 'https://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513199891/dog3_a25vcc.jpg' },
-  { name: 'Teacher1', email: 'teacher1@gmail.com', teacher_class: 'Class A', contact: '444-444-4444', logged_in: false, profile_pic: 'https://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513199891/dog2_rz2qbr.jpg' },
-  { name: 'Teacher2', email: 'teacher2@gmail.com', teacher_class: 'Class B', contact: '555-555-5555', logged_in: false, profile_pic: 'https://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513199891/dog1_lymttu.jpg' },
+  { name: 'Miss Melissa', email: 'teacher1@gmail.com', teacher_class: 'Class A', contact: '444-444-4444', logged_in: false, profile_pic: 'https://res.cloudinary.com/dreamhousesf/image/upload/v1511993218/dane-deaner-327695_xbkbyl.jpg' },
+  { name: 'Miss Lisa', email: 'teacher2@gmail.com', teacher_class: 'Class B', contact: '555-555-5555', logged_in: false, profile_pic: 'https://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513199891/dog1_lymttu.jpg' },
   ])
 
 Child.create([
@@ -44,17 +44,17 @@ moments = Moment.create([
   { body: 'Band-aid Report: James was tripped on the playground with minor scratch on the face ', author_id: 4, is_public: false },
   { body: 'Potty Time: Pee', author_id: 4, is_public: false },
   { body: 'Nap Time: 1:00-2:58pm', author_id: 4, is_public: false },
-  #12 13 14Moments for child 3, Ethan Lily
+  #12 13 14 15 Moments for child 3, Ethan Lily
   { body: 'Diaper : Wet', author_id: 5, is_public: false },
   { body: "Band-aid Report: Ethan got scratched when grabbing another kid's toy", author_id: 5, is_public: false },
   { body: 'Nap Time: 1:00- 3:00pm', author_id: 5, is_public: false },
   { body: 'Diaper : Wet', author_id: 5, is_public: false },
-  #15 16 17 Moments for child 6,coco Guy
+  #16 17 18 Moments for child 6,coco Guy
   { body: 'Diaper : Wet', author_id: 5, is_public: false },
   { body: "Band-aid Report: Coco got tripped on the stairs", author_id: 5, is_public: false },
   { body: 'Nap Time: Restless', author_id: 5, is_public: false },
   #afternoon
-  #18,19,20,21,22,23
+  #19,20,21,22,23,24
   { body: 'Afternoon Play outside', author_id: 4, is_public: true },
   { body: 'Afternoon Story time', author_id: 4, is_public: true },
   { body: 'Afternoon Snack time', author_id: 4, is_public: true },
@@ -64,15 +64,20 @@ moments = Moment.create([
 
   { body: 'Moment balala', author_id: 5, is_public: false },
   { body: 'Moment long time ago', author_id: 5, is_public: false },
-  { body: 'Moment long time', author_id: 5, is_public: false },
-  { body: 'Moment not oldest', author_id: 5, is_public: false },
-  { body: 'Moment older', author_id: 5, is_public: false },
-  { body: 'Moment new', author_id: 5, is_public: false },
-  { body: 'Moment im the latest one', author_id: 5, is_public: false },
+  { body: 'Moment long time', author_id: 4, is_public: false },
+  { body: 'Moment not oldest', author_id: 4, is_public: false },
+  { body: 'Moment older', author_id: 4, is_public: false },
+  { body: 'Moment new', author_id: 4, is_public: false },
+  { body: 'Moment im the latest one', author_id: 4, is_public: false },
 
   ])
 
 moments.each.with_index do |moment, idx|
+  moment.update_attribute :id, idx + 101
+end
+
+moments.each.with_index do |moment, idx|
+  moment.update_attribute :id, idx + 1
   moment.update_attribute :created_at, (moments.length - idx).minutes.ago
 end
 
@@ -90,12 +95,9 @@ ChildMomentMembership.create([
   { child_id: 3, moment_id: 4 },
   { child_id: 6, moment_id: 4 },
 
-  { child_id: 1, moment_id: 5 },
-
   { child_id: 3, moment_id: 5 },
   { child_id: 6, moment_id: 5 },
-
-  #child 3 extras
+  { child_id: 2, moment_id: 5 },
   { child_id: 1, moment_id: 6 },
   { child_id: 4, moment_id: 6 },
   { child_id: 5, moment_id: 6 },
@@ -113,46 +115,118 @@ ChildMomentMembership.create([
   { child_id: 3, moment_id: 12 },
   { child_id: 3, moment_id: 13 },
   { child_id: 3, moment_id: 14 },
+  { child_id: 3, moment_id: 15 },
 
-  { child_id: 6, moment_id: 15 },
   { child_id: 6, moment_id: 16 },
   { child_id: 6, moment_id: 17 },
+  { child_id: 6, moment_id: 18 },
 
-  { child_id: 1, moment_id: 18 },
-  { child_id: 4, moment_id: 18 },
-  { child_id: 5, moment_id: 18 },
   { child_id: 1, moment_id: 19 },
   { child_id: 4, moment_id: 19 },
   { child_id: 5, moment_id: 19 },
   { child_id: 1, moment_id: 20 },
   { child_id: 4, moment_id: 20 },
   { child_id: 5, moment_id: 20 },
-  { child_id: 2, moment_id: 21 },
-  { child_id: 3, moment_id: 21 },
-  { child_id: 6, moment_id: 21 },
+  { child_id: 1, moment_id: 21 },
+  { child_id: 4, moment_id: 21 },
+  { child_id: 5, moment_id: 21 },
   { child_id: 2, moment_id: 22 },
   { child_id: 3, moment_id: 22 },
   { child_id: 6, moment_id: 22 },
   { child_id: 2, moment_id: 23 },
   { child_id: 3, moment_id: 23 },
   { child_id: 6, moment_id: 23 },
-
-  { child_id: 6, moment_id: 24 },
-  { child_id: 6, moment_id: 25 },
-  { child_id: 6, moment_id: 26 },
-  { child_id: 6, moment_id: 27 },
-  { child_id: 6, moment_id: 28 },
-  { child_id: 6, moment_id: 29 },
-  { child_id: 6, moment_id: 30 },
-
+  { child_id: 2, moment_id: 24 },
   { child_id: 3, moment_id: 24 },
+  { child_id: 6, moment_id: 24 },
+
   { child_id: 3, moment_id: 25 },
   { child_id: 3, moment_id: 26 },
-  { child_id: 3, moment_id: 27 },
-  { child_id: 3, moment_id: 28 },
-  { child_id: 3, moment_id: 29 },
-  { child_id: 3, moment_id: 30 },
+  { child_id: 1, moment_id: 27 },
+  { child_id: 1, moment_id: 28 },
+  { child_id: 1, moment_id: 29 },
+  { child_id: 1, moment_id: 30 },
+  { child_id: 1, moment_id: 31 },
 
 
 
   ])
+
+  # ChildMomentMembership.create([
+  #   { child_id: 1, moment_id: 101 },
+  #   { child_id: 4, moment_id: 101 },
+  #   { child_id: 5, moment_id: 101 },
+  #   { child_id: 2, moment_id: 102 },
+  #   { child_id: 3, moment_id: 102 },
+  #   { child_id: 6, moment_id: 102 },
+  #   { child_id: 1, moment_id: 103 },
+  #   { child_id: 4, moment_id: 103 },
+  #   { child_id: 5, moment_id: 103 },
+  #   { child_id: 2, moment_id: 104 },
+  #   { child_id: 3, moment_id: 104 },
+  #   { child_id: 6, moment_id: 104 },
+  #
+  #   { child_id: 1, moment_id: 105 },
+  #
+  #   { child_id: 3, moment_id: 105 },
+  #   { child_id: 6, moment_id: 105 },
+  #
+  #   #child 3 extras
+  #   { child_id: 1, moment_id: 106 },
+  #   { child_id: 4, moment_id: 106 },
+  #   { child_id: 5, moment_id: 106 },
+  #   { child_id: 2, moment_id: 107 },
+  #   { child_id: 3, moment_id: 107 },
+  #   { child_id: 6, moment_id: 107 },
+  #   { child_id: 1, moment_id: 108 },
+  #   { child_id: 4, moment_id: 108 },
+  #   { child_id: 5, moment_id: 108 },
+  #
+  #   { child_id: 4, moment_id: 109 },
+  #   { child_id: 4, moment_id: 110 },
+  #   { child_id: 4, moment_id: 111 },
+  #
+  #   { child_id: 3, moment_id: 112 },
+  #   { child_id: 3, moment_id: 113 },
+  #   { child_id: 3, moment_id: 114 },
+  #
+  #   { child_id: 6, moment_id: 115 },
+  #   { child_id: 6, moment_id: 116 },
+  #   { child_id: 6, moment_id: 117 },
+  #
+  #   { child_id: 1, moment_id: 118 },
+  #   { child_id: 4, moment_id: 118 },
+  #   { child_id: 5, moment_id: 118 },
+  #   { child_id: 1, moment_id: 119 },
+  #   { child_id: 4, moment_id: 119 },
+  #   { child_id: 5, moment_id: 119 },
+  #   { child_id: 1, moment_id: 120 },
+  #   { child_id: 4, moment_id: 120 },
+  #   { child_id: 5, moment_id: 120 },
+  #   { child_id: 2, moment_id: 121 },
+  #   { child_id: 3, moment_id: 121 },
+  #   { child_id: 6, moment_id: 121 },
+  #   { child_id: 2, moment_id: 122 },
+  #   { child_id: 3, moment_id: 122 },
+  #   { child_id: 6, moment_id: 122 },
+  #   { child_id: 2, moment_id: 123 },
+  #   { child_id: 3, moment_id: 123 },
+  #   { child_id: 6, moment_id: 123 },
+  #
+  #   { child_id: 6, moment_id: 124 },
+  #   { child_id: 6, moment_id: 125 },
+  #   { child_id: 6, moment_id: 126 },
+  #   { child_id: 6, moment_id: 127 },
+  #   { child_id: 6, moment_id: 128 },
+  #   { child_id: 6, moment_id: 129 },
+  #   { child_id: 6, moment_id: 130 },
+  #
+  #   { child_id: 3, moment_id: 124 },
+  #   { child_id: 3, moment_id: 125 },
+  #   { child_id: 3, moment_id: 126 },
+  #   { child_id: 3, moment_id: 127 },
+  #   { child_id: 3, moment_id: 128 },
+  #   { child_id: 3, moment_id: 129 },
+  #   { child_id: 3, moment_id: 130 },
+  #
+  #   ])
