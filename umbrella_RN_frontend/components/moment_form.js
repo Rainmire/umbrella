@@ -42,10 +42,13 @@ class MomentForm extends React.Component {
 
 //this.props.addMoment(this.state.body).then( () =>
 //this.props.navigation.navigate('MomentsScreen'))
-  _submitMoment = () => (
+  _submitMoment (){
+    AsyncStorage.getItem('token').then((returntoken)=> {
+      this.props.createMoment(this.state,returntoken);
+    });
     // console.log('submit moment props: ', this.props);
-    this.props.navigation.navigate('MomentsScreen')
-  )
+    this.props.navigation.navigate('MomentsScreen');
+  }
 
 //look at state for props needed
 
