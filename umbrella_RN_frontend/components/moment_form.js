@@ -28,7 +28,7 @@ class MomentForm extends React.Component {
   }
 
   selectedStudents(){
-    this.props.navigation.navigate('SelectStudents')
+    this.props.navigation.navigate('SelectStudents');
     return this.state.studentsStatus;
   }
 
@@ -68,7 +68,7 @@ class MomentForm extends React.Component {
           style={styles.addPhoto}
           onPress={ () => {
             this.props.navigation.navigate('CaptureImage',
-              {navigation: this.props.navigation})
+              {navigation: this.props.navigation});
           }}
         >
           <Icon name='camera' size={50} color='#000' />
