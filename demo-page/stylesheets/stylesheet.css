@@ -1,0 +1,161 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  font-family: 'Raleway', sans-serif;
+}
+
+a.anchor {
+  display: block;
+  position: relative;
+  visibility: hidden;
+  top: -70px;
+}
+
+.navbar {
+  display: flex;
+  height: 75px;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  background-color: white;
+  width: 100%;
+  z-index: 1;
+}
+
+.navbar-list {
+  width: 100%;
+  text-align: center;
+}
+
+.navbar-list li {
+  display: inline;
+  margin-left: 20px;
+}
+
+.navbar-list li a {
+  text-decoration: none;
+  color: black;
+}
+
+.splash-box {
+  margin-top: 75px;
+  height: 621px;
+  width: 90%;
+  background-color: #f9f1de;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: -2;
+}
+
+.umbrella-logo {
+  margin-top: 80px;
+}
+
+.splash-title {
+  display: flex;
+}
+
+.title-flair-left {
+  transform: rotate(180deg);
+}
+
+.title-text {
+  font-size: 220px;
+  font-family: 'Amatic SC', cursive;
+}
+
+.splash-description {
+  font-size: 25px;
+  letter-spacing: 4.6px;
+  margin: 20px 0;
+}
+
+.download-button {
+  background-color: #e8794a;
+  height: 40px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+}
+
+.download-button a {
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+}
+
+.summary {
+  display: flex;
+  justify-content: space-between;
+  margin: 100px 0;
+  /*margin-left: 40px;*/
+}
+
+.summary-text {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 200px;
+}
+
+.summary-text h1 {
+  font-size: 60px;
+  margin-bottom: 120px;
+  font-weight: bold;
+  font-family: 'Amatic SC', cursive;
+}
+
+.summary-text p {
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.animations {
+  margin: 100px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.animations h1 {
+  font-size: 60px;
+  font-weight: bold;
+  font-family: 'Amatic SC', cursive;
+  margin-right: 300px;
+}
+
+.placeholder-image {
+  border: solid black 1px;
+  width: 250px;
+  height: 350px;
+}
+
+.other-stuff {
+  font-size: 60px;
+  font-weight: bold;
+  font-family: 'Amatic SC', cursive;
+}
+
+.footer {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  background-color: #294660;
+  width: 100%;
+  z-index: 1;
+  /*justify-content: center;*/
+  align-items: center;
+  height: 40px;
+  color: white;
+}
+
+.authors {
+  /*margin-right: 100px;*/
+  margin-left: 40%;
+  margin-right: 50px;
+}

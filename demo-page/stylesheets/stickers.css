@@ -1,0 +1,20 @@
+.line-path1 {
+  z-index: -1;
+  position: absolute;
+  margin-top: 600px;
+  margin-left: 100px;
+}
+
+.line-path2 {
+  z-index: -1;
+  position: absolute;
+  margin-top: 1240px;
+  margin-left: -125px;
+}
+
+.line-path3 {
+  z-index: -1;
+  position: absolute;
+  margin-top: 1790px;
+  margin-left: 120px;
+}
