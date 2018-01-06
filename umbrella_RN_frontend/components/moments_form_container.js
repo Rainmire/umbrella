@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import createMoment from '../actions/moment_actions';
 
 import MomentsForm from './moments_form';
 

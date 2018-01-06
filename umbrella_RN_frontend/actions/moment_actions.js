@@ -1,5 +1,5 @@
 export const RECEIVE_MOMENTS = "RECEIVE_MOMENTS";
-export const RECEIVE_NEW_CREATED_MOMENTS = "RECEIVE_NEW_CREATED_MOMENTS";
+export const RECEIVE_NEW_CREATED_MOMENT = "RECEIVE_NEW_CREATED_MOMENT";
 export const RECEIVE_MORE_MOMENTS = "RECEIVE_MORE_MOMENTS";
 
 export const receiveMoments = (moments) => ({
@@ -12,9 +12,9 @@ export const receiveMoreMoments = (moments) => ({
   moments
 });
 
-export const receiveNewCreatedMoments = (moments) => ({
-  type: RECEIVE_NEW_CREATED_MOMENTS,
-  moments
+export const receiveNewCreatedMoment = (moment) => ({
+  type: RECEIVE_NEW_CREATED_MOMENT,
+  moment
 });
 
 export const fetchMoments = (type,who,token,MomentId) => dispatch => (
@@ -36,6 +36,6 @@ export const createMoment = (post,token) => dispatch => (
     method:'POST',
     headers: { 'Authorization': token }
   }).then(({_bodyInit})=>{
-    dispatch(receiveNewCreatedMoments(JSON.parse(_bodyInit).moment));
+    dispatch(receiveNewCreatedMoment(JSON.parse(_bodyInit).moment));
   })
 );
