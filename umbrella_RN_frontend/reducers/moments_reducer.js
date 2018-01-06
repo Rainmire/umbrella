@@ -10,7 +10,7 @@ const childrenReducer = (state = [], action) => {
     case RECEIVE_MORE_MOMENTS:
       return state.concat(action.moments);
     case RECEIVE_NEW_CREATED_MOMENT:
-      return action.moments;
+      return action.moment.concat(state);
     default:
       return state;
   }

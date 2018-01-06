@@ -8,7 +8,7 @@ const mapSTPs = ({entities}) => ({
 });
 
 const mapDTPs = (dispatch) => ({
-
+  createMoment: (moment, token)=> dispatch(createMoment(moment, token))
 });
 
 export default connect(mapSTPs, mapDTPs)(MomentsForm);
