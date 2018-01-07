@@ -61,6 +61,7 @@ class MomentsScreen extends React.Component {
     )
   }
 
+// create actions
   _addMoment = () => (
     this.props.navigation.navigate('MomentForm', {navigation: this.props.navigation})
   )
@@ -85,6 +86,10 @@ class MomentsScreen extends React.Component {
 
   componentDidMount(){
     this.setState({refreshing: true});
+
+    if (this.props.currentUser && this.props.currentUser.teacher_class) {
+      this.setState({ isTeacher: true});
+    }
     AsyncStorage.getItem('token').then((returntoken)=> {
       if (this.props.currentUser === undefined && returntoken) {
         this.props.fetchCurrentUser(returntoken);
@@ -145,28 +150,12 @@ class MomentsScreen extends React.Component {
 }
 
 export default MomentsScreen;
-// <ListView
-// dataSource = {this.state.dataSource}
-// renderRow = {(rowData) => <Text>{rowData}</Text>}
-// refreshControl={
-//   <RefreshControl
-//   refreshing={this.state.refreshing}
-//   onRefresh={ () => this._fetch('new')}
-//   />}
-//   onEndReached={ () =>{
-//     if(this.props.moments.length > 10){
-//       this._fetch('more')
-//     }
-//   }}
-//   >
-//   </ListView>
 
 export const styles = StyleSheet.create({
   moments_container: {
     flex: 1,
     flexDirection: 'row',
     paddingTop: 25,
-    // borderWidth: 1,
   },
   profile_pic: {
     height: 50,
@@ -175,12 +164,14 @@ export const styles = StyleSheet.create({
   },
   moment: {
     marginLeft: 20,
+    flex: 1
   },
   name: {
     fontSize: 24,
     marginBottom: 10,
   },
   moment_body: {
+    flex: 1,
     marginBottom: 20,
   },
   moments_image: {
@@ -193,14 +184,13 @@ export const styles = StyleSheet.create({
   footer: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
   },
   footer_info: {
     fontSize: 12,
     marginTop: 5,
   },
   addMoment: {
-    // backgroundColor: 'pink',
     height: 50,
     width: 50,
     alignItems: 'center',
@@ -211,9 +201,7 @@ export const styles = StyleSheet.create({
 
   },
   addMomentContainer: {
-    // backgroundColor: 'yellow',
     marginTop: 20,
-    // flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end'
