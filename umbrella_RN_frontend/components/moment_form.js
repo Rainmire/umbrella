@@ -9,9 +9,11 @@ import {
   TextInput,
   TouchableOpacity,
   AsyncStorage,
+  Dimensions
 } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Camera from 'react-native-camera';
 
 class MomentForm extends React.Component {
   constructor(props) {
@@ -26,6 +28,7 @@ class MomentForm extends React.Component {
   }
 
   selectedStudents(){
+    this.props.navigation.navigate('SelectStudents');
     return this.state.studentsStatus;
   }
 
@@ -39,12 +42,16 @@ class MomentForm extends React.Component {
 
 //this.props.addMoment(this.state.body).then( () =>
 //this.props.navigation.navigate('MomentsScreen'))
-  _submitMoment = () => (
+  _submitMoment (){
+    AsyncStorage.getItem('token').then((returntoken)=> {
+      this.props.createMoment(this.state,returntoken);
+    });
     // console.log('submit moment props: ', this.props);
-    this.props.navigation.navigate('MomentsScreen')
-  )
+    this.props.navigation.navigate('MomentsScreen');
+  }
 
 //look at state for props needed
+
   _renderForm() {
     return (
       <View style={styles.newMomentContainer} >
@@ -59,7 +66,11 @@ class MomentForm extends React.Component {
 
         <TouchableOpacity
           style={styles.addPhoto}
-          onPress={console.log('open the camera/ camera roll, set state')} >
+          onPress={ () => {
+            this.props.navigation.navigate('CaptureImage',
+              {navigation: this.props.navigation});
+          }}
+        >
           <Icon name='camera' size={50} color='#000' />
         </TouchableOpacity>
 
@@ -141,7 +152,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 50,
     width: 200,
-
   },
   submitText: {
     fontSize: 22,

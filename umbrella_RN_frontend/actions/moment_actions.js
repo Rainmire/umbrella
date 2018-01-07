@@ -1,5 +1,5 @@
 export const RECEIVE_MOMENTS = "RECEIVE_MOMENTS";
-export const RECEIVE_NEW_MOMENTS = "RECEIVE_NEW_MOMENTS";
+export const RECEIVE_NEW_CREATED_MOMENT = "RECEIVE_NEW_CREATED_MOMENT";
 export const RECEIVE_MORE_MOMENTS = "RECEIVE_MORE_MOMENTS";
 
 export const receiveMoments = (moments) => ({
@@ -12,18 +12,30 @@ export const receiveMoreMoments = (moments) => ({
   moments
 });
 
-export const receiveNewMoments = (moments) => ({
-  type: RECEIVE_NEW_MOMENTS,
-  moments
+export const receiveNewCreatedMoment = (moment) => ({
+  type: RECEIVE_NEW_CREATED_MOMENT,
+  moment
 });
 
-export const fetchMoments = (type,MomentId,who,token) => dispatch => (
+export const fetchMoments = (type,who,token,MomentId) => dispatch => (
   // fetch(`https://umbrella-server.herokuapp.com/api/children/${who}/${type}_moments/${MomentId}`, {
-  fetch(`http://localhost:3000/api/${who}/${type}_moments/${MomentId}`,{
+  fetch(`http://localhost:3000/api/${who}/${type}_moments${MomentId}`,{
     method: 'GET',
     headers: { 'Authorization': token }
   }).then(({_bodyInit}) => {
-    console.log("hi");
-    return dispatch(receiveNewMoments(JSON.parse(_bodyInit).moments));
+    if(type === "new"){
+      return dispatch(receiveMoments(JSON.parse(_bodyInit).moments));
+    }else{
+      return dispatch(receiveMoreMoments(JSON.parse(_bodyInit).moments));
+    }
+  })
+);
+
+export const createMoment = (post,token) => dispatch => (
+  fetch(`http://localhost:3000/api/moments`,{
+    method:'POST',
+    headers: { 'Authorization': token }
+  }).then(({_bodyInit})=>{
+    dispatch(receiveNewCreatedMoment(JSON.parse(_bodyInit).moment));
   })
 );
