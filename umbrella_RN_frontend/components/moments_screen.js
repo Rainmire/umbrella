@@ -25,7 +25,7 @@ class MomentsScreen extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Moments',
     tabBarIcon: ({ tintColor }) => (
-      <Icon name="newspaper-o" size={30} color="#00F" />
+      <Icon name="newspaper-o" size={30} color="#00adf5" />
     )
   };
 

@@ -8,7 +8,7 @@ class CalendarScreen extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Calendar',
     tabBarIcon: ({ tintColor }) => (
-      <Icon name="calendar" size={30} color="#00F" />
+      <Icon name="calendar" size={30} color="#00adf5" />
     )
   };
 

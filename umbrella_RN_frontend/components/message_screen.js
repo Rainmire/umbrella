@@ -7,7 +7,7 @@ class MessageScreen extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Messages',
     tabBarIcon: ({ tintColor }) => (
-      <Icon name="comments" size={30} color="#00F" />
+      <Icon name="comments" size={30} color="#00adf5" />
     )
 
 

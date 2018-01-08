@@ -28,7 +28,7 @@ class ProfileScreen extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Profile',
     tabBarIcon: ({ tintColor }) => (
-      <Icon name="user" size={30} color="#00F" />
+      <Icon name="user" size={30} color="#00adf5" />
     )
   }
 
