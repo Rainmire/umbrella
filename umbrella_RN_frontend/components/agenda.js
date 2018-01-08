@@ -10,11 +10,15 @@ export default class AgendaScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: {
+      events: {
         '2017-05-01': [{name: "school closed for teacher's conference"}],
          '2017-05-02': [{name: 'item 2 - any js object'}],
          '2017-05-03': [],
          '2017-05-04': [{name: 'item 3 - any js object'},{name: 'any js object'}],
+      },
+      markedDates:{
+        '2017-05-01': {dots: [{key:'closed', color: 'red'}]},
+        '2017-05-02': {dots: [{key:'closed', color: 'red'}]},
       }
     };
   }
@@ -22,7 +26,7 @@ export default class AgendaScreen extends Component {
   render() {
     return (
       <Agenda
-        items={this.state.items}
+        events={this.state.events}
         loadItemsForMonth={(day)=>{console.log(day);}}
         selected={'2017-05-01'}
         renderItem={this.renderItem.bind(this)}
@@ -30,10 +34,7 @@ export default class AgendaScreen extends Component {
         rowHasChanged={this.rowHasChanged.bind(this)}
         onDayPress = {(day)=>{console.log("pressed", day);}}
         markingType={'multi-dot'}
-        markedDates={{
-    '2017-05-01': {dots: [{key:'closed', color: 'red'}]},
-    '2017-05-02': {dots: [{key:'closed', color: 'red'}]},
-  }}
+        markedDates={this.state.markedDates}
         // markingType={'period'}
         // markedDates={{
         //    '2017-05-08': {textColor: '#666'},
