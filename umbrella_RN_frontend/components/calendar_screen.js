@@ -3,7 +3,6 @@ import { StyleSheet, ScrollView,View, Text, Button } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Agenda, LocaleConfig } from 'react-native-calendars';
-import AgendaScreen from './agenda.js';
 
 class CalendarScreen extends React.Component {
   static navigationOptions = {
