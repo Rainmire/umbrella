@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, ScrollView,View, Text, Button } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Calendar, CalendarList, Agenda, LocaleConfig } from 'react-native-calendars';
+import { Agenda, LocaleConfig } from 'react-native-calendars';
 import AgendaScreen from './agenda.js';
 
 class CalendarScreen extends React.Component {
