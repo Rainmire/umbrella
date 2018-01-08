@@ -11,7 +11,7 @@ export default class AgendaScreen extends Component {
     super(props);
     this.state = {
       items: {
-        '2017-05-01': [{name: 'item 1 - any js object'}],
+        '2017-05-01': [{name: "school closed for teacher's conference"}],
          '2017-05-02': [{name: 'item 2 - any js object'}],
          '2017-05-03': [],
          '2017-05-04': [{name: 'item 3 - any js object'},{name: 'any js object'}],
@@ -23,12 +23,17 @@ export default class AgendaScreen extends Component {
     return (
       <Agenda
         items={this.state.items}
-        loadItemsForMonth={this.loadItems.bind(this)}
+        loadItemsForMonth={(day)=>{console.log(day);}}
         selected={'2017-05-01'}
         renderItem={this.renderItem.bind(this)}
         renderEmptyDate={this.renderEmptyDate.bind(this)}
         rowHasChanged={this.rowHasChanged.bind(this)}
         onDayPress = {(day)=>{console.log("pressed", day);}}
+        markingType={'multi-dot'}
+        markedDates={{
+    '2017-05-01': {dots: [{key:'closed', color: 'red'}]},
+    '2017-05-02': {dots: [{key:'closed', color: 'red'}]},
+  }}
         // markingType={'period'}
         // markedDates={{
         //    '2017-05-08': {textColor: '#666'},
@@ -44,33 +49,6 @@ export default class AgendaScreen extends Component {
         //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
       />
     );
-  }
-
-  loadItems(day) {
-    // setTimeout(() => {
-      console.log(day);
-    //   // for (let i = -15; i < 85; i++) {
-    //   //   const time = day.timestamp + i * 24 * 60 * 60 * 1000;
-    //   //   const strTime = this.timeToString(time);
-    //   //   if (!this.state.items[strTime]) {
-    //   //     this.state.items[strTime] = [];
-    //   //     const numItems = Math.floor(Math.random() * 5);
-    //   //     for (let j = 0; j < numItems; j++) {
-    //   //       this.state.items[strTime].push({
-    //   //         name: 'Item for '+ strTime ,
-    //   //         height: Math.max(50, Math.floor(Math.random() * 150))
-    //   //       });
-    //   //     }
-    //   //   }
-    //   // }
-    //   console.log(this.state.items);
-    //   const newItems = {};
-    //   Object.keys(this.state.items).forEach(key => {newItems[key] = this.state.items[key];});
-    //   this.setState({
-    //     items: newItems
-    //   });
-    // }, 1000);
-    // console.log(`Load Items for ${day.year}-${day.month}`);
   }
 
   renderItem(item) {
