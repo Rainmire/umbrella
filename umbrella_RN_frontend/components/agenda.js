@@ -26,7 +26,7 @@ export default class AgendaScreen extends Component {
   render() {
     return (
       <Agenda
-        events={this.state.events}
+        items={this.state.events}
         loadItemsForMonth={(day)=>{console.log(day);}}
         selected={'2017-05-01'}
         renderItem={this.renderItem.bind(this)}

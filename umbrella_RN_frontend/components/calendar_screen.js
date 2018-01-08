@@ -28,15 +28,58 @@ class CalendarScreen extends React.Component {
       }
     };
   }
+  renderItem(item) {
+    return (
+      <View style={[styles.item, {height: item.height}]}><Text>{item.name}</Text></View>
+    );
+  }
+
+  renderEmptyDate() {
+    return (
+      <View style={styles.emptyDate}><Text>This is empty date!</Text></View>
+    );
+  }
+
+  rowHasChanged(r1, r2) {
+    return r1.name !== r2.name;
+  }
+
+  timeToString(time) {
+    const date = new Date(time);
+    return date.toISOString().split('T')[0];
+  }
 
   render() {
     return(
       <ScrollView style={{ paddingTop: 50, flex: 1 }}>
-        <AgendaScreen />
+        <Agenda
+          items={this.state.events}
+          loadItemsForMonth={(day)=>{console.log(day);}}
+          selected={'2017-05-01'}
+          renderItem={this.renderItem.bind(this)}
+          renderEmptyDate={this.renderEmptyDate.bind(this)}
+          rowHasChanged={this.rowHasChanged.bind(this)}
+          onDayPress = {(day)=>{console.log("pressed", day);}}
+          markingType={'multi-dot'}
+          markedDates={this.state.markedDates}
+        />
       </ScrollView>
     );
   }
 }
+// markedDates={{
+//    '2017-05-08': {textColor: '#666'},
+//    '2017-05-09': {textColor: '#666'},
+//    '2017-05-14': {startingDay: true, endingDay: true, color: 'blue'},
+//    '2017-05-21': {startingDay: true, color: 'blue'},
+//    '2017-05-22': {endingDay: true, color: 'gray'},
+//    '2017-05-24': {startingDay: true, color: 'gray'},
+//    '2017-05-25': {color: 'gray'},
+//    '2017-05-26': {endingDay: true, color: 'gray'}}}
+// monthFormat={'yyyy'}
+// theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
+//renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
+
 // markingType={'period'}
 // LocaleConfig.defaultLocale = 'fr';
 
