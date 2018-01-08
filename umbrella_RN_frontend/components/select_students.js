@@ -15,10 +15,6 @@ class SelectStudents extends React.Component {
   constructor(props) {
     super(props);
 
-// hard code in as:
-// 4: false,
-// 6: false
-// if componentDidUpdate fn doesn't work
     this.state = {
       studentsStatus: {},
     }
@@ -27,38 +23,25 @@ class SelectStudents extends React.Component {
     this.selectStudents = this.props.navigation.state.params.selectedStudents.bind(this);
   }
 
-// the logic in this function seems sound, but not working;
-// changed to component did update, maybe another lifecycle method needed?
-// changed to use object.assign, maybe that will fix it?
-// try: componentDidMount, componentWillReceiveProps
-  componentDidUpdate(){
+  componentDidMount(){
     let stus = {};
-    console.log('select props', this.props);
+
     this.props.students.forEach((student)=>{
       stus[student.id] = false;
     });
-    console.log('stus', stus);
-    this.setState({ studentsStatus: stus });
 
-    Object.assign({}, this.state.studentStatus, stus)
+    let status = Object.assign({}, this.state.studentsStatus, stus)
+    this.setState({ studentsStatus: status });
   }
 
 // toggles the studentsStatus between true/ false
 // must use Object.assign to merge state
   _selectStudent(id) {
-
-    // if (this.state.studentsStatus[id]) {
-    //   let status = Object.assign({}, this.state.studentStatus, { [id]: false })
-    //   this.setState({ studentStatus: status })
-    // } else {
-    //   let status = Object.assign({}, this.state.studentStatus, { [id]: true })
-    //   this.setState({ studentStatus: status })
-    // }
-
-    let status = Object.assign({}, this.state.studentStatus,
+    let status = Object.assign({}, this.state.studentsStatus,
       { [id]: !this.state.studentsStatus[id] })
-    this.setState({ studentStatus: status })
+      console.log('selecting students by id', this.state)
 
+    this.setState({ studentsStatus: status })
   }
 
   _renderItem = ({ item }) => {
@@ -80,19 +63,18 @@ class SelectStudents extends React.Component {
     );
   }
 
-// broken right now--FIX-- use Object.assign here to fix
-//   _selectAllStudents() {
-//     this.setState(previousState => {
-//       return { studentsStatus: !previousState.studentsStatus };
-//     });
-//
-//     this.setState({ studentsStatus: Object.values(this.state.studentsStatus).map( v => v = !v )})
-//     console.log('all students status', this.state.studentsStatus)
-//
-//   }
+  _selectAllStudents() {
+    let stus = {};
+
+    this.props.students.forEach((student)=>{
+      stus[student.id] = stus[student.id] ? false : true;
+    });
+
+    this.setState({ studentsStatus: stus });
+  }
 
   _finishSelecting() {
-    console.log('hit the button', this.state.studentStatus);
+    console.log('hit the button state', this.state.studentsStatus);
     this.selectStudents(this.state.studentsStatus);
     this.props.navigation.navigate('MomentForm');
   }
@@ -108,7 +90,7 @@ class SelectStudents extends React.Component {
           <Text>Finished</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={ this._selectAllStudents }
+          onPress={ this._selectAllStudents.bind(this) }
           style={styles.button}>
           <View style={styles.name}>
             <Text style={{fontSize: 24}}>Select All Students</Text>
