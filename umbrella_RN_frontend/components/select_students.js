@@ -15,18 +15,23 @@ class SelectStudents extends React.Component {
   constructor(props) {
     super(props);
 
+// hard code in as:
+// 4: false,
+// 6: false
+// if componentDidUpdate fn doesn't work
     this.state = {
-      studentsStatus: {
-        4: false,
-        6: false
-      },
+      studentsStatus: {},
     }
 
     this.setState = this.setState.bind(this);
     this.selectStudents = this.props.navigation.state.params.selectedStudents.bind(this);
   }
 
-  componentWillReceiveProps(){
+// the logic in this function seems sound, but not working;
+// changed to component did update, maybe another lifecycle method needed?
+// changed to use object.assign, maybe that will fix it?
+// try: componentDidMount, componentWillReceiveProps
+  componentDidUpdate(){
     let stus = {};
     console.log('select props', this.props);
     this.props.students.forEach((student)=>{
@@ -35,6 +40,7 @@ class SelectStudents extends React.Component {
     console.log('stus', stus);
     this.setState({ studentsStatus: stus });
 
+    Object.assign({}, this.state.studentStatus, stus)
   }
 
 // toggles the studentsStatus between true/ false
@@ -49,16 +55,12 @@ class SelectStudents extends React.Component {
     //   this.setState({ studentStatus: status })
     // }
 
-    let status = Object.assign(
-      {},
-      this.state.studentStatus,
+    let status = Object.assign({}, this.state.studentStatus,
       { [id]: !this.state.studentsStatus[id] })
     this.setState({ studentStatus: status })
 
   }
 
-// for each child, when we click them, we need to get their __?__ so we
-// can connect them to the moment when it is sent to the db;
   _renderItem = ({ item }) => {
 
     return(
@@ -78,7 +80,7 @@ class SelectStudents extends React.Component {
     );
   }
 
-// broken right now
+// broken right now--FIX-- use Object.assign here to fix
 //   _selectAllStudents() {
 //     this.setState(previousState => {
 //       return { studentsStatus: !previousState.studentsStatus };
@@ -90,15 +92,13 @@ class SelectStudents extends React.Component {
 //   }
 
   _finishSelecting() {
-    // debugger
     console.log('hit the button', this.state.studentStatus);
     this.selectStudents(this.state.studentsStatus);
     this.props.navigation.navigate('MomentForm');
   }
 
   render() {
-    // console.log('select students props: ', this.props);
-    // console.log('here is the state for the select: ', this.state.studentsStatus);
+
     return (
       <View>
         <TouchableOpacity
@@ -160,13 +160,3 @@ export const styles = StyleSheet.create({
     height: 50,
   },
 });
-
-// render(){
-//   const selectedStudents = this.props.selectedStudents;
-//   console.log('select student props: ', this.props);
-//   return(
-//     <View>
-//     <Text>This is where we select which students to send to</Text>
-//     </View>
-//   );
-// }
