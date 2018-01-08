@@ -13,11 +13,21 @@ class CalendarScreen extends React.Component {
     )
   };
 
-  // constructor(){
-  //   this.state = {
-  //     selectdate = ""
-  //   }
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      events: {
+        '2017-05-01': [{name: "school closed for teacher's conference"}],
+         '2017-05-02': [{name: 'item 2 - any js object'}],
+         '2017-05-03': [],
+         '2017-05-04': [{name: 'item 3 - any js object'},{name: 'any js object'}],
+      },
+      markedDates:{
+        '2017-05-01': {dots: [{key:'closed', color: 'red'}]},
+        '2017-05-02': {dots: [{key:'closed', color: 'red'}]},
+      }
+    };
+  }
 
   render() {
     return(
