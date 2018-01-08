@@ -148,85 +148,21 @@ ChildMomentMembership.create([
   { child_id: 1, moment_id: 30 },
   { child_id: 1, moment_id: 31 },
 
-
-
   ])
 
-  # ChildMomentMembership.create([
-  #   { child_id: 1, moment_id: 101 },
-  #   { child_id: 4, moment_id: 101 },
-  #   { child_id: 5, moment_id: 101 },
-  #   { child_id: 2, moment_id: 102 },
-  #   { child_id: 3, moment_id: 102 },
-  #   { child_id: 6, moment_id: 102 },
-  #   { child_id: 1, moment_id: 103 },
-  #   { child_id: 4, moment_id: 103 },
-  #   { child_id: 5, moment_id: 103 },
-  #   { child_id: 2, moment_id: 104 },
-  #   { child_id: 3, moment_id: 104 },
-  #   { child_id: 6, moment_id: 104 },
-  #
-  #   { child_id: 1, moment_id: 105 },
-  #
-  #   { child_id: 3, moment_id: 105 },
-  #   { child_id: 6, moment_id: 105 },
-  #
-  #   #child 3 extras
-  #   { child_id: 1, moment_id: 106 },
-  #   { child_id: 4, moment_id: 106 },
-  #   { child_id: 5, moment_id: 106 },
-  #   { child_id: 2, moment_id: 107 },
-  #   { child_id: 3, moment_id: 107 },
-  #   { child_id: 6, moment_id: 107 },
-  #   { child_id: 1, moment_id: 108 },
-  #   { child_id: 4, moment_id: 108 },
-  #   { child_id: 5, moment_id: 108 },
-  #
-  #   { child_id: 4, moment_id: 109 },
-  #   { child_id: 4, moment_id: 110 },
-  #   { child_id: 4, moment_id: 111 },
-  #
-  #   { child_id: 3, moment_id: 112 },
-  #   { child_id: 3, moment_id: 113 },
-  #   { child_id: 3, moment_id: 114 },
-  #
-  #   { child_id: 6, moment_id: 115 },
-  #   { child_id: 6, moment_id: 116 },
-  #   { child_id: 6, moment_id: 117 },
-  #
-  #   { child_id: 1, moment_id: 118 },
-  #   { child_id: 4, moment_id: 118 },
-  #   { child_id: 5, moment_id: 118 },
-  #   { child_id: 1, moment_id: 119 },
-  #   { child_id: 4, moment_id: 119 },
-  #   { child_id: 5, moment_id: 119 },
-  #   { child_id: 1, moment_id: 120 },
-  #   { child_id: 4, moment_id: 120 },
-  #   { child_id: 5, moment_id: 120 },
-  #   { child_id: 2, moment_id: 121 },
-  #   { child_id: 3, moment_id: 121 },
-  #   { child_id: 6, moment_id: 121 },
-  #   { child_id: 2, moment_id: 122 },
-  #   { child_id: 3, moment_id: 122 },
-  #   { child_id: 6, moment_id: 122 },
-  #   { child_id: 2, moment_id: 123 },
-  #   { child_id: 3, moment_id: 123 },
-  #   { child_id: 6, moment_id: 123 },
-  #
-  #   { child_id: 6, moment_id: 124 },
-  #   { child_id: 6, moment_id: 125 },
-  #   { child_id: 6, moment_id: 126 },
-  #   { child_id: 6, moment_id: 127 },
-  #   { child_id: 6, moment_id: 128 },
-  #   { child_id: 6, moment_id: 129 },
-  #   { child_id: 6, moment_id: 130 },
-  #
-  #   { child_id: 3, moment_id: 124 },
-  #   { child_id: 3, moment_id: 125 },
-  #   { child_id: 3, moment_id: 126 },
-  #   { child_id: 3, moment_id: 127 },
-  #   { child_id: 3, moment_id: 128 },
-  #   { child_id: 3, moment_id: 129 },
-  #   { child_id: 3, moment_id: 130 },
-  #
-  #   ])
+calendar_events = CalendarEvent.create([
+  { date: '2017-05-01', start_time: '2017-05-01T10:15:00+00:00', end_time: '2017-05-01T11:15:00+00:00', body: 'event1' },
+  { date: '2017-05-01', start_time: '2017-05-01T12:00:00+00:00', end_time: '2017-05-01T13:00:00+00:00', body: 'event2' },
+  { date: '2017-05-01', start_time: '2017-05-01T14:00:00+00:00', end_time: '2017-05-01T15:00:00+00:00', body: 'event3' },
+  { date: '2017-05-01', start_time: '2017-05-01T15:00:00+00:00', end_time: '2017-05-01T16:00:00+00:00', body: 'event4' },
+
+  { date: '2017-05-02', start_time: '2017-05-01T09:00:00+00:00', end_time: '2017-05-01T10:15:00+00:00', body: 'event5' },
+  { date: '2017-05-02', start_time: '2017-05-01T10:15:00+00:00', end_time: '2017-05-01T11:15:00+00:00', body: 'event6' },
+  { date: '2017-05-02', start_time: '2017-05-01T11:15:00+00:00', end_time: '2017-05-01T13:15:00+00:00', body: 'event7' },
+
+  { date: '2017-06-12', start_time: '2017-05-01T10:15:00+00:00', end_time: '2017-05-01T11:15:00+00:00', body: 'event8' },
+  { date: '2017-06-12', start_time: '2017-05-01T12:15:00+00:00', end_time: '2017-05-01T14:15:00+00:00', body: 'event9' },
+
+  { date: '2017-06-30', start_time: '2017-05-01T10:00:00+00:00', end_time: '2017-05-01T16:00:00+00:00', body: 'event10' },
+
+  ])
