@@ -110,7 +110,7 @@ class CaptureImage extends Component {
     const options = {};
     //options.location = ...
     this.camera.capture({metadata: options})
-      .then((data) => console.log(data))
+      .then((data) => console.log('image data', data))
       .catch(err => console.error(err));
   }
 }

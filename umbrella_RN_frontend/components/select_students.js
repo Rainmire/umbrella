@@ -14,15 +14,56 @@ import { TabNavigator } from 'react-navigation';
 class SelectStudents extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      studentsStatus: {
+        4: false,
+        6: false
+      },
+    }
+
+    this.setState = this.setState.bind(this);
+    this.selectStudents = this.props.navigation.state.params.selectedStudents.bind(this);
+  }
+
+  componentWillReceiveProps(){
+    let stus = {};
+    console.log('select props', this.props);
+    this.props.students.forEach((student)=>{
+      stus[student.id] = false;
+    });
+    console.log('stus', stus);
+    this.setState({ studentsStatus: stus });
+
+  }
+
+// toggles the studentsStatus between true/ false
+// must use Object.assign to merge state
+  _selectStudent(id) {
+
+    // if (this.state.studentsStatus[id]) {
+    //   let status = Object.assign({}, this.state.studentStatus, { [id]: false })
+    //   this.setState({ studentStatus: status })
+    // } else {
+    //   let status = Object.assign({}, this.state.studentStatus, { [id]: true })
+    //   this.setState({ studentStatus: status })
+    // }
+
+    let status = Object.assign(
+      {},
+      this.state.studentStatus,
+      { [id]: !this.state.studentsStatus[id] })
+    this.setState({ studentStatus: status })
+
   }
 
 // for each child, when we click them, we need to get their __?__ so we
 // can connect them to the moment when it is sent to the db;
   _renderItem = ({ item }) => {
-    console.log(`${item.name}`, 'has an id of: ', `${item.id}`);
+
     return(
       <TouchableOpacity
-        onPress={ () =>  console.log('child', `${item.name}`, 'was pressed')}
+        onPress={ () => this._selectStudent(item.id) }
         style={styles.switchChildContainer}>
         <View>
           <Image
@@ -37,12 +78,38 @@ class SelectStudents extends React.Component {
     );
   }
 
+// broken right now
+//   _selectAllStudents() {
+//     this.setState(previousState => {
+//       return { studentsStatus: !previousState.studentsStatus };
+//     });
+//
+//     this.setState({ studentsStatus: Object.values(this.state.studentsStatus).map( v => v = !v )})
+//     console.log('all students status', this.state.studentsStatus)
+//
+//   }
+
+  _finishSelecting() {
+    // debugger
+    console.log('hit the button', this.state.studentStatus);
+    this.selectStudents(this.state.studentsStatus);
+    this.props.navigation.navigate('MomentForm');
+  }
+
   render() {
+    // console.log('select students props: ', this.props);
+    // console.log('here is the state for the select: ', this.state.studentsStatus);
     return (
       <View>
         <TouchableOpacity
-          onPress={ () =>  console.log('selected all children')}
-          style={styles.selectAllButton}>
+          onPress={ () => this._finishSelecting() }
+          style={styles.button}
+        >
+          <Text>Finished</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={ this._selectAllStudents }
+          style={styles.button}>
           <View style={styles.name}>
             <Text style={{fontSize: 24}}>Select All Students</Text>
           </View>
@@ -83,7 +150,7 @@ export const styles = StyleSheet.create({
     paddingLeft: 25,
     alignItems: 'center'
   },
-  selectAllButton: {
+  button: {
     paddingTop: 5,
     paddingBottom: 5,
     backgroundColor: 'rgba(255, 182, 193, .5)',

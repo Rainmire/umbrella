@@ -24,35 +24,40 @@ class MomentForm extends React.Component {
       momentImage: '',
       studentsStatus: {}
     };
+
     this.selectedStudents = this.selectedStudents.bind(this);
   }
 
   selectedStudents(){
-    this.props.navigation.navigate('SelectStudents');
+    this.props.navigation.navigate('SelectStudents', {selectedStudents: this._selectStudents });
     return this.state.studentsStatus;
   }
+
+  _selectStudents(students) {
+    this.setState({studentsStatus: students});
+  }
+
 
   componentWillReceiveProps(newProps){
     let stus = {};
     newProps.students.forEach((student)=>{
       stus[student.id] = false;
     });
+    
     this.setState({studentsStatus:stus});
   }
 
-//this.props.addMoment(this.state.body).then( () =>
-//this.props.navigation.navigate('MomentsScreen'))
   _submitMoment (){
     AsyncStorage.getItem('token').then((returntoken)=> {
       this.props.createMoment(this.state,returntoken);
     });
-    // console.log('submit moment props: ', this.props);
+
     this.props.navigation.navigate('MomentsScreen');
   }
 
-//look at state for props needed
 
   _renderForm() {
+
     return (
       <View style={styles.newMomentContainer} >
         <View style={styles.textInputContainer}>
@@ -67,8 +72,7 @@ class MomentForm extends React.Component {
         <TouchableOpacity
           style={styles.addPhoto}
           onPress={ () => {
-            this.props.navigation.navigate('CaptureImage',
-              {navigation: this.props.navigation});
+            this.props.navigation.navigate('CaptureImage');
           }}
         >
           <Icon name='camera' size={50} color='#000' />
@@ -79,7 +83,9 @@ class MomentForm extends React.Component {
             onPress={this.selectedStudents}
             style={styles.selecteRecipient}
           >
-            <Text style={styles.selecteRecipientText}>Select Recipient </Text>
+            <Text style={styles.selecteRecipientText}>
+              Select Recipient
+            </Text>
             <Icon
               name='angle-right'
               size={30}
@@ -91,7 +97,7 @@ class MomentForm extends React.Component {
 
         <View style={styles.submitContainer}>
           <TouchableOpacity
-            onPress={ this._submitMoment}
+            onPress={ this._submitMoment.bind(this)}
             style={styles.submit}
           >
             <Text style={styles.submitText}>Submit</Text>
@@ -102,7 +108,9 @@ class MomentForm extends React.Component {
   }
 
   render() {
+    console.log('moment form props: ', this.props);
     console.log('new moment props: ', this.props);
+    console.log('new moment form state: ', this.state);
     return (
       <View>
         {this._renderForm()}
