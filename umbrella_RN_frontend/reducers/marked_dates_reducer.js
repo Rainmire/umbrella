@@ -6,7 +6,7 @@ const markedDatesReducer = (state = [], action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_MARKEDDATES:
-      return action.markedDates;
+      return action.markedDates.concat(state);
     default:
       return state;
   }
