@@ -33,9 +33,9 @@ export const fetchMoments = (type,who,token,MomentId) => dispatch => (
 
 export const createMoment = (post,token) => dispatch => (
   fetch(`http://localhost:3000/api/moments`,{
-    method:'POST',
+    method: 'POST',
     headers: { 'Authorization': token }
-  }).then(({_bodyInit})=>{
+  }).then(({_bodyInit}) => {
     dispatch(receiveNewCreatedMoment(JSON.parse(_bodyInit).moment));
   })
 );

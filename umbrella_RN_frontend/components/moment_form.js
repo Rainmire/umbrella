@@ -31,6 +31,13 @@ class MomentForm extends React.Component {
     this.selectedStudents = this.selectedStudents.bind(this);
     this._selectStudents = this._selectStudents.bind(this);
     window.checkState = this.checkState.bind(this);
+    // remember, to access checkState on the window, change 'top'
+    // to 'webworker'-somethingoranother in dev tools
+  }
+
+  componentDidMount() {
+    console.log('component mounted: ', this);
+    console.log('component mounted: ', this.props);
   }
 
   checkState() {
@@ -39,6 +46,7 @@ class MomentForm extends React.Component {
   }
 
   selectedStudents(){
+    console.log('selectedStudents');
     this.props.navigation.navigate('SelectStudents',
       {selectStudents: this._selectStudents});
   }
@@ -48,7 +56,7 @@ class MomentForm extends React.Component {
   // send back its state, which will tell which children the new moment will
   // be connected to
   _selectStudents(students) {
-
+console.log('_selectStudents');
     this.setState({studentsStatus: students},
       () => this._readyStudentMemberships());
   }
@@ -67,11 +75,14 @@ class MomentForm extends React.Component {
   }
 
   _submitMoment (){
+    console.log('submit moment');
+    this.checkState();
     AsyncStorage.getItem('token').then( (returntoken) => {
       this.props.createMoment(this.state, returntoken);
     }).then(this.props.navigation.navigate('MomentsScreen'));
 
   }
+
 
 // renders once, state is correct; re-renders, and state is reset
 // recreate: uncomment debugger below, step through once you've selected
@@ -80,6 +91,7 @@ class MomentForm extends React.Component {
 // console.log('render fn state', this.state);
 // console.log('render fn context', this);
 // debugger
+console.log('_renderForm');
 this.checkState();
     return (
       <View style={styles.newMomentContainer} >
@@ -132,6 +144,8 @@ this.checkState();
   }
 
   render() {
+    console.log('render');
+    console.log('moment form', this.state);
     return (
       <View>
         {this._renderForm()}

@@ -1,8 +1,7 @@
 import { RECEIVE_MOMENTS, RECEIVE_MORE_MOMENTS, RECEIVE_NEW_CREATED_MOMENT } from '../actions/moment_actions';
 import merge from 'lodash/merge';
 
-
-const childrenReducer = (state = [], action) => {
+const MomentsReducer = (state = [], action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_MOMENTS:
@@ -16,4 +15,4 @@ const childrenReducer = (state = [], action) => {
   }
 };
 
-export default childrenReducer;
+export default MomentsReducer;

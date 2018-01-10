@@ -33,6 +33,7 @@ class SelectStudents extends React.Component {
 // used for trying to set state locally and pass back studentsStatus
 // object to moment form; not entirely sure if this is needed here...
   componentDidMount(){
+    console.log('componentDidMount');
     let stus = {};
 
     this.props.students.forEach((student)=>{
@@ -46,6 +47,7 @@ class SelectStudents extends React.Component {
 // toggles the studentsStatus between true/ false
 // must use Object.assign to merge state
   _selectStudent(id) {
+    console.log('_selectStudent(id)');
     let status = Object.assign({}, this.state.studentsStatus,
       { [id]: !this.state.studentsStatus[id] })
 
@@ -53,7 +55,7 @@ class SelectStudents extends React.Component {
   }
 
   _renderItem = ({ item }) => {
-
+console.log('_renderItem');
     return(
       <TouchableOpacity
         onPress={ () => this._selectStudent(item.id) }
@@ -72,6 +74,7 @@ class SelectStudents extends React.Component {
   }
 
   _selectAllStudents() {
+    console.log('_selectAllStudents');
     let stus = {};
 
     this.props.students.forEach( (student) => {
@@ -82,11 +85,14 @@ class SelectStudents extends React.Component {
   }
 
   _finishSelecting() {
-    this.selectStudents(this.state.studentsStatus);
+    // new Promise (() => this.selectStudents(this.state.studentsStatus)).then(
+    // this.props.navigation.navigate('MomentForm'));
+    this.selectStudents(this.state.studentsStatus)
     this.props.navigation.navigate('MomentForm');
   }
 
   render() {
+console.log('render');
 
     return (
       <View>
