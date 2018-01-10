@@ -15,9 +15,6 @@ import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Camera from 'react-native-camera';
 
-// will be passing back children as an array, with student id's present
-// if they are to have membership to the moment
-
 // I think this has to do with the state updating each time the textinpit
 // field is updated, resetting state...this being the fact that student status aren't
 // saving, and the body doesn't persist when navigating between screens
@@ -33,91 +30,55 @@ class MomentForm extends React.Component {
 
     this.selectedStudents = this.selectedStudents.bind(this);
     this._selectStudents = this._selectStudents.bind(this);
-    this.setParentState = this.setState.bind(this);
     window.checkState = this.checkState.bind(this);
-  }
-
-  componentDidUpdate() {
-    console.log('I updated...right?...', this.state);
   }
 
   checkState() {
     console.log('current moment state: ', this.state);
     return this;
   }
-// {setParentState: newState => this.setState(newState)}
+
   selectedStudents(){
     this.props.navigation.navigate('SelectStudents',
       {selectStudents: this._selectStudents});
-    // return this.state.studentsStatus;
   }
-
-  // selectedStudents(){
-  //   this.props.navigation.navigate('SelectStudents',
-  //     {setParentState: this.setParentState});
-  //   // return this.state.studentsStatus;
-  // }
 
 
   // this is passed to select_students screen so that select_students can
   // send back its state, which will tell which children the new moment will
   // be connected to
   _selectStudents(students) {
-    console.log('students ', students);
-    // console.log('context before setting: ', this);
-    // console.log('state before setting: ', this.state);
-    // let status = Object.assign({}, this.state.studentsStatus, students);
-    // console.log('heres the status after students: ', status);
 
-    this.setState({studentsStatus: students}, () => this._readyStudentMemberships());
-    console.log('context after setting?,', this);
-    // console.log('state after setting?,', this.state);
-    // console.log('context after setting 2?,', this);
+    this.setState({studentsStatus: students},
+      () => this._readyStudentMemberships());
   }
 
-// this gives the id as a string--what's it expecting in the backend?
   _readyStudentMemberships() {
     let students = [];
-    // console.log('value of the status: ', this.state.studentsStatus );
-// console.log('here is the final context within _readyStudentMemberships: ', this);
+
     Object.keys(this.state.studentsStatus).forEach( (id) => {
       if (this.state.studentsStatus[id]) {
         students.push(parseInt(id));
       }
     });
-    // console.log('these are the new students: ', students);
-    this.setState({studentsStatus: students}, () => console.log('student memberships ready: ', this.state));
+
+    this.setState({studentsStatus: students},
+      () => console.log('student memberships ready: ', this.state));
   }
 
-  // componentWillReceiveProps(newProps){
-  //   console.log('I updated...right?...will receive props', this.state);
-  //   console.log('new props', newProps);
-  //   let stus = {};
-  //   newProps.students.forEach((student)=>{
-  //     stus[student.id] = false;
-  //   });
-  //
-  //   this.setState({studentsStatus:stus});
-  // }
-
   _submitMoment (){
-    console.log('submit moment props', this.props);
     AsyncStorage.getItem('token').then( (returntoken) => {
       this.props.createMoment(this.state, returntoken);
     }).then(this.props.navigation.navigate('MomentsScreen'));
 
-    // console.log('here is the final context before hitting _readyStudentMemberships: ', this);
-    // console.log('here is the final state before hitting _readyStudentMemberships: ', this.state);
-    // this._readyStudentMemberships();
-    // this.props.navigation.navigate('MomentsScreen');
   }
 
 // renders once, state is correct; re-renders, and state is reset
 // recreate: uncomment debugger below, step through once you've selected
 // students, call checkState(); which was placed on the window
   _renderForm() {
-console.log('render fn state', this.state);
-console.log('render fn context', this);
+// console.log('render fn state', this.state);
+// console.log('render fn context', this);
 // debugger
 this.checkState();
     return (
@@ -171,9 +132,6 @@ this.checkState();
   }
 
   render() {
-    // console.log('moment form props: ', this.props);
-    // console.log('new moment props: ', this.props);
-    // console.log('new moment form state: ', this.state);
     return (
       <View>
         {this._renderForm()}
@@ -227,5 +185,4 @@ export const styles = StyleSheet.create({
   submitText: {
     fontSize: 22,
   }
-
 });

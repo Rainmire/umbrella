@@ -19,21 +19,19 @@ class SelectStudents extends React.Component {
       studentsStatus: {},
     }
 
-    // this.setState = this.setState.bind(this);
     this.selectStudents = this.props.navigation.state.params.selectStudents;
-    // this.studentsStatus = this.props.navigation.state.params.studentsStatus;
-    // this.setParentState = this.props.navigation.state.params.setParentState;
   }
 
-  componentDidMount() {
-    console.log('select student screen state', this.state);
-  }
+  // componentDidMount() {
+  //   console.log('select student screen state', this.state);
+  // }
+  //
+  // componentWillUnmount() {
+  //   console.log('surprise?...');
+  // }
 
-  componentWillUnmount() {
-    console.log('surprise?...');
-  }
-
-// used for trying to set state locally and pass back studentsStatus object to moment form
+// used for trying to set state locally and pass back studentsStatus
+// object to moment form; not entirely sure if this is needed here...
   componentDidMount(){
     let stus = {};
 
@@ -43,8 +41,6 @@ class SelectStudents extends React.Component {
 
     let status = Object.assign({}, this.studentsStatus, stus)
     this.setState({ studentsStatus: status });
-    // this.studentsStatus = stus;
-    // console.log('select student screen mounted: ', this);
   }
 
 // toggles the studentsStatus between true/ false
@@ -52,7 +48,6 @@ class SelectStudents extends React.Component {
   _selectStudent(id) {
     let status = Object.assign({}, this.state.studentsStatus,
       { [id]: !this.state.studentsStatus[id] })
-      // console.log('selecting students by id', this.state)
 
     this.setState({ studentsStatus: status }, () => console.log('setting state: ', this.state));
   }
@@ -78,18 +73,15 @@ class SelectStudents extends React.Component {
 
   _selectAllStudents() {
     let stus = {};
-// console.log('select student props', this.props);
+
     this.props.students.forEach( (student) => {
       stus[student.id] = true;
     });
 
-    // this.selectStudents(stus);
     this.setState({ studentsStatus: stus });
-    // this.setParentState(stus);
   }
 
   _finishSelecting() {
-    // console.log('hit the button state', this.state);
     this.selectStudents(this.state.studentsStatus);
     this.props.navigation.navigate('MomentForm');
   }
@@ -119,7 +111,6 @@ class SelectStudents extends React.Component {
       </View>
     );
   }
-
 }
 
 export default SelectStudents;

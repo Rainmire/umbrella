@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { createMoment } from '../actions/moment_actions';
 
-import MomentForm from './moments_form';
+import MomentForm from './moment_form';
 
 const mapSTPs = ({entities}) => ({
   students: entities.children
