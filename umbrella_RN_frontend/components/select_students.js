@@ -87,8 +87,8 @@ console.log('_renderItem');
   _finishSelecting() {
     // new Promise (() => this.selectStudents(this.state.studentsStatus)).then(
     // this.props.navigation.navigate('MomentForm'));
-    this.selectStudents(this.state.studentsStatus)
-    this.props.navigation.navigate('MomentForm');
+    this.selectStudents(this.state.studentsStatus);
+    this.props.navigation.navigate('MomentForm', {status: this.state.studentsStatus});
   }
 
   render() {

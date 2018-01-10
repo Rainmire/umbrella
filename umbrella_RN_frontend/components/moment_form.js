@@ -27,7 +27,7 @@ class MomentForm extends React.Component {
       momentImage: '',
       studentsStatus: {}
     };
-
+    global.count = 0;
     this.selectedStudents = this.selectedStudents.bind(this);
     this._selectStudents = this._selectStudents.bind(this);
     window.checkState = this.checkState.bind(this);
@@ -35,9 +35,21 @@ class MomentForm extends React.Component {
     // to 'webworker'-somethingoranother in dev tools
   }
 
+
+// mounting hit twice; instead of setting the state in the other component,
+// instead send back the object in the navigation state params instead
+// and use it there
   componentDidMount() {
     console.log('component mounted: ', this);
     console.log('component mounted: ', this.props);
+  }
+
+  componentWillReceiveProps() {
+    console.log('will receive props', this.state);
+  }
+
+  componentWillUpdate() {
+    console.log('will update', this.state);
   }
 
   checkState() {
@@ -75,12 +87,27 @@ console.log('_selectStudents');
   }
 
   _submitMoment (){
-    console.log('submit moment');
-    this.checkState();
-    AsyncStorage.getItem('token').then( (returntoken) => {
-      this.props.createMoment(this.state, returntoken);
-    }).then(this.props.navigation.navigate('MomentsScreen'));
+    console.log('submit moment', this);
 
+    // this.checkState();
+    // debugger
+    this.setState({studentsStatus: this.props.navigation.state.params.status}, () => this.checkState())
+      // AsyncStorage.getItem('token').then( (returntoken) => {
+      //   this.props.createMoment(this.state, returntoken);
+      // }).then(this.props.navigation.navigate('MomentsScreen'));
+
+    // this.setState({studentsStatus: this.props.navigation.state.params.status}).then( () => {
+    //   AsyncStorage.getItem('token').then( (returntoken) => {
+    //     this.props.createMoment(this.state, returntoken);
+    //   }).then(this.props.navigation.navigate('MomentsScreen'));
+    // });
+
+  }
+
+  debugging() {
+    debugger;
+    global.count += 1;
+    console.log('debugger count', global.count);
   }
 
 
@@ -91,8 +118,11 @@ console.log('_selectStudents');
 // console.log('render fn state', this.state);
 // console.log('render fn context', this);
 // debugger
+
+// value={this.state.body}
 console.log('_renderForm');
 this.checkState();
+// this.debugging();
     return (
       <View style={styles.newMomentContainer} >
         <View style={styles.textInputContainer}>
@@ -100,7 +130,7 @@ this.checkState();
           style={styles.textInput}
             multiline={ true }
             numberOfLines={4}
-            value={this.state.body}
+
             onChangeText={ (text) => this.setState({body: text})}
           />
         </View>
