@@ -54,12 +54,16 @@ class CalendarScreen extends React.Component {
   onDayPress(){
     return (day) =>{
       console.log(day);
-      let dailyEvents = this.props.events[day.dateString];
-      this.setState({[day.dateString]:dailyEvents})
+      if(this.props.events.length !== 0){
+
+        let dailyEvents = this.props.events[day.dateString];
+        this.setState({[day.dateString]:dailyEvents})
+      }
     }
   }
 
   render() {
+    console.log(this.props);
     return(
       <View style={{ paddingTop: 50, flex: 1 }}>
         <Agenda

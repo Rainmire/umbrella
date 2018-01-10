@@ -5,7 +5,7 @@ import LoginFormContainer from '../components/login_form_container';
 import LoginForm from '../components/login_form';
 import ProfileContainer from '../components/profile_container';
 import MomentsContainer from '../components/moments_container';
-import CalendarScreen from '../components/calendar_screen';
+import CalendarContainer from '../components/calendar_container';
 import MessageScreen from '../components/message_screen';
 import SwitchChildContainer from '../components/switch_child_container';
 import MomentForm from '../components/moment_form';
@@ -45,7 +45,7 @@ const HomeNavigator = TabNavigator({
     screen: MomentsContainer,
   },
   CalendarScreen: {
-    screen: CalendarScreen,
+    screen: CalendarContainer,
   },
   MessageScreen: {
     screen: MessageScreen,
