@@ -54,7 +54,8 @@ class CalendarScreen extends React.Component {
   onDayPress(){
     return (day) =>{
       console.log(day);
-      
+      let dailyEvents = this.props.events[day.dateString];
+      this.setState({[day.dateString]:dailyEvents})
     }
   }
 
