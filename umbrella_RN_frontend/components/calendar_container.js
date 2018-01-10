@@ -1,15 +1,15 @@
 import { connect } from 'react-redux';
-import fetchEvents from '../actions/calendar_actions';
+import fetchCalendar from '../actions/calendar_actions';
 
 import CalendarScreen from './calendar_screen';
 
 const mapSTPs = ({entities}) => ({
-  events: entities.events,
-  markedDates: entities.markedDates
+  events: entities.calendars.events,
+  markedDates: entities.calendars.markedDates
 });
 
 const mapDTPs = (dispatch) => ({
-  fetchEvents: (date, token)=> dispatch(fetchEvents(date, token))
+  fetchCalendar: (date, token)=> dispatch(fetchCalendar(date, token))
 });
 
 export default connect(mapSTPs, mapDTPs)(CalendarScreen);

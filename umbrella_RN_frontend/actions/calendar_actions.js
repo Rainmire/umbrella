@@ -12,22 +12,13 @@ export const receiveMarkedDates = (markedDates) => ({
   markedDates
 });
 
-export const fetchEvents = (date,token) => dispatch => (
+export const fetchCalendar = (date,token) => dispatch => (
   fetch(`http://localhost:3000/api/daily_events`,{
     method:'GET',
     headers: { 'Authorization': token },
     body: date
   }).then(({_bodyInit})=>{
-    dispatch(receiveEvents(JSON.parse(_bodyInit)));
-  })
-);
-
-export const fetchMarkedDates = (month,token) => dispatch => (
-  fetch(`http://localhost:3000/api/daily_events`,{
-    method:'GET',
-    headers: { 'Authorization': token },
-    body: month
-  }).then(({_bodyInit})=>{
-    dispatch(receiveMarkedDates(JSON.parse(_bodyInit)));
+    dispatch(receiveEvents(JSON.parse(_bodyInit.events)));
+    dispatch(receiveMarkedDates(JSON.parse(_bodyInit.markedDates)));
   })
 );
