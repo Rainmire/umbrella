@@ -51,6 +51,13 @@ class CalendarScreen extends React.Component {
     return date.toISOString().split('T')[0];
   }
 
+  onDayPress(){
+    return (day) =>{
+      console.log(day);
+      
+    }
+  }
+
   render() {
     return(
       <View style={{ paddingTop: 50, flex: 1 }}>
@@ -61,7 +68,7 @@ class CalendarScreen extends React.Component {
           renderItem={this.renderItem.bind(this)}
           renderEmptyDate={this.renderEmptyDate.bind(this)}
           rowHasChanged={this.rowHasChanged.bind(this)}
-          onDayPress = {(day)=>{console.log("pressed", day);}}
+          onDayPress = {this.onDayPress()}
           markingType={'multi-dot'}
           markedDates={this.state.markedDates}
           theme={{
