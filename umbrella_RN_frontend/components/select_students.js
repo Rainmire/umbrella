@@ -25,6 +25,14 @@ class SelectStudents extends React.Component {
     // this.setParentState = this.props.navigation.state.params.setParentState;
   }
 
+  componentDidMount() {
+    console.log('select student screen state', this.state);
+  }
+
+  componentWillUnmount() {
+    console.log('surprise?...');
+  }
+
 // used for trying to set state locally and pass back studentsStatus object to moment form
   componentDidMount(){
     let stus = {};
@@ -46,7 +54,7 @@ class SelectStudents extends React.Component {
       { [id]: !this.state.studentsStatus[id] })
       // console.log('selecting students by id', this.state)
 
-    this.setParentState({ studentsStatus: status })
+    this.setState({ studentsStatus: status }, () => console.log('setting state: ', this.state));
   }
 
   _renderItem = ({ item }) => {
@@ -75,14 +83,14 @@ class SelectStudents extends React.Component {
       stus[student.id] = true;
     });
 
-    this.selectStudents(stus);
-    // this.setState({ studentsStatus: stus });
+    // this.selectStudents(stus);
+    this.setState({ studentsStatus: stus });
     // this.setParentState(stus);
   }
 
   _finishSelecting() {
-    // console.log('hit the button state', this.state.studentsStatus);
-    // this.selectedStudents(this.state.studentsStatus);
+    // console.log('hit the button state', this.state);
+    this.selectStudents(this.state.studentsStatus);
     this.props.navigation.navigate('MomentForm');
   }
 
