@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, ScrollView,View, Text, Button } from 'react-native';
+import { StyleSheet, ScrollView, View, Text, Button, AsyncStorage } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Agenda, LocaleConfig } from 'react-native-calendars';
@@ -63,6 +63,14 @@ class CalendarScreen extends React.Component {
     }
   }
 
+  loadItemsForMonth(){
+    return(day) =>{
+      AsyncStorage.getItem('token').then((returntoken)=> {
+        this.props.fetchCalendar(date,returntoken);
+      });
+    }
+  }
+
   render() {
     var today = new Date();
     var dd = today.getDate();
@@ -79,7 +87,8 @@ class CalendarScreen extends React.Component {
       <View style={{ paddingTop: 50, flex: 1 }}>
         <Agenda
           items={this.state.events}
-          loadItemsForMonth={(day)=>{console.log(day);}}
+          onMonthChange={(month) => {console.log('month changed', month)}}
+          loadItemsForMonth={this.loadItemsForMonth()}
           selected={today}
           renderItem={this.renderItem.bind(this)}
           renderEmptyDate={this.renderEmptyDate.bind(this)}
