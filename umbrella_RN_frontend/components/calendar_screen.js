@@ -122,34 +122,9 @@ class CalendarScreen extends React.Component {
     );
   }
 }
-// markedDates={{
-//    '2017-05-08': {textColor: '#666'},
-//    '2017-05-09': {textColor: '#666'},
-//    '2017-05-14': {startingDay: true, endingDay: true, color: 'blue'},
-//    '2017-05-21': {startingDay: true, color: 'blue'},
-//    '2017-05-22': {endingDay: true, color: 'gray'},
-//    '2017-05-24': {startingDay: true, color: 'gray'},
-//    '2017-05-25': {color: 'gray'},
-//    '2017-05-26': {endingDay: true, color: 'gray'}}}
-// monthFormat={'yyyy'}
-// theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
-//renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
 
-// markingType={'period'}
-// LocaleConfig.defaultLocale = 'fr';
-
-// <View>
-//   <Text style={styles.calendar}>
-//      You are now on the calendar view page.
-//   </Text>
-// </View>
 export default CalendarScreen;
 
-// export const styles = StyleSheet.create({
-//   calendar: {
-//     margin: 50,
-//   },
-// });
 const styles = StyleSheet.create({
   item: {
     backgroundColor: 'white',
