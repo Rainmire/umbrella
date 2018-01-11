@@ -26,7 +26,7 @@ class CalendarScreen extends React.Component {
          // '2017-05-06': [{name: 'item 3 - any js object'},{name: 'item 4 - any js object'}],
       },
       markedDates:{
-        '2017-05-01': {dots: [{key:'closed', color: 'red'},{key:'school event', color:'pink'}]},
+        '2017-05-01': {dots: [{key:'closed', color: 'red'},{key:'close', color:'red'}]},
         '2017-05-02': {dots: [{key:'closed', color: 'red'}]},
       }
     };
