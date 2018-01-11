@@ -50,6 +50,7 @@ class MomentForm extends React.Component {
 
   componentWillUpdate() {
     console.log('will update', this.state);
+    
   }
 
   checkState() {
@@ -86,11 +87,15 @@ console.log('_selectStudents');
 
   _submitMoment (){
     let status = this.props.navigation.state.params.status;
-
-    this._readyStudentMemberships(status);
-    AsyncStorage.getItem('token')
+// debugger;
+    // this._readyStudentMemberships(status);
+    this.setState({studentsStatus: status}, () => {
+      AsyncStorage.getItem('token')
       .then( (returntoken) => this.props.createMoment(this.state, returntoken))
-      .then( () => this.props.navigation.navigate('MomentsScreen'));
+      .then( () => this.debugging())
+      .then( () => this.props.navigation.navigate('MomentsScreen'))
+      ;
+    })
   }
   // this.setState({studentsStatus: this.props.navigation.state.params.status}, () => this.checkState())
   // .then(this.props.navigation.navigate('MomentsScreen'));
@@ -101,11 +106,11 @@ console.log('_selectStudents');
   //   }).then(this.props.navigation.navigate('MomentsScreen'));
   // });
 
-  // debugging() {
-  //   debugger;
-  //   global.count += 1;
-  //   console.log('debugger count', global.count);
-  // }
+  debugging() {
+    debugger;
+    global.count += 1;
+    console.log('debugger count', global.count);
+  }
 
 
 // renders once, state is correct; re-renders, and state is reset

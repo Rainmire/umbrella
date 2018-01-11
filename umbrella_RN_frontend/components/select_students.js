@@ -80,8 +80,9 @@ class SelectStudents extends React.Component {
         studentIds.push(students[i].id);
       }
     }
-    
-    this.setState({studentsStatus: studentIds.concat(this.state.studentsStatus)}, () => console.log('selected all students?', this.state.studentsStatus));
+    // is there a better way to do this? Like when we use Object.assign() for objects?...
+    this.setState({studentsStatus: studentIds.concat(this.state.studentsStatus)},
+      () => console.log('selected all students?', this.state.studentsStatus));
   }
 
   _finishSelecting() {
