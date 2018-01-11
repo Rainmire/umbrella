@@ -17,8 +17,8 @@ class CalendarScreen extends React.Component {
     super(props);
     this.state = {
       events: {
-        '2017-05-01': [{name: "school closed for teacher's conference",height: 99}],
-         '2017-05-02': [{name: "John's birthday, Happy Birthday, John!",height: 50}, {name:"Afternoon open house",height: 99}],
+        '2017-05-01': [{name: "school closed for teacher's conference"}],
+         '2017-05-02': [{name: "John's birthday, Happy Birthday, John!"}, {name:"Afternoon open house"}],
          '2017-05-03': [],
          // '2017-05-04': [{name: 'item 3 - any js object'},{name: 'item 4 - any js object'},{name: 'item 4 - any js object'},{name: 'item 4 - any js object'}],
          // '2017-05-05': [{name: 'item 3 - any js object'},{name: 'item 4 - any js object'}],
@@ -32,7 +32,7 @@ class CalendarScreen extends React.Component {
   }
   renderItem(item) {
     return (
-      <View style={[styles.item,{height: item.height}]}><Text>{item.name}</Text></View>
+      <View style={[styles.item]}><Text>{item.name}</Text></View>
     );
   }
 
@@ -63,7 +63,6 @@ class CalendarScreen extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     return(
       <View style={{ paddingTop: 50, flex: 1 }}>
         <Agenda
@@ -138,7 +137,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginRight: 10,
     marginTop: 17,
-    height:15
+    height:60
   },
   emptyDate: {
     height: 15,
