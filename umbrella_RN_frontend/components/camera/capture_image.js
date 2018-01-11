@@ -95,6 +95,10 @@ class CaptureImage extends Component {
     };
   }
 
+  componentDidMount() {
+    console.log('camera screen props: ', this.props);
+  }
+
   takePicture() {
     // comment out alert once we know it's working
     alert('image captured');
@@ -108,6 +112,9 @@ class CaptureImage extends Component {
       .catch(err => console.error(err));
   }
 
+// not sure what's happening here with this... what screen is it going
+// to when the picture is taken? The text is not displayed, but when
+// you click back, it is displayed momentarily during the transition
   renderImage() {
     return(
       <View>
@@ -119,6 +126,12 @@ class CaptureImage extends Component {
           style={styles.cancel}
           onPress={ () => this.setState({ path: null })}
         >Cancel
+        </Text>
+        <Text
+        style={styles.select}
+        onPress={ () => this.props.navigation.navigate('MomentForm', {path: this.state.path})}
+        >
+          Use this picture
         </Text>
       </View>
     );
@@ -165,7 +178,24 @@ const styles = StyleSheet.create({
     color: '#000',
     padding: 10,
     margin: 40,
-
-  }
+  },
+  cancel: {
+    position: 'absolute',
+    right: 20,
+    top: 20,
+    backgroundColor: 'transparent',
+    color: '#FFF',
+    fontWeight: '600',
+    fontSize: 16,
+  },
+  select: {
+    position: 'absolute',
+    right: 50,
+    top: 50,
+    backgroundColor: 'blue',
+    color: '#FFF',
+    fontWeight: '600',
+    fontSize: 16,
+  },
 });
 export default CaptureImage;

@@ -91,8 +91,7 @@ class SelectStudents extends React.Component {
     // this.selectStudents(this.state.studentsStatus);
     this.props.navigation.navigate('MomentForm',
     {status: this.state.studentsStatus, body: this.props.navigation.state.params.body}
-
-  );
+    );
   }
 
  _renderItem = ({ item }) => {

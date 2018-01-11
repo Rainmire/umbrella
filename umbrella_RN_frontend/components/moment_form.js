@@ -103,10 +103,10 @@ console.log('_selectStudents');
     // this._readyStudentMemberships(status);
     this.setState({studentsStatus: status}, () => {
       AsyncStorage.getItem('token')
+      .then( (returntoken) => console.log('here is the whole moment object: ', this.state, returntoken))
       .then( (returntoken) => this.props.createMoment(this.state, returntoken))
-      .then( () => this.props.navigation.navigate('MomentsScreen'))
-      ;
-    })
+      .then( () => this.props.navigation.navigate('MomentsScreen'));
+    });
   }
   // this.setState({studentsStatus: this.props.navigation.state.params.status}, () => this.checkState())
   // .then(this.props.navigation.navigate('MomentsScreen'));

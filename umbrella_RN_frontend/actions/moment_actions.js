@@ -36,6 +36,8 @@ export const createMoment = (post,token) => dispatch => (
     method: 'POST',
     headers: { 'Authorization': token }
   }).then(({_bodyInit}) => {
+    console.log('in the createMoment action: ', post);
+    console.log('in the createMoment action now: ', {_bodyInit});
     dispatch(receiveNewCreatedMoment(JSON.parse(_bodyInit).moment));
   })
 );
