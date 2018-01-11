@@ -59,8 +59,7 @@ class MomentForm extends React.Component {
 
   selectedStudents(){
     console.log('selectedStudents');
-    this.props.navigation.navigate('SelectStudents',
-      {selectStudents: this._selectStudents});
+    this.props.navigation.navigate('SelectStudents');
   }
 
 
@@ -73,42 +72,40 @@ console.log('_selectStudents');
       () => this._readyStudentMemberships());
   }
 
-  _readyStudentMemberships() {
+  _readyStudentMemberships(studentsObject) {
     let students = [];
 
-    Object.keys(this.state.studentsStatus).forEach( (id) => {
+    Object.keys(studentsObject).forEach( (id) => {
       if (this.state.studentsStatus[id]) {
         students.push(parseInt(id));
       }
     });
 
-    this.setState({studentsStatus: students},
-      () => console.log('student memberships ready: ', this.state));
+    this.setState({studentsStatus: students});
   }
 
   _submitMoment (){
-    console.log('submit moment', this);
+    let status = this.props.navigation.state.params.status;
 
-    // this.checkState();
-    // debugger
-    this.setState({studentsStatus: this.props.navigation.state.params.status}, () => this.checkState())
-      // AsyncStorage.getItem('token').then( (returntoken) => {
-      //   this.props.createMoment(this.state, returntoken);
-      // }).then(this.props.navigation.navigate('MomentsScreen'));
-
-    // this.setState({studentsStatus: this.props.navigation.state.params.status}).then( () => {
-    //   AsyncStorage.getItem('token').then( (returntoken) => {
-    //     this.props.createMoment(this.state, returntoken);
-    //   }).then(this.props.navigation.navigate('MomentsScreen'));
-    // });
-
+    this._readyStudentMemberships(status);
+    AsyncStorage.getItem('token')
+      .then( (returntoken) => this.props.createMoment(this.state, returntoken))
+      .then( () => this.props.navigation.navigate('MomentsScreen'));
   }
+  // this.setState({studentsStatus: this.props.navigation.state.params.status}, () => this.checkState())
+  // .then(this.props.navigation.navigate('MomentsScreen'));
 
-  debugging() {
-    debugger;
-    global.count += 1;
-    console.log('debugger count', global.count);
-  }
+  // this.setState({studentsStatus: this.props.navigation.state.params.status}).then( () => {
+  //   AsyncStorage.getItem('token').then( (returntoken) => {
+  //     this.props.createMoment(this.state, returntoken);
+  //   }).then(this.props.navigation.navigate('MomentsScreen'));
+  // });
+
+  // debugging() {
+  //   debugger;
+  //   global.count += 1;
+  //   console.log('debugger count', global.count);
+  // }
 
 
 // renders once, state is correct; re-renders, and state is reset

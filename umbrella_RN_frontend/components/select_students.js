@@ -16,10 +16,10 @@ class SelectStudents extends React.Component {
     super(props);
 
     this.state = {
-      studentsStatus: {},
+      studentsStatus: [],
     }
 
-    this.selectStudents = this.props.navigation.state.params.selectStudents;
+    // this.selectStudents = this.props.navigation.state.params.selectStudents;
   }
 
   // componentDidMount() {
@@ -32,26 +32,37 @@ class SelectStudents extends React.Component {
 
 // used for trying to set state locally and pass back studentsStatus
 // object to moment form; not entirely sure if this is needed here...
-  componentDidMount(){
-    console.log('componentDidMount');
-    let stus = {};
-
-    this.props.students.forEach((student)=>{
-      stus[student.id] = false;
-    });
-
-    let status = Object.assign({}, this.studentsStatus, stus)
-    this.setState({ studentsStatus: status });
-  }
+  // componentDidMount(){
+  //   console.log('componentDidMount');
+  //   let stus = [];
+  //
+  //   this.props.students.forEach((student)=>{
+  //     stus[student.id] = false;
+  //   });
+  //
+  //   let status = Object.assign({}, this.studentsStatus, stus)
+  //   this.setState({ studentsStatus: status });
+  // }
 
 // toggles the studentsStatus between true/ false
 // must use Object.assign to merge state
   _selectStudent(id) {
     console.log('_selectStudent(id)');
-    let status = Object.assign({}, this.state.studentsStatus,
-      { [id]: !this.state.studentsStatus[id] })
+    let studentIds = this.state.studentsStatus;
 
-    this.setState({ studentsStatus: status }, () => console.log('setting state: ', this.state));
+    if (studentIds.includes(id)) {
+      let remove = studentIds.indexOf(id);
+
+      studentIds = studentIds.slice(0, remove)
+        .concat(studentIds
+        .slice(remove + 1, studentIds.length));
+    } else {
+      studentIds.push(id);
+    }
+    // let status = Object.assign({}, this.state.studentsStatus,
+    //   { [id]: !this.state.studentsStatus[id] })
+
+    this.setState({ studentsStatus: studentIds }, () => console.log('setting state in select students for select student by id: ', this.state));
   }
 
   _renderItem = ({ item }) => {
@@ -87,7 +98,7 @@ console.log('_renderItem');
   _finishSelecting() {
     // new Promise (() => this.selectStudents(this.state.studentsStatus)).then(
     // this.props.navigation.navigate('MomentForm'));
-    this.selectStudents(this.state.studentsStatus);
+    // this.selectStudents(this.state.studentsStatus);
     this.props.navigation.navigate('MomentForm', {status: this.state.studentsStatus});
   }
 
