@@ -24,10 +24,11 @@ class MomentForm extends React.Component {
 
     this.state = {
       body: '',
-      momentImage: '',
-      studentsStatus: {}
+      momentImage: null,
+      studentsStatus: [],
+
     };
-    global.count = 0;
+    // global.count = 0; // used for this.debugging() to see if state gets reset
     this.selectedStudents = this.selectedStudents.bind(this);
     this._selectStudents = this._selectStudents.bind(this);
     window.checkState = this.checkState.bind(this);
@@ -42,6 +43,16 @@ class MomentForm extends React.Component {
   componentDidMount() {
     console.log('component mounted: ', this);
     console.log('component mounted: ', this.props);
+    let body = this.props.navigation.state.params.body;
+
+    if (body) {
+      this.setState({body: body});
+    }
+  }
+
+  componentWillMount() {
+    console.log('will mount hit');
+
   }
 
   componentWillReceiveProps() {
@@ -50,7 +61,7 @@ class MomentForm extends React.Component {
 
   componentWillUpdate() {
     console.log('will update', this.state);
-    
+
   }
 
   checkState() {
@@ -60,7 +71,7 @@ class MomentForm extends React.Component {
 
   selectedStudents(){
     console.log('selectedStudents');
-    this.props.navigation.navigate('SelectStudents');
+    this.props.navigation.navigate('SelectStudents', {body: this.state.body});
   }
 
 
@@ -87,12 +98,12 @@ console.log('_selectStudents');
 
   _submitMoment (){
     let status = this.props.navigation.state.params.status;
+    let body = this.props.navigation.state.params.body;
 // debugger;
     // this._readyStudentMemberships(status);
     this.setState({studentsStatus: status}, () => {
       AsyncStorage.getItem('token')
       .then( (returntoken) => this.props.createMoment(this.state, returntoken))
-      .then( () => this.debugging())
       .then( () => this.props.navigation.navigate('MomentsScreen'))
       ;
     })
@@ -121,7 +132,7 @@ console.log('_selectStudents');
 // console.log('render fn context', this);
 // debugger
 
-// value={this.state.body}
+
 console.log('_renderForm');
 this.checkState();
 // this.debugging();
@@ -132,7 +143,7 @@ this.checkState();
           style={styles.textInput}
             multiline={ true }
             numberOfLines={4}
-
+            value={this.state.body}
             onChangeText={ (text) => this.setState({body: text})}
           />
         </View>

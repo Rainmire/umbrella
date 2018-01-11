@@ -81,27 +81,18 @@ import {
   Text,
   TouchableHighlight,
   View,
-  Icon
+  Icon,
+  Image
 } from 'react-native';
 import Camera from 'react-native-camera';
 
 class CaptureImage extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Camera
-          ref={(cam) => {
-            this.camera = cam;
-          }}
-          style={styles.preview}
-          aspect={Camera.constants.Aspect.fill}>
-          <Text
-            style={styles.capture}
-            onPress={this.takePicture.bind(this)}
-          >[CAPTURE]</Text>
-        </Camera>
-      </View>
-    );
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      path: null,
+    };
   }
 
   takePicture() {
@@ -110,8 +101,51 @@ class CaptureImage extends Component {
     const options = {};
     //options.location = ...
     this.camera.capture({metadata: options})
-      .then((data) => console.log('image data', data))
+      .then((data) => {
+        console.log('image data', data);
+        this.setState({path: data.path});
+      })
       .catch(err => console.error(err));
+  }
+
+  renderImage() {
+    return(
+      <View>
+        <Image
+          source={{ uri: this.state.path }}
+          style={styles.preview}
+        />
+        <Text
+          style={styles.cancel}
+          onPress={ () => this.setState({ path: null })}
+        >Cancel
+        </Text>
+      </View>
+    );
+  }
+
+  renderCamera() {
+    return(
+      <Camera
+        ref={(cam) => {
+          this.camera = cam;
+        }}
+        style={styles.preview}
+        aspect={Camera.constants.Aspect.fill}>
+        <Text
+          style={styles.capture}
+          onPress={this.takePicture.bind(this)}
+        >[CAPTURE]</Text>
+      </Camera>
+    );
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        { this.state.path? this.renderImage() : this.renderCamera() }
+      </View>
+    );
   }
 }
 

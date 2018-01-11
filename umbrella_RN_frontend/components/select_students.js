@@ -22,9 +22,9 @@ class SelectStudents extends React.Component {
     // this.selectStudents = this.props.navigation.state.params.selectStudents;
   }
 
-  // componentDidMount() {
-  //   console.log('select student screen state', this.state);
-  // }
+  componentDidMount() {
+    console.log('select student screen state', this);
+  }
   //
   // componentWillUnmount() {
   //   console.log('surprise?...');
@@ -89,7 +89,10 @@ class SelectStudents extends React.Component {
     // new Promise (() => this.selectStudents(this.state.studentsStatus)).then(
     // this.props.navigation.navigate('MomentForm'));
     // this.selectStudents(this.state.studentsStatus);
-    this.props.navigation.navigate('MomentForm', {status: this.state.studentsStatus});
+    this.props.navigation.navigate('MomentForm',
+    {status: this.state.studentsStatus, body: this.props.navigation.state.params.body}
+
+  );
   }
 
  _renderItem = ({ item }) => {
