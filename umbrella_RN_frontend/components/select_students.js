@@ -59,14 +59,40 @@ class SelectStudents extends React.Component {
     } else {
       studentIds.push(id);
     }
-    // let status = Object.assign({}, this.state.studentsStatus,
-    //   { [id]: !this.state.studentsStatus[id] })
 
     this.setState({ studentsStatus: studentIds }, () => console.log('setting state in select students for select student by id: ', this.state));
   }
 
-  _renderItem = ({ item }) => {
-console.log('_renderItem');
+// had to use for loop to break early in case all students were already
+// selected; this allows the teacher to toggle between selecting all students
+  _selectAllStudents() {
+    console.log('_selectAllStudents');
+    let studentIds = [];
+    let status = this.state.studentsStatus;
+    let students = this.props.students;
+
+    for (let i = 0; i < students.length; i ++) {
+      if (status.length === students.length) {
+        this.setState({ studentsStatus: [] });
+        return;
+      }
+      if (!status.includes(students[i].id)) {
+        studentIds.push(students[i].id);
+      }
+    }
+    
+    this.setState({studentsStatus: studentIds.concat(this.state.studentsStatus)}, () => console.log('selected all students?', this.state.studentsStatus));
+  }
+
+  _finishSelecting() {
+    // new Promise (() => this.selectStudents(this.state.studentsStatus)).then(
+    // this.props.navigation.navigate('MomentForm'));
+    // this.selectStudents(this.state.studentsStatus);
+    this.props.navigation.navigate('MomentForm', {status: this.state.studentsStatus});
+  }
+
+ _renderItem = ({ item }) => {
+  // console.log('_renderItem');
     return(
       <TouchableOpacity
         onPress={ () => this._selectStudent(item.id) }
@@ -84,26 +110,8 @@ console.log('_renderItem');
     );
   }
 
-  _selectAllStudents() {
-    console.log('_selectAllStudents');
-    let stus = {};
-
-    this.props.students.forEach( (student) => {
-      stus[student.id] = true;
-    });
-
-    this.setState({ studentsStatus: stus });
-  }
-
-  _finishSelecting() {
-    // new Promise (() => this.selectStudents(this.state.studentsStatus)).then(
-    // this.props.navigation.navigate('MomentForm'));
-    // this.selectStudents(this.state.studentsStatus);
-    this.props.navigation.navigate('MomentForm', {status: this.state.studentsStatus});
-  }
-
   render() {
-console.log('render');
+// console.log('render');
 
     return (
       <View>

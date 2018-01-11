@@ -5,8 +5,12 @@ import LoginFormContainer from '../components/login_form_container';
 import LoginForm from '../components/login_form';
 import ProfileContainer from '../components/profile_container';
 import MomentsContainer from '../components/moments_container';
+
+// create containers
 import CalendarScreen from '../components/calendar_screen';
 import MessageScreen from '../components/message_screen';
+// create containers
+
 import SwitchChildContainer from '../components/switch_child_container';
 import MomentForm from '../components/moments_form_container';
 import CaptureImageContainer from '../components/camera/capture_image_container';
