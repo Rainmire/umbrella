@@ -16,39 +16,20 @@ class SelectStudents extends React.Component {
     super(props);
 
     this.state = {
-      studentsStatus: [],
+      children: [],
+      is_public: false,
     }
 
-    // this.selectStudents = this.props.navigation.state.params.selectStudents;
   }
 
   componentDidMount() {
     console.log('select student screen state', this);
   }
-  //
-  // componentWillUnmount() {
-  //   console.log('surprise?...');
-  // }
 
-// used for trying to set state locally and pass back studentsStatus
-// object to moment form; not entirely sure if this is needed here...
-  // componentDidMount(){
-  //   console.log('componentDidMount');
-  //   let stus = [];
-  //
-  //   this.props.students.forEach((student)=>{
-  //     stus[student.id] = false;
-  //   });
-  //
-  //   let status = Object.assign({}, this.studentsStatus, stus)
-  //   this.setState({ studentsStatus: status });
-  // }
-
-// toggles the studentsStatus between true/ false
-// must use Object.assign to merge state
   _selectStudent(id) {
     console.log('_selectStudent(id)');
-    let studentIds = this.state.studentsStatus;
+    let studentIds = this.state.children;
+    let is_public;
 
     if (studentIds.includes(id)) {
       let remove = studentIds.indexOf(id);
@@ -60,7 +41,9 @@ class SelectStudents extends React.Component {
       studentIds.push(id);
     }
 
-    this.setState({ studentsStatus: studentIds }, () => console.log('setting state in select students for select student by id: ', this.state));
+    is_public = (studentIds.length === this.props.students.length) ? true : false
+console.log('is it public?', is_public);
+    this.setState({ children: studentIds, is_public: is_public }, () => console.log('setting state in select students for select student by id: ', this.state));
   }
 
 // had to use for loop to break early in case all students were already
@@ -68,12 +51,12 @@ class SelectStudents extends React.Component {
   _selectAllStudents() {
     console.log('_selectAllStudents');
     let studentIds = [];
-    let status = this.state.studentsStatus;
+    let status = this.state.children;
     let students = this.props.students;
 
     for (let i = 0; i < students.length; i ++) {
       if (status.length === students.length) {
-        this.setState({ studentsStatus: [] });
+        this.setState({ children: [], is_public: false });
         return;
       }
       if (!status.includes(students[i].id)) {
@@ -81,21 +64,19 @@ class SelectStudents extends React.Component {
       }
     }
     // is there a better way to do this? Like when we use Object.assign() for objects?...
-    this.setState({studentsStatus: studentIds.concat(this.state.studentsStatus)},
-      () => console.log('selected all students?', this.state.studentsStatus));
+    this.setState({children: studentIds.concat(this.state.children), is_public: true},
+      () => console.log('selected all students?', this.state.children));
   }
 
   _finishSelecting() {
-    // new Promise (() => this.selectStudents(this.state.studentsStatus)).then(
-    // this.props.navigation.navigate('MomentForm'));
-    // this.selectStudents(this.state.studentsStatus);
-    this.props.navigation.navigate('MomentForm',
-    {status: this.state.studentsStatus, body: this.props.navigation.state.params.body}
-    );
+    this.props.navigation.navigate('MomentForm',{
+      status: this.state.children,
+      body: this.props.navigation.state.params.body,
+      is_public: this.state.is_public
+    });
   }
 
  _renderItem = ({ item }) => {
-  // console.log('_renderItem');
     return(
       <TouchableOpacity
         onPress={ () => this._selectStudent(item.id) }
@@ -114,8 +95,6 @@ class SelectStudents extends React.Component {
   }
 
   render() {
-// console.log('render');
-
     return (
       <View>
         <TouchableOpacity

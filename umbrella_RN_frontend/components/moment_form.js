@@ -15,9 +15,6 @@ import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Camera from 'react-native-camera';
 
-// I think this has to do with the state updating each time the textinpit
-// field is updated, resetting state...this being the fact that student status aren't
-// saving, and the body doesn't persist when navigating between screens
 class MomentForm extends React.Component {
   constructor(props) {
     super(props);
@@ -25,12 +22,12 @@ class MomentForm extends React.Component {
     this.state = {
       body: '',
       momentImage: null,
-      studentsStatus: [],
+      children: [],
+      is_public: false,
 
     };
     // global.count = 0; // used for this.debugging() to see if state gets reset
     this.selectedStudents = this.selectedStudents.bind(this);
-    this._selectStudents = this._selectStudents.bind(this);
     window.checkState = this.checkState.bind(this);
     // remember, to access checkState on the window, change 'top'
     // to 'webworker'-somethingoranother in dev tools
@@ -44,10 +41,22 @@ class MomentForm extends React.Component {
     console.log('component mounted: ', this);
     console.log('component mounted: ', this.props);
     let body = this.props.navigation.state.params.body;
+    let status = this.props.navigation.state.params.status;
+    let isPublic = this.props.navigation.state.params.is_public;
 
     if (body) {
       this.setState({body: body});
     }
+
+    if (status) {
+      this.setState({children: status});
+    }
+
+    if (isPublic) {
+      this.setState({is_public: isPublic});
+    }
+
+
   }
 
   componentWillMount() {
@@ -74,48 +83,25 @@ class MomentForm extends React.Component {
     this.props.navigation.navigate('SelectStudents', {body: this.state.body});
   }
 
+  // _readyStudentMemberships(studentsObject) {
+  //   let students = [];
+  //
+  //   Object.keys(studentsObject).forEach( (id) => {
+  //     if (this.state.children[id]) {
+  //       students.push(parseInt(id));
+  //     }
+  //   });
+  //
+  //   this.setState({children: students});
+  // }
 
-  // this is passed to select_students screen so that select_students can
-  // send back its state, which will tell which children the new moment will
-  // be connected to
-  _selectStudents(students) {
-console.log('_selectStudents');
-    this.setState({studentsStatus: students},
-      () => this._readyStudentMemberships());
-  }
-
-  _readyStudentMemberships(studentsObject) {
-    let students = [];
-
-    Object.keys(studentsObject).forEach( (id) => {
-      if (this.state.studentsStatus[id]) {
-        students.push(parseInt(id));
-      }
-    });
-
-    this.setState({studentsStatus: students});
-  }
-
+// need to comment out 'teacher' requirement in moment controller;
+// also need to set 'isPrivate', since this is a requirement in cont.
   _submitMoment (){
-    let status = this.props.navigation.state.params.status;
-    let body = this.props.navigation.state.params.body;
-// debugger;
-    // this._readyStudentMemberships(status);
-    this.setState({studentsStatus: status}, () => {
-      AsyncStorage.getItem('token')
-      .then( (returntoken) => console.log('here is the whole moment object: ', this.state, returntoken))
+    AsyncStorage.getItem('token')
       .then( (returntoken) => this.props.createMoment(this.state, returntoken))
       .then( () => this.props.navigation.navigate('MomentsScreen'));
-    });
   }
-  // this.setState({studentsStatus: this.props.navigation.state.params.status}, () => this.checkState())
-  // .then(this.props.navigation.navigate('MomentsScreen'));
-
-  // this.setState({studentsStatus: this.props.navigation.state.params.status}).then( () => {
-  //   AsyncStorage.getItem('token').then( (returntoken) => {
-  //     this.props.createMoment(this.state, returntoken);
-  //   }).then(this.props.navigation.navigate('MomentsScreen'));
-  // });
 
   debugging() {
     debugger;
@@ -123,19 +109,8 @@ console.log('_selectStudents');
     console.log('debugger count', global.count);
   }
 
-
-// renders once, state is correct; re-renders, and state is reset
-// recreate: uncomment debugger below, step through once you've selected
-// students, call checkState(); which was placed on the window
   _renderForm() {
-// console.log('render fn state', this.state);
-// console.log('render fn context', this);
-// debugger
 
-
-console.log('_renderForm');
-this.checkState();
-// this.debugging();
     return (
       <View style={styles.newMomentContainer} >
         <View style={styles.textInputContainer}>
@@ -187,8 +162,6 @@ this.checkState();
   }
 
   render() {
-    console.log('render');
-    console.log('moment form', this.state);
     return (
       <View>
         {this._renderForm()}

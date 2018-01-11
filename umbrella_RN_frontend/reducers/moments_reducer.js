@@ -1,4 +1,8 @@
-import { RECEIVE_MOMENTS, RECEIVE_MORE_MOMENTS, RECEIVE_NEW_CREATED_MOMENT } from '../actions/moment_actions';
+import {
+  RECEIVE_MOMENTS,
+  RECEIVE_MORE_MOMENTS,
+  RECEIVE_NEW_CREATED_MOMENT
+} from '../actions/moment_actions';
 import merge from 'lodash/merge';
 
 const MomentsReducer = (state = [], action) => {

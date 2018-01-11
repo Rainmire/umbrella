@@ -12,7 +12,7 @@ import MessageScreen from '../components/message_screen';
 // create containers
 
 import SwitchChildContainer from '../components/switch_child_container';
-import MomentForm from '../components/moments_form_container';
+import MomentFormContainer from '../components/moments_form_container';
 import CaptureImageContainer from '../components/camera/capture_image_container';
 import SelectStudentsContainer from '../components/select_students_container';
 
@@ -78,7 +78,7 @@ export const SignedInScreen = StackNavigator({
     screen: SwitchChildContainer,
   },
   MomentForm: {
-    screen: MomentForm,
+    screen: MomentFormContainer,
   },
   CaptureImage: {
     screen: CaptureImageContainer,
