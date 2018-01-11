@@ -18,8 +18,9 @@ class CalendarScreen extends React.Component {
     this.state = {
       events: {
         '2017-05-01': [{name: "school closed for teacher's conference"}],
-         '2017-05-02': [{name: "John's birthday, Happy Birthday, John!"}, {name:"Afternoon open house"}],
-         '2017-05-03': [],
+        '2017-05-02': [{name: "school closed for teacher's conference"}],
+         '2017-05-03': [{name: "John's birthday, Happy Birthday, John!"}, {name:"Afternoon open house"}],
+         '2017-05-04': [],
          // '2017-05-04': [{name: 'item 3 - any js object'},{name: 'item 4 - any js object'},{name: 'item 4 - any js object'},{name: 'item 4 - any js object'}],
          // '2017-05-05': [{name: 'item 3 - any js object'},{name: 'item 4 - any js object'}],
          // '2017-05-06': [{name: 'item 3 - any js object'},{name: 'item 4 - any js object'}],
@@ -63,12 +64,23 @@ class CalendarScreen extends React.Component {
   }
 
   render() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+    if(dd < 10){
+      dd = '0' + dd;
+    }if(mm < 10){
+      mm = '0' + mm;
+    }
+    var today = `${yyyy}-${mm}-${dd}`;
+    console.log(today);
     return(
       <View style={{ paddingTop: 50, flex: 1 }}>
         <Agenda
           items={this.state.events}
           loadItemsForMonth={(day)=>{console.log(day);}}
-          selected={'2017-05-01'}
+          selected={today}
           renderItem={this.renderItem.bind(this)}
           renderEmptyDate={this.renderEmptyDate.bind(this)}
           rowHasChanged={this.rowHasChanged.bind(this)}
