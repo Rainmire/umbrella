@@ -17,10 +17,10 @@ class CalendarScreen extends React.Component {
     super(props);
     this.state = {
       events: {
-        '2017-05-01': [{name: "school closed for teacher's conference"}],
-        '2017-05-02': [{name: "school closed for teacher's conference"}],
-         '2017-05-03': [{name: "John's birthday, Happy Birthday, John!"}, {name:"Afternoon open house"}],
-         '2017-05-04': [],
+        // '2017-05-01': [{name: "school closed for teacher's conference"}],
+        // '2017-05-02': [{name: "school closed for teacher's conference"}],
+        //  '2017-05-03': [{name: "John's birthday, Happy Birthday, John!"}, {name:"Afternoon open house"}],
+        //  '2017-05-04': [],
          // '2017-05-04': [{name: 'item 3 - any js object'},{name: 'item 4 - any js object'},{name: 'item 4 - any js object'},{name: 'item 4 - any js object'}],
          // '2017-05-05': [{name: 'item 3 - any js object'},{name: 'item 4 - any js object'}],
          // '2017-05-06': [{name: 'item 3 - any js object'},{name: 'item 4 - any js object'}],
@@ -31,6 +31,29 @@ class CalendarScreen extends React.Component {
       }
     };
   }
+
+  _getToday(){
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth()+1; //January is 0!
+    let yyyy = today.getFullYear();
+    if(dd < 10){
+      dd = '0' + dd;
+    }
+    if(mm < 10){
+      mm = '0' + mm;
+    }
+    today = `${yyyy}-${mm}-${dd}`;
+    return today;
+  }
+
+  // componentWillReceiveProps(newProps){
+  //   let today = this._getToday();
+  //   let dailyEvents = newProps.events[today.dateString];
+  //   this.setState({[today.dateString]:dailyEvents});
+  // }
+
+
   renderItem(item) {
     return (
       <View style={[styles.item]}><Text>{item.name}</Text></View>
@@ -56,9 +79,8 @@ class CalendarScreen extends React.Component {
     return (day) =>{
       console.log(day);
       if(this.props.events.length !== 0){
-
         let dailyEvents = this.props.events[day.dateString];
-        this.setState({[day.dateString]:dailyEvents})
+        this.setState({[day.dateString]:dailyEvents});
       }
     }
   }
@@ -72,22 +94,18 @@ class CalendarScreen extends React.Component {
     }
   }
 
+
   render() {
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth()+1; //January is 0!
-    var yyyy = today.getFullYear();
-    if(dd < 10){
-      dd = '0' + dd;
-    }if(mm < 10){
-      mm = '0' + mm;
-    }
-    var today = `${yyyy}-${mm}-${dd}`;
+    let today = this._getToday();
     console.log(today);
+    let events = this.state.events;
+    if(this.state.events[today] === undefined){
+      events = {[today]:[]};
+    }
     return(
       <View style={{ paddingTop: 50, flex: 1 }}>
         <Agenda
-          items={this.state.events}
+          items={events}
           onMonthChange={(month) => {console.log('month changed', month)}}
           loadItemsForMonth={this.loadItemsForMonth()}
           selected={today}
