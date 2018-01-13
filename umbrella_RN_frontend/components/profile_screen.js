@@ -28,7 +28,7 @@ class ProfileScreen extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Profile',
     tabBarIcon: ({ tintColor }) => (
-      <Icon name="user" size={30} color="#00adf5" />
+      <Icon name="user" size={30} color="#00a4f7" />
     )
   }
 
@@ -61,9 +61,10 @@ class ProfileScreen extends React.Component {
           style={styles.profileButton}
         >
           <Text style={styles.switchChildButtonText}>
+            <Icon name="exchange" size={20} color="#fff" />
             Switch Child
           </Text>
-          <Icon name="arrow-right" size={20} color="#900" />
+          <Icon name="chevron-right" size={20} color="#fff" />
         </ TouchableOpacity>
       )
     }
@@ -74,7 +75,7 @@ class ProfileScreen extends React.Component {
       onPress={this.handleSignout()}
       style={styles.logOutButton}
     >
-      <Text style={styles.signOutButtonText}> SIGN OUT </Text>
+      <Text style={styles.signOutButtonText}> Sign Out </Text>
     </ TouchableOpacity>
   )
 
@@ -167,7 +168,6 @@ export const styles = StyleSheet.create({
   photo: {
     height: 150,
     width: 150,
-    borderWidth: 2,
     marginBottom: 50,
     borderRadius: 75,
   },
@@ -184,8 +184,8 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    backgroundColor: '#bddfeb',
-    borderRadius: 30,
+    backgroundColor: '#f9c866',
+    borderRadius: 10,
     marginBottom: 20,
     paddingRight: 20
   },
@@ -196,17 +196,16 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#bddfeb',
-    borderRadius: 30,
-    marginBottom: 20,
-    // paddingRight: 20
+    borderRadius: 10,
+    marginBottom: 20
   },
   switchChildButtonText: {
-    fontSize: 18,
-    color: 'blue',
+    fontSize: 15,
+    color: 'white',
     paddingRight: 50
   },
   signOutButtonText: {
-    fontSize: 18,
-    color: 'blue',
+    fontSize: 15,
+    color: 'white',
   }
 });

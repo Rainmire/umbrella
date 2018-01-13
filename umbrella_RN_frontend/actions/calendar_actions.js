@@ -18,7 +18,8 @@ export const fetchCalendar = (date,token) => dispatch => (
     headers: { 'Authorization': token },
     body: date
   }).then(({_bodyInit})=>{
-    dispatch(receiveEvents(JSON.parse(_bodyInit.events)));
-    dispatch(receiveMarkedDates(JSON.parse(_bodyInit.markedDates)));
+    console.log(JSON.parse(_bodyInit));
+    // dispatch(receiveEvents(JSON.parse(_bodyInit.events)));
+    // dispatch(receiveMarkedDates(JSON.parse(_bodyInit.markedDates)));
   })
 );
