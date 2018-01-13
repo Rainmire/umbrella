@@ -65,9 +65,10 @@ class CalendarScreen extends React.Component {
 
   loadItemsForMonth(){
     return(day) =>{
-      AsyncStorage.getItem('token').then((returntoken)=> {
-        this.props.fetchCalendar(date,returntoken);
-      });
+      console.log(day);
+      // AsyncStorage.getItem('token').then((returntoken)=> {
+      //   this.props.fetchCalendar(date,returntoken);
+      // });
     }
   }
 

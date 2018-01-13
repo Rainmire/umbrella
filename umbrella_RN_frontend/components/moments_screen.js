@@ -155,7 +155,11 @@ export const styles = StyleSheet.create({
   moments_container: {
     flex: 1,
     flexDirection: 'row',
-    paddingTop: 25,
+    paddingTop: 15,
+    paddingBottom: 15,
+    backgroundColor: "white",
+    borderWidth: 0.5,
+    borderColor: '#d6d7da'
   },
   profile_pic: {
     height: 50,
@@ -167,7 +171,7 @@ export const styles = StyleSheet.create({
     flex: 1
   },
   name: {
-    fontSize: 24,
+    fontSize: 20,
     marginBottom: 10,
   },
   moment_body: {
@@ -189,6 +193,7 @@ export const styles = StyleSheet.create({
   footer_info: {
     fontSize: 12,
     marginTop: 5,
+    color: "grey"
   },
   addMoment: {
     height: 50,

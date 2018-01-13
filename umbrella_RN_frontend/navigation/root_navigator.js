@@ -56,7 +56,7 @@ const HomeNavigator = TabNavigator({
 
 }, {
   tabBarPosition: 'bottom',
-  animationEnabled: true,
+  animationEnabled: false,
   tabBarOptions: {
     activeTintColor: '#e91e63',
   },

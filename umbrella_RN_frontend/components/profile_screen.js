@@ -162,11 +162,11 @@ export const styles = StyleSheet.create({
   },
   childInfoContainer: {
     flex: 1,
-    flexDirection: "column",
+    flexDirection: "row",
     justifyContent:"center",
     alignSelf: 'stretch',
     backgroundColor: "white",
-    textAlign: "center"
+    alignItems: "center"
   },
   textWithIcon:{
     flex: 1,
@@ -204,7 +204,8 @@ export const styles = StyleSheet.create({
     paddingLeft: 10,
     borderWidth: 0.5,
     borderColor: '#d6d7da',
-    fontSize: 15
+    fontSize: 15,
+    alignSelf: "center"
   },
   photo: {
     height: 150,
