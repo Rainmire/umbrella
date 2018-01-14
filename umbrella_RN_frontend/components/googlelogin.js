@@ -96,17 +96,20 @@ export default class GoogleLogin extends Component {
   }
 
   render() {
-    console.log('google login: ', this);
     return (
-
+      <View style = {styles.container}>
+        <Image source={{ uri: "https://res.cloudinary.com/dreamhousesf/image/upload/v1515912680/turquoise-umbrella-hi_wyxtfw.png" }}
+        style={styles.logoImage}></Image>
+      <Text style = {styles.text}>Welcome to Umbrella</Text>
         <Icon.Button
           name="google"
           backgroundColor="#DD4B39"
           onPress={this.loginWithGoogle.bind(this)}
           {...iconStyles}
-        >
+          >
           Log in with Google
         </Icon.Button>
+      </View>
     );
   }
 }
@@ -149,6 +152,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFF',
+    // justifyContent: 'space-around',
+    alignItems: 'stretch',
   },
   content: {
     flex: 1,
@@ -158,10 +163,12 @@ const styles = StyleSheet.create({
   avatar: {
     margin: 20,
   },
-  avatarImage: {
-    borderRadius: 50,
-    height: 100,
-    width: 100,
+  logoImage: {
+    marginTop: 150,
+    marginBottom: 50,
+    alignSelf: 'center',
+    height: 105,
+    width: 130,
   },
   header: {
     fontSize: 20,
