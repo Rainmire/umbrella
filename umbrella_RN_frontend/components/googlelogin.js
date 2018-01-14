@@ -100,17 +100,17 @@ export default class GoogleLogin extends Component {
       <View style = {styles.container}>
         <Image source={{ uri: "https://res.cloudinary.com/dreamhousesf/image/upload/v1515912680/turquoise-umbrella-hi_wyxtfw.png" }}
         style={styles.logoImage}></Image>
-      <Text style = {styles.text}>Welcome to Umbrella</Text>
-        <Icon.Button
-          name="google"
-          backgroundColor="#DD4B39"
-          onPress={this.loginWithGoogle.bind(this)}
-          {...iconStyles}
-          >
-          <Text style = {styles.buttontext}>
+        <Text style = {styles.text}>Welcome to Umbrella</Text>
+        <View style = { styles.buttons}>
+          <Icon.Button
+            name="google"
+            backgroundColor="#DD4B39"
+            onPress={this.loginWithGoogle.bind(this)}
+            {...iconStyles}
+            >
             Log in with Google
-          </Text>
-        </Icon.Button>
+          </Icon.Button>
+        </View>
       </View>
     );
   }
@@ -146,11 +146,16 @@ export default class GoogleLogin extends Component {
 //   </View>
 // </View>
 const iconStyles = {
-  flex: 1,
-  alignItems: 'center',
+  // flex: 1,
+  // flexDirection: 'row',
+  // justifyContent: 'space-around',
+  // alignItems: 'center',
+  height: 20,
+  // width: 250,
+  // textAlign: 'center',
   padding:20,
   borderRadius: 10,
-  iconStyle: { paddingVertical: 5 }
+  iconStyle: { marginLeft: 60 }
 };
 
 const styles = StyleSheet.create({
@@ -159,27 +164,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     // justifyContent: 'space-around',
   },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttontext: {
-    // alignSelf: 'center',
-    textAlign: 'center',
-    color: 'white'
-  },
   logoImage: {
     marginTop: 150,
     marginBottom: 50,
     alignSelf: 'center',
     height: 105,
     width: 130,
-  },
-  header: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
   },
   text: {
     fontSize: 30,
@@ -188,10 +178,12 @@ const styles = StyleSheet.create({
     marginBottom: 100,
   },
   buttons: {
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    margin: 20,
-    marginBottom: 30,
+    width:300,
+    alignSelf: 'center',
+    // justifyContent: 'space-between',
+    // flexDirection: 'row',
+    // margin: 20,
+    // marginBottom: 30,
   },
 });
 // <View style={styles.buttons}>

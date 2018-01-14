@@ -157,12 +157,13 @@ export const styles = StyleSheet.create({
   profileScreen: {
     flex: 1,
     alignItems: 'center',
-    // justifyContent: 'space-around',
     paddingTop: 40
   },
   childInfoContainer: {
     flex: 1,
-    flexDirection: "row",
+    borderWidth: 0.5,
+    borderColor: '#d6d7da',
+    // flexDirection: "row",
     justifyContent:"center",
     alignSelf: 'stretch',
     backgroundColor: "white",
@@ -195,6 +196,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'stretch'
   },
   text: {
+    marginTop: 10,
     height: 60,
     paddingTop:20,
     paddingBottom: 20,
@@ -202,8 +204,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-around',
     paddingTop: 5,
     paddingLeft: 10,
-    borderWidth: 0.5,
-    borderColor: '#d6d7da',
     fontSize: 15,
     alignSelf: "center"
   },
