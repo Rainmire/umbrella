@@ -16,19 +16,7 @@ class CalendarScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      events: {
-        // '2017-05-01': [{name: "school closed for teacher's conference"}],
-        // '2017-05-02': [{name: "school closed for teacher's conference"}],
-        //  '2017-05-03': [{name: "John's birthday, Happy Birthday, John!"}, {name:"Afternoon open house"}],
-        //  '2017-05-04': [],
-         // '2017-05-04': [{name: 'item 3 - any js object'},{name: 'item 4 - any js object'},{name: 'item 4 - any js object'},{name: 'item 4 - any js object'}],
-         // '2017-05-05': [{name: 'item 3 - any js object'},{name: 'item 4 - any js object'}],
-         // '2017-05-06': [{name: 'item 3 - any js object'},{name: 'item 4 - any js object'}],
-      },
-      markedDates:{
-        '2017-05-01': {dots: [{key:'closed', color: 'red'},{key:'close', color:'red'}]},
-        '2017-05-02': {dots: [{key:'closed', color: 'red'}]},
-      }
+
     };
   }
 
@@ -77,36 +65,31 @@ class CalendarScreen extends React.Component {
 
   onDayPress(){
     return (day) =>{
-      console.log(day);
-      if(this.props.events.length !== 0){
+      // if(this.props.events.length !== 0){
         let dailyEvents = this.props.events[day.dateString];
+        console.log(dailyEvents);
         this.setState({[day.dateString]:dailyEvents});
-      }
+      // }
     }
   }
 
   loadItemsForMonth(){
     return(day) =>{
       console.log(day);
-      // AsyncStorage.getItem('token').then((returntoken)=> {
-      //   this.props.fetchCalendar(date,returntoken);
-      // });
+      AsyncStorage.getItem('token').then((returntoken)=> {
+        console.log(this.props);
+        this.props.fetchCalendar(day.dateString,returntoken);
+      });
     }
   }
 
 
   render() {
     let today = this._getToday();
-    console.log(today);
-    let events = this.state.events;
-    if(this.state.events[today] === undefined){
-      events = {[today]:[]};
-    }
     return(
       <View style={{ paddingTop: 50, flex: 1 }}>
         <Agenda
-          items={events}
-          onMonthChange={(month) => {console.log('month changed', month)}}
+          items={this.state}
           loadItemsForMonth={this.loadItemsForMonth()}
           selected={today}
           renderItem={this.renderItem.bind(this)}
@@ -114,7 +97,7 @@ class CalendarScreen extends React.Component {
           rowHasChanged={this.rowHasChanged.bind(this)}
           onDayPress = {this.onDayPress()}
           markingType={'multi-dot'}
-          markedDates={this.state.markedDates}
+          markedDates={this.props.markedDates}
           theme={{
             // backgroundColor: '#ffffff',
             calendarBackground: '#ffffff',
