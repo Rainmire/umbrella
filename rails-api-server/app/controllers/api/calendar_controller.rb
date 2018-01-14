@@ -43,10 +43,25 @@ class Api::CalendarController < ApplicationController
 
     #################################
 
-    @events = CalendarEvent.all.order(:start_time).select do |event|
+    selected_events = CalendarEvent.all.order(:start_time).select do |event|
       event_month = DateTime.parse(event.start_time).strftime("%Y-%m")
       event_month == month1 || event_month == month2
     end
+
+    @events = []
+    prev_day = nil
+
+    selected_events.each do |event|
+      curr_day = DateTime.parse(event.start_time).strftime("%Y-%m-%d")
+      if prev_day == curr_day
+        @events.last << event
+      else
+        @events << [event]
+        prev_day = curr_day
+      end
+    end
+
+    debugger
 
     render 'api/calendar/show'
     # debugger
