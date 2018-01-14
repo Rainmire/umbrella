@@ -47,10 +47,12 @@ class MomentsScreen extends React.Component {
         <View style={styles.moment}>
           <Text style={styles.name}>{`${author.name}`}</Text>
           <Text style={styles.moment_body}>{`${item.body}`}</Text>
-          <Image
-            source={{ uri: "https://www.security-camera-warehouse.com/images/profile.png" }}
-            style={styles.moments_image}
-          />
+          <TouchableOpacity>
+            <Image
+              source={{ uri: "https://www.security-camera-warehouse.com/images/profile.png" }}
+              style={styles.moments_image}
+              />
+          </TouchableOpacity>
           <View style={styles.footer}>
             <Text style={styles.footer_info}>{`${dateStamp}`}</Text>
             <Text style={styles.footer_info}>--{`${timeStamp}`}--</Text>
