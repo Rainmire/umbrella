@@ -61,8 +61,6 @@ class Api::CalendarController < ApplicationController
       end
     end
 
-    debugger
-
     render 'api/calendar/show'
     # debugger
   end
