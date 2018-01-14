@@ -72,12 +72,12 @@ class MomentsScreen extends React.Component {
     if (true) {
       return (
         <View style={styles.addMomentContainer}>
-          <Text style={styles.addMomentText}>Add Moment</Text>
           <TouchableOpacity
             onPress={this._addMoment}
             style={styles.addMoment}
             >
-            <Icon name='plus' size={50} color='#000' />
+            <Text style = {styles.addMomentText}>Add</Text>
+            <Icon name='plus' size={20} color='#000' />
           </TouchableOpacity>
         </View>
       );
@@ -163,8 +163,7 @@ export const styles = StyleSheet.create({
   },
   profile_pic: {
     height: 50,
-    width: 50,
-    marginTop: 20,
+    width: 50
   },
   moment: {
     marginLeft: 20,
@@ -196,23 +195,21 @@ export const styles = StyleSheet.create({
     color: "grey"
   },
   addMoment: {
+    flex: 1,
+    flexDirection: 'row',
     height: 50,
     width: 50,
-    alignItems: 'center',
+    alignSelf: 'flex-end',
     justifyContent: 'center',
-    marginRight: 25,
-    marginTop: 10,
-    marginLeft: 50
-
+    paddingTop: 25,
+    marginLeft: 50,
+    marginRight: 10
   },
   addMomentContainer: {
-    marginTop: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-end'
+    height: 50,
   },
   addMomentText: {
-    justifyContent: 'center',
-    fontSize: 16,
+    marginRight: 8,
+    marginTop: 2
   }
 });
