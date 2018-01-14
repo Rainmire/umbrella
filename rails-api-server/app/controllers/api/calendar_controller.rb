@@ -1,7 +1,7 @@
 require 'date'
 
 class Api::CalendarController < ApplicationController
-  before_action :authenticate_request!
+  # before_action :authenticate_request!
 
   def create
     if @current_user.techer_class.nil?
@@ -39,7 +39,17 @@ class Api::CalendarController < ApplicationController
 
     # target_month1 = DateTime.parse(params[:date]).strftime("%Y-%m")
 
-    @events = CalendarEvent.where("date = ? OR date = ?", month1, month2).order(start_time: :desc)
+    # @events = CalendarEvent.where("date = ? OR date = ?", month1, month2).order(start_time: :desc)
+
+    #################################
+
+    @events = CalendarEvent.all.order(:start_time).select do |event|
+      event_month = DateTime.parse(event.start_time).strftime("%Y-%m")
+      event_month == month1 || event_month == month2
+    end
+
+    render 'api/calendar/show'
+    # debugger
   end
 
 end
