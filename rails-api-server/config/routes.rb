@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :moments, only: [:create]
 
     resource :calendar, only: [:create] do
-      get 'daily_events/', to: 'calendar#daily_events'
+      get 'monthly_events/', to: 'calendar#monthly_events'
     end
   end
 
