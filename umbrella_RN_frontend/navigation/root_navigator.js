@@ -58,8 +58,8 @@ const HomeNavigator = TabNavigator({
   tabBarPosition: 'bottom',
   animationEnabled: false,
   tabBarOptions: {
-    activeTintColor: '#e91e63',
-  },
+    activeTintColor: "#1797e2"
+  }
 });
 
 // switch all screens to containers once containers done
