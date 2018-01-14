@@ -21,6 +21,19 @@ json.set! "events" do
   end
 end
 
+json.set! "markedDates" do
+  @events.each do |day|
+    json.set! DateTime.parse(day.first.start_time).strftime("%Y-%m-%d") do
+      json.array!(day) do |event|
+        unless event.key.nil?
+          json.key event.key
+          json.color event.color
+        end
+      end
+    end
+  end
+end
+
 # json.set! "markedDates" do
 #   @events.each do |event|
 #     unless event.key.nil?

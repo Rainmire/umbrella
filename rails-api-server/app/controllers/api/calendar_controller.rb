@@ -17,8 +17,8 @@ class Api::CalendarController < ApplicationController
       start_time: start_time,
       end_time: end_time,
       body: params[:body],
-      dot: params[:color],
-      key: params[:key]
+      key: params[:key],
+      color: params[:color],
     )
 
     if calendar_event.save

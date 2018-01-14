@@ -154,10 +154,10 @@ calendar_events = CalendarEvent.create([
   { start_time: '2017-05-01T10:15:00+00:00', end_time: '2017-05-01T11:15:00+00:00', body: 'event1' },
   { start_time: '2017-05-01T12:00:00+00:00', end_time: '2017-05-01T13:00:00+00:00', body: 'event2' },
   { start_time: '2017-05-01T14:00:00+00:00', end_time: '2017-05-01T15:00:00+00:00', body: 'event3' },
-  { start_time: '2017-05-01T15:00:00+00:00', end_time: '2017-05-01T16:00:00+00:00', body: 'event4' },
+  { start_time: '2017-05-01T15:00:00+00:00', end_time: '2017-05-01T16:00:00+00:00', body: 'event4', key: 'key4', color: 'red' },
 
   { start_time: '2017-05-02T09:00:00+00:00', end_time: '2017-05-02T10:15:00+00:00', body: 'event5' },
-  { start_time: '2017-05-02T10:15:00+00:00', end_time: '2017-05-02T11:15:00+00:00', body: 'event6' },
+  { start_time: '2017-05-02T10:15:00+00:00', end_time: '2017-05-02T11:15:00+00:00', body: 'event6', key: 'key6', color: 'blue' },
   { start_time: '2017-05-02T11:15:00+00:00', end_time: '2017-05-02T13:15:00+00:00', body: 'event7' },
 
   { start_time: '2017-06-12T10:15:00+00:00', end_time: '2017-06-12T11:15:00+00:00', body: 'event8' },
