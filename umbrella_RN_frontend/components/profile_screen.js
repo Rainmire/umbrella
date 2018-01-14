@@ -28,7 +28,7 @@ class ProfileScreen extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Profile',
     tabBarIcon: ({ tintColor }) => (
-      <Icon name="user" size={30} color="#00F" />
+      <Icon name="user" size={30} color="#00a4f7" />
     )
   }
 
@@ -60,10 +60,13 @@ class ProfileScreen extends React.Component {
           onPress={this._switchChild}
           style={styles.profileButton}
         >
+        <View style={styles.textWithIcon}>
+          <Icon name="exchange" size={20} color="#000" style = {styles.icon}/>
           <Text style={styles.switchChildButtonText}>
             Switch Child
           </Text>
-          <Icon name="arrow-right" size={20} color="#900" />
+        </View>
+          <Icon name="chevron-right" size={20} color="grey" />
         </ TouchableOpacity>
       )
     }
@@ -74,47 +77,62 @@ class ProfileScreen extends React.Component {
       onPress={this.handleSignout()}
       style={styles.logOutButton}
     >
-      <Text style={styles.signOutButtonText}> SIGN OUT </Text>
+      <Text style={styles.signOutButtonText}> Sign Out </Text>
     </ TouchableOpacity>
   )
 
 
-  _renderItem = ( { item } ) => {
-   let currentChild = item.currentChild;
-   let teacher = item.teacher;
-
-    return(
-      <View style={styles.profileScreen}>
-        <View>
-          <Image
-            source={{ uri: `${currentChild.profile_pic}` }}
-            style={styles.photo}
-            />
-        </View>
-        <View style={styles.childInfoContainer}>
-          <View style={styles.childInfo1}>
-            <Text style={styles.text}>Name:   {`${currentChild.name}`}</Text>
-            <Text style={styles.text}>Class:   {`${teacher.teacher_class}`}</Text>
-          </View>
-          <View style={styles.childInfo2}>
-            <Text style={styles.text}>Main Teacher:   {`${teacher.name}`}</Text>
-            <Text style={styles.text}>Contact:   {`${teacher.contact}`}</Text>
-          </View>
-        </View>
-      </View>
-    )
-  }
+  // _renderItem = ( { item } ) => {
+  //  let currentChild = item.currentChild;
+  //  let teacher = item.teacher;
+  //
+  //   return(
+  //     <View style={styles.profileScreen}>
+  //       <View>
+  //         <Image
+  //           source={{ uri: `${currentChild.profile_pic}` }}
+  //           style={styles.photo}
+  //           />
+  //       </View>
+  //       <View style = {styles.nameContainer}>
+  //         <Text style={styles.name}>{`${currentChild.name}`}</Text>
+  //       </View>
+  //       <View style={styles.childInfoContainer}>
+  //         <View style={styles.childInfo}>
+  //           <Text style={styles.text}>Class:   {`${teacher.teacher_class}`}</Text>
+  //           <Text style={styles.text}>Main Teacher:   {`${teacher.name}`}</Text>
+  //           <Text style={styles.text}>Contact:   {`${teacher.contact}`}</Text>
+  //         </View>
+  //       </View>
+  //     </View>
+  //   )
+  // }
 
   render() {
 console.log('screen props: ', this.props)
     if (!this.state.isTeacher) {
+      let currentChild = this.props.currentChild;
+      let teacher = this.props.teacher;
       return (
         <View style={styles.profileScreen}>
-          <FlatList
-            data={ [this.props] }
-            keyExtractor={ (item) => item.currentChild.id }
-            renderItem={ this._renderItem }
-          />
+          <View>
+            <Image
+              source={{ uri: `${currentChild.profile_pic}` }}
+              style={styles.photo}
+              />
+          </View>
+          <View style = {styles.nameContainer}>
+            <Text style={styles.name}>{`${currentChild.name}`}</Text>
+          </View>
+          <View style={styles.childInfoContainer}>
+            <Text style={styles.text}>Class:   {`${teacher.teacher_class}`}</Text>
+          </View>
+          <View style={styles.childInfoContainer}>
+            <Text style={styles.text}>Main Teacher:   {`${teacher.name}`}</Text>
+          </View>
+          <View style={styles.childInfoContainer}>
+            <Text style={styles.text}>Contact:   {`${teacher.contact}`}</Text>
+          </View>
           { this._renderSwitchChildren() }
           { this._renderLogOutButton() }
         </View>
@@ -139,55 +157,72 @@ export const styles = StyleSheet.create({
   profileScreen: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 50,
+    // justifyContent: 'space-around',
+    paddingTop: 40
   },
   childInfoContainer: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 3,
+    flex: 1,
+    flexDirection: "row",
+    justifyContent:"center",
+    alignSelf: 'stretch',
+    backgroundColor: "white",
+    alignItems: "center"
   },
-  childInfo1: {
-    height: 75,
-    width: 300,
-    borderWidth: .5,
+  textWithIcon:{
+    flex: 1,
+    flexDirection: "row"
   },
-  childInfo2: {
+  icon:{
+    marginLeft: 10,
+    marginRight: 10
+  },
+  switchChildButtonText: {
+    fontSize: 15,
+    color: 'black'
+  },
+  nameContainer:{
+    flex: 1,
+    alignItems:"center",
+    justifyContent:"center",
+    marginBottom: 10,
+    alignSelf: 'stretch',
+  },
+  name:{
+    fontSize: 22
+  },
+  childInfo: {
     height: 75,
-    width: 300,
-    borderWidth: .5,
+    alignSelf: 'stretch'
   },
   text: {
+    height: 60,
+    paddingTop:20,
+    paddingBottom: 20,
     flex: 1,
     justifyContent: 'space-around',
     paddingTop: 5,
     paddingLeft: 10,
+    borderWidth: 0.5,
+    borderColor: '#d6d7da',
+    fontSize: 15,
+    alignSelf: "center"
   },
   photo: {
     height: 150,
     width: 150,
-    borderWidth: 2,
-    marginBottom: 50,
+    marginTop:40,
     borderRadius: 75,
-  },
-  buttonContainer: {
-    height: 100,
-    width: 300,
-    flex: 1,
-    flexDirection: 'column',
   },
   profileButton: {
     height: 50,
-    width: 300,
+    alignSelf: 'stretch',
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    backgroundColor: '#bddfeb',
-    borderRadius: 30,
-    marginBottom: 20,
-    paddingRight: 20
+    justifyContent: 'space-between',
+    backgroundColor: 'white',
+    marginTop: 40,
+    marginBottom: 20
   },
   logOutButton: {
     height: 20,
@@ -196,17 +231,11 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#bddfeb',
-    borderRadius: 30,
-    marginBottom: 20,
-    // paddingRight: 20
-  },
-  switchChildButtonText: {
-    fontSize: 18,
-    color: 'blue',
-    paddingRight: 50
+    borderRadius: 10,
+    marginBottom: 20
   },
   signOutButtonText: {
-    fontSize: 18,
-    color: 'blue',
+    fontSize: 15,
+    color: 'white',
   }
 });
