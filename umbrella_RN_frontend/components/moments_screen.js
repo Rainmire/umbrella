@@ -35,12 +35,11 @@ class MomentsScreen extends React.Component {
     const timeStampSplit = item.created_at.split('T');
     const dateStamp = timeStampSplit[0];
     const timeStamp = timeStampSplit[1].split('.')[0];
-    // console.log('this it the item in the render item moments index: ', item);
     return(
       <View style={styles.moments_container}>
         <View style={styles.image_container}>
           <Image
-            source={{ uri: "https://www.security-camera-warehouse.com/images/profile.png" }}
+            source={{ uri:`${author.profile_pic}` }}
             style={styles.profile_pic}
           />
         </View>
@@ -125,7 +124,6 @@ class MomentsScreen extends React.Component {
 
 // once backend fetch for moments is fixed, look at refresh again and fix
   render() {
-
     return (
       <View>
         {this._addMomentButton()}
