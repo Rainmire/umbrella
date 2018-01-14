@@ -15,9 +15,7 @@ class CalendarScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-
-    };
+    this.state = {events:{}};
   }
 
   _getToday(){
@@ -50,7 +48,7 @@ class CalendarScreen extends React.Component {
 
   renderEmptyDate() {
     return (
-      <View style={styles.emptyDate}><Text>This is empty date!</Text></View>
+      <View style={styles.emptyDate}><Text>No Event Today!</Text></View>
     );
   }
 
@@ -58,17 +56,19 @@ class CalendarScreen extends React.Component {
     return r1.name !== r2.name;
   }
 
-  timeToString(time) {
-    const date = new Date(time);
-    return date.toISOString().split('T')[0];
-  }
+  // timeToString(time) {
+  //   const date = new Date(time);
+  //   return date.toISOString().split('T')[0];
+  // }
 
   onDayPress(){
     return (day) =>{
       // if(this.props.events.length !== 0){
         let dailyEvents = this.props.events[day.dateString];
-        console.log(dailyEvents);
-        this.setState({[day.dateString]:dailyEvents});
+        if(dailyEvents === undefined){
+          dailyEvents = [];
+        }
+        this.setState({events:{[day.dateString]:dailyEvents}});
       // }
     }
   }
@@ -77,7 +77,7 @@ class CalendarScreen extends React.Component {
     return(day) =>{
       console.log(day);
       AsyncStorage.getItem('token').then((returntoken)=> {
-        console.log(this.props);
+        console.log(this.state);
         this.props.fetchCalendar(day.dateString,returntoken);
       });
     }
@@ -89,7 +89,7 @@ class CalendarScreen extends React.Component {
     return(
       <View style={{ paddingTop: 50, flex: 1 }}>
         <Agenda
-          items={this.state}
+          items={this.state.events}
           loadItemsForMonth={this.loadItemsForMonth()}
           selected={today}
           renderItem={this.renderItem.bind(this)}

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import fetchCalendar from '../actions/calendar_actions';
+import {fetchCalendar} from '../actions/calendar_actions';
 
 import CalendarScreen from './calendar_screen';
 
