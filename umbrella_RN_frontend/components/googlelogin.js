@@ -107,7 +107,9 @@ export default class GoogleLogin extends Component {
           onPress={this.loginWithGoogle.bind(this)}
           {...iconStyles}
           >
-          Log in with Google
+          <Text style = {styles.buttontext}>
+            Log in with Google
+          </Text>
         </Icon.Button>
       </View>
     );
@@ -144,8 +146,11 @@ export default class GoogleLogin extends Component {
 //   </View>
 // </View>
 const iconStyles = {
+  flex: 1,
+  alignItems: 'center',
+  padding:20,
   borderRadius: 10,
-  iconStyle: { paddingVertical: 5 },
+  iconStyle: { paddingVertical: 5 }
 };
 
 const styles = StyleSheet.create({
@@ -153,15 +158,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFF',
     // justifyContent: 'space-around',
-    alignItems: 'stretch',
   },
   content: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  avatar: {
-    margin: 20,
+  buttontext: {
+    // alignSelf: 'center',
+    textAlign: 'center',
+    color: 'white'
   },
   logoImage: {
     marginTop: 150,
@@ -176,9 +182,10 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   text: {
+    fontSize: 30,
     textAlign: 'center',
     color: '#333',
-    marginBottom: 5,
+    marginBottom: 100,
   },
   buttons: {
     justifyContent: 'space-between',
