@@ -25,7 +25,7 @@ class MomentsScreen extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Moments',
     tabBarIcon: ({ tintColor }) => (
-      <Icon name="newspaper-o" size={30} color="#00F" />
+      <Icon name="newspaper-o" size={30} color={tintColor}  />
     )
   };
 
@@ -35,22 +35,24 @@ class MomentsScreen extends React.Component {
     const timeStampSplit = item.created_at.split('T');
     const dateStamp = timeStampSplit[0];
     const timeStamp = timeStampSplit[1].split('.')[0];
-    // console.log('this it the item in the render item moments index: ', item);
+    console.log('this it the item in the render item moments index: ', author);
     return(
       <View style={styles.moments_container}>
         <View style={styles.image_container}>
           <Image
-            source={{ uri: "https://www.security-camera-warehouse.com/images/profile.png" }}
+            source={{ uri:`${author.profile_pic}` }}
             style={styles.profile_pic}
           />
         </View>
         <View style={styles.moment}>
           <Text style={styles.name}>{`${author.name}`}</Text>
           <Text style={styles.moment_body}>{`${item.body}`}</Text>
-          <Image
-            source={{ uri: "https://www.security-camera-warehouse.com/images/profile.png" }}
-            style={styles.moments_image}
-          />
+          <TouchableOpacity>
+            <Image
+              source={{ uri: "https://www.security-camera-warehouse.com/images/profile.png" }}
+              style={styles.moments_image}
+              />
+          </TouchableOpacity>
           <View style={styles.footer}>
             <Text style={styles.footer_info}>{`${dateStamp}`}</Text>
             <Text style={styles.footer_info}>--{`${timeStamp}`}--</Text>
@@ -72,12 +74,12 @@ class MomentsScreen extends React.Component {
     if (true) {
       return (
         <View style={styles.addMomentContainer}>
-          <Text style={styles.addMomentText}>Add Moment</Text>
           <TouchableOpacity
             onPress={this._addMoment}
             style={styles.addMoment}
             >
-            <Icon name='plus' size={50} color='#000' />
+            <Text style = {styles.addMomentText}>Add</Text>
+            <Icon name='plus' size={20} color='#000' />
           </TouchableOpacity>
         </View>
       );
@@ -125,7 +127,6 @@ class MomentsScreen extends React.Component {
 
 // once backend fetch for moments is fixed, look at refresh again and fix
   render() {
-
     return (
       <View>
         {this._addMomentButton()}
@@ -155,19 +156,22 @@ export const styles = StyleSheet.create({
   moments_container: {
     flex: 1,
     flexDirection: 'row',
-    paddingTop: 25,
+    paddingTop: 15,
+    paddingBottom: 15,
+    backgroundColor: "white",
+    borderWidth: 0.5,
+    borderColor: '#d6d7da'
   },
   profile_pic: {
     height: 50,
-    width: 50,
-    marginTop: 20,
+    width: 50
   },
   moment: {
     marginLeft: 20,
     flex: 1
   },
   name: {
-    fontSize: 24,
+    fontSize: 20,
     marginBottom: 10,
   },
   moment_body: {
@@ -189,25 +193,24 @@ export const styles = StyleSheet.create({
   footer_info: {
     fontSize: 12,
     marginTop: 5,
+    color: "grey"
   },
   addMoment: {
+    flex: 1,
+    flexDirection: 'row',
     height: 50,
     width: 50,
-    alignItems: 'center',
+    alignSelf: 'flex-end',
     justifyContent: 'center',
-    marginRight: 25,
-    marginTop: 10,
-    marginLeft: 50
-
+    paddingTop: 25,
+    marginLeft: 50,
+    marginRight: 10
   },
   addMomentContainer: {
-    marginTop: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-end'
+    height: 50,
   },
   addMomentText: {
-    justifyContent: 'center',
-    fontSize: 16,
+    marginRight: 8,
+    marginTop: 2
   }
 });
