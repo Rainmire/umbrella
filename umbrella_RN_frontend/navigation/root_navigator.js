@@ -85,12 +85,3 @@ export const SignedInScreen = StackNavigator({
     screen: SelectStudentsContainer,
   }
 });
-
-// export const SignedOutScreen = StackNavigator({
-//   Login: {
-//     screen: LoginForm,
-//     navigationOptions: {
-//       header: null
-//     }
-//   }
-// });

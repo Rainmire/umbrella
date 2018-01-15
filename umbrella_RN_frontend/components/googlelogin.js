@@ -48,7 +48,7 @@ export default class GoogleLogin extends Component {
     }).then(({_bodyInit}) => {
       const JWTtoken = JSON.parse(_bodyInit);
       AsyncStorage.setItem('token', JWTtoken.auth_token);
-
+      console.log(' token in the google login form', JWTtoken);
       AsyncStorage.getItem('token').then((returntoken)=> {
         this.props.fetchCurrentUser(returntoken);
       })
