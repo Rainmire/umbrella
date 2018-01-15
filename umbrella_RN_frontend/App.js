@@ -25,7 +25,7 @@ class App extends Component {
   render() {
 
     return (
-      <Provider store={createStore(RootReducer, applyMiddleware(logger,thunk))}>
+      <Provider store={createStore(RootReducer, applyMiddleware(logger, thunk, logger))}>
         <Router />
       </Provider>
     );

@@ -6,12 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
 User.create([
   { name: 'Lily', email: 'zq.yang.lily@gmail.com', contact: '111-111-1111', logged_in: false, profile_pic: 'https://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513199891/dog1_lymttu.jpg' },
   { name: 'Guy', email: 'ggwass@gmail.com', contact: '222-222-2222', logged_in: false, profile_pic: 'https://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513199891/dog2_rz2qbr.jpg' },
   { name: 'Mitch', email: 'melancholycomedy@gmail.com', contact: '333-333-3333', logged_in: false, profile_pic: 'https://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513199891/dog3_a25vcc.jpg' },
   { name: 'Miss Melissa', email: 'teacher1@gmail.com', teacher_class: 'Class A', contact: '444-444-4444', logged_in: false, profile_pic: 'https://res.cloudinary.com/dreamhousesf/image/upload/v1511993218/dane-deaner-327695_xbkbyl.jpg' },
   { name: 'Miss Lisa', email: 'teacher2@gmail.com', teacher_class: 'Class B', contact: '555-555-5555', logged_in: false, profile_pic: 'https://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513199891/dog1_lymttu.jpg' },
+  { name: 'Mr Binh', email: 'umbrellaTeacherTest@gmail.com', teacher_class: 'Class C', contact: '666-666-6666', logged_in: false, profile_pic: 'https://res.cloudinary.com/rainmire/image/upload/c_lfill,h_300,w_300/v1513199891/dog1_lymttu.jpg' },
   ])
 
 Child.create([
@@ -20,7 +22,9 @@ Child.create([
   { name: 'Ethan', teacher_id: 5, parent_id: 1, profile_pic: 'https://res.cloudinary.com/dreamhousesf/image/upload/v1513807652/IMG_5142_2_yfvsji.jpg' },
   { name: 'James', teacher_id: 4, parent_id: 2, profile_pic: 'https://res.cloudinary.com/dreamhousesf/image/upload/v1513807652/FullSizeRender_5_smr5gm.jpg' },
   { name: 'Emily', teacher_id: 4, parent_id: 3, profile_pic: 'https://res.cloudinary.com/dreamhousesf/image/upload/v1513807653/FullSizeRender_7_gxq6bf.jpg' },
-  { name: 'Coco', teacher_id: 5, parent_id: 2, profile_pic: 'https://res.cloudinary.com/dreamhousesf/image/upload/v1513807793/FullSizeRender_8_n9v6xk.jpg' },
+  { name: 'Linda', teacher_id: 6, parent_id: 2, profile_pic: 'https://res.cloudinary.com/dreamhousesf/image/upload/v1513807793/FullSizeRender_8_n9v6xk.jpg' },
+  { name: 'Louise', teacher_id: 6, parent_id: 1, profile_pic: 'https://res.cloudinary.com/dreamhousesf/image/upload/v1513807793/FullSizeRender_8_n9v6xk.jpg' },
+  { name: 'Tina', teacher_id: 6, parent_id: 3, profile_pic: 'https://res.cloudinary.com/dreamhousesf/image/upload/v1513807793/FullSizeRender_8_n9v6xk.jpg' },
   ])
 
 moments = Moment.create([
@@ -61,7 +65,7 @@ moments = Moment.create([
   { body: 'Afternoon Play outside', author_id: 5, is_public: true },
   { body: 'Story time: Leaves', author_id: 5, is_public: true },
   { body: 'Afternoon Snack time', author_id: 5, is_public: true },
-
+  # 25 - 31
   { body: 'Moment balala', author_id: 5, is_public: false },
   { body: 'Moment long time ago', author_id: 5, is_public: false },
   { body: 'Moment long time', author_id: 4, is_public: false },
@@ -69,6 +73,10 @@ moments = Moment.create([
   { body: 'Moment older', author_id: 4, is_public: false },
   { body: 'Moment new', author_id: 4, is_public: false },
   { body: 'Moment im the latest one', author_id: 4, is_public: false },
+  # 32 - 34
+  { body: 'Remember -- we have an early release today!', author_id: 6, is_public: false },
+  { body: 'Band-aid Report: Scraped knee on the playground', author_id: 6, is_public: false },
+  { body: 'Just wanted to say Happy Friday!', author_id: 6, is_public: false },
 
   ])
 
@@ -147,6 +155,15 @@ ChildMomentMembership.create([
   { child_id: 1, moment_id: 29 },
   { child_id: 1, moment_id: 30 },
   { child_id: 1, moment_id: 31 },
+
+  # new moments added for new test teacher 
+  { child_id: 6, moment_id: 32 },
+  { child_id: 7, moment_id: 32 },
+  { child_id: 8, moment_id: 32 },
+  { child_id: 7, moment_id: 33 },
+  { child_id: 8, moment_id: 33 },
+  { child_id: 6, moment_id: 34 },
+  { child_id: 8, moment_id: 34 },
 
 
 

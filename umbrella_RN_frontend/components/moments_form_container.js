@@ -7,8 +7,12 @@ const mapSTPs = ({entities}) => ({
   students: entities.children
 });
 
-const mapDTPs = dispatch => ({
-  createMoment: (moment, token) => dispatch(createMoment(moment, token)),
-});
+const mapDTPs = dispatch => {
+console.log('create moment: ', createMoment);
+  return({
+
+    createMoment: (moment, token) => dispatch(createMoment(moment, token)),
+  });
+};
 
 export default connect(mapSTPs, mapDTPs)(MomentForm);
