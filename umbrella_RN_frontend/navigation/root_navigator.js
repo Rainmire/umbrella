@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
-import LoginFormContainer from '../components/login_form_container';
-import LoginForm from '../components/login_form';
+// import LoginFormContainer from '../components/login_form_container';
+import GoogleLoginContainer from '../components/googlelogin_container';
 import ProfileContainer from '../components/profile_container';
 import MomentsContainer from '../components/moments_container';
-
-// create containers
-import CalendarScreen from '../components/calendar_screen';
+import CalendarContainer from '../components/calendar_container';
 import MessageScreen from '../components/message_screen';
 // create containers
 
@@ -27,7 +25,7 @@ export const createRootNavigator = (signedIn = false) => {
         }
       },
       SignedOut: {
-        screen: LoginForm,
+        screen: GoogleLoginContainer,
         navigationOptions: {
           gesturesEnabled: false,
           left: null
@@ -49,7 +47,7 @@ const HomeNavigator = TabNavigator({
     screen: MomentsContainer,
   },
   CalendarScreen: {
-    screen: CalendarScreen,
+    screen: CalendarContainer,
   },
   MessageScreen: {
     screen: MessageScreen,
@@ -60,10 +58,10 @@ const HomeNavigator = TabNavigator({
 
 }, {
   tabBarPosition: 'bottom',
-  animationEnabled: true,
+  animationEnabled: false,
   tabBarOptions: {
-    activeTintColor: '#e91e63',
-  },
+    activeTintColor: "#1797e2"
+  }
 });
 
 // switch all screens to containers once containers done

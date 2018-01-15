@@ -77,13 +77,12 @@ export const styles = StyleSheet.create({
     paddingBottom: 5,
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: 'rgba(255, 182, 193, .5)',
+    backgroundColor: 'white',
     marginTop: 10
   },
   photo: {
     height: 50,
     width: 50,
-    borderWidth: 2,
     marginLeft: 50,
     borderRadius: 25,
   },

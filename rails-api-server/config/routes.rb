@@ -17,6 +17,10 @@ Rails.application.routes.draw do
     end
 
     resources :moments, only: [:create]
+
+    resource :calendar, only: [:create] do
+      get 'monthly_events/', to: 'calendar#monthly_events'
+    end
   end
 
   get 'auth/:provider/callback', to: 'api/sessions#create'
