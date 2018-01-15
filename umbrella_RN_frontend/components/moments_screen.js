@@ -42,7 +42,7 @@ class MomentsScreen extends React.Component {
     const timeStampSplit = item.created_at.split('T');
     const dateStamp = timeStampSplit[0];
     const timeStamp = timeStampSplit[1].split('.')[0];
-    console.log('this it the item in the render item moments index: ', this.props.users);
+    console.log('this it the item in the render item moments index: ', item);
     return(
       <View style={styles.moments_container}>
         <View style={styles.image_container}>
@@ -54,8 +54,7 @@ class MomentsScreen extends React.Component {
         <View style={styles.moment}>
           <Text style={styles.name}>{`${author.name}`}</Text>
           <Text style={styles.moment_body}>{`${item.body}`}</Text>
-          <TouchableOpacity
-            onPress = {this.openModal(item.image_url)}>
+          <TouchableOpacity>
             <Image
               source={{ uri: item.image_url }}
               style={styles.moments_image}
@@ -135,7 +134,6 @@ class MomentsScreen extends React.Component {
 
 // once backend fetch for moments is fixed, look at refresh again and fix
   render() {
-    console.log(this.props.moments);
     return (
       <View>
         {this._addMomentButton()}
@@ -156,7 +154,6 @@ class MomentsScreen extends React.Component {
         />
         <Modal
           visible = {this.state.modalVisible}
-          onRequestClose = {()=>{}}
         >
           <Image source = {{uri:this.state.modalImage}}></Image>
         </Modal>

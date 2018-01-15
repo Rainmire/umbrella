@@ -59,8 +59,8 @@ moments = Moment.create([
   { body: 'Afternoon Story time', author_id: 4, is_public: true },
   { body: 'Afternoon Snack time', author_id: 4, is_public: true },
   { body: 'Afternoon Play outside', author_id: 5, is_public: true },
-  { body: 'Story time: Leaves', author_id: 5, is_public: true },
-  { body: 'Afternoon Snack time', author_id: 5, is_public: true },
+  { body: 'Story time: Leaves', author_id: 5, is_public: true, image_url: "https://res.cloudinary.com/dreamhousesf/image/upload/v1513807793/FullSizeRender_8_n9v6xk.jpg" },
+  { body: 'Afternoon Snack time', author_id: 5, is_public: true, image_url: "https://res.cloudinary.com/dreamhousesf/image/upload/v1513807652/IMG_0936_ebxblo.jpg" },
 
   { body: 'Moment balala', author_id: 5, is_public: false },
   { body: 'Moment long time ago', author_id: 5, is_public: false },
