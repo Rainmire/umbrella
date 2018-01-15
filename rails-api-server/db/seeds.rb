@@ -158,18 +158,18 @@ ChildMomentMembership.create([
   ])
 
 calendar_events = CalendarEvent.create([
-  { date: '2017-05', start_time: '2017-05-01T10:15:00+00:00', end_time: '2017-05-01T11:15:00+00:00', body: 'event1' },
-  { date: '2017-05', start_time: '2017-05-01T12:00:00+00:00', end_time: '2017-05-01T13:00:00+00:00', body: 'event2' },
-  { date: '2017-05', start_time: '2017-05-01T14:00:00+00:00', end_time: '2017-05-01T15:00:00+00:00', body: 'event3' },
-  { date: '2017-05', start_time: '2017-05-01T15:00:00+00:00', end_time: '2017-05-01T16:00:00+00:00', body: 'event4' },
+  { start_time: '2017-05-01T10:15:00+00:00', end_time: '2017-05-01T11:15:00+00:00', body: 'event1' },
+  { start_time: '2017-05-01T12:00:00+00:00', end_time: '2017-05-01T13:00:00+00:00', body: 'event2' },
+  { start_time: '2017-05-01T14:00:00+00:00', end_time: '2017-05-01T15:00:00+00:00', body: 'event3' },
+  { start_time: '2017-05-01T15:00:00+00:00', end_time: '2017-05-01T16:00:00+00:00', body: 'event4', key: 'key4', color: 'red' },
 
-  { date: '2017-05', start_time: '2017-05-02T09:00:00+00:00', end_time: '2017-05-02T10:15:00+00:00', body: 'event5' },
-  { date: '2017-05', start_time: '2017-05-02T10:15:00+00:00', end_time: '2017-05-02T11:15:00+00:00', body: 'event6' },
-  { date: '2017-05', start_time: '2017-05-02T11:15:00+00:00', end_time: '2017-05-02T13:15:00+00:00', body: 'event7' },
+  { start_time: '2017-05-02T09:00:00+00:00', end_time: '2017-05-02T10:15:00+00:00', body: 'event5' },
+  { start_time: '2017-05-02T10:15:00+00:00', end_time: '2017-05-02T11:15:00+00:00', body: 'event6', key: 'key6', color: 'blue' },
+  { start_time: '2017-05-02T11:15:00+00:00', end_time: '2017-05-02T13:15:00+00:00', body: 'event7' },
 
-  { date: '2017-06', start_time: '2017-06-12T10:15:00+00:00', end_time: '2017-06-12T11:15:00+00:00', body: 'event8' },
-  { date: '2017-06', start_time: '2017-06-12T12:15:00+00:00', end_time: '2017-06-12T14:15:00+00:00', body: 'event9' },
+  { start_time: '2017-06-12T10:15:00+00:00', end_time: '2017-06-12T11:15:00+00:00', body: 'event8' },
+  { start_time: '2017-06-12T12:15:00+00:00', end_time: '2017-06-12T14:15:00+00:00', body: 'event9' },
 
-  { date: '2017-06', start_time: '2017-06-30T10:00:00+00:00', end_time: '2017-06-30T16:00:00+00:00', body: 'event10' },
+  { start_time: '2017-06-30T10:00:00+00:00', end_time: '2017-06-30T16:00:00+00:00', body: 'event10' },
 
   ])

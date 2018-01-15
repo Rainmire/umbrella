@@ -17,8 +17,8 @@ class Api::CalendarController < ApplicationController
       start_time: start_time,
       end_time: end_time,
       body: params[:body],
-      dot: params[:color],
-      key: params[:key]
+      key: params[:key],
+      color: params[:color],
     )
 
     if calendar_event.save
@@ -39,7 +39,30 @@ class Api::CalendarController < ApplicationController
 
     # target_month1 = DateTime.parse(params[:date]).strftime("%Y-%m")
 
-    @events = CalendarEvent.where("date = ? OR date = ?", month1, month2).order(start_time: :desc)
+    # @events = CalendarEvent.where("date = ? OR date = ?", month1, month2).order(start_time: :desc)
+
+    #################################
+
+    selected_events = CalendarEvent.all.order(:start_time).select do |event|
+      event_month = DateTime.parse(event.start_time).strftime("%Y-%m")
+      event_month == month1 || event_month == month2
+    end
+
+    @events = []
+    prev_day = nil
+
+    selected_events.each do |event|
+      curr_day = DateTime.parse(event.start_time).strftime("%Y-%m-%d")
+      if prev_day == curr_day
+        @events.last << event
+      else
+        @events << [event]
+        prev_day = curr_day
+      end
+    end
+
+    render 'api/calendar/show'
+    # debugger
   end
 
 end
