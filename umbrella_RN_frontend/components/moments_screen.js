@@ -7,7 +7,8 @@ import { StyleSheet,
          AsyncStorage,
          FlatList,
          TouchableOpacity,
-         RefreshControl
+         RefreshControl,
+         Modal
         } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -19,6 +20,8 @@ class MomentsScreen extends React.Component {
     this.state = {
       refreshing: false,
       isTeacher: false,
+      modalVisible: false,
+      modalImage:""
     };
   }
 
@@ -29,13 +32,17 @@ class MomentsScreen extends React.Component {
     )
   };
 
+  openModal(image_url){
+    this.setState({modalVisible:true,modalImage: `${image_url}`},()=>{console.log("setState",this.state);})
+  }
+
   _renderItem = ({ item }) => {
     const privacy = item.is_public ? 'Public' : 'Private';
     const author = this.props.users[item.author_id];
     const timeStampSplit = item.created_at.split('T');
     const dateStamp = timeStampSplit[0];
     const timeStamp = timeStampSplit[1].split('.')[0];
-    console.log('this it the item in the render item moments index: ', author);
+    console.log('this it the item in the render item moments index: ', this.props.users);
     return(
       <View style={styles.moments_container}>
         <View style={styles.image_container}>
@@ -47,9 +54,10 @@ class MomentsScreen extends React.Component {
         <View style={styles.moment}>
           <Text style={styles.name}>{`${author.name}`}</Text>
           <Text style={styles.moment_body}>{`${item.body}`}</Text>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress = {this.openModal(item.image_url)}>
             <Image
-              source={{ uri: "https://www.security-camera-warehouse.com/images/profile.png" }}
+              source={{ uri: item.image_url }}
               style={styles.moments_image}
               />
           </TouchableOpacity>
@@ -127,6 +135,7 @@ class MomentsScreen extends React.Component {
 
 // once backend fetch for moments is fixed, look at refresh again and fix
   render() {
+    console.log(this.props.moments);
     return (
       <View>
         {this._addMomentButton()}
@@ -145,6 +154,12 @@ class MomentsScreen extends React.Component {
             }
           }}
         />
+        <Modal
+          visible = {this.state.modalVisible}
+          onRequestClose = {()=>{}}
+        >
+          <Image source = {{uri:this.state.modalImage}}></Image>
+        </Modal>
       </View>
     );
   }
