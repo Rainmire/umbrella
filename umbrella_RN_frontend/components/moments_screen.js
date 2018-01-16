@@ -10,7 +10,6 @@ import { StyleSheet,
          RefreshControl,
          Modal
         } from 'react-native';
-import PhotoView from 'react-native-photo-view';
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -34,13 +33,15 @@ class MomentsScreen extends React.Component {
   };
 
   openModal(image_url){
-    return ()=>{
-      this.setState({modalVisible:true,modalImage: `${image_url}`},()=>{console.log("setState",this.state);})
+    return()=>{
+      this.setState({modalVisible:true,modalImage: `${image_url}`})
     }
   }
 
   closeModal(){
-    return()=>{this.setState({modalVisible:false})}
+    return ()=>{
+      this.setState({modalVisible:false})
+    }
   }
 
   _renderItem = ({ item }) => {
@@ -171,14 +172,8 @@ class MomentsScreen extends React.Component {
           style={styles.modal}
         >
         <TouchableOpacity
-          onPress={this.closeModal()}>
-          <PhotoView
-            source={{uri:this.state.modalImage}}
-            minimumZoomScale={0.5}
-            maximumZoomScale={3}
-            androidScaleType="center"
-            onLoad={() => console.log("Image loaded!")}
-            style={{width: 300, height: 300}} />
+          onPress = {this.closeModal()}>
+          <Image style={styles.modal_image} source = {{uri:this.state.modalImage}}></Image>
         </TouchableOpacity>
         </Modal>
       </View>
@@ -251,10 +246,12 @@ export const styles = StyleSheet.create({
   },
   modal: {
     flex: 1,
-    backgroundColor: 'pink'
+    backgroundColor: 'pink',
+    alignItems: 'center',
+    flexDirection: 'column'
   },
   modal_image: {
-    flex: 1,
-    alignSelf: 'stretch'
+    height: 200,
+    width:300
   }
 });
