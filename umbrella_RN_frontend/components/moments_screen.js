@@ -34,7 +34,7 @@ class MomentsScreen extends React.Component {
 
   openModal(image_url){
     return()=>{
-      this.setState({modalVisible:true,modalImage: `${image_url}`},()=>{console.log("setState",this.state);})
+      this.setState({modalVisible:true,modalImage: `${image_url}`})
     }
   }
 
@@ -52,7 +52,8 @@ class MomentsScreen extends React.Component {
     const timeStamp = timeStampSplit[1].split('.')[0];
     let momentImage;
     if(item.image_url !== null){
-      momentImage = (<TouchableOpacity>
+      momentImage = (<TouchableOpacity
+        onPress={this.openModal(item.image_url)}>
         <Image
           source={{ uri: item.image_url }}
           style={styles.moments_image}
@@ -169,7 +170,7 @@ class MomentsScreen extends React.Component {
         >
         <TouchableOpacity
           onPress = {this.closeModal()}>
-          <Image source = {{uri:this.state.modalImage}}></Image>
+          <Image style={styles.moments_image} source = {{uri:this.state.modalImage}}></Image>
         </TouchableOpacity>
         </Modal>
       </View>
