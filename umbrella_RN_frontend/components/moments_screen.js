@@ -7,7 +7,8 @@ import { StyleSheet,
          AsyncStorage,
          FlatList,
          TouchableOpacity,
-         RefreshControl
+         RefreshControl,
+         Modal
         } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -19,6 +20,8 @@ class MomentsScreen extends React.Component {
     this.state = {
       refreshing: false,
       isTeacher: false,
+      modalVisible: false,
+      modalImage:""
     };
   }
 
@@ -29,13 +32,36 @@ class MomentsScreen extends React.Component {
     )
   };
 
+  openModal(image_url){
+    return()=>{
+      this.setState({modalVisible:true,modalImage: `${image_url}`})
+    }
+  }
+
+  closeModal(){
+    return ()=>{
+      this.setState({modalVisible:false})
+    }
+  }
+
   _renderItem = ({ item }) => {
     const privacy = item.is_public ? 'Public' : 'Private';
     const author = this.props.users[item.author_id];
     const timeStampSplit = item.created_at.split('T');
     const dateStamp = timeStampSplit[0];
     const timeStamp = timeStampSplit[1].split('.')[0];
-    console.log('this it the item in the render item moments index: ', author);
+    let momentImage;
+    if(item.image_url !== null){
+      momentImage = (
+        <TouchableOpacity
+          onPress={this.openModal(item.image_url)}>
+        <Image
+          source={{ uri: item.image_url }}
+          style={styles.moments_image}
+          />
+      </TouchableOpacity>)
+    }
+    console.log('this it the item in the render item moments index: ', item);
     return(
       <View style={styles.moments_container}>
         <View style={styles.image_container}>
@@ -47,12 +73,7 @@ class MomentsScreen extends React.Component {
         <View style={styles.moment}>
           <Text style={styles.name}>{`${author.name}`}</Text>
           <Text style={styles.moment_body}>{`${item.body}`}</Text>
-          <TouchableOpacity>
-            <Image
-              source={{ uri: "https://www.security-camera-warehouse.com/images/profile.png" }}
-              style={styles.moments_image}
-              />
-          </TouchableOpacity>
+          {momentImage}
           <View style={styles.footer}>
             <Text style={styles.footer_info}>{`${dateStamp}`}</Text>
             <Text style={styles.footer_info}>--{`${timeStamp}`}--</Text>
@@ -145,6 +166,16 @@ class MomentsScreen extends React.Component {
             }
           }}
         />
+        <Modal
+          visible = {this.state.modalVisible}
+          onRequestClose={this.closeModal()}
+          style={styles.modal}
+        >
+        <TouchableOpacity
+          onPress = {this.closeModal()}>
+          <Image style={styles.modal_image} source = {{uri:this.state.modalImage}}></Image>
+        </TouchableOpacity>
+        </Modal>
       </View>
     );
   }
@@ -212,5 +243,16 @@ export const styles = StyleSheet.create({
   addMomentText: {
     marginRight: 8,
     marginTop: 2
+  },
+  modal: {
+    flex: 1,
+    backgroundColor: 'pink',
+    alignItems: 'center',
+    flexDirection: 'column'
+  },
+  modal_image: {
+    height: 300,
+    width: 380,
+    marginTop: 180
   }
 });
