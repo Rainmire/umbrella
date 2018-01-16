@@ -10,18 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180108010105) do
+ActiveRecord::Schema.define(version: 20180114205809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "calendar_events", force: :cascade do |t|
-    t.string "date", null: false
     t.string "start_time", null: false
     t.string "end_time", null: false
     t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "key"
+    t.string "color"
   end
 
   create_table "child_moment_memberships", force: :cascade do |t|
@@ -51,6 +52,7 @@ ActiveRecord::Schema.define(version: 20180108010105) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_public", null: false
+    t.string "image_url"
     t.index ["author_id"], name: "index_moments_on_author_id"
   end
 

@@ -23,7 +23,6 @@ export const fetchCurrentUser = (token) => (dispatch) => {
     headers: { 'Authorization': token }
   }).then(({_bodyInit}) => {
     const response = JSON.parse(_bodyInit);
-    console.log(response);
 
     const currentUser = response.users[response.current_user_id];
 

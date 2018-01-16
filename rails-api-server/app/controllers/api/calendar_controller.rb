@@ -1,9 +1,10 @@
 require 'date'
 
 class Api::CalendarController < ApplicationController
-  before_action :authenticate_request!
+  # before_action :authenticate_request!
 
   def create
+    authenticate_request!
     if @current_user.techer_class.nil?
       render json: {error: "User is not a teacher"}, status: 403
     end
@@ -17,8 +18,8 @@ class Api::CalendarController < ApplicationController
       start_time: start_time,
       end_time: end_time,
       body: params[:body],
-      dot: params[:color],
-      key: params[:key]
+      key: params[:key],
+      color: params[:color],
     )
 
     if calendar_event.save
@@ -34,12 +35,36 @@ class Api::CalendarController < ApplicationController
   # end
 
   def monthly_events
-    month1 = DateTime.parse(params[:date]).strftime("%Y-%m")
-    month2 = (DateTime.parse(params[:date]) >> 1).strftime("%Y-%m")
+    date = request.body.string
+    month1 = DateTime.parse(date).strftime("%Y-%m")
+    month2 = (DateTime.parse(date) >> 1).strftime("%Y-%m")
 
     # target_month1 = DateTime.parse(params[:date]).strftime("%Y-%m")
 
-    @events = CalendarEvent.where("date = ? OR date = ?", month1, month2).order(start_time: :desc)
+    # @events = CalendarEvent.where("date = ? OR date = ?", month1, month2).order(start_time: :desc)
+
+    #################################
+
+    selected_events = CalendarEvent.all.order(:start_time).select do |event|
+      event_month = DateTime.parse(event.start_time).strftime("%Y-%m")
+      event_month == month1 || event_month == month2
+    end
+
+    @events = []
+    prev_day = nil
+
+    selected_events.each do |event|
+      curr_day = DateTime.parse(event.start_time).strftime("%Y-%m-%d")
+      if prev_day == curr_day
+        @events.last << event
+      else
+        @events << [event]
+        prev_day = curr_day
+      end
+    end
+
+    render 'api/calendar/show'
+    # debugger
   end
 
 end

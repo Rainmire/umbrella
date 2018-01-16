@@ -4,7 +4,8 @@ class Api::MomentsController < ApplicationController
   def create
     user = @current_user
     render json: {error: 'User is not a teacher'}, status: 401 if !user.teacher_class
-    moment = Moment.new(body: params[:body], author_id: user.id, is_public: params[:is_public])
+    # body = request.body.string
+    moment = Moment.new(body: params[:body],image_url: params[:image_url], author_id: user.id, is_public: params[:is_public])
     render json: {error: 'Moment save failed'}, status: 400 if !moment.save
     params[:children].each do |child_id|
       membership = ChildMomentMembership.new(child_id: child_id, moment_id: moment.id)
