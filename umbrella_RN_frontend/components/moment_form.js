@@ -99,7 +99,7 @@ class MomentForm extends React.Component {
 // also need to set 'isPrivate', since this is a requirement in cont.
   _submitMoment (){
     AsyncStorage.getItem('token').then( (returnToken) => this.props.createMoment(this.state, returnToken));
-    
+
 
     // AsyncStorage.getItem('token')
     //   .then( (returntoken) => this.props.createMoment(this.state, returntoken))

@@ -2,7 +2,7 @@ class Api::MomentsController < ApplicationController
   before_action :authenticate_request!
 
   def create
-# debugger
+debugger
     user = @current_user
     # p 'in the new moment create'
     # p params

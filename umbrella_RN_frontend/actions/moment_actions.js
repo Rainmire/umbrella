@@ -42,9 +42,12 @@ export const createMoment = (moment,token) => dispatch => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      'Authorization': token,
     },
-    body: JSON.stringify({moment: moment})
-  }).then( (res) => console.log('here is the response in the action: ', res));
+    body: JSON.stringify({moment})
+  }).then(({_bodyInit}) => {
+      dispatch(receiveNewCreatedMoment(JSON.parse(_bodyInit).moment));
+    });
 
   // fetch(`http://localhost:3000/api/moments`,{
   //   method: 'POST',
