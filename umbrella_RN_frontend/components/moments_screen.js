@@ -251,7 +251,8 @@ export const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   modal_image: {
-    height: 200,
-    width:300
+    height: 300,
+    width: 380,
+    marginTop: 180
   }
 });
