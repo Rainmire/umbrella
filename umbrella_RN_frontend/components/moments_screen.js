@@ -33,7 +33,15 @@ class MomentsScreen extends React.Component {
   };
 
   openModal(image_url){
-    this.setState({modalVisible:true,modalImage: `${image_url}`},()=>{console.log("setState",this.state);})
+    return()=>{
+      this.setState({modalVisible:true,modalImage: `${image_url}`},()=>{console.log("setState",this.state);})
+    }
+  }
+
+  closeModal(){
+    return ()=>{
+      this.setState({modalVisible:false})
+    }
   }
 
   _renderItem = ({ item }) => {
@@ -159,7 +167,10 @@ class MomentsScreen extends React.Component {
         <Modal
           visible = {this.state.modalVisible}
         >
+        <TouchableOpacity
+          onPress = {this.closeModal()}>
           <Image source = {{uri:this.state.modalImage}}></Image>
+        </TouchableOpacity>
         </Modal>
       </View>
     );
