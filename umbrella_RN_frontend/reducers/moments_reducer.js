@@ -13,6 +13,7 @@ const MomentsReducer = (state = [], action) => {
     case RECEIVE_MORE_MOMENTS:
       return state.concat(action.moments);
     case RECEIVE_NEW_CREATED_MOMENT:
+    console.log('moment in the reducer', action.moment);
       return action.moment.concat(state);
     default:
       return state;

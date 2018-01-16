@@ -35,7 +35,7 @@ class MomentsScreen extends React.Component {
     const timeStampSplit = item.created_at.split('T');
     const dateStamp = timeStampSplit[0];
     const timeStamp = timeStampSplit[1].split('.')[0];
-    console.log('this it the item in the render item moments index: ', author);
+    // console.log('this it the item in the render item moments index: ', author);
     return(
       <View style={styles.moments_container}>
         <View style={styles.image_container}>

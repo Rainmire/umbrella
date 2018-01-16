@@ -31,14 +31,22 @@ export const fetchMoments = (type,who,token,MomentId) => dispatch => (
   })
 );
 
-export const createMoment = (post,token) => dispatch => (
+// do we need a body for the post?
+export const createMoment = (moment,token) => dispatch => {
+  console.log('in action ', moment);
+  console.log('in action ', token);
   fetch(`http://localhost:3000/api/moments`,{
     method: 'POST',
-    headers: { 'Authorization': token }
+    headers: { 'Authorization': token },
+    body: moment,
   }).then(({_bodyInit}) => {
-    console.log('in the createMoment action: ', post);
-    console.log('in the createMoment action now: ', _bodyInit);
-    console.log('in the createMoment action nowparse: ', JSON.parse(_bodyInit).moment);
     dispatch(receiveNewCreatedMoment(JSON.parse(_bodyInit).moment));
-  })
-);
+  });
+  console.log('in create moment action before fetch', moment);
+  console.log('token', token);
+};
+
+// // debugger
+// console.log('in the createMoment action: ', moment);
+// console.log('in the createMoment action now body init: ', _bodyInit);
+// console.log('in the createMoment action nowparse: ', JSON.parse(_bodyInit).moment);

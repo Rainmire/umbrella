@@ -72,10 +72,6 @@ moments = Moment.create([
   { body: 'Moment older', author_id: 4, is_public: false },
   { body: 'Moment new', author_id: 4, is_public: false },
   { body: 'Moment im the latest one', author_id: 4, is_public: false },
-  # 32 - 34
-  { body: 'Remember -- we have an early release today!', author_id: 6, is_public: false },
-  { body: 'Band-aid Report: Scraped knee on the playground', author_id: 6, is_public: false },
-  { body: 'Just wanted to say Happy Friday!', author_id: 6, is_public: false },
 
   ])
 

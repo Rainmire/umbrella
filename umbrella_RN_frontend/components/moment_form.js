@@ -21,7 +21,7 @@ class MomentForm extends React.Component {
 
     this.state = {
       body: '',
-      momentImage: null,
+      image_url: null,
       children: [],
       is_public: false,
 
@@ -100,7 +100,8 @@ class MomentForm extends React.Component {
   _submitMoment (){
     AsyncStorage.getItem('token')
       .then( (returntoken) => this.props.createMoment(this.state, returntoken))
-      .then( () => this.props.navigation.navigate('MomentsScreen'));
+      .then( () => this.props.navigation.navigate('MomentsScreen'))
+      // .then( () => this.debugging);
   }
 
   debugging() {
