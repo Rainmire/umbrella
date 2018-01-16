@@ -1,9 +1,10 @@
 require 'date'
 
 class Api::CalendarController < ApplicationController
-  before_action :authenticate_request!
+  # before_action :authenticate_request!
 
   def create
+    authenticate_request!
     if @current_user.techer_class.nil?
       render json: {error: "User is not a teacher"}, status: 403
     end
