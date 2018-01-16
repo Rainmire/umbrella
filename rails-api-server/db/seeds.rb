@@ -159,6 +159,7 @@ calendar_events = CalendarEvent.create([
   { start_time: '2018-01-05T09:00:00+00:00', end_time: '2018-01-05T10:15:00+00:00', body: 'event5' },
   { start_time: '2018-01-15T10:15:00+00:00', end_time: '2018-01-15T11:15:00+00:00', body: 'School Closed on Martin Luther King Day, Happy Holiday!', key: 'key6', color: 'blue' },
   { start_time: '2018-01-16T09:15:00+00:00', end_time: '2018-01-16T11:15:00+00:00', body: 'Petting zoo in the morning' },
+  { start_time: '2018-01-16T09:15:00+00:00', end_time: '2018-01-16T11:15:00+00:00', body: 'Happy Birthday Molly!' },
 
   { start_time: '2018-01-19T10:15:00+00:00', end_time: '2018-01-19T11:15:00+00:00', body: 'Happy Birthday Emily!' },
   { start_time: '2018-06-12T12:15:00+00:00', end_time: '2018-06-12T14:15:00+00:00', body: 'event9' },
