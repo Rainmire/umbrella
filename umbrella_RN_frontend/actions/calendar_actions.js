@@ -13,13 +13,14 @@ export const receiveMarkedDates = (markedDates) => ({
 });
 
 export const fetchCalendar = (date,token) => dispatch => {
-  return fetch('http://localhost:3000/api/daily_events',{
-    method:'GET',
+  return fetch('http://localhost:3000/api/calendar/monthly_events',{
+    method:'POST',
     headers: { 'Authorization': token },
-    // body: date
+    body: date
   }).then(({_bodyInit})=>{
-    console.log(JSON.parse(_bodyInit));
-    // dispatch(receiveEvents(JSON.parse(_bodyInit.events)));
+    let response = JSON.parse(_bodyInit);
+    let events = response.events;
+    dispatch(receiveEvents(events));
     // dispatch(receiveMarkedDates(JSON.parse(_bodyInit.markedDates)));
   });
 };
