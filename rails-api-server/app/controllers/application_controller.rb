@@ -44,6 +44,7 @@ class ApplicationController < ActionController::Base
   end
 
   # Sets the @current_user with the user_id from payload
+
   def load_current_user!
     @current_user = User.find_by(oauth_token: payload[0]['oauth_token'])
   end

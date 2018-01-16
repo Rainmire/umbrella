@@ -43,9 +43,7 @@ export const createMoment = (moment,token) => dispatch => {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      moment
-    }),
+    body: JSON.stringify({moment: moment})
   }).then( (res) => console.log('here is the response in the action: ', res));
 
   // fetch(`http://localhost:3000/api/moments`,{
