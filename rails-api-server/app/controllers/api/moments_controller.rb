@@ -8,7 +8,7 @@ class Api::MomentsController < ApplicationController
     # p params
     # p '---------------'
     render json: {error: 'User is not a teacher'}, status: 401 if !user.teacher_class
-# debugger
+    # body = request.body.string
     moment = Moment.new(body: params[:body],image_url: params[:image_url], author_id: user.id, is_public: params[:is_public])
 # debugger
     render json: {error: 'Moment save failed'}, status: 400 if !moment.save
@@ -44,9 +44,9 @@ class Api::MomentsController < ApplicationController
     render 'api/moments/show'
   end
 
-  # private
-  # def moment_params
-  #   params.require(:moment).permit(:body)
-  # end
+  private
+  def moment_params
+    params.require(:moment).permit(:body, :image_url, :is_public)
+  end
 
 end
