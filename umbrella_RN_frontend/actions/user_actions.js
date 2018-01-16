@@ -25,15 +25,14 @@ export const fetchCurrentUser = (token) => (dispatch) => {
     const response = JSON.parse(_bodyInit);
 
     const currentUser = response.users[response.current_user_id];
-
-    console.log("is teacher?", Boolean(response.users[response.current_user_id].teacher_class));
+console.log('response in the fetch current user: ', response);
     dispatch(receiveChildren(response.children));
     dispatch(receiveUsers(response.users));
     dispatch(receiveMoments(response.moments));
     dispatch(receiveCurrentUser(currentUser));
 
     if(!currentUser.teacher_class){
-      console.log("is parent");
+
       dispatch(receiveCurrentChild(response.children[0]));
     }
   });

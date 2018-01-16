@@ -109,7 +109,7 @@ class ProfileScreen extends React.Component {
   // }
 
   render() {
-console.log('screen props: ', this.props)
+
     if (!this.state.isTeacher) {
       let currentChild = this.props.currentChild;
       let teacher = this.props.teacher;

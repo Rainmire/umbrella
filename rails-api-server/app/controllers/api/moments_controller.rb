@@ -2,10 +2,15 @@ class Api::MomentsController < ApplicationController
   before_action :authenticate_request!
 
   def create
+debugger
     user = @current_user
+    # p 'in the new moment create'
+    # p params
+    # p '---------------'
     render json: {error: 'User is not a teacher'}, status: 401 if !user.teacher_class
     # body = request.body.string
     moment = Moment.new(body: params[:body],image_url: params[:image_url], author_id: user.id, is_public: params[:is_public])
+# debugger
     render json: {error: 'Moment save failed'}, status: 400 if !moment.save
     params[:children].each do |child_id|
       membership = ChildMomentMembership.new(child_id: child_id, moment_id: moment.id)
@@ -39,9 +44,9 @@ class Api::MomentsController < ApplicationController
     render 'api/moments/show'
   end
 
-  # private
-  # def moment_params
-  #   params.require(:moment).permit(:body)
-  # end
+  private
+  def moment_params
+    params.require(:moment).permit(:body, :image_url, :is_public)
+  end
 
 end

@@ -39,8 +39,9 @@ export default class GoogleLogin extends Component {
   handleOpenURL({ url }){
     const { navigate } = this.props.navigation;
     const { dispatch } = this.props.navigation;
-
+// console.log('here is the url in the google login form', url);
     const oauthtoken = url.slice(11);
+    // console.log('oauth token in google login form', oauthtoken);
     fetch('http://localhost:3000/api/session/fetch_jwt', {
 
       method: 'GET',
@@ -48,8 +49,9 @@ export default class GoogleLogin extends Component {
     }).then(({_bodyInit}) => {
       const JWTtoken = JSON.parse(_bodyInit);
       AsyncStorage.setItem('token', JWTtoken.auth_token);
-
+      // console.log(' JWT token in the google login form', JWTtoken);
       AsyncStorage.getItem('token').then((returntoken)=> {
+        // console.log('token in the google login form is: ', returntoken);
         this.props.fetchCurrentUser(returntoken);
       })
       .then( () => {

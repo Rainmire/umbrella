@@ -26,6 +26,15 @@ class SwitchChildScreen extends React.Component {
     )
   };
 
+// why isn't this working to actually switch the child?
+  _switchChild() {
+    AsyncStorage.getItem('token')
+      .then( (res) => this.props.fetchChildInfo(item.id, res))
+      .then( () => this.props.receiveCurrentChild(item))
+
+    this.props.navigation.navigate('ProfileScreen')
+  }
+
   _renderItem = ({ item }) => {
     return(
       <TouchableOpacity

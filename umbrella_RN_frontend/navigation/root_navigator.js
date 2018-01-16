@@ -7,8 +7,10 @@ import ProfileContainer from '../components/profile_container';
 import MomentsContainer from '../components/moments_container';
 import CalendarContainer from '../components/calendar_container';
 import MessageScreen from '../components/message_screen';
+// create containers
+
 import SwitchChildContainer from '../components/switch_child_container';
-import MomentForm from '../components/moment_form';
+import MomentFormContainer from '../components/moments_form_container';
 import CaptureImageContainer from '../components/camera/capture_image_container';
 import SelectStudentsContainer from '../components/select_students_container';
 
@@ -74,7 +76,7 @@ export const SignedInScreen = StackNavigator({
     screen: SwitchChildContainer,
   },
   MomentForm: {
-    screen: MomentForm,
+    screen: MomentFormContainer,
   },
   CaptureImage: {
     screen: CaptureImageContainer,
@@ -83,12 +85,3 @@ export const SignedInScreen = StackNavigator({
     screen: SelectStudentsContainer,
   }
 });
-
-// export const SignedOutScreen = StackNavigator({
-//   Login: {
-//     screen: LoginForm,
-//     navigationOptions: {
-//       header: null
-//     }
-//   }
-// });

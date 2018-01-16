@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
 
   # protect_from_forgery with: :exception
 
-  helper_method :current_user
 
   # def current_user
   #   # return User.first
@@ -21,6 +20,7 @@ class ApplicationController < ActionController::Base
   protected
   # Validates the token and user and sets the @current_user scope
   def authenticate_request!
+    # debugger
     if !payload || !JsonWebToken.valid_payload(payload.first)
       return invalid_authentication
     end
@@ -45,6 +45,7 @@ class ApplicationController < ActionController::Base
   end
 
   # Sets the @current_user with the user_id from payload
+
   def load_current_user!
     @current_user = User.find_by(oauth_token: payload[0]['oauth_token'])
   end

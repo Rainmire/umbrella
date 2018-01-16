@@ -21,38 +21,100 @@ class MomentForm extends React.Component {
 
     this.state = {
       body: '',
-      momentImage: '',
-      studentsStatus: {}
+      image_url: null,
+      children: [],
+      is_public: false,
+
     };
+    // global.count = 0; // used for this.debugging() to see if state gets reset
     this.selectedStudents = this.selectedStudents.bind(this);
+    window.checkState = this.checkState.bind(this);
+    // remember, to access checkState on the window, change 'top'
+    // to 'webworker'-somethingoranother in dev tools
+  }
+
+
+// mounting hit twice; instead of setting the state in the other component,
+// instead send back the object in the navigation state params instead
+// and use it there
+  componentDidMount() {
+    console.log('component mounted: ', this);
+    console.log('component mounted: ', this.props);
+    let body = this.props.navigation.state.params.body;
+    let status = this.props.navigation.state.params.status;
+    let isPublic = this.props.navigation.state.params.is_public;
+
+    if (body) {
+      this.setState({body: body});
+    }
+
+    if (status) {
+      this.setState({children: status});
+    }
+
+    if (isPublic) {
+      this.setState({is_public: isPublic});
+    }
+
+
+  }
+
+  componentWillMount() {
+    console.log('will mount hit');
+
+  }
+
+  componentWillReceiveProps() {
+    console.log('will receive props', this.state);
+  }
+
+  componentWillUpdate() {
+    console.log('will update', this.state);
+
+  }
+
+  checkState() {
+    console.log('current moment state: ', this.state);
+    return this;
   }
 
   selectedStudents(){
-    this.props.navigation.navigate('SelectStudents');
-    return this.state.studentsStatus;
+    console.log('selectedStudents');
+    this.props.navigation.navigate('SelectStudents', {body: this.state.body});
   }
 
-  componentWillReceiveProps(newProps){
-    let stus = {};
-    newProps.students.forEach((student)=>{
-      stus[student.id] = false;
-    });
-    this.setState({studentsStatus:stus});
-  }
+  // _readyStudentMemberships(studentsObject) {
+  //   let students = [];
+  //
+  //   Object.keys(studentsObject).forEach( (id) => {
+  //     if (this.state.children[id]) {
+  //       students.push(parseInt(id));
+  //     }
+  //   });
+  //
+  //   this.setState({children: students});
+  // }
 
-//this.props.addMoment(this.state.body).then( () =>
-//this.props.navigation.navigate('MomentsScreen'))
+// need to comment out 'teacher' requirement in moment controller;
+// also need to set 'isPrivate', since this is a requirement in cont.
   _submitMoment (){
-    AsyncStorage.getItem('token').then((returntoken)=> {
-      this.props.createMoment(this.state,returntoken);
-    });
-    // console.log('submit moment props: ', this.props);
-    this.props.navigation.navigate('MomentsScreen');
+    AsyncStorage.getItem('token').then( (returnToken) => this.props.createMoment(this.state, returnToken));
+
+
+    // AsyncStorage.getItem('token')
+    //   .then( (returntoken) => this.props.createMoment(this.state, returntoken))
+    //   .then( () => this.props.navigation.navigate('MomentsScreen'))
+      // .then( () => this.debugging);
   }
 
-//look at state for props needed
+  debugging() {
+    debugger;
+    global.count += 1;
+    console.log('debugger count', global.count);
+  }
 
   _renderForm() {
+
     return (
       <View style={styles.newMomentContainer} >
         <View style={styles.textInputContainer}>
@@ -60,6 +122,7 @@ class MomentForm extends React.Component {
           style={styles.textInput}
             multiline={ true }
             numberOfLines={4}
+            value={this.state.body}
             onChangeText={ (text) => this.setState({body: text})}
           />
         </View>
@@ -67,8 +130,7 @@ class MomentForm extends React.Component {
         <TouchableOpacity
           style={styles.addPhoto}
           onPress={ () => {
-            this.props.navigation.navigate('CaptureImage',
-              {navigation: this.props.navigation});
+            this.props.navigation.navigate('CaptureImage');
           }}
         >
           <Icon name='camera' size={50} color='#000' />
@@ -79,7 +141,9 @@ class MomentForm extends React.Component {
             onPress={this.selectedStudents}
             style={styles.selecteRecipient}
           >
-            <Text style={styles.selecteRecipientText}>Select Recipient </Text>
+            <Text style={styles.selecteRecipientText}>
+              Select Recipient
+            </Text>
             <Icon
               name='angle-right'
               size={30}
@@ -91,7 +155,7 @@ class MomentForm extends React.Component {
 
         <View style={styles.submitContainer}>
           <TouchableOpacity
-            onPress={ this._submitMoment}
+            onPress={ this._submitMoment.bind(this)}
             style={styles.submit}
           >
             <Text style={styles.submitText}>Submit</Text>
@@ -102,7 +166,6 @@ class MomentForm extends React.Component {
   }
 
   render() {
-    console.log('new moment props: ', this.props);
     return (
       <View>
         {this._renderForm()}
@@ -156,5 +219,4 @@ export const styles = StyleSheet.create({
   submitText: {
     fontSize: 22,
   }
-
 });

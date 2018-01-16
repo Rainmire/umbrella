@@ -17,6 +17,7 @@ import CreateRootNavigator from './navigation/root_navigator';
 import { isSignedIn } from './app/auth';
 import Router from './navigation/router';
 
+
 // if we make this for android too, need to make an action to dispatch
 // a navigation function 'rest' to reset the navigation state
 // https://reactnavigation.org/docs/navigators/navigation-actions#Reset
@@ -24,7 +25,7 @@ class App extends Component {
   render() {
 
     return (
-      <Provider store={createStore(RootReducer, applyMiddleware(logger,thunk))}>
+      <Provider store={createStore(RootReducer, applyMiddleware(logger, thunk, logger))}>
         <Router />
       </Provider>
     );
