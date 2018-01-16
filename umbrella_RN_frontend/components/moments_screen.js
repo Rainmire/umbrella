@@ -42,6 +42,15 @@ class MomentsScreen extends React.Component {
     const timeStampSplit = item.created_at.split('T');
     const dateStamp = timeStampSplit[0];
     const timeStamp = timeStampSplit[1].split('.')[0];
+    let momentImage;
+    if(item.image_url !== null){
+      momentImage = (<TouchableOpacity>
+        <Image
+          source={{ uri: item.image_url }}
+          style={styles.moments_image}
+          />
+      </TouchableOpacity>)
+    }
     console.log('this it the item in the render item moments index: ', item);
     return(
       <View style={styles.moments_container}>
@@ -54,12 +63,7 @@ class MomentsScreen extends React.Component {
         <View style={styles.moment}>
           <Text style={styles.name}>{`${author.name}`}</Text>
           <Text style={styles.moment_body}>{`${item.body}`}</Text>
-          <TouchableOpacity>
-            <Image
-              source={{ uri: item.image_url }}
-              style={styles.moments_image}
-              />
-          </TouchableOpacity>
+          {momentImage}
           <View style={styles.footer}>
             <Text style={styles.footer_info}>{`${dateStamp}`}</Text>
             <Text style={styles.footer_info}>--{`${timeStamp}`}--</Text>
