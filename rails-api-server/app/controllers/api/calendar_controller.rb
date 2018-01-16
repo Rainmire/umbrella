@@ -1,7 +1,7 @@
 require 'date'
 
 class Api::CalendarController < ApplicationController
-  # before_action :authenticate_request!
+  before_action :authenticate_request!
 
   def create
     if @current_user.techer_class.nil?
