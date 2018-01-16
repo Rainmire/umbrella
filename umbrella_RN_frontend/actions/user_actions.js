@@ -25,7 +25,7 @@ export const fetchCurrentUser = (token) => (dispatch) => {
     const response = JSON.parse(_bodyInit);
 
     const currentUser = response.users[response.current_user_id];
-
+console.log('response in the fetch current user: ', response);
     dispatch(receiveChildren(response.children));
     dispatch(receiveUsers(response.users));
     dispatch(receiveMoments(response.moments));

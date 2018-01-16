@@ -4,7 +4,7 @@ class Api::UsersController < ApplicationController
 
   def show
     @user = @current_user
-    
+    debugger
     if @user.teacher_class
       other_users = @user.parents
       @children = @user.students
