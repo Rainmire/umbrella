@@ -98,9 +98,12 @@ class MomentForm extends React.Component {
 // need to comment out 'teacher' requirement in moment controller;
 // also need to set 'isPrivate', since this is a requirement in cont.
   _submitMoment (){
-    AsyncStorage.getItem('token')
-      .then( (returntoken) => this.props.createMoment(this.state, returntoken))
-      .then( () => this.props.navigation.navigate('MomentsScreen'))
+    AsyncStorage.getItem('token').then( (returnToken) => this.props.createMoment(this.state, returnToken));
+    
+
+    // AsyncStorage.getItem('token')
+    //   .then( (returntoken) => this.props.createMoment(this.state, returntoken))
+    //   .then( () => this.props.navigation.navigate('MomentsScreen'))
       // .then( () => this.debugging);
   }
 

@@ -35,15 +35,30 @@ export const fetchMoments = (type,who,token,MomentId) => dispatch => (
 export const createMoment = (moment,token) => dispatch => {
   console.log('in action ', moment);
   console.log('in action ', token);
-  fetch(`http://localhost:3000/api/moments`,{
+
+
+  fetch('http://localhost:3000/api/moments', {
     method: 'POST',
-    headers: { 'Authorization': token },
-    body: moment,
-  }).then(({_bodyInit}) => {
-    dispatch(receiveNewCreatedMoment(JSON.parse(_bodyInit).moment));
-  });
-  console.log('in create moment action before fetch', moment);
-  console.log('token', token);
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      moment
+    }),
+  }).then( (res) => console.log('here is the response in the action: ', res));
+
+  // fetch(`http://localhost:3000/api/moments`,{
+  //   method: 'POST',
+  //   headers: { 'Authorization': token },
+  //   body: moment,
+  // }).then( (res) => console.log('here is the response in the action: ', res))
+
+// .then(({_bodyInit}) => {
+//     dispatch(receiveNewCreatedMoment(JSON.parse(_bodyInit).moment));
+//   });
+//   console.log('in create moment action before fetch', moment);
+//   console.log('token', token);
 };
 
 // // debugger
