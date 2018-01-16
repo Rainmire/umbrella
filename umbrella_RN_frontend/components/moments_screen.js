@@ -16,7 +16,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 class MomentsScreen extends React.Component {
   constructor(props) {
     super(props);
-
+    this.onEndReachedCalledDuringMomentum = true;
     this.state = {
       refreshing: false,
       isTeacher: false,
@@ -61,7 +61,6 @@ class MomentsScreen extends React.Component {
           />
       </TouchableOpacity>)
     }
-    console.log('this it the item in the render item moments index: ', item);
     return(
       <View style={styles.moments_container}>
         <View style={styles.image_container}>
@@ -159,10 +158,13 @@ class MomentsScreen extends React.Component {
           refreshing={this.state.refreshing}
           initialNumToRender={ 4 }
           onRefresh={ () => this._fetch('new')}
+          onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false;}}
           onEndReachedThreshold ={0}
           onEndReached={ () => {
-            if (this.props.moments.length >= 10) {
+            if(!this.onEndReachedCalledDuringMomentum){
               this._fetch('more');
+              this.onEndReachedCalledDuringMomentum = true;
+              this.setState({refreshing: false});
             }
           }}
         />
