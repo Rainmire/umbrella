@@ -35,7 +35,7 @@ class Api::CalendarController < ApplicationController
   # end
 
   def monthly_events
-    debugger
+    # debugger
     month1 = DateTime.parse(params[:date]).strftime("%Y-%m")
     month2 = (DateTime.parse(params[:date]) >> 1).strftime("%Y-%m")
 
