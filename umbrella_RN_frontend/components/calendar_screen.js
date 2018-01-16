@@ -97,7 +97,11 @@ class CalendarScreen extends React.Component {
           rowHasChanged={this.rowHasChanged.bind(this)}
           onDayPress = {this.onDayPress()}
           markingType={'multi-dot'}
-          markedDates={this.props.markedDates}
+          markedDates={{
+            '2018-01-01': {dots: [{key:'close',color:'red'}]},
+            '2018-01-15': {dots: [{key:'close',color:'red'}]},
+            '2018-01-16': {dots: [{key: 'school event', color:'pink'}]},
+          }}
           theme={{
             // backgroundColor: '#ffffff',
             calendarBackground: '#ffffff',
