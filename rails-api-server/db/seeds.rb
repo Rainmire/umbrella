@@ -156,9 +156,10 @@ calendar_events = CalendarEvent.create([
   { start_time: '2017-05-01T14:00:00+00:00', end_time: '2017-05-01T15:00:00+00:00', body: 'event3' },
   { start_time: '2017-05-01T15:00:00+00:00', end_time: '2017-05-01T16:00:00+00:00', body: 'event4', key: 'key4', color: 'red' },
 
-  { start_time: '2017-05-02T09:00:00+00:00', end_time: '2017-05-02T10:15:00+00:00', body: 'event5' },
-  { start_time: '2017-05-02T10:15:00+00:00', end_time: '2017-05-02T11:15:00+00:00', body: 'event6', key: 'key6', color: 'blue' },
-  { start_time: '2017-05-02T11:15:00+00:00', end_time: '2017-05-02T13:15:00+00:00', body: 'event7' },
+  { start_time: '2018-01-05T09:00:00+00:00', end_time: '2018-01-05T10:15:00+00:00', body: 'event5' },
+  { start_time: '2018-01-15T10:15:00+00:00', end_time: '2018-01-15T11:15:00+00:00', body: 'School Closed on Martin Luther King Day, Happy Holiday!', key: 'key6', color: 'blue' },
+  { start_time: '2018-01-16T09:15:00+00:00', end_time: '2018-01-16T11:15:00+00:00', body: 'Petting zoo in the morning' },
+  { start_time: '2018-01-16T09:15:00+00:00', end_time: '2018-01-16T11:15:00+00:00', body: 'Happy Birthday Molly!' },
 
   { start_time: '2017-06-12T10:15:00+00:00', end_time: '2017-06-12T11:15:00+00:00', body: 'event8' },
   { start_time: '2017-06-12T12:15:00+00:00', end_time: '2017-06-12T14:15:00+00:00', body: 'event9' },

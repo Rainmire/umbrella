@@ -164,6 +164,7 @@ class MomentsScreen extends React.Component {
             if(!this.onEndReachedCalledDuringMomentum){
               this._fetch('more');
               this.onEndReachedCalledDuringMomentum = true;
+              this.setState({refreshing: false});
             }
           }}
         />

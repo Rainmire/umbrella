@@ -100,7 +100,7 @@ class CalendarScreen extends React.Component {
           markedDates={{
             '2018-01-01': {dots: [{key:'close',color:'red'}]},
             '2018-01-15': {dots: [{key:'close',color:'red'}]},
-            '2018-01-16': {dots: [{key: 'school event', color:'pink'}]},
+            '2018-01-16': {dots: [{key: 'school event', color:'pink'},{key: 'birthday', color:'green'}]},
           }}
           theme={{
             // backgroundColor: '#ffffff',
