@@ -42,7 +42,7 @@ class CalendarScreen extends React.Component {
 
   renderItem(item) {
     return (
-      <View style={[styles.item]}><Text>{item.name}</Text></View>
+      <View style={[styles.item]}><Text>{item.body}</Text></View>
     );
   }
 
