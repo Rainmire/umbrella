@@ -10,6 +10,7 @@ import { StyleSheet,
          RefreshControl,
          Modal
         } from 'react-native';
+import PhotoView from 'react-native-photo-view';
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -33,7 +34,13 @@ class MomentsScreen extends React.Component {
   };
 
   openModal(image_url){
-    this.setState({modalVisible:true,modalImage: `${image_url}`},()=>{console.log("setState",this.state);})
+    return ()=>{
+      this.setState({modalVisible:true,modalImage: `${image_url}`},()=>{console.log("setState",this.state);})
+    }
+  }
+
+  closeModal(){
+    return()=>{this.setState({modalVisible:false})}
   }
 
   _renderItem = ({ item }) => {
@@ -44,7 +51,9 @@ class MomentsScreen extends React.Component {
     const timeStamp = timeStampSplit[1].split('.')[0];
     let momentImage;
     if(item.image_url !== null){
-      momentImage = (<TouchableOpacity>
+      momentImage = (
+        <TouchableOpacity
+          onPress={this.openModal(item.image_url)}>
         <Image
           source={{ uri: item.image_url }}
           style={styles.moments_image}
@@ -158,8 +167,19 @@ class MomentsScreen extends React.Component {
         />
         <Modal
           visible = {this.state.modalVisible}
+          onRequestClose={this.closeModal()}
+          style={styles.modal}
         >
-          <Image source = {{uri:this.state.modalImage}}></Image>
+        <TouchableOpacity
+          onPress={this.closeModal()}>
+          <PhotoView
+            source={{uri:this.state.modalImage}}
+            minimumZoomScale={0.5}
+            maximumZoomScale={3}
+            androidScaleType="center"
+            onLoad={() => console.log("Image loaded!")}
+            style={{width: 300, height: 300}} />
+        </TouchableOpacity>
         </Modal>
       </View>
     );
@@ -228,5 +248,13 @@ export const styles = StyleSheet.create({
   addMomentText: {
     marginRight: 8,
     marginTop: 2
+  },
+  modal: {
+    flex: 1,
+    backgroundColor: 'pink'
+  },
+  modal_image: {
+    flex: 1,
+    alignSelf: 'stretch'
   }
 });
